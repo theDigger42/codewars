@@ -4,22 +4,30 @@ import Signup from './Signup'
 import Login from './Login'
 
 const Navbar = (props) => {
+  console.log('Navbar ---- ' + props.auth.isAuthenticated);
+  const navAuth = !props.auth.isAuthenticated ? (
+    <Layout>
+    <Title>CodeWars</Title>
+    <SignUp
+      onClick={() => props.openModal('signup')}
+    > 
+      Signup
+    </SignUp>
+    <LogIn
+      onClick={() => props.openModal('login')}
+    >
+      Login
+    </LogIn></Layout> 
+  ) : (
+    <Layout>
+      <Title>CodeWars</Title>
+      <Logout onClick={() => props.logout()}>Logout</Logout>
+    </Layout>
+  )
+
   return (
     <div>
-      <Layout>
-          <Title>CodeWars</Title>
-          <SignUp
-            onClick={() => props.openModal('signup')}
-          > 
-            Signup
-          </SignUp>
-          <LogIn
-            onClick={() => props.openModal('login')}
-          >
-            Login
-          </LogIn>
-
-      </Layout>
+      {navAuth}
       <Login
           username={ props.input.username }
           password={ props.input.password }
@@ -68,5 +76,10 @@ const SignUp = styled.div`
 const LogIn = styled.div`
     grid-column: 4;
     background: red;
+`
+
+const Logout = styled.div`
+  grid-column: 4;
+  background: green;
 `
 

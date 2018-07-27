@@ -1,8 +1,6 @@
 import {
     LOGIN,
-    LOGOUT,
-    SIGN_UP,
-    CLOSE_MODAL,
+    LOGOUT
 } from "../actions/types"
 
 import isEmpty from 'lodash/isEmpty'
@@ -21,29 +19,10 @@ const auth = (state = intialState, action) => {
                 user: action.user
             }
 
-        case `${LOGOUT}_FULFILLED`:
+        case `${LOGOUT}`:
             return {
-                ...state,
                 user: {},
                 isAuthenticated: false
-            }
-
-        case `${SIGN_UP}_FULFILLED`:
-            return {
-                ...state,
-                error: 'signup successful'
-            }
-
-        case `${SIGN_UP}_REJECTED`:
-            return {
-                ...state,
-                error: action.payload.response.data,
-            }
-
-        case CLOSE_MODAL:
-            return {
-                ...state,
-                error: '',
             }
 
         default:

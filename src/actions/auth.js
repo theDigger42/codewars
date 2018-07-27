@@ -21,10 +21,12 @@ export const login = (data) => {
   }
 }
 
-export const logout = (credentials) => ({
-  type: LOGOUT,
-  payload: axios.post(`http://localhost:3000/api/signout`, credentials)
-})
+export const logout = () => {
+  localStorage.setItem('jwtToken', null)
+  return {
+    type: LOGOUT
+  }
+}
 
 export const signup = (credentials) => ({
   type: SIGN_UP,

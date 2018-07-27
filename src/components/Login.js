@@ -17,9 +17,7 @@ const Login = ({
   username,
   password,
   showModal,
-  addText,
-  message,
-  error
+  addText
 }) => {
 
   const enterInput = e => 
@@ -28,29 +26,30 @@ const Login = ({
   return modal({
     showModal,
     handleClose: () => closeModal("login")
-  })([
-    <div className="modal-title">LOGIN</div>,
-    <div className="error">{ error ? error : message }</div>,
-    <Input
-      value={username}
-      onChange={e => handleChange(addText, "username", e.target.value)}
-      placeholder="Username"
-      type="text"
-      required
-      onKeyPress={enterInput}
-    />,
-    <Input
-      value={password}
-      onChange={e => handleChange(addText, "password", e.target.value)}
-      placeholder="Password"
-      type="password"
-      required
-      onKeyPress={enterInput}
-    />,
-    <Button onClick={e => login({username, password}) }>
-      Submit
-    </Button>
-  ])
+  })(
+    <div>
+      <div className="modal-title">LOGIN</div>
+      <Input
+        value={username}
+        onChange={e => handleChange(addText, "username", e.target.value)}
+        placeholder="Username"
+        type="text"
+        required
+        onKeyPress={enterInput}
+      />
+      <Input
+        value={password}
+        onChange={e => handleChange(addText, "password", e.target.value)}
+        placeholder="Password"
+        type="password"
+        required
+        onKeyPress={enterInput}
+      />
+      <Button onClick={e => login({username, password}) }>
+        Submit
+      </Button>
+    </div>
+  )
 }
 
 export default Login

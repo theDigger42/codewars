@@ -18,8 +18,7 @@ const Signup = ({
   password,
   showModal,
   email,
-  addText,
-  error
+  addText
 }) => {
 
   const enterInput =
@@ -31,9 +30,8 @@ const Signup = ({
     showModal,
     handleClose: () => closeModal('signup')
   })(
-    [
-      <div className="modal-title">SIGNUP</div>,
-      <div className="error">{ error }</div>,
+    <div>
+      <div className="modal-title">SIGNUP</div>
       <Input
         value={ email }
         onChange={ e => handleChange(addText, "email", e.target.value) }
@@ -41,7 +39,7 @@ const Signup = ({
         type="text"
         required
         onKeyPress={ enterInput }
-      />,
+      />
       <Input
         value={ username }
         onChange={ e => handleChange(addText, "username", e.target.value) }
@@ -49,7 +47,7 @@ const Signup = ({
         type="text"
         required
         onKeyPress={ enterInput }
-      />,
+      />
       <Input
         value={ password }
         onChange={ e => handleChange(addText, "password", e.target.value) }
@@ -57,7 +55,7 @@ const Signup = ({
         type="text"
         required
         onKeyPress={ enterInput }
-      />,
+      />
       <Button
         onClick={ e => 
           handleClick(e, signup, { username, password, email }) 
@@ -65,7 +63,7 @@ const Signup = ({
       >
         Submit
       </Button>
-    ]
+    </div>
   )
 }
 
