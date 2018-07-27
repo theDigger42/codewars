@@ -8,16 +8,21 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const cors = require('cors')
 
 const app = express();
 const server = http.Server(app);
 const io = socket(server);
+
+const auth = require('./routes/auth')
+const signup = require('./routes/signup')
 
 // Setup middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(cors())
 
 app.use(session({
   secret: 'secret',
@@ -27,12 +32,13 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/api/auth', auth)
+app.use('/api/signup', signup)
 
 app.set('port', (process.env.PORT || 3000));
 
 
 //Here are the routes we use
-require('./routes.js').passportRoutes(app, passport);
 require('./routes.js').challengeRoutes(app);
 require('./routes.js').databaseRoutes(app);
 

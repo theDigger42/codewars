@@ -14,7 +14,7 @@ const Navbar = (props) => {
             Signup
           </SignUp>
           <LogIn
-            onClick={() => props.openModal('signin')}
+            onClick={() => props.openModal('login')}
           >
             Login
           </LogIn>
@@ -27,7 +27,7 @@ const Navbar = (props) => {
           closeModal={ props.closeModal }
           signin={ props.signin }
           login={ props.login }
-          showModal={ props.modalReducer.signin }
+          showModal={ props.modalReducer.login }
           message={props.modalReducer.message}
           addText={ props.addText }
         />
