@@ -26,15 +26,13 @@ const Navbar = (props) => {
         <NavTitle
           to='/'
         >CodeWars</NavTitle>
-        <NavChallenge
-          to='/challenge'
-        >Random</NavChallenge>
+        <Challenge><NavChallenge to='/challenge'>Random</NavChallenge></Challenge>
         <Logout onClick={() => props.logout()}>Logout</Logout>
       </Layout>
     )
 
   return (
-    <div>
+    <Layout>
       {navAuth}
       <Login
         username={props.input.username}
@@ -58,7 +56,7 @@ const Navbar = (props) => {
         message={props.modalReducer.message}
         addText={props.addText}
       />
-    </div>
+    </Layout>
   )
 }
 
@@ -68,6 +66,7 @@ const Layout = styled.div`
   display: grid;
   grid-template-columns: 1fr 20em 1fr 1fr;
   grid-row: 1;
+  grid-column: 1 / 5;
   min-height: 75px;
 `
 
@@ -88,23 +87,22 @@ const LogIn = styled.button`
     background: red;
     font-size: 30px;
 `
-
+const Challenge = styled.button`
+  grid-column: 3;
+`
 const Logout = styled.button`
   grid-column: 4;
-  background: green;
+  background: lightgreen;
   font-size: 30px;
 `
 const NavTitle= styled(Link)`
   grid-column: 1;
   cursor: pointer;
-  text-decoration: none;
   background: lightgrey;
   font-size: 50px;
 `
 const NavChallenge= styled(Link)`
   grid-column: 3;
   cursor: pointer;
-  text-decoration: none;
-  background: royalblue;
   font-size: 30px;
 `

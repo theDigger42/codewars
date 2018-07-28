@@ -28,7 +28,7 @@ export default class Homepage extends Component {
 
 const Layout = styled.div`
   display: grid;
-  grid-template-rows: 100px auto 10%;
+  grid-template-rows: 75px auto 10%;
   grid-template-columns: 1fr;
 `
 

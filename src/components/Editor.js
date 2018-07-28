@@ -8,7 +8,7 @@ const Editor = (props) => {
         <AceEditor
             mode="javascript"
             theme="monokai"
-            onChange={this.onChange}
+            onChange={props.change}
             value={props.input}
             name="UNIQUE_ID_OF_DIV"
             editorProps={{$blockScrolling: true}}
@@ -18,7 +18,7 @@ const Editor = (props) => {
             showGutter={true}
             highlightActiveLine={true}
             height={500}
-            width={700}
+            width={600}
             setOptions={{
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true,
