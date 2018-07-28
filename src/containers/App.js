@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Switch, Route } from "react-router-dom"
-import Homepage from "./Homepage";
+import Homepage from './Homepage'
+import Challenge from './Challenge'
 
 export default class App extends Component {
 
@@ -11,7 +12,11 @@ export default class App extends Component {
         <Route
           exact
           path="/"
-          render={props => <Homepage {...this.props} {...props} />}
+          render={props => <Homepage {...this.props}/>}
+        />
+        <Route
+          path='/challenge'
+          render={props => <Challenge {...this.props}/>}
         />
       </Switch>
     )

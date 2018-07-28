@@ -6,3 +6,5 @@ export const LOGOUT = 'LOGOUT'
 
 export const INPUT_CHANGE = 'INPUT_CHANGE'
 export const CLEAR_ALL_INPUTS = 'CLEAR_ALL_INPUTS'
+
+export const SUBMIT_SOLUTION = 'SUBMIT_SOLUTION'

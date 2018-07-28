@@ -6,7 +6,7 @@ import {
 const initialState = {
     username: '',
     password: '',
-    email: '',
+    solution: '',
 }
 
 const textInput = (state = initialState, action) => {

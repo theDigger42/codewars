@@ -2,54 +2,62 @@ import React from 'react'
 import styled from 'styled-components'
 import Signup from './Signup'
 import Login from './Login'
+import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
   console.log('Navbar ---- ' + props.auth.isAuthenticated);
   const navAuth = !props.auth.isAuthenticated ? (
     <Layout>
-    <Title>CodeWars</Title>
-    <SignUp
-      onClick={() => props.openModal('signup')}
-    > 
-      Signup
+      <NavTitle
+        to='/'
+      >CodeWars</NavTitle>
+      <SignUp
+        onClick={() => props.openModal('signup')}
+      >
+        Signup
     </SignUp>
-    <LogIn
-      onClick={() => props.openModal('login')}
-    >
-      Login
-    </LogIn></Layout> 
+      <LogIn
+        onClick={() => props.openModal('login')}
+      >
+        Login
+    </LogIn></Layout>
   ) : (
-    <Layout>
-      <Title>CodeWars</Title>
-      <Logout onClick={() => props.logout()}>Logout</Logout>
-    </Layout>
-  )
+      <Layout>
+        <NavTitle
+          to='/'
+        >CodeWars</NavTitle>
+        <NavChallenge
+          to='/challenge'
+        >Random</NavChallenge>
+        <Logout onClick={() => props.logout()}>Logout</Logout>
+      </Layout>
+    )
 
   return (
     <div>
       {navAuth}
       <Login
-          username={ props.input.username }
-          password={ props.input.password }
-          openModal={ props.openModal }
-          closeModal={ props.closeModal }
-          signin={ props.signin }
-          login={ props.login }
-          showModal={ props.modalReducer.login }
-          message={props.modalReducer.message}
-          addText={ props.addText }
-        />
-        <Signup
-          username={ props.input.username }
-          password={ props.input.password }
-          email={ props.input.email }
-          openModal={ props.openModal }
-          closeModal={ props.closeModal }
-          signup={ props.signup }
-          showModal={ props.modalReducer.signup }
-          message={props.modalReducer.message}
-          addText={ props.addText }
-        />
+        username={props.input.username}
+        password={props.input.password}
+        openModal={props.openModal}
+        closeModal={props.closeModal}
+        signin={props.signin}
+        login={props.login}
+        showModal={props.modalReducer.login}
+        message={props.modalReducer.message}
+        addText={props.addText}
+      />
+      <Signup
+        username={props.input.username}
+        password={props.input.password}
+        email={props.input.email}
+        openModal={props.openModal}
+        closeModal={props.closeModal}
+        signup={props.signup}
+        showModal={props.modalReducer.signup}
+        message={props.modalReducer.message}
+        addText={props.addText}
+      />
     </div>
   )
 }
@@ -82,4 +90,15 @@ const Logout = styled.div`
   grid-column: 4;
   background: green;
 `
-
+const NavTitle= styled(Link)`
+  grid-column: 1;
+  cursor: pointer;
+  text-decoration: none;
+  background: lightgrey;
+`
+const NavChallenge= styled(Link)`
+  grid-column: 3;
+  cursor: pointer;
+  text-decoration: none;
+  background: grey;
+`

@@ -8,7 +8,15 @@ export default class Homepage extends Component {
             <Layout>
                 <Navbar { ...this.props }/>
                 <Body>
-                    BODY
+                    <Heading>
+                        Practice coding.
+                        <br/>
+                        Compete.
+                        <br/>
+                        Improve your speed.
+                        <br/>
+                        All in one place.
+                    </Heading>
                 </Body>
                 <Foot>
                     FOOT
@@ -28,6 +36,16 @@ const Body = styled.div`
   grid-row: 2;
   min-height: 600px;
   background: grey;
+  display: grid;
+  grid-template-rows: 100px auto;
+`
+
+const Heading = styled.div`
+  grid-row: 1;
+  background: lightblue;
+  justify-self: center;
+  align-self: center;
+  font-size: 20px;
 `
 
 const Foot = styled.div`

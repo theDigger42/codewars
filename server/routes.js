@@ -9,6 +9,7 @@ var challengeRoutes = function(app) {
 
   //Route for running tests on toyProblem
   app.post('/challenge', function(req, res) {
+    console.log(req.body);
     let funcName = req.body.funcName;
     let solution = req.body.solution;
     let tests = req.body.tests;

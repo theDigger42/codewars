@@ -6,6 +6,8 @@ import { openModal, closeModal } from './modal'
 
 import { signup, login, logout, setCurrentUser } from './auth'
 
+import { submit } from './submit'
+
 const mapDispatchToProps = (dispatch) => (
   bindActionCreators({ 
     openModal,
@@ -16,7 +18,8 @@ const mapDispatchToProps = (dispatch) => (
     signup,
     login,
     logout,
-    setCurrentUser
+    setCurrentUser,
+    submit
   }, dispatch)
 )
 
