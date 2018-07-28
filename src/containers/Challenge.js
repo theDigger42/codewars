@@ -5,11 +5,14 @@ import AceEditor from 'react-ace';
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 import axios from 'axios'
+import Editor from '../components/Editor'
 
 export default class Challenge extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            title: '',
+            body: '',
             funcName: '',
             solution: '',
             tests: []
@@ -21,8 +24,9 @@ export default class Challenge extends Component {
         axios.get('http://localhost:3000/randomChallenge')
             .then(res => {
                 let challenge = res.data
-                console.log(challenge);
                 this.setState({
+                    title: challenge.title,
+                    body: challenge.body,
                     solution: 'function ' + challenge.funcName + '(' + challenge.params + ')' + ' {\n\n}',
                     funcName: challenge.funcName,
                     tests: challenge.tests,
@@ -42,30 +46,12 @@ export default class Challenge extends Component {
         return (
             <Layout>
                 <Navbar {...this.props}/>
-                <div>Title</div>
-                <AceEditor
-                    mode="javascript"
-                    theme="monokai"
-                    onChange={this.onChange}
-                    value={this.state.solution}
-                    name="UNIQUE_ID_OF_DIV"
-                    editorProps={{$blockScrolling: true}}
-                    fontSize={16}
-                    cursorStart={2}
-                    showPrintMargin={true}
-                    showGutter={true}
-                    highlightActiveLine={true}
-                    height={600}
-                    width={800}
-                    setOptions={{
-                        enableBasicAutocompletion: true,
-                        enableLiveAutocompletion: true,
-                        enableSnippets: true,
-                        showLineNumbers: true,
-                        tabSize: 2
-                    }}
-                />
-                <button onClick={e => this.props.submit(data)}>Submit</button>
+                <Body>
+                    <Prompt>{this.state.title}</Prompt>
+                    <EditorWrapper><Editor input={this.state.solution}/></EditorWrapper>
+                    <ResultsPanel>Results</ResultsPanel>
+                    <Button onClick={e => this.props.submit(data)}>Submit</Button>
+                </Body>
             </Layout>
         )
     }
@@ -73,7 +59,30 @@ export default class Challenge extends Component {
 
 const Layout = styled.div`
   display: grid;
-  grid-template-rows: 100px 50px auto 10%;
-  grid-template-columns: 1fr;
+  grid-template-rows: 75px 50px auto 10%;
 `
- 
+const Body = styled.div`
+  grid-row: 2 / 4;
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+`
+const Prompt = styled.div`
+  grid-row: 2;
+  grid-column: 1 / 2;
+  font-size: 40px;
+  justify-self: center
+`
+const EditorWrapper = styled.div`
+  grid-row: 3;
+  grid-column: 1;
+`
+const ResultsPanel = styled.div`
+  grid-column: 2;
+  grid-row: 2 / 4;
+  background: lightpink;
+`
+const Button = styled.button`
+  grid-row: 4;
+  grid-column: 1;
+  font-size: 30px;
+`

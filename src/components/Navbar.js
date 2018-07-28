@@ -68,37 +68,43 @@ const Layout = styled.div`
   display: grid;
   grid-template-columns: 1fr 20em 1fr 1fr;
   grid-row: 1;
-  min-height: 100px;
+  min-height: 75px;
 `
 
 const Title = styled.div`
     grid-column: 1;
     background: lightgrey;
+    font-size: 30px;
 `
 
-const SignUp = styled.div`
+const SignUp = styled.button`
     grid-column: 3;
     background: lightblue;
+    font-size: 30px;
 `
 
-const LogIn = styled.div`
+const LogIn = styled.button`
     grid-column: 4;
     background: red;
+    font-size: 30px;
 `
 
-const Logout = styled.div`
+const Logout = styled.button`
   grid-column: 4;
   background: green;
+  font-size: 30px;
 `
 const NavTitle= styled(Link)`
   grid-column: 1;
   cursor: pointer;
   text-decoration: none;
   background: lightgrey;
+  font-size: 50px;
 `
 const NavChallenge= styled(Link)`
   grid-column: 3;
   cursor: pointer;
   text-decoration: none;
-  background: grey;
+  background: royalblue;
+  font-size: 30px;
 `

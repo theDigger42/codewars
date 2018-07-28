@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Switch, Route } from "react-router-dom"
 import Homepage from './Homepage'
 import Challenge from './Challenge'
+import PrivateRoute from '../components/PrivateRoute'
 
 export default class App extends Component {
 
@@ -14,9 +15,10 @@ export default class App extends Component {
           path="/"
           render={props => <Homepage {...this.props}/>}
         />
-        <Route
+        <PrivateRoute
           path='/challenge'
-          render={props => <Challenge {...this.props}/>}
+          component={Challenge}
+          {...this.props}
         />
       </Switch>
     )

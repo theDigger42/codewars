@@ -37,21 +37,21 @@ const Body = styled.div`
   min-height: 600px;
   background: grey;
   display: grid;
-  grid-template-rows: 100px auto;
+  grid-template-rows: auto;
 `
 
 const Heading = styled.div`
   grid-row: 1;
-  background: lightblue;
   justify-self: center;
   align-self: center;
-  font-size: 20px;
+  font-size: 58px;
 `
 
 const Foot = styled.div`
   grid-row: 3;
   background: lightgrey;
   min-height: 100px;
+  font-size: 50px;
 `
 
 
