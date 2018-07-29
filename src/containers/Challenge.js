@@ -3,12 +3,13 @@ import React, { Component } from 'react'
 import Navbar from '../components/Navbar'
 import axios from 'axios'
 import Editor from '../components/Editor'
+import Footer from '../components/Footer'
 
 export default class Challenge extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: '',
+            title: 'Are you ready?',
             body: '',
             funcName: '',
             solution: '',
@@ -49,12 +50,19 @@ export default class Challenge extends Component {
         let data = this.state
         console.log(this.props);
         let testResults = this.props.submitReducer.tests.map((test, i) => {
-            return (
-                <p>{i}: {test.status}</p>
-            )
+            let status
+            if (test.status === 'pass') {
+                return (
+                    <PassResult>Input: ({test.input}). Expected: {test.expected}. Actual: {test.actual}.</PassResult>
+                )
+            } else {
+                return (
+                    <FailResult>Input: ({test.input}). Expected: {test.expected}. Actual: {test.actual}.</FailResult>                    
+                )
+            }
         })
-        let panelBody = this.state.view === 'instructions' ? <p>{this.state.body}</p> 
-            : this.state.view === 'results' ? <p>{testResults}</p> 
+        let panelBody = this.state.view === 'instructions' ? <Info>{this.state.body}</Info> 
+            : this.state.view === 'results' ? <Info>{testResults}</Info> 
             : <p>other</p>
 
         return (
@@ -66,19 +74,17 @@ export default class Challenge extends Component {
                     <ResultsPanel>
                         <TabContainer>
                             <Tab onClick={() => this.changeView('instructions')}>
-                                Instructions
+                                Challenge
                             </Tab>
                             <Tab onClick={() => this.changeView('results')}> 
                                 Results
-                            </Tab>
-                            <Tab onClick={() => this.changeView('other')}>
-                                Other
                             </Tab>
                         </TabContainer>
                         {panelBody}
                         <Button onClick={e => this.props.submit(data)}>Submit</Button>
                     </ResultsPanel>
                 </Body>
+                <Footer/>
             </Layout>
         )
     }
@@ -102,9 +108,8 @@ const Prompt = styled.div`
   grid-column: 1 / 3;
   text-align: center;
   font-size: 45px;
-  height: 50px;
   width: 100%;
-  background: azure;
+  background: lightgrey;
   margin: 25px;
 `
 const EditorWrapper = styled.div`
@@ -114,7 +119,7 @@ const EditorWrapper = styled.div`
 const ResultsPanel = styled.div`
   grid-column: 2;
   grid-row: 2 / 4;
-  background: lightblue;
+  background: azure;
   display: grid;
   grid-template-rows: 50px auto 40px;
   margin-top: 100px;
@@ -123,7 +128,7 @@ const ResultsPanel = styled.div`
 const TabContainer = styled.div`
   grid-row: 1;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   background: darkgrey;
 `
 const Tab = styled.div`
@@ -132,7 +137,16 @@ const Tab = styled.div`
   justify-self: center;
   align-self: center;
 `
+const Info = styled.p`
+  font-size: 20px;
+`
 const Button = styled.button`
   grid-row: 3;
   font-size: 30px;
+`
+const PassResult = styled.p`
+  color: green;
+`
+const FailResult = styled.p`
+  color: red;
 `

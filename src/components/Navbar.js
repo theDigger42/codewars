@@ -5,7 +5,6 @@ import Login from './Login'
 import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
-  console.log('Navbar ---- ' + props.auth.isAuthenticated);
   const navAuth = !props.auth.isAuthenticated ? (
     <Layout>
       <NavTitle
@@ -64,16 +63,10 @@ export default Navbar
 
 const Layout = styled.div`
   display: grid;
-  grid-template-columns: 1fr 20em 1fr 1fr;
+  grid-template-columns: 2fr 5fr 1fr 1fr;
   grid-row: 1;
   grid-column: 1 / 5;
   min-height: 75px;
-`
-
-const Title = styled.div`
-    grid-column: 1;
-    background: lightgrey;
-    font-size: 30px;
 `
 
 const SignUp = styled.button`

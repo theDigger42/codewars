@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import React, { Component } from 'react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 export default class Homepage extends Component {
     render() {
@@ -18,9 +19,7 @@ export default class Homepage extends Component {
                         All in one place.
                     </Heading>
                 </Body>
-                <Foot>
-                    FOOT
-                </Foot>
+                <Footer />
             </Layout>
         )
     }
@@ -34,7 +33,7 @@ const Layout = styled.div`
 
 const Body = styled.div`
   grid-row: 2;
-  min-height: 600px;
+  min-height: 620px;
   background: grey;
   display: grid;
   grid-template-rows: auto;
@@ -45,13 +44,6 @@ const Heading = styled.div`
   justify-self: center;
   align-self: center;
   font-size: 58px;
-`
-
-const Foot = styled.div`
-  grid-row: 3;
-  background: lightgrey;
-  min-height: 100px;
-  font-size: 50px;
 `
 
 
