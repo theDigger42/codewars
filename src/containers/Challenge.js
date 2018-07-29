@@ -20,7 +20,7 @@ export default class Challenge extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:80/randomChallenge')
+        axios.get('/randomChallenge')
             .then(res => {
                 let challenge = res.data
                 this.setState({
