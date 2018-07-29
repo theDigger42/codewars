@@ -8,9 +8,7 @@ import logo from '../images/logo.png'
 const Navbar = (props) => {
   const navAuth = !props.auth.isAuthenticated ? (
     <Layout>
-      <NavLink
-        to='/'
-      >CodeWars</NavLink>
+      <Title to='/'><img id="logo" src={logo}/></Title>
       <SignUp
         onClick={() => props.openModal('signup')}
       >

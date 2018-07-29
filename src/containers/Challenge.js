@@ -102,16 +102,15 @@ const Body = styled.div`
   grid-template-columns: 1.5fr 1fr;
   grid-column-gap: 20px;
   grid-template-rows: 100px 6fr;
-  min-height: 600px;
+  min-height: 615px;
 `
 const Prompt = styled.div`
   grid-row: 1;
   grid-column: 1 / 3;
   text-align: center;
   font-size: 28px;
-  width: 100%;
   background: lightgrey;
-  margin: 25px;
+  align-self: center;
 `
 const ResultsPanel = styled.div`
   grid-column: 2;

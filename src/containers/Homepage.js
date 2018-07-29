@@ -33,7 +33,7 @@ const Layout = styled.div`
 
 const Body = styled.div`
   grid-row: 2;
-  min-height: 620px;
+  min-height: 645px;
   background: grey;
   display: grid;
   grid-template-rows: auto;
