@@ -97,7 +97,7 @@ const Layout = styled.div`
 `
 const Body = styled.div`
   grid-row: 2 / 4;
-  grid-column: 2;
+  grid-column: 2 / 5;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   grid-column-gap: 20px;
@@ -119,9 +119,9 @@ const ResultsPanel = styled.div`
   background: azure;
   display: grid;
   grid-template-rows: 50px auto 40px;
-  justify-self: right;
   margin-top: 100px;
   min-width: 400px;
+  margin-right: 2em;
 `
 const TabContainer = styled.div`
   grid-row: 1;

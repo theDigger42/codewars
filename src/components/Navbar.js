@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom'
 const Navbar = (props) => {
   const navAuth = !props.auth.isAuthenticated ? (
     <Layout>
-      <NavTitle
+      <NavLink
         to='/'
-      >CodeWars</NavTitle>
+      >CodeWars</NavLink>
       <SignUp
         onClick={() => props.openModal('signup')}
       >
@@ -22,11 +22,10 @@ const Navbar = (props) => {
     </LogIn></Layout>
   ) : (
       <Layout>
-        <NavTitle
-          to='/'
-        >CodeWars</NavTitle>
-        <Challenge><NavChallenge to='/challenge'>Random</NavChallenge></Challenge>
-        <Logout onClick={() => props.logout()}>Logout</Logout>
+        <NavLink to='/'><img src="../../public/logo.png"/></NavLink>
+        <Leaderboard><NavLink to='/leaderboard'>Leaderboard</NavLink></Leaderboard>
+        <Challenge><NavLink to='/challenge'>Random</NavLink></Challenge>
+        <Logout><NavLink onClick={() => props.logout()} to='/'>Logout</NavLink></Logout>
       </Layout>
     )
 
@@ -63,39 +62,46 @@ export default Navbar
 
 const Layout = styled.div`
   display: grid;
-  grid-template-columns: 2fr 5fr 1fr 1fr;
+  grid-template-columns: 2fr 5fr 1.5fr 1fr 1fr;
+  grid-column-gap: 1em;
   grid-row: 1;
-  grid-column: 1 / 5;
+  grid-column: 1 / 6;
+  align-items: center;
   min-height: 75px;
+  background: azure;
 `
 
 const SignUp = styled.button`
-    grid-column: 3;
-    background: lightblue;
-    font-size: 30px;
+  grid-column: 4;
+  font-size: 30px;
 `
 
 const LogIn = styled.button`
-    grid-column: 4;
-    background: red;
-    font-size: 30px;
+  grid-column: 5;
+  background: red;
+  font-size: 30px;
+`
+
+const NavLink = styled(Link)`
+  cursor: pointer;
+  background: lightblue;
+`
+const Title = styled.div`
+  grid-column: 1;
+  font-size: 40px;
+`
+const Leaderboard = styled.button`
+  grid-column: 3;
+  font-size: 20px;
+  background: lightblue;
 `
 const Challenge = styled.button`
-  grid-column: 3;
+  grid-column: 4;
+  font-size: 20px;
+  background: lightblue;
 `
 const Logout = styled.button`
-  grid-column: 4;
-  background: lightgreen;
-  font-size: 30px;
-`
-const NavTitle= styled(Link)`
-  grid-column: 1;
-  cursor: pointer;
-  background: lightgrey;
-  font-size: 50px;
-`
-const NavChallenge= styled(Link)`
-  grid-column: 3;
-  cursor: pointer;
-  font-size: 30px;
+  grid-column: 5;
+  font-size: 20px;
+  background: lightblue;
 `

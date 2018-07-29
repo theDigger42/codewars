@@ -13,7 +13,7 @@ export default Footer
 
 const Layout = styled.div`
     grid-row: 5;
-    grid-column: 1 / 5;
+    grid-column: 1 / 6;
     display: grid;
     grid-template-columns: 5% auto 5%;
     background: dimgrey;
