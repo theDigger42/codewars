@@ -14,20 +14,16 @@ router.post('/', (req, res) => {
             console.log('Username already taken')
         } else {
             const saltRounds = 5;
-            return bcrypt.genSaltAsync(saltRounds)
-            .then ((salt) => {
-                return bcrypt.hashAsync(password, salt)
-                .then ((hash) => {
-                    var newUser = new User();
-                    newUser.username = username;
-                    newUser.password = hash;
-                    newUser.save(function(err) {
-                        if (err) console.log('error in newUser.save ' + err);
-                        console.log(newUser);
-                        console.log("successful signup...");
-                    });
-                });
-            })
+            let salt = bcrypt.genSaltSync(saltRounds)
+            let hash = bcrypt.hashSync(password, salt)
+            var newUser = new User();
+            newUser.username = username;
+            newUser.password = hash;
+            newUser.save(function(err) {
+                if (err) console.log('error in newUser.save ' + err);
+                console.log(newUser);
+                console.log("successful signup...");
+            });
         }
     })
 })
