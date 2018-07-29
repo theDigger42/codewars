@@ -35,7 +35,7 @@ app.use(passport.session());
 app.use('/api/auth', auth)
 app.use('/api/signup', signup)
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 80));
 
 
 //Here are the routes we use
