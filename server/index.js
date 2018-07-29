@@ -21,7 +21,7 @@ const signup = require('./routes/signup')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(__dirname + '/../build'));
 app.use(cors())
 
 app.use(session({
@@ -36,6 +36,10 @@ app.use('/api/auth', auth)
 app.use('/api/signup', signup)
 
 app.set('port', (process.env.PORT || 80));
+
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+})
 
 
 //Here are the routes we use
