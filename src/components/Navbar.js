@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Signup from './Signup'
 import Login from './Login'
 import { Link } from 'react-router-dom'
+import logo from '../images/logo.png'
 
 const Navbar = (props) => {
   const navAuth = !props.auth.isAuthenticated ? (
@@ -22,7 +23,7 @@ const Navbar = (props) => {
     </LogIn></Layout>
   ) : (
       <Layout>
-        <NavLink to='/'><img src="../../public/logo.png"/></NavLink>
+        <Title to='/'><img id="logo" src={logo}/></Title>
         <Leaderboard><NavLink to='/leaderboard'>Leaderboard</NavLink></Leaderboard>
         <Challenge><NavLink to='/challenge'>Random</NavLink></Challenge>
         <Logout><NavLink onClick={() => props.logout()} to='/'>Logout</NavLink></Logout>
@@ -82,26 +83,22 @@ const LogIn = styled.button`
   font-size: 30px;
 `
 
+const Title = styled(Link)`
+  cursor: pointer;
+  background: dimgrey;
+`
 const NavLink = styled(Link)`
   cursor: pointer;
-  background: lightblue;
 `
-const Title = styled.div`
-  grid-column: 1;
-  font-size: 40px;
-`
-const Leaderboard = styled.button`
+const Leaderboard = styled.div`
   grid-column: 3;
   font-size: 20px;
-  background: lightblue;
 `
-const Challenge = styled.button`
+const Challenge = styled.div`
   grid-column: 4;
   font-size: 20px;
-  background: lightblue;
 `
-const Logout = styled.button`
+const Logout = styled.div`
   grid-column: 5;
   font-size: 20px;
-  background: lightblue;
 `

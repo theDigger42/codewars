@@ -108,7 +108,7 @@ const Prompt = styled.div`
   grid-row: 1;
   grid-column: 1 / 3;
   text-align: center;
-  font-size: 45px;
+  font-size: 28px;
   width: 100%;
   background: lightgrey;
   margin: 25px;

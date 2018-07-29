@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom"
 import Homepage from './Homepage'
 import Challenge from './Challenge'
 import PrivateRoute from '../components/PrivateRoute'
+import Leaderboard from "./Leaderboard";
 
 export default class App extends Component {
 
@@ -12,7 +13,11 @@ export default class App extends Component {
         <Route
           exact
           path="/"
-          render={props => <Homepage {...this.props}/>}
+          render={() => <Homepage {...this.props}/>}
+        />
+        <Route 
+          path='/leaderboard'
+          render={() => <Leaderboard {...this.props}/>}
         />
         <PrivateRoute
           path='/challenge'
