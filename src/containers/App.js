@@ -7,7 +7,6 @@ import PrivateRoute from '../components/PrivateRoute'
 export default class App extends Component {
 
   render() {
-    console.log("Rendering App with props", this.props);
     return (
       <Switch>
         <Route

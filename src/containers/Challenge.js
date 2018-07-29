@@ -48,9 +48,7 @@ export default class Challenge extends Component {
 
     render() {
         let data = this.state
-        console.log(this.props);
         let testResults = this.props.submitReducer.tests.map((test, i) => {
-            let status
             if (test.status === 'pass') {
                 return (
                     <PassResult>Input: ({test.input}). Expected: {test.expected}. Actual: {test.actual}.</PassResult>

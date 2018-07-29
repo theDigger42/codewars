@@ -1,48 +1,13 @@
-const User = require('../database/index.js').User;
-const Scoreboard = require('../database/index.js').Scoreboard;
-const ToyProblem = require('../database/index.js').ToyProblem;
-const execute = require('../helpers/sandbox.js').execute;
-const Promise = require('bluebird');
-const db = require('../database/index.js');
+const express = require('express')
+const db = require('../../database/index.js');
+const User = require('../../database/index.js').User;
+const Scoreboard = require('../../database/index.js').Scoreboard;
+const ToyProblem = require('../../database/index.js').ToyProblem;
 
-var challengeRoutes = function(app) {
+let router = express.Router()
 
-  //Route for running tests on toyProblem
-  app.post('/challenge', function(req, res) {
-    console.log(req.body);
-    let funcName = req.body.funcName;
-    let solution = req.body.solution;
-    let tests = req.body.tests;
-    let status;
-    var testRes = [];
-
-    //Because execute returns a promise, we need to map each test
-    //to the result of execute in order to properly send an array of test results
-    Promise.map(tests, function(test) {
-      return execute(`${solution} ${funcName}(${test.input})`)
-      .then((data) => {
-        if (data !== test.expected) {
-          status = 'fail';
-        } else {
-          status = 'pass';
-        }
-        return { input: test.input, actual: data, expected: test.expected, status: status};
-      });
-    }).then((data) => {
-      res.status(200);
-      res.data = data;
-      res.end(JSON.stringify(data));
-    });
-  });
-
-};
-
-
-//Routes that deal with databse actions
-var databaseRoutes = function(app) {
-
-  //Get a random toy problem from the database
-  app.get('/randomChallenge', function(req, res) {
+//Get a random toy problem from the database
+router.get('/randomChallenge', function(req, res) {
     ToyProblem.count().exec(function(err, count) {
       var random = Math.floor(Math.random() * count);
       ToyProblem.findOne().skip(random).exec(function(err, result) {
@@ -52,7 +17,7 @@ var databaseRoutes = function(app) {
   });
 
   // Get leaderboard of users in databse
-  app.get('/leaderboard', function(req, res) {
+  router.get('/leaderboard', function(req, res) {
     db.findLeaderboard((users) => {
       console.log(users);
       res.json(users);
@@ -60,7 +25,7 @@ var databaseRoutes = function(app) {
   });
 
     //Get leaderboard by DAY
-    app.get('/leaderboardByDay', function(req, res) {
+    router.get('/leaderboardByDay', function(req, res) {
       db.findScoreboardByDay((users) => {
         console.log(users);
         res.json(users);
@@ -68,7 +33,7 @@ var databaseRoutes = function(app) {
     });
 
   //Get names of all toy problems in database
-  app.get('/problems', function(req, res) {
+  router.get('/problems', function(req, res) {
     db.findToyProblems((toyProblems) => {
       res.json(toyProblems);
     });
@@ -76,7 +41,7 @@ var databaseRoutes = function(app) {
 
   //Get a specific toy problem from the database, using the funcName as a query.
   //NOTE: This isn't currently being used in the application.
-  app.get('/challenge:name', (req, res) => {
+  router.get('/challenge:name', (req, res) => {
     var func = req.params.name.slice(1);
     ToyProblem.findOne({"funcName": func}).exec(function(err, result) {
       res.end(JSON.stringify(result));
@@ -84,7 +49,7 @@ var databaseRoutes = function(app) {
   });
 
   //Update a user's score within the database
-  app.patch('/users:name', (req, res) => {
+  router.patch('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
     User.update({"username": name}, { $inc: {"score": 1} }, function(err, result) {
       if (err) console.log(err);
@@ -94,7 +59,7 @@ var databaseRoutes = function(app) {
   });
 
   //Add a toyProblem to the database
-  app.post('/admin/toyProblem', (req, res) => {
+  router.post('/admin/toyProblem', (req, res) => {
     var problem = {};
     problem.title = req.body.title;
     problem.body = req.body.body;
@@ -112,7 +77,7 @@ var databaseRoutes = function(app) {
   });
 
   //Check whether or not a user is logged in
-  app.get('/isLoggedIn', function(req, res) {
+  router.get('/isLoggedIn', function(req, res) {
     if (req.user) {
       var username = req.user.username;
       User.find({username}).exec((err, data) => {
@@ -127,7 +92,7 @@ var databaseRoutes = function(app) {
   });
 
   //Posts to scoreboard schema
-  app.post('/users:name', (req, res) => {
+  router.post('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
     var dbScoreboard = new Scoreboard({"username": name});
     dbScoreboard.save((err) => {
@@ -139,8 +104,4 @@ var databaseRoutes = function(app) {
     });
   });
 
-
-};
-
-module.exports.challengeRoutes = challengeRoutes;
-module.exports.databaseRoutes = databaseRoutes;
+  module.exports = router;

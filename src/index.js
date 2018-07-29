@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import Root from './Root';
-import registerServiceWorker from './registerServiceWorker';
 import setAuthorizationToken from './utils/setAuthorizationToken'
 import { setCurrentUser } from './actions/auth'
 import store from './store/index'
@@ -19,5 +18,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
-
-registerServiceWorker();

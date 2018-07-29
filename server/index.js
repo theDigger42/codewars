@@ -3,9 +3,7 @@ const express = require('express');
 const http = require('http');
 const socket = require('socket.io');
 
-const session = require('express-session');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors')
@@ -16,35 +14,27 @@ const io = socket(server);
 
 const auth = require('./routes/auth')
 const signup = require('./routes/signup')
+const challengeRoutes = require('./routes/challenge')
+const databaseRoutes = require('./routes/database')
 
 // Setup middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser());
 app.use(express.static(__dirname + '/../build'));
 app.use(cors())
-
-app.use(session({
-  secret: 'secret',
-  saveUninitialized: true,
-  resave: true
-}));
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api/auth', auth)
 app.use('/api/signup', signup)
+app.use('/', challengeRoutes)
+app.use('/', databaseRoutes)
 
 app.set('port', (process.env.PORT || 80));
 
 app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname, '../build/index.html'));
 })
-
-
-//Here are the routes we use
-require('./routes.js').challengeRoutes(app);
-require('./routes.js').databaseRoutes(app);
 
 let connections = [];
 let waitingRoom = {};
