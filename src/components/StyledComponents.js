@@ -38,19 +38,18 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-  background: ${WHITE_BLUE};
-  color: midnightblue;
+  background: white;
+  color: smoke;
   width: 120px;
   justify-self: center;
   font-size: 1.2em;
   font-weight: bold;
   padding: 0.5em;
-  border: 2px solid ${POOL};
+  border: 2px solid maroon;
   border-radius: 8px;
   &:hover {
-    background: ${'lavender'};
-    color: ${MAIN_COLOR};
-    border: 2px solid ${PURPLE};
+    background: dimgrey;
+    color: white;
     cursor: pointer;
   }
 `

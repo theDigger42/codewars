@@ -16,7 +16,7 @@ const Layout = styled.div`
     display: grid;
     grid-template-columns: 5% auto 5%;
     background: black;
-    min-height: 100px;
+    height: 10vh;
 `
 
 const Copy = styled.span`

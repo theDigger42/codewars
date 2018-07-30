@@ -18,7 +18,8 @@ const Signup = ({
   password,
   showModal,
   email,
-  addText
+  addText,
+  clear
 }) => {
 
   const enterInput =
@@ -49,17 +50,18 @@ const Signup = ({
         onKeyPress={ enterInput }
       />
       <Input
-        value={ password }
+        value={password}
         onChange={ e => handleChange(addText, "password", e.target.value) }
         placeholder="Password"
-        type="text"
+        type="password"
         required
         onKeyPress={ enterInput }
       />
       <Button
-        onClick={ e => 
-          handleClick(e, signup, { username, password, email }) 
-        }
+        onClick={ e => {
+          handleClick(e, signup, { username, password, email })
+          clear()
+        }}
       >
         Submit
       </Button>

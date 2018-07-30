@@ -45,11 +45,11 @@ const Content = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: azure;
+  background-color: lightgrey;
   padding: 1.5rem 1.5rem;
   width: 30rem;
   border-radius: 0.5rem;
-  border: .3rem solid ${styles.SECONDARY_COLOR};
+  border: .3rem solid maroon;
 `
 const Inner = styled.div`
   display: grid;
@@ -62,7 +62,7 @@ const Inner = styled.div`
     justify-self: center;
     font-size: 28px;
     font-weight: bold;
-    color: #0a0d54;
+    color: smoke;
   }
 
   .error {

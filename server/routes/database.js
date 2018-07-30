@@ -51,6 +51,7 @@ router.get('/randomChallenge', function(req, res) {
   //Update a user's score within the database
   router.patch('/users:name', (req, res) => {
     var name = req.params.name.slice(1);
+    console.log(name);
     User.update({"username": name}, { $inc: {"score": 1} }, function(err, result) {
       if (err) console.log(err);
       console.log('patch: ', result);

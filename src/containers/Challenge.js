@@ -14,11 +14,16 @@ export default class Challenge extends Component {
             funcName: '',
             solution: '',
             tests: [],
+            results: '',
+            isComplete: false,
             view: 'instructions',
             tags: ['instructions']
         }
         this.onChange = this.onChange.bind(this)  
         this.clickTag = this.clickTag.bind(this) 
+        this.testUserSolution = this.testUserSolution.bind(this)
+        this.handleTestResponse = this.handleTestResponse.bind(this)
+        this.getPrompt = this.getPrompt.bind(this)
     }
 
     clickTag(tag) {
@@ -27,6 +32,51 @@ export default class Challenge extends Component {
     }
 
     componentDidMount() {
+        this.getPrompt()
+    }
+
+    testUserSolution(e) {
+        axios.post('/challenge', this.state)
+            .then(this.handleTestResponse);
+    }
+    
+      handleTestResponse(res) {
+        var array = res.data;
+        console.log(array);
+        var passing = true;
+
+        array.forEach((test) => {
+          if (test.status === 'fail') {
+            passing = false;
+          }
+        });
+
+        let testResults = array.map((test) => {
+            if (test.status === 'pass') {
+                return (
+                    <PassResult>Input: {test.input}. Expected: {test.expected}. Actual: {test.actual}.</PassResult>
+                )
+            } else {
+                return (
+                    <FailResult>Input: {test.input} Expected: {test.expected}. Actual: {test.actual}.</FailResult>                    
+                )
+            }
+        })
+
+        this.setState({
+            results: testResults
+        })
+
+        if (passing) {
+          this.setState({ //updates the score of the user if all tests pass
+            isComplete: true
+          });
+    
+          axios.patch(`/users:${this.props.auth.user.username}`);
+        }
+      }
+    
+      getPrompt() {
         axios.get('/randomChallenge')
             .then(res => {
                 let challenge = res.data
@@ -36,9 +86,16 @@ export default class Challenge extends Component {
                     solution: 'function ' + challenge.funcName + '(' + challenge.params + ')' + ' {\n\n}',
                     funcName: challenge.funcName,
                     tests: challenge.tests,
+                    results: ''
                 })
             })
-    }
+
+        this.setState({
+            view: 'instructions',
+            isComplete: false,
+            tags: ['instructions']
+        });
+      }
 
     onChange (e) {
         this.setState({
@@ -54,25 +111,23 @@ export default class Challenge extends Component {
     }
 
     render() {
-        let data = this.state
-        let testResults = this.props.submitReducer.tests.map((test, i) => {
-            if (test.status === 'pass') {
-                return (
-                    <PassResult>Input: {test.input}. Expected: {test.expected}. Actual: {test.actual}.</PassResult>
-                )
-            } else {
-                return (
-                    <FailResult>Input: {test.input} Expected: {test.expected}. Actual: {test.actual}.</FailResult>                    
-                )
-            }
-        })
+        console.log(this.state.tests);
+
         let panelBody = this.state.view === 'instructions' ? <Info>{this.state.body}</Info> 
-            : this.state.view === 'results' ? <Info>{testResults}</Info> 
+            : this.state.view === 'results' ? <Info>{this.state.results}</Info> 
             : <p>other</p>
+        
+        let submitButton = this.state.isComplete === false ? <Button onClick={e => {
+            this.testUserSolution()
+            this.changeView('results')
+            this.clickTag('results')
+        }}>Submit</Button> : <Button onClick={e => {
+            this.getPrompt()
+        }}>Next Problem</Button>
 
         return (
             <Layout>
-                <Navbar {...this.props}/>
+                <Navbar {...this.props} active={'challenge'}/>
                 <Prompt>{this.state.title}</Prompt>
                 <Editor input={this.state.solution} change={this.onChange}/>
                 <ResultsPanel>
@@ -93,11 +148,7 @@ export default class Challenge extends Component {
                         </Tab>
                     </TabContainer>
                     <Content>{panelBody}</Content>
-                    <Button onClick={e => {
-                        this.props.submit(data)
-                        this.changeView('results')
-                        this.clickTag('results')
-                    }}>Submit</Button>
+                    {submitButton}
                 </ResultsPanel>
                 <Footer/>
             </Layout>
@@ -110,12 +161,15 @@ const Layout = styled.div`
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
   grid-row-gap: 5px;
-  background: grey;
+  background: dimgrey;
+  height: 100vh;
+  width: 100vw;
 `
 const Prompt = styled.h1`
   grid-column: 1 / 13;
   text-align: center;
   align-self: center;
+  font-weight: bold;
 `
 const ResultsPanel = styled.div`
   grid-column: 8 / 13;
@@ -125,6 +179,7 @@ const ResultsPanel = styled.div`
   grid-template-rows: 40px 1fr 50px;
   margin-right: 2em;
   margin-left: 1em;
+  margin-bottom: 2em;
   width: 400px;
 `
 const TabContainer = styled.div`
@@ -143,6 +198,7 @@ const Tab = styled.div`
   ${({ active }) => active && `
     color: black;
     background: gainsboro;
+    font-weight: bold;
   `};
 `
 const Content = styled.div`
@@ -157,6 +213,9 @@ const Button = styled.button`
   font-size: 30px;
   color: ghostwhite;
   background: maroon;
+  &:hover{{
+    background: #420000;
+  }}
 `
 const PassResult = styled.p`
   color: green;

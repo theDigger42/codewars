@@ -18,7 +18,7 @@ export default class Leaderboard extends Component {
         })
         return (
             <Layout>
-                <Navbar { ...this.props }/>
+                <Navbar { ...this.props } active={'scores'}/>
                 <Body>
                     <Title>High Scores</Title>
                     {userList}

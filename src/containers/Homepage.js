@@ -29,6 +29,7 @@ const Layout = styled.div`
   display: grid;
   grid-template-rows: 75px auto 10%;
   grid-template-columns: 1fr;
+  height: 100vh;
 `
 
 const Body = styled.div`

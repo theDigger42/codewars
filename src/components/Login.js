@@ -17,7 +17,8 @@ const Login = ({
   username,
   password,
   showModal,
-  addText
+  addText,
+  clear
 }) => {
 
   const enterInput = e => 
@@ -45,7 +46,10 @@ const Login = ({
         required
         onKeyPress={enterInput}
       />
-      <Button onClick={e => login({username, password}) }>
+      <Button onClick={e => {
+        login({username, password}) 
+        clear()
+      }}>
         Submit
       </Button>
     </div>
