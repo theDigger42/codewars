@@ -14,9 +14,16 @@ export default class Challenge extends Component {
             funcName: '',
             solution: '',
             tests: [],
-            view: 'instructions'
+            view: 'instructions',
+            tags: ['instructions']
         }
-        this.onChange = this.onChange.bind(this)   
+        this.onChange = this.onChange.bind(this)  
+        this.clickTag = this.clickTag.bind(this) 
+    }
+
+    clickTag(tag) {
+        var tags = [tag];
+        this.setState({ tags: tags })
     }
 
     componentDidMount() {
@@ -51,11 +58,11 @@ export default class Challenge extends Component {
         let testResults = this.props.submitReducer.tests.map((test, i) => {
             if (test.status === 'pass') {
                 return (
-                    <PassResult>Input: ({test.input}). Expected: {test.expected}. Actual: {test.actual}.</PassResult>
+                    <PassResult>Input: {test.input}. Expected: {test.expected}. Actual: {test.actual}.</PassResult>
                 )
             } else {
                 return (
-                    <FailResult>Input: ({test.input}). Expected: {test.expected}. Actual: {test.actual}.</FailResult>                    
+                    <FailResult>Input: {test.input} Expected: {test.expected}. Actual: {test.actual}.</FailResult>                    
                 )
             }
         })
@@ -66,22 +73,32 @@ export default class Challenge extends Component {
         return (
             <Layout>
                 <Navbar {...this.props}/>
-                <Body>
-                    <Prompt>{this.state.title}</Prompt>
-                    <Editor input={this.state.solution} change={this.onChange}/>
-                    <ResultsPanel>
-                        <TabContainer>
-                            <Tab onClick={() => this.changeView('instructions')}>
-                                Challenge
-                            </Tab>
-                            <Tab onClick={() => this.changeView('results')}> 
-                                Results
-                            </Tab>
-                        </TabContainer>
-                        {panelBody}
-                        <Button onClick={e => this.props.submit(data)}>Submit</Button>
-                    </ResultsPanel>
-                </Body>
+                <Prompt>{this.state.title}</Prompt>
+                <Editor input={this.state.solution} change={this.onChange}/>
+                <ResultsPanel>
+                    <TabContainer>
+                        <Tab active={this.state.tags[0] === 'instructions'}
+                            onClick={() => {
+                            this.changeView('instructions')
+                            this.clickTag('instructions')
+                        }}>
+                            Instructions
+                        </Tab>
+                        <Tab active={this.state.tags[0] === 'results'}
+                            onClick={() => {
+                            this.changeView('results')
+                            this.clickTag('results')
+                        }}>
+                            Results
+                        </Tab>
+                    </TabContainer>
+                    <Content>{panelBody}</Content>
+                    <Button onClick={e => {
+                        this.props.submit(data)
+                        this.changeView('results')
+                        this.clickTag('results')
+                    }}>Submit</Button>
+                </ResultsPanel>
                 <Footer/>
             </Layout>
         )
@@ -90,49 +107,47 @@ export default class Challenge extends Component {
 
 const Layout = styled.div`
   display: grid;
-  grid-template-rows: 75px 50px auto 10%;
-  grid-template-columns: 5% auto 5%;
-  grid-row-gap: 10px;
+  grid-template-rows: repeat(auto-fit, 1fr);
+  grid-template-columns: repeat(auto-fit, 1fr);
+  grid-row-gap: 5px;
   background: grey;
 `
-const Body = styled.div`
-  grid-row: 2 / 4;
-  grid-column: 2 / 5;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  grid-column-gap: 20px;
-  grid-template-rows: 100px 6fr;
-  min-height: 615px;
-`
-const Prompt = styled.div`
-  grid-row: 1;
-  grid-column: 1 / 3;
+const Prompt = styled.h1`
+  grid-column: 1 / 13;
   text-align: center;
-  font-size: 28px;
-  background: lightgrey;
   align-self: center;
 `
 const ResultsPanel = styled.div`
-  grid-column: 2;
-  grid-row: 1 / 4;
-  background: azure;
+  grid-column: 8 / 13;
+  background: gainsboro;
+  justify-self: center;
   display: grid;
-  grid-template-rows: 50px auto 40px;
-  margin-top: 100px;
-  min-width: 400px;
+  grid-template-rows: 40px 1fr 50px;
   margin-right: 2em;
+  margin-left: 1em;
+  width: 400px;
 `
 const TabContainer = styled.div`
   grid-row: 1;
   display: grid;
   grid-template-columns: auto auto;
-  background: darkgrey;
+  grid-column-gap: 10px;
+  background: grey;
 `
 const Tab = styled.div`
-  background: ghostwhite;
+  background: maroon;
+  color: white;
   font-size: 30px;
-  justify-self: center;
-  align-self: center;
+  text-align: center;
+  cursor: pointer;
+  ${({ active }) => active && `
+    color: black;
+    background: gainsboro;
+  `};
+`
+const Content = styled.div`
+  font-size: 30px;
+  text-align: center;
 `
 const Info = styled.p`
   font-size: 20px;
@@ -140,6 +155,8 @@ const Info = styled.p`
 const Button = styled.button`
   grid-row: 3;
   font-size: 30px;
+  color: ghostwhite;
+  background: maroon;
 `
 const PassResult = styled.p`
   color: green;

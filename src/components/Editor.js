@@ -36,7 +36,8 @@ const Editor = (props) => {
 export default Editor
 
 const Wrapper = styled.div`
-    grid-column: 1;
-    grid-row: 2;
-    min-width: 450px;
+    grid-column: 1 / 8;
+    min-width: 400px;
+    margin-left: 2em;
+    height: 550px;
 `

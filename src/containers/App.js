@@ -16,7 +16,7 @@ export default class App extends Component {
           render={() => <Homepage {...this.props}/>}
         />
         <Route 
-          path='/leaderboard'
+          path='/scores'
           render={() => <Leaderboard {...this.props}/>}
         />
         <PrivateRoute

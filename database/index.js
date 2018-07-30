@@ -56,7 +56,7 @@ const Scoreboard = mongoose.model('Scoreboard', ScoreboardSchema);
 //Gets the top users based on score from User schema
 let findLeaderboard = (callback) => {
   User.find((err, users) => {
-    let names = users.map(user => {
+    let names = users && users.map(user => {
         return {
           username: user.username,
           score: user.score

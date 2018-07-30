@@ -9,6 +9,7 @@ const Navbar = (props) => {
   const navAuth = !props.auth.isAuthenticated ? (
     <Layout>
       <Title to='/'><img id="logo" src={logo}/></Title>
+      <Leaderboard><NavLink to='/scores'>Leaderboard</NavLink></Leaderboard>
       <SignUp
         onClick={() => props.openModal('signup')}
       >
@@ -22,7 +23,7 @@ const Navbar = (props) => {
   ) : (
       <Layout>
         <Title to='/'><img id="logo" src={logo}/></Title>
-        <Leaderboard><NavLink to='/leaderboard'>Leaderboard</NavLink></Leaderboard>
+        <Leaderboard><NavLink to='/scores'>Leaderboard</NavLink></Leaderboard>
         <Challenge><NavLink to='/challenge'>Random</NavLink></Challenge>
         <Logout><NavLink onClick={() => props.logout()} to='/'>Logout</NavLink></Logout>
       </Layout>
@@ -60,43 +61,42 @@ const Navbar = (props) => {
 export default Navbar
 
 const Layout = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 5fr 1.5fr 1fr 1fr;
-  grid-column-gap: 1em;
   grid-row: 1;
-  grid-column: 1 / 6;
+  grid-column: 1 / 13;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  background: black;
   align-items: center;
-  min-height: 75px;
-  background: azure;
 `
-
-const SignUp = styled.button`
-  grid-column: 4;
-  font-size: 30px;
+const SignUp = styled.div`
+  grid-column: 7;
+  font-size: 20px;
+  color: white;
 `
-
-const LogIn = styled.button`
-  grid-column: 5;
-  background: red;
-  font-size: 30px;
+const LogIn = styled.div`
+  grid-column: 8;
+  font-size: 20px;
+  color: white;
 `
-
 const Title = styled(Link)`
   cursor: pointer;
-  background: dimgrey;
+  grid-column: 1 / 3;
+  justify-self: left;
 `
 const NavLink = styled(Link)`
   cursor: pointer;
+  color: white;
 `
 const Leaderboard = styled.div`
-  grid-column: 3;
+  grid-column: 6;
   font-size: 20px;
+  margin-right: 1em;
 `
 const Challenge = styled.div`
-  grid-column: 4;
+  grid-column: 7;
   font-size: 20px;
 `
 const Logout = styled.div`
-  grid-column: 5;
+  grid-column: 8;
   font-size: 20px;
 `

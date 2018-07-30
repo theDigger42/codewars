@@ -12,19 +12,17 @@ const Footer = (props) => {
 export default Footer
 
 const Layout = styled.div`
-    grid-row: 5;
-    grid-column: 1 / 6;
+    grid-column: 1 / 13;
     display: grid;
     grid-template-columns: 5% auto 5%;
-    background: dimgrey;
+    background: black;
+    min-height: 100px;
 `
 
-const Copy = styled.div`
+const Copy = styled.span`
     grid-column: 2;
-    color: azure;
+    color: white;
     justify-self: center;
-    font-size: 20px;
-    margin-top: 2em;
-    height: 70px;
+    align-self: center;
 `
 
