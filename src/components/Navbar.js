@@ -88,6 +88,7 @@ const Layout = styled.div`
   background: black;
   align-items: center;
   height: 10vh;
+  width: 100vw;
 `
 const SignUp = styled.div`
   grid-column: 7;

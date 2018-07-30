@@ -31,15 +31,16 @@ export default class Leaderboard extends Component {
 
 const Layout = styled.div`
   display: grid;
-  grid-template-rows: 75px auto 10%;
-  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fit, 1fr);
+  grid-template-columns: repeat(auto-fit, 1fr);
+  width: 100vw;
 `
 
 const Body = styled.div`
+  grid-column: 1 / 13;
   display: grid;
   grid-template-rows: 75px auto;
   grid-template-columns: 10% auto 10%;
-  min-height: 620px;
   background: grey;
 `
 const Title = styled.h1`

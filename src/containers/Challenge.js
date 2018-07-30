@@ -36,7 +36,7 @@ export default class Challenge extends Component {
     }
 
     testUserSolution(e) {
-        axios.post('/challenge', this.state)
+        axios.post('http://localhost:3000/challenge', this.state)
             .then(this.handleTestResponse);
     }
     
@@ -72,12 +72,12 @@ export default class Challenge extends Component {
             isComplete: true
           });
     
-          axios.patch(`/users:${this.props.auth.user.username}`);
+          axios.patch(`http://localhost:3000/users:${this.props.auth.user.username}`);
         }
       }
     
       getPrompt() {
-        axios.get('/randomChallenge')
+        axios.get('http://localhost:3000/randomChallenge')
             .then(res => {
                 let challenge = res.data
                 this.setState({
@@ -160,7 +160,6 @@ const Layout = styled.div`
   display: grid;
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
-  grid-row-gap: 5px;
   background: dimgrey;
   height: 100vh;
   width: 100vw;

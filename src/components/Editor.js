@@ -40,5 +40,5 @@ const Wrapper = styled.div`
     min-width: 400px;
     margin-left: 2em;
     margin-bottom: 2em;
-    height: 65vh;
+    height: 66vh;
 `

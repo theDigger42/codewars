@@ -7,7 +7,7 @@ export default class Homepage extends Component {
     render() {
         return (
             <Layout>
-                <Navbar { ...this.props }/>
+                <Navbar {...this.props} active={'home'}/>
                 <Body>
                     <Heading>
                         Practice coding.
@@ -19,7 +19,7 @@ export default class Homepage extends Component {
                         All in one place.
                     </Heading>
                 </Body>
-                <Footer />
+                <Footer/>
             </Layout>
         )
     }
@@ -27,14 +27,16 @@ export default class Homepage extends Component {
 
 const Layout = styled.div`
   display: grid;
-  grid-template-rows: 75px auto 10%;
-  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fit, 1fr);
+  grid-template-columns: repeat(auto-fit, 1fr);
   height: 100vh;
+  width: 100vw;
 `
 
 const Body = styled.div`
   grid-row: 2;
-  min-height: 645px;
+  grid-column: 1 / 13;
+  min-height: 80vh;
   background: grey;
   display: grid;
   grid-template-rows: auto;
