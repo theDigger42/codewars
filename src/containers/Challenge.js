@@ -36,7 +36,7 @@ export default class Challenge extends Component {
     }
 
     testUserSolution(e) {
-        axios.post('/challenge', this.state)
+        axios.post('http://localhost:3000/challenge', this.state)
             .then(this.handleTestResponse);
     }
     
@@ -72,12 +72,12 @@ export default class Challenge extends Component {
             isComplete: true
           });
     
-          axios.patch(`/users:${this.props.auth.user.username}`);
+          axios.patch(`http://localhost:3000/users:${this.props.auth.user.username}`);
         }
       }
     
       getPrompt() {
-        axios.get('/randomChallenge')
+        axios.get('http://localhost:3000/randomChallenge')
             .then(res => {
                 let challenge = res.data
                 this.setState({

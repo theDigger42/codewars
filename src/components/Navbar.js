@@ -26,7 +26,10 @@ export default class Navbar extends Component {
         <Title to='/'><img id="logo" src={logo}/></Title>
         <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores'} onClick={() =>
           this.clickTag('scores')
-        }>Leaderboard</NavLink></Leaderboard>
+        }>Scores</NavLink></Leaderboard>
+        <Help><NavLink to='/help' active={this.state.tags[0] === 'help'} onClick={() =>
+          this.clickTag('help')
+        }>Help</NavLink></Help>
         <SignUp
           onClick={() => this.props.openModal('signup')}
         >
@@ -42,10 +45,13 @@ export default class Navbar extends Component {
           <Title to='/'><img id="logo" src={logo}/></Title>
           <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores'} onClick={() =>
           this.clickTag('scores')}>Scores</NavLink></Leaderboard>
+          <Help><NavLink to='/help' active={this.state.tags[0] === 'help'} onClick={() =>
+          this.clickTag('help')
+          }>Help</NavLink></Help>
           <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat'} onClick={() =>
           this.clickTag('chat')}>Chat</NavLink></Chat>
           <Challenge><NavLink to='/challenge' active={this.state.tags[0] === 'challenge'} onClick={() =>
-          this.clickTag('challenge')}>Challenge</NavLink></Challenge>
+          this.clickTag('challenge')}>Code</NavLink></Challenge>
           <Logout><NavLink onClick={() => this.props.logout()} to='/'>Logout</NavLink></Logout>
         </Layout>
       )
@@ -128,9 +134,12 @@ const NavLink = styled(Link)`
   `};
 `
 const Leaderboard = styled.div`
+  grid-column: 4;
+  font-size: 20px;
+`
+const Help = styled.div`
   grid-column: 5;
   font-size: 20px;
-  margin-right: 1em;
 `
 const Chat = styled.div`
   grid-column: 6;

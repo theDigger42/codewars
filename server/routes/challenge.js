@@ -17,9 +17,9 @@ router.post('/challenge', function(req, res) {
     return execute(`${solution} ${funcName}(${test.input})`)
         .then((data) => {
             if (data !== test.expected) {
-            status = 'fail';
+                status = 'fail';
             } else {
-            status = 'pass';
+                status = 'pass';
             }
             return { input: test.input, actual: data, expected: test.expected, status: status};
         });
