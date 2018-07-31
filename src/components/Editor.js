@@ -17,14 +17,10 @@ const Editor = (props) => {
                 fontSize={16}
                 cursorStart={2}
                 showPrintMargin={true}
-                showGutter={true}
                 highlightActiveLine={true}
                 width="100%"
                 height="100%"
                 setOptions={{
-                    enableBasicAutocompletion: true,
-                    enableLiveAutocompletion: true,
-                    enableSnippets: true,
                     showLineNumbers: true,
                     tabSize: 2
                 }}

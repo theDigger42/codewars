@@ -23,11 +23,11 @@ export default class Navbar extends Component {
   render() {
     const navBar = !this.props.auth.isAuthenticated ? (
       <Layout>
-        <Title to='/'><img id="logo" src={logo}/></Title>
-        <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores'} onClick={() =>
+        <Title to='/'><img id="logo" src={logo} alt="logo.png"/></Title>
+        <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
           this.clickTag('scores')
         }>Scores</NavLink></Leaderboard>
-        <Help><NavLink to='/help' active={this.state.tags[0] === 'help'} onClick={() =>
+        <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
           this.clickTag('help')
         }>Help</NavLink></Help>
         <SignUp
@@ -42,15 +42,15 @@ export default class Navbar extends Component {
       </LogIn></Layout>
     ) : (
         <Layout>
-          <Title to='/'><img id="logo" src={logo}/></Title>
-          <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores'} onClick={() =>
+          <Title to='/'><img id="logo" src={logo} alt="logo.png"/></Title>
+          <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
           this.clickTag('scores')}>Scores</NavLink></Leaderboard>
-          <Help><NavLink to='/help' active={this.state.tags[0] === 'help'} onClick={() =>
+          <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
           this.clickTag('help')
           }>Help</NavLink></Help>
-          <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat'} onClick={() =>
+          <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat' ? 1 : 0} onClick={() =>
           this.clickTag('chat')}>Chat</NavLink></Chat>
-          <Challenge><NavLink to='/challenge' active={this.state.tags[0] === 'challenge'} onClick={() =>
+          <Challenge><NavLink to='/challenge' active={this.state.tags[0] === 'challenge' ? 1 : 0} onClick={() =>
           this.clickTag('challenge')}>Code</NavLink></Challenge>
           <Logout><NavLink onClick={() => this.props.logout()} to='/'>Logout</NavLink></Logout>
         </Layout>

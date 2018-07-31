@@ -13,7 +13,7 @@ export default class Leaderboard extends Component {
         console.log(this.props);
         let userList = this.props.score.users && this.props.score.users.map((user, i) => {
             return (
-                <User>{i+1}: {user.username} - {user.score}</User>
+                <User key={i}>{i+1}: {user.username} - {user.score}</User>
             )
         })
         return (
