@@ -4,6 +4,7 @@ import Homepage from './Homepage'
 import Challenge from './Challenge'
 import PrivateRoute from '../components/PrivateRoute'
 import Leaderboard from "./Leaderboard";
+import Chat from './Chat'
 
 export default class App extends Component {
 
@@ -22,6 +23,11 @@ export default class App extends Component {
         <PrivateRoute
           path='/challenge'
           component={Challenge}
+          {...this.props}
+        />
+        <PrivateRoute
+          path='/chat'
+          component={Chat}
           {...this.props}
         />
       </Switch>

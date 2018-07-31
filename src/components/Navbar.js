@@ -42,6 +42,8 @@ export default class Navbar extends Component {
           <Title to='/'><img id="logo" src={logo}/></Title>
           <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores'} onClick={() =>
           this.clickTag('scores')}>Scores</NavLink></Leaderboard>
+          <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat'} onClick={() =>
+          this.clickTag('chat')}>Chat</NavLink></Chat>
           <Challenge><NavLink to='/challenge' active={this.state.tags[0] === 'challenge'} onClick={() =>
           this.clickTag('challenge')}>Challenge</NavLink></Challenge>
           <Logout><NavLink onClick={() => this.props.logout()} to='/'>Logout</NavLink></Logout>
@@ -126,9 +128,13 @@ const NavLink = styled(Link)`
   `};
 `
 const Leaderboard = styled.div`
-  grid-column: 6;
+  grid-column: 5;
   font-size: 20px;
   margin-right: 1em;
+`
+const Chat = styled.div`
+  grid-column: 6;
+  font-size: 20px;
 `
 const Challenge = styled.div`
   grid-column: 7;

@@ -7,6 +7,7 @@ const initialState = {
     username: '',
     password: '',
     solution: '',
+    message: ''
 }
 
 const textInput = (state = initialState, action) => {
