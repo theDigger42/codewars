@@ -27,7 +27,7 @@ export default class Help extends Component {
             tests: '',
             params: '',
           };
-      axios.post('http://localhost:3000/admin/toyProblem', toyProblem)
+      axios.post('/admin/toyProblem', toyProblem)
       .then((data) => {
         console.log('success', data);
         this.setState(emptyState);
