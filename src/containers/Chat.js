@@ -54,7 +54,7 @@ export default class Chat extends Component {
         let messages = [...this.state.messages].reverse().map((msg) => {
             if (msg.user) 
             return (
-                <Message>{msg.user}: {msg.contents}</Message>
+                <Message> ({msg.user}) : {msg.contents}</Message>
             )
         })
 
@@ -65,11 +65,10 @@ export default class Chat extends Component {
                     <Title>Chat Room</Title>
                     <Window>
                         <MessageBox>{messages}</MessageBox>
-                        <Input name="message" type="text" value={this.props.input.message}
+                        <Input name="message" type="text" value={this.props.input.message} placeholder="Type here and hit ENTER to send"
                             onChange={e => this.handleChange(this.props.addText, 'message', e.target.value)}
                             onKeyPress={this.enterInput}
                         />
-                        <Button onClick={(e) => this.handleSubmit(e)}> Send </Button>
                     </Window>
                 </Body>
                 <Footer/>
@@ -84,8 +83,8 @@ const Layout = styled.div`
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
   width: 100vw;
+  height: 100vh;
 `
-
 const Body = styled.div`
   grid-column: 1 / 13;
   display: grid;
@@ -98,28 +97,31 @@ const Window = styled.div`
     grid-row: 2;
     grid-column: 2;
     background: gainsboro;
+    overflow: hidden;
     display: grid;
-    grid-template-rows: auto 50px;
-    grid-template-columns: 3fr 1fr;
+    grid-template-rows: repeat(10, 1fr) 55px;
 `
-const Message = styled.div`
-    background: ghostwhite;
-    width: 50%;
+const Message = styled.li`
+    background: black;
+    color: gainsboro;
+    width: 70vw;
+    height: 30px;
+    border: 1px solid maroon;
+    border-radius: 10px;
+    font-size: 30px;
+    padding: 0.5em;
+    transform: rotate(-180deg);
 `
-const MessageBox = styled.div`
-    grid-row: 1;
-    height: 62vh;
-    display: grid;
-    grid-template-rows: repeat(15, 30px);
-    grid-row-gap: 10px;
-    overflow: auto;
+const MessageBox = styled.ul`
+    grid-row: 1 / 11;
+    transform: rotate(180deg);
 `
 const Input = styled.textarea`
     align-self: bottom;
-    justify-self: center;
-    width: 60vw;
-    grid-row: 2;
-    grid-column: 1;
+    width: 100%;
+    grid-row: 11;
+    font-size: 30px;
+    text-align: center;
 `
 const Title = styled.h1`
     grid-row: 1;

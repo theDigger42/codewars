@@ -19,7 +19,7 @@ export default class Challenge extends Component {
         super(props)
         this.state = {
             title: 'Get ready',
-            body: '',
+            body: 'Wait for the game to start.',
             funcName: '',
             solution: '',
             tests: [],
@@ -312,7 +312,8 @@ const Content = styled.div`
   text-align: center;
 `
 const Info = styled.p`
-  font-size: 20px;
+  font-size: 26px;
+  margin-top: 2em;
 `
 const Button = styled.button`
   grid-row: 3;
