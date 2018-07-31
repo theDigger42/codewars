@@ -19,7 +19,7 @@ export default class Challenge extends Component {
         super(props)
         this.state = {
             title: 'Get ready',
-            body: 'Wait for the game to start.',
+            body: 'Click join and wait for the game to start.',
             funcName: '',
             solution: '',
             tests: [],
@@ -43,6 +43,7 @@ export default class Challenge extends Component {
         this.updateGameTimer = this.updateGameTimer.bind(this)
         this.onGameStart = this.onGameStart.bind(this)
         this.onScoreboardChange = this.onScoreboardChange.bind(this)
+        this.suffix = this.suffix.bind(this)
     }
 
     updateTimer(date) {
@@ -104,7 +105,7 @@ export default class Challenge extends Component {
     }
 
     testUserSolution(e) {
-        axios.post('http://localhost:3000/challenge', this.state)
+        axios.post('/challenge', this.state)
             .then(this.handleTestResponse);
     }
     
@@ -138,14 +139,19 @@ export default class Challenge extends Component {
         if (passing) {
           this.setState({ //updates the score of the user if all tests pass
             isComplete: true
-          });   
-          axios.patch(`http://localhost:3000/users:${this.props.auth.user.username}`);
+          });
+          if (this.state.scoreboard[0] === 'unfinished') {
+            axios.patch(`/users:${this.props.auth.user.username}`);
+          }
+          console.log(this.state.scoreboard);
           gameComplete()
+          this.clickTag('scores')
+          this.changeView('scores')
         }
       }
     
     getPrompt() {
-        axios.get('http://localhost:3000/randomChallenge')
+        axios.get('/randomChallenge')
             .then(res => {
                 let challenge = res.data
                 this.setState({
@@ -194,9 +200,24 @@ export default class Challenge extends Component {
         })
     }
 
+    suffix(i) {
+        var j = i % 10,
+            k = i % 100;
+        if (j == 1 && k != 11) {
+            return i + "st";
+        }
+        if (j == 2 && k != 12) {
+            return i + "nd";
+        }
+        if (j == 3 && k != 13) {
+            return i + "rd";
+        }
+        return i + "th";
+    }
+
     render() {
-        let scores = this.state.scoreboard && this.state.scoreboard.map(score => {
-            return <p>{score}</p>
+        let scores = this.state.scoreboard && this.state.scoreboard.map((score, i) => {
+            return <p>{this.suffix(i+1)} : {score}</p>
         })
 
         let panelBody = this.state.view === 'instructions' ? <Info>{this.state.body}</Info> 
@@ -308,8 +329,9 @@ const Tab = styled.div`
   `};
 `
 const Content = styled.div`
-  font-size: 30px;
+  font-size: 28px;
   text-align: center;
+  margin: 1em;
 `
 const Info = styled.p`
   font-size: 26px;

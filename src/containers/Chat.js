@@ -52,10 +52,11 @@ export default class Chat extends Component {
     render() {
 
         let messages = [...this.state.messages].reverse().map((msg) => {
-            if (msg.user) 
-            return (
-                <Message> ({msg.user}) : {msg.contents}</Message>
-            )
+            if (msg.user) {
+                return (
+                    <Message> ({msg.user}) : {msg.contents}</Message>
+                )
+            }
         })
 
         return (
@@ -96,7 +97,7 @@ const Body = styled.div`
 const Window = styled.div`
     grid-row: 2;
     grid-column: 2;
-    background: gainsboro;
+    background: black;
     overflow: hidden;
     display: grid;
     grid-template-rows: repeat(10, 1fr) 55px;
@@ -107,7 +108,7 @@ const Message = styled.li`
     width: 70vw;
     height: 30px;
     border: 1px solid maroon;
-    border-radius: 10px;
+    border-radius: 20px;
     font-size: 30px;
     padding: 0.5em;
     transform: rotate(-180deg);

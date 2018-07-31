@@ -20,7 +20,7 @@ export default class Leaderboard extends Component {
             <Layout>
                 <Navbar { ...this.props } active={'scores'}/>
                 <Body>
-                    <Title>High Scores</Title>
+                    <Title>Top Hackers</Title>
                     {userList}
                 </Body>
                 <Footer />
