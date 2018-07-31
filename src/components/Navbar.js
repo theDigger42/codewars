@@ -26,7 +26,7 @@ export default class Navbar extends Component {
         <Title to='/'><img id="logo" src={logo} alt="logo.png"/></Title>
         <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
           this.clickTag('scores')
-        }>Scores</NavLink></Leaderboard>
+        }>Leaderboard</NavLink></Leaderboard>
         <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
           this.clickTag('help')
         }>Help</NavLink></Help>
@@ -44,7 +44,7 @@ export default class Navbar extends Component {
         <Layout>
           <Title to='/'><img id="logo" src={logo} alt="logo.png"/></Title>
           <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
-          this.clickTag('scores')}>Scores</NavLink></Leaderboard>
+          this.clickTag('scores')}>Leaderboard</NavLink></Leaderboard>
           <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
           this.clickTag('help')
           }>Help</NavLink></Help>
@@ -134,8 +134,10 @@ const NavLink = styled(Link)`
   `};
 `
 const Leaderboard = styled.div`
-  grid-column: 4;
+  grid-column: 3 / 4;
   font-size: 20px;
+  justify-self: right;
+  margin-left: 5em;
 `
 const Help = styled.div`
   grid-column: 5;

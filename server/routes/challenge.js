@@ -1,6 +1,6 @@
 const express = require('express')
 const Promise = require('bluebird')
-const execute = require('../../helpers/sandbox.js').execute;
+const execute = require('../../helpers/runner').execute;
 
 let router = express.Router()
 
