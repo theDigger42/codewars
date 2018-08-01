@@ -21,10 +21,8 @@ export default class Chat extends Component {
 
     componentDidMount() {
         subscribeToSocket(this.props.auth.user.username, (message) => {
-            console.log('message', message)
             let messages = [...this.state.messages];
             messages.push(message);
-            console.log(messages);
             this.setState({
                 messages: messages
             });

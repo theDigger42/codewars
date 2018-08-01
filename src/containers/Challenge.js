@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import axios from 'axios'
 import Editor from '../components/Editor'
 import Footer from '../components/Footer'
-import WaitingRoom from '../components/WaitingRoom'
+
 import {
     subscribeToTimerSocket, 
     getDateTimerSocket,
@@ -83,8 +83,6 @@ export default class Challenge extends Component {
     }
     
     onScoreboardChange(scoreboard) {
-        console.log('old scoreboard', this.state.scoreboard);
-        console.log('setting new scoreboard state', scoreboard);
         this.setState({ scoreboard })
     }
 
@@ -105,13 +103,12 @@ export default class Challenge extends Component {
     }
 
     testUserSolution(e) {
-        axios.post('/challenge', this.state)
+        axios.post('http://localhost:3000/challenge', this.state)
             .then(this.handleTestResponse);
     }
     
       handleTestResponse(res) {
         var array = res.data;
-        console.log(array);
         var passing = true;
 
         array.forEach((test) => {
@@ -141,9 +138,8 @@ export default class Challenge extends Component {
             isComplete: true
           });
           if (this.state.scoreboard[0] === 'unfinished') {
-            axios.patch(`/users:${this.props.auth.user.username}`);
+            axios.patch(`http://localhost:3000/users:${this.props.auth.user.username}`);
           }
-          console.log(this.state.scoreboard);
           gameComplete()
           this.clickTag('scores')
           this.changeView('scores')
@@ -151,7 +147,7 @@ export default class Challenge extends Component {
       }
     
     getPrompt() {
-        axios.get('/randomChallenge')
+        axios.get('http://localhost:3000/randomChallenge')
             .then(res => {
                 let challenge = res.data
                 this.setState({
@@ -185,7 +181,6 @@ export default class Challenge extends Component {
         this.setState({
             solution: e
         })
-        console.log(this.state.solution);
     }
 
     changeView(view) {
@@ -203,13 +198,13 @@ export default class Challenge extends Component {
     suffix(i) {
         var j = i % 10,
             k = i % 100;
-        if (j == 1 && k != 11) {
+        if (j === 1 && k !== 11) {
             return i + "st";
         }
-        if (j == 2 && k != 12) {
+        if (j === 2 && k !== 12) {
             return i + "nd";
         }
-        if (j == 3 && k != 13) {
+        if (j === 3 && k !== 13) {
             return i + "rd";
         }
         return i + "th";
@@ -314,7 +309,7 @@ const TabContainer = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   grid-column-gap: 10px;
-  background: grey;
+  background: dimgrey;
 `
 const Tab = styled.div`
   background: maroon;
