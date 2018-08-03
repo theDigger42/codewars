@@ -3,7 +3,7 @@ import axios from '../../node_modules/axios';
 
 export const submit = (solution) => {
   return dispatch => {
-    axios.post('http://localhost:3000/challenge', solution)
+    axios.post('/challenge', solution)
       .then(res => {
         dispatch({
           type: SUBMIT_SOLUTION,
@@ -15,7 +15,7 @@ export const submit = (solution) => {
 
 export const getPrompt = () => {
   return dispatch => {
-    axios.get('http://localhost:3000/randomChallenge')
+    axios.get('/randomChallenge')
       .then(res => {
         dispatch({
           type: GET_PROMPT,
