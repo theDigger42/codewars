@@ -48,10 +48,10 @@ export default class Chat extends Component {
   }
 
   render() {
-    let messages = [...this.state.messages].reverse().map((msg) => {
+    let messages = [...this.state.messages].reverse().map((msg, i) => {
       if (msg.user) {
         return (
-          <Message> ({msg.user}) : {msg.contents}</Message>
+          <Message key={i}> ({msg.user}) : {msg.contents}</Message>
         )
       }
       return null

@@ -1,4 +1,4 @@
-import { GET_LEADERBOARD } from './types'
+import { GET_LEADERBOARD, CHANGE_SCOREBOARD } from './types'
 import axios from '../../node_modules/axios';
 
 export const getLeaderboard = () => {
@@ -10,5 +10,14 @@ export const getLeaderboard = () => {
           payload: res.data
         })
       })
+  }
+}
+
+export const onScoreboardChange = (scoreboard) => {
+  return dispatch => {
+    dispatch({
+      type: CHANGE_SCOREBOARD,
+      payload: scoreboard
+    })
   }
 }

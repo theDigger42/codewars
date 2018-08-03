@@ -36,15 +36,7 @@ let connections = [];
 let waitingRoom = {};
 let gameRoom = {};
 let scoreboard = [];
-/*
-{
-  username: 'will',
-  finished: false,
-  finishTime: null,
-  finishPlace: null
-}
 
-*/
 // socket.io
 io.on('connection', (client) => {
   console.log('socket connected');

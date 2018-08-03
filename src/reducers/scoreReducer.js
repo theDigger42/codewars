@@ -1,21 +1,28 @@
-import { GET_LEADERBOARD } from '../actions/types'
+import { GET_LEADERBOARD, CHANGE_SCOREBOARD } from '../actions/types'
 
 const initialState = {
-  users: []
+  users: [],
+  scoreboard: []
 }
 
-const scoreReducer = (state = initialState, action) => {
+const score = (state = initialState, action) => {
   switch (action.type) {
     case GET_LEADERBOARD:
-      const results = action.payload
       return {
         ...state,
-        users: results
+        users: action.payload
+      }
+
+    case CHANGE_SCOREBOARD:
+      return {
+        ...state,
+        scoreboard: action.payload
       }
 
     default:
       return state
+
   }
 }
 
-export default scoreReducer
+export default score

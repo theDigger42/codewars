@@ -6,9 +6,9 @@ import { openModal, closeModal } from './modal'
 
 import { signup, login, logout, setCurrentUser } from './auth'
 
-import { submit } from './submit'
+import { submit, getPrompt, clearPrompt } from './prompt'
 
-import { getLeaderboard } from './score'
+import { getLeaderboard, onScoreboardChange } from './score'
 
 const mapDispatchToProps = (dispatch) => (
   bindActionCreators({
@@ -22,7 +22,10 @@ const mapDispatchToProps = (dispatch) => (
     logout,
     setCurrentUser,
     submit,
-    getLeaderboard
+    getLeaderboard,
+    getPrompt,
+    clearPrompt,
+    onScoreboardChange
   }, dispatch)
 )
 

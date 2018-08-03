@@ -112,7 +112,7 @@ export default class Help extends Component {
               value={this.state.tests}
             ></WideInput>
           </Tests>
-          <div><h7>{this.state.invalidEntries.join(' || ')}</h7></div>
+          <div><h5>{this.state.invalidEntries.join(' || ')}</h5></div>
           <Submit>
             <Button type="Submit" name="Submit" onClick={this.handleSubmit}>Submit</Button>
           </Submit>

@@ -37,6 +37,7 @@ const Body = styled.div`
   grid-template-rows: 75px auto;
   grid-template-columns: 10% auto 10%;
   background: grey;
+  min-height: 80vh;
 `
 const Title = styled.h1`
     grid-row: 1;

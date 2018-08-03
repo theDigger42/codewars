@@ -10,7 +10,7 @@ const Editor = (props) => {
       <AceEditor
         mode="javascript"
         theme="monokai"
-        onChange={props.change}
+        onChange={e => props.change('solution', e)}
         value={props.input}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
