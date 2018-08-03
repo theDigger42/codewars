@@ -61,7 +61,7 @@ export default class Panel extends Component {
     if (passing) {
       this.props.complete(true)
       if (this.props.score.scoreboard[0] === 'unfinished') {
-        axios.patch(`/users:${this.props.auth.user.username}`);
+        axios.patch(`http://localhost:3000/users:${this.props.auth.user.username}`);
       }
       gameComplete()
       setTimeout(() => {
@@ -100,9 +100,9 @@ export default class Panel extends Component {
       this.props.clearPrompt()
     }}>Play again</Button>
 
-    let joinButton = this.props.room === '' 
-      ? <Button onClick={() => { this.props.changeRoom('waiting') }}>Join</Button> 
-      : this.props.room === 'waiting' 
+    let joinButton = this.props.prompt.room === 'lobby' 
+      ? <Button onClick={() => this.props.changeRoom('waiting') }>Join</Button> 
+      : this.props.prompt.room === 'waiting' 
       ? <Button>Waiting...</Button> 
       : submitButton
 

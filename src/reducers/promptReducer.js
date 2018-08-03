@@ -1,13 +1,14 @@
-import { GET_PROMPT, INPUT_CHANGE, SUBMIT_SOLUTION, CLEAR_PROMPT } from '../actions/types'
+import { GET_PROMPT, INPUT_CHANGE, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM } from '../actions/types'
 
 const initialState = {
   title: 'Get ready',
-  body: 'Click join and wait for the challenge to begin :)',
+  body: 'Click join and wait for the challenge to begin',
   solution: '',
   funcName: '',
   tests: [],
   results: [],
-  isComplete: false
+  isComplete: false,
+  room: 'lobby'
 }
 
 const prompt = (state = initialState, action) => {
@@ -22,25 +23,33 @@ const prompt = (state = initialState, action) => {
         funcName: action.payload.funcName,
         tests: action.payload.tests,
         results: '',
-        isComplete: false
+        isComplete: false,
+        room: ''
       }
 
     case CLEAR_PROMPT: 
       return {
         ...state,
         title: 'Get ready',
-        body: 'Wait for next game to begin',
+        body: 'Wait for the next game to begin',
         solution: '',
         funcName: '',
         tests: [],
         results: '',
-        isComplete: false
+        isComplete: false,
+        room: 'waiting'
       }
 
     case SUBMIT_SOLUTION:
       return {
         ...state,
         tests: action.payload
+      }
+
+    case CHANGE_ROOM:
+      return {
+        ...state,
+        room: action.payload
       }
 
     case INPUT_CHANGE: 

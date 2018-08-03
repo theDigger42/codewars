@@ -17,17 +17,13 @@ export default class Challenge extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      room: '',
-      results: '',
       timerTillNextGame: '',
       gameTimer: 60,
-      scoreboard: [],
       isComplete: false
     }
     this.updateTimer = this.updateTimer.bind(this)
     this.updateGameTimer = this.updateGameTimer.bind(this)
     this.onGameStart = this.onGameStart.bind(this)
-    this.changeRoom = this.changeRoom.bind(this)
     this.setComplete = this.setComplete.bind(this)
   }
 
@@ -45,9 +41,10 @@ export default class Challenge extends Component {
       this.setState({ timerTillNextGame: secondsTillNextGame });
       if (secondsTillNextGame <= -1) {
         clearInterval(timer);
-        if (this.state.room === 'waiting') {
+        if (this.props.prompt.room === 'waiting') {
           this.props.getPrompt()
-          this.setState({ room: 'game', isComplete: false })
+          this.props.changeRoom('game')
+          this.setState({ isComplete: false })
           this.updateGameTimer();
         }
         getDateTimerSocket();
@@ -63,7 +60,7 @@ export default class Challenge extends Component {
       if (secondsTillEndGame < 0) {
         clearInterval(gameTimer);
         setTimeout(() => {
-          this.setState({ gameTimer: 30 })
+          this.setState({ gameTimer: 60 })
         }, 2000)
       }
     }, 1000)
@@ -81,13 +78,7 @@ export default class Challenge extends Component {
   }
 
   componentWillUnmount() {
-    exitWaitingRoom()
-  }
-
-  changeRoom(room) {
-    this.setState({
-      room: room
-    })
+    exitWaitingRoom({ username: this.props.auth.user.username })
   }
 
   suffix(i) {
@@ -113,8 +104,7 @@ export default class Challenge extends Component {
         <Prompt>{this.props.prompt.title}</Prompt>
         <Timer>Next game in: {this.state.timerTillNextGame}</Timer>
         <Editor input={this.props.prompt.solution} change={this.props.addText} />
-        <Panel {...this.props} room={this.state.room} changeRoom={this.changeRoom} 
-          complete={this.setComplete} isComplete={this.state.isComplete}/>
+        <Panel {...this.props} complete={this.setComplete} isComplete={this.state.isComplete} />
         <Footer />
       </Layout>
     )
