@@ -11,7 +11,7 @@ import { submit } from './submit'
 import { getLeaderboard } from './score'
 
 const mapDispatchToProps = (dispatch) => (
-  bindActionCreators({ 
+  bindActionCreators({
     openModal,
     closeModal,
     addText,

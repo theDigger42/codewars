@@ -7,13 +7,13 @@ class WaitingRoom extends Component {
   }
 
   componentDidMount() {
-    joinWaitingRoom({username: this.props.username});
+    joinWaitingRoom({ username: this.props.username });
   }
 
   componentWillUnmount() {
     exitWaitingRoom();
   }
-  
+
   render() {
     return (
       <div>

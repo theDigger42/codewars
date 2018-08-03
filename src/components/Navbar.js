@@ -23,7 +23,7 @@ export default class Navbar extends Component {
   render() {
     const navBar = !this.props.auth.isAuthenticated ? (
       <Layout>
-        <Title to='/'><img id="logo" src={logo} alt="logo.png"/></Title>
+        <Title to='/'><img id="logo" src={logo} alt="logo.png" /></Title>
         <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
           this.clickTag('scores')
         }>Leaderboard</NavLink></Leaderboard>
@@ -42,20 +42,22 @@ export default class Navbar extends Component {
       </LogIn></Layout>
     ) : (
         <Layout>
-          <Title to='/'><img id="logo" src={logo} alt="logo.png"/></Title>
+          <Title to='/'><img id="logo" src={logo} alt="logo.png" /></Title>
           <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
-          this.clickTag('scores')}>Leaderboard</NavLink></Leaderboard>
+            this.clickTag('scores')}>Leaderboard</NavLink></Leaderboard>
           <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
-          this.clickTag('help')
+            this.clickTag('help')
           }>Help</NavLink></Help>
           <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat' ? 1 : 0} onClick={() =>
-          this.clickTag('chat')}>Chat</NavLink></Chat>
+            this.clickTag('chat')}>Chat</NavLink></Chat>
           <Challenge><NavLink to='/challenge' active={this.state.tags[0] === 'challenge' ? 1 : 0} onClick={() =>
-          this.clickTag('challenge')}>Code</NavLink></Challenge>
+            this.clickTag('challenge')}>Code</NavLink></Challenge>
+          <Profile><NavLink to='/profile' active={this.state.tags[0] === 'profile' ? 1 : 0} onClick={() =>
+            this.clickTag('profile')}>Profile</NavLink></Profile>
           <Logout><NavLink onClick={() => this.props.logout()} to='/'>Logout</NavLink></Logout>
         </Layout>
       )
-  
+
     return (
       <Layout>
         {navBar}
@@ -92,7 +94,7 @@ const Layout = styled.div`
   grid-row: 1;
   grid-column: 1 / 13;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   background: black;
   align-items: center;
   height: 10vh;
@@ -134,9 +136,8 @@ const NavLink = styled(Link)`
   `};
 `
 const Leaderboard = styled.div`
-  grid-column: 3 / 4;
+  grid-column: 3;
   font-size: 20px;
-  justify-self: right;
   margin-left: 5em;
 `
 const Help = styled.div`
@@ -151,7 +152,11 @@ const Challenge = styled.div`
   grid-column: 7;
   font-size: 20px;
 `
-const Logout = styled.div`
+const Profile = styled.div`
   grid-column: 8;
+  font-size: 20px;
+`
+const Logout = styled.div`
+  grid-column: 9;
   font-size: 20px;
 `

@@ -6,10 +6,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     rest.auth.isAuthenticated === true
       ? <Component {...props} {...rest} />
       : <Redirect to={{
-          pathname: '/',
-          state: { from: props.location }
-        }}/>
-  )}/>
+        pathname: '/',
+        state: { from: props.location }
+      }} />
+  )} />
 )
 
 export default PrivateRoute

@@ -8,13 +8,13 @@ import store from './store/index'
 import jwt from 'jsonwebtoken'
 
 if (localStorage.jwtToken) {
-    setAuthorizationToken(localStorage.jwtToken)
-    store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)))
+  setAuthorizationToken(localStorage.jwtToken)
+  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)))
 }
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Root />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <Root />
+  </Provider>,
+  document.getElementById('root')
 );

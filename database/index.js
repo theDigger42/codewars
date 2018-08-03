@@ -57,18 +57,18 @@ const Scoreboard = mongoose.model('Scoreboard', ScoreboardSchema);
 let findLeaderboard = (callback) => {
   User.find((err, users) => {
     let names = users && users.map(user => {
-        return {
-          username: user.username,
-          score: user.score
-        }
-      })
+      return {
+        username: user.username,
+        score: user.score
+      }
+    })
     if (err) {
       console.log(err);
     } else {
       callback(names);
     }
   })
-  .sort({'score': -1});
+    .sort({ 'score': -1 });
 }
 
 //Gets all toy problems, unsorted
@@ -95,33 +95,33 @@ let logPoints = (callback) => {
 }
 
 //Gets top users based on score from ScoreboardSchema // still testing
-  let findScoreboard = (callback) => {
-    Scoreboard.find((err, users) => {
-      if (err) {
-        console.log(err);
-      } else {
-        callback(users);
-      }
-    })
-    .sort({'score': -1});
-  }
+let findScoreboard = (callback) => {
+  Scoreboard.find((err, users) => {
+    if (err) {
+      console.log(err);
+    } else {
+      callback(users);
+    }
+  })
+    .sort({ 'score': -1 });
+}
 
 //Find scoreboard by day // THIS WORKS
-  let findScoreboardByDay = (callback) => {
-    let today = new Date();
-    today.setHours(0,0,0,0);
-    Scoreboard.aggregate( [
-      { $match: {entry: {$gt: new Date(today)} } },
-      { $group: { _id: '$username', count: {$sum: 1} } },
-      { $sort: {count: -1} }
-    ], function(err, results) {
-      if (err) {
-        console.log('err in scoreboard aggregate');
-      } else {
-        callback(results);
-      }
-    });
-  }
+let findScoreboardByDay = (callback) => {
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  Scoreboard.aggregate([
+    { $match: { entry: { $gt: new Date(today) } } },
+    { $group: { _id: '$username', count: { $sum: 1 } } },
+    { $sort: { count: -1 } }
+  ], function (err, results) {
+    if (err) {
+      console.log('err in scoreboard aggregate');
+    } else {
+      callback(results);
+    }
+  });
+}
 
 // Database export
 // Database export  

@@ -1,17 +1,17 @@
 var util = require('util');
-var vm   = require('vm');
+var vm = require('vm');
 
 //-----------------------------------------------------------------------------
 // Sandbox
 //-----------------------------------------------------------------------------
 
-var code    = '';
-var stdin   = process.openStdin();
+var code = '';
+var stdin = process.openStdin();
 var result;
 var console = [];
 
 // Get code
-stdin.on('data', function(data) {
+stdin.on('data', function (data) {
   code += data;
 });
 stdin.on('end', run);
@@ -21,7 +21,7 @@ function getSafeRunner() {
   // Keep it outside of strict mode
   function UserScript(str) {
     // We want a global scoped function that has implicit returns.
-    return Function('return eval('+JSON.stringify(str+'')+')');
+    return Function('return eval(' + JSON.stringify(str + '') + ')');
   }
   // place with a closure that is not exposed thanks to strict mode
   return function run(comm, src) {
@@ -32,12 +32,12 @@ function getSafeRunner() {
       //
       // All comm must be serialized properly to avoid attacks, JSON or XJSON
       //
-      comm.send(event, JSON.stringify([].slice.call(arguments,1)));
+      comm.send(event, JSON.stringify([].slice.call(arguments, 1)));
     };
 
     global.print = send.bind(global, 'stdout');
     global.console = { log: send.bind(global, 'stdout') };
-    global.process = { 
+    global.process = {
       stdout: { write: send.bind(global, 'stdout') }
     };
     global.postMessage = send.bind(global, 'message');
@@ -52,8 +52,8 @@ function getSafeRunner() {
 function run() {
 
   var context = vm.createContext();
-  var safeRunner = vm.runInContext('('+getSafeRunner.toString()+')()', context);
-  
+  var safeRunner = vm.runInContext('(' + getSafeRunner.toString() + ')()', context);
+
   try {
     safeRunner({
       send: function (event, value) {
@@ -73,7 +73,7 @@ function run() {
             throw new Error('Unknown event type');
         }
       },
-      exit: function(){
+      exit: function () {
         processExit();
       }
     }, code);
@@ -84,20 +84,20 @@ function run() {
   }
 
   process.on('message', processMessageListener.bind(null, context));
-  
+
   process.send('__sandbox_inner_ready__');
 
   // This will exit the process if onmessage was not defined
   checkIfProcessFinished(context);
 };
 
-function processMessageListener(context, message){
-  vm.runInContext('if (typeof onmessage === "function") { onmessage('+ JSON.stringify(String(message)) + '); }', context);
+function processMessageListener(context, message) {
+  vm.runInContext('if (typeof onmessage === "function") { onmessage(' + JSON.stringify(String(message)) + '); }', context);
   checkIfProcessFinished(context);
 };
 
 function checkIfProcessFinished(context) {
-  if(vm.runInContext('typeof onmessage', context) !== 'function') {
+  if (vm.runInContext('typeof onmessage', context) !== 'function') {
     processExit();
   }
 };
@@ -105,7 +105,7 @@ function checkIfProcessFinished(context) {
 function processExit() {
   process.removeListener('message', processMessageListener);
 
-  process.stdout.on('finish', function() {
+  process.stdout.on('finish', function () {
     process.exit(0);
   });
 

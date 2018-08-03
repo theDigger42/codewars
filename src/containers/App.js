@@ -6,8 +6,13 @@ import PrivateRoute from '../components/PrivateRoute'
 import Leaderboard from "./Leaderboard";
 import Help from './Help'
 import Chat from './Chat'
+import Profile from './Profile'
 
 export default class App extends Component {
+
+  componentWillMount() {
+    this.props.getLeaderboard()
+  }
 
   render() {
     return (
@@ -15,15 +20,15 @@ export default class App extends Component {
         <Route
           exact
           path="/"
-          render={() => <Homepage {...this.props}/>}
+          render={() => <Homepage {...this.props} />}
         />
-        <Route 
+        <Route
           path='/scores'
-          render={() => <Leaderboard {...this.props}/>}
+          render={() => <Leaderboard {...this.props} />}
         />
         <Route
           path='/help'
-          render={() => <Help {...this.props}/>}
+          render={() => <Help {...this.props} />}
         />
         <PrivateRoute
           path='/challenge'
@@ -33,6 +38,11 @@ export default class App extends Component {
         <PrivateRoute
           path='/chat'
           component={Chat}
+          {...this.props}
+        />
+        <PrivateRoute
+          path='/profile'
+          component={Profile}
           {...this.props}
         />
       </Switch>

@@ -1,28 +1,17 @@
 import styled from "styled-components"
 import React from "react"
 
-/*
- *
- * Use modal function to create a modal
- * Showmodal is curried.
- * 
- *  pass in a boolean of whether it is showed first
- * then pass in any jsx or an array to be rendered in
- * the modal
- * 
- */
-
 const modal = ({ showModal, handleClose }) => (component) => (
   <Container
-    showModal={ showModal }
-    onClick={ handleClose }
+    showModal={showModal}
+    onClick={handleClose}
   >
     <Content>
-      <Inner 
+      <Inner
         className="modal-content"
-        onClick={ e => e.stopPropagation() }  
+        onClick={e => e.stopPropagation()}
       >
-        { component }
+        {component}
       </Inner>
     </Content>
   </Container>

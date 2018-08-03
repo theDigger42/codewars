@@ -1,6 +1,6 @@
-let ioclient = require('socket.io-client'); 
+let ioclient = require('socket.io-client');
 
-const socket = ioclient.connect('http://localhost:3000', {port: 3000});
+const socket = ioclient.connect('http://localhost:3000', { port: 3000 });
 console.log(socket);
 // subscribe to a Socket
 // pass in callback that gets run when recieving messages
@@ -11,7 +11,7 @@ export const subscribeToSocket = (name, cb) => {
   socket.on('connect', (data) => {
     socket.emit('subscribeToMessage', name);
   })
-  
+
 };
 
 export const sendMessage = (message) => {
@@ -20,10 +20,10 @@ export const sendMessage = (message) => {
 };
 
 //timer 
-const timerSocket = ioclient('http://localhost:3000/timer', {port: 3000});
+const timerSocket = ioclient('http://localhost:3000/timer', { port: 3000 });
 
 export const subscribeToTimerSocket = (cb) => {
-  timerSocket.on('date',(date) => {
+  timerSocket.on('date', (date) => {
     cb(date);
   })
 }
@@ -32,7 +32,7 @@ export const getDateTimerSocket = () => {
   timerSocket.emit('getDate');
 }
 
-const gameSocket = ioclient('http://localhost:3000/game', {port: 3000});
+const gameSocket = ioclient('http://localhost:3000/game', { port: 3000 });
 
 export const subscribeToGameSocket = (onGameStart, onScoreboardChange) => {
 

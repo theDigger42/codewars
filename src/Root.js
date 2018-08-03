@@ -8,9 +8,9 @@ import App from './containers/App'
 const Root = (props) => {
   return (
     <Router>
-      <Route {...props} 
-        path="/" 
-        render={ (routeProps) => <App {...props} {...routeProps} /> }
+      <Route {...props}
+        path="/"
+        render={(routeProps) => <App {...props} {...routeProps} />}
       />
     </Router>
   )

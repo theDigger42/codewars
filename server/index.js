@@ -17,7 +17,7 @@ const io = socket(server);
 
 // Setup middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../build'));
 app.use(cors())
 
@@ -48,14 +48,14 @@ let scoreboard = [];
 // socket.io
 io.on('connection', (client) => {
   console.log('socket connected');
-  
+
   client.on('message', (data) => {
     console.log('message', data);
     for (connection of connections) {
       connection.emit('message', data)
     }
   })
-  
+
   client.on('subscribeToMessage', (data) => {
     console.log('new subscriber', data);
   })
@@ -80,7 +80,7 @@ ioTimer.on('connection', (interval) => {
   })
 })
 
-server.listen(app.get('port'), function() {
+server.listen(app.get('port'), function () {
   console.log('Server started on port:' + app.get('port'));
 });
 
@@ -97,7 +97,7 @@ ioGame.on('connection', (socket) => {
   socket.on('joinWaitingRoom', ({ username }) => {
     _username = username;
     console.log('joinWaitingRoom', username);
-    waitingRoom[username] = { 
+    waitingRoom[username] = {
       socket,
       finished: false,
       finishTime: null,
@@ -108,7 +108,7 @@ ioGame.on('connection', (socket) => {
   /// everything we only want to send to this person or listen to form this person here
   const removeFromWaitingRoom = () => delete waitingRoom[_username];
 
-  socket.on('exitWaitingRoom', removeFromWaitingRoom); 
+  socket.on('exitWaitingRoom', removeFromWaitingRoom);
   socket.on('disconnect', removeFromWaitingRoom);
 
   socket.on('gameComplete', () => {
@@ -135,7 +135,7 @@ const scoreboardChange = (user) => {
 const startGame = () => {
   // move waiting room to gameroom 
   // reset
-  console.log('starting a new game startgame timer thing'); 
+  console.log('starting a new game startgame timer thing');
   gameRoom = Object.assign({}, waitingRoom)
   scoreboard = [];
   waitingRoom = {};

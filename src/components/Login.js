@@ -21,7 +21,7 @@ const Login = ({
   clear
 }) => {
 
-  const enterInput = e => 
+  const enterInput = e =>
     e.key === "Enter" && handleClick(e, login, { username, password })
 
   return modal({
@@ -47,7 +47,7 @@ const Login = ({
         onKeyPress={enterInput}
       />
       <Button onClick={e => {
-        login({username, password}) 
+        login({ username, password })
         clear()
       }}>
         Submit

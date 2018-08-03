@@ -8,7 +8,7 @@ export const setCurrentUser = (user) => {
     type: LOGIN,
     user
   }
-} 
+}
 
 export const login = (data) => {
   return dispatch => {

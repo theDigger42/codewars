@@ -4,10 +4,10 @@ import rootReducer from '../reducers/rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
-    rootReducer,
-    composeWithDevTools(
-      applyMiddleware(thunk)
-    )
+  rootReducer,
+  composeWithDevTools(
+    applyMiddleware(thunk)
+  )
 );
 
 window.store = store

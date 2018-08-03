@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const MAIN_COLOR = `#16252A`
-export const BORDER_MODAL = `#5F89A4` 
+export const BORDER_MODAL = `#5F89A4`
 export const SECONDARY_COLOR = `#537F9A`
 export const SKY_BLUE = `#C0E4F8`
 export const MAIN_FONT = '#C1CBD9'

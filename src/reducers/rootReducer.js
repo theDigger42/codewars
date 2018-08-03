@@ -6,9 +6,9 @@ import submitReducer from './submitReducer'
 import score from './scoreReducer'
 
 export default combineReducers({
-    modalReducer,
-    input,
-    auth,
-    submitReducer,
-    score
+  modalReducer,
+  input,
+  auth,
+  submitReducer,
+  score
 });

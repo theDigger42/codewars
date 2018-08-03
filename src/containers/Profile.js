@@ -3,21 +3,12 @@ import React, { Component } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-export default class Homepage extends Component {
+export default class Profile extends Component {
   render() {
     return (
       <Layout>
-        <Navbar {...this.props} active={'home'} />
+        <Navbar {...this.props} active={'profile'} />
         <Body>
-          <Heading>
-            Practice coding.
-            <br />
-            Compete.
-            <br />
-            Improve your speed.
-            <br />
-            All in one place.
-          </Heading>
         </Body>
         <Footer />
       </Layout>
@@ -41,12 +32,3 @@ const Body = styled.div`
   display: grid;
   grid-template-rows: auto;
 `
-
-const Heading = styled.div`
-  grid-row: 1;
-  justify-self: center;
-  align-self: center;
-  font-size: 58px;
-`
-
-

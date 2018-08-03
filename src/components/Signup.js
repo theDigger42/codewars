@@ -23,9 +23,9 @@ const Signup = ({
 }) => {
 
   const enterInput =
-  (e) =>
-  e.key === 'Enter'
-  && handleClick(e, signup, { username, password, email })
+    (e) =>
+      e.key === 'Enter'
+      && handleClick(e, signup, { username, password, email })
 
   return modal({
     showModal,
@@ -34,31 +34,31 @@ const Signup = ({
     <div>
       <div className="modal-title">SIGNUP</div>
       <Input
-        value={ email }
-        onChange={ e => handleChange(addText, "email", e.target.value) }
+        value={email}
+        onChange={e => handleChange(addText, "email", e.target.value)}
         placeholder="Email"
         type="text"
         required
-        onKeyPress={ enterInput }
+        onKeyPress={enterInput}
       />
       <Input
-        value={ username }
-        onChange={ e => handleChange(addText, "username", e.target.value) }
+        value={username}
+        onChange={e => handleChange(addText, "username", e.target.value)}
         placeholder="Username"
         type="text"
         required
-        onKeyPress={ enterInput }
+        onKeyPress={enterInput}
       />
       <Input
         value={password}
-        onChange={ e => handleChange(addText, "password", e.target.value) }
+        onChange={e => handleChange(addText, "password", e.target.value)}
         placeholder="Password"
         type="password"
         required
-        onKeyPress={ enterInput }
+        onKeyPress={enterInput}
       />
       <Button
-        onClick={ e => {
+        onClick={e => {
           handleClick(e, signup, { username, password, email })
           clear()
         }}

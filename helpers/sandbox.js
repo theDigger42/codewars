@@ -21,7 +21,7 @@ function Sandbox(options) {
   self._message_queue = [];
   
   self.options = {
-    timeout: 2000,
+    timeout: 3000,
     node:    'node',
     shovel:  path.join(__dirname, 'shovel.js')
   };
