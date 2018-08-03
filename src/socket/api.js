@@ -24,7 +24,7 @@ const timerSocket = ioclient('http://localhost:3000/timer', { port: 3000 });
 
 export const subscribeToTimerSocket = (cb) => {
   timerSocket.on('date', (date) => {
-    cb(date);
+    cb(date)
   })
 }
 
@@ -53,4 +53,4 @@ export const gameComplete = () => {
 
 export const joinWaitingRoom = (userInfo) => gameSocket.emit('joinWaitingRoom', userInfo);
 
-export const exitWaitingRoom = (userInfo) => gameSocket.emit('exitWaitingRoom', userInfo)
+export const exitWaitingRoom = () => gameSocket.emit('exitWaitingRoom')

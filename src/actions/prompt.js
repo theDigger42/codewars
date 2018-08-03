@@ -1,4 +1,4 @@
-import { SUBMIT_SOLUTION, GET_PROMPT, CLEAR_PROMPT, CHANGE_ROOM } from './types'
+import { SUBMIT_SOLUTION, GET_PROMPT, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE } from './types'
 import axios from '../../node_modules/axios';
 
 export const submit = (solution) => {
@@ -38,6 +38,15 @@ export const changeRoom = (room) => {
     dispatch({
       type: CHANGE_ROOM,
       payload: room
+    })
+  }
+}
+
+export const setComplete = () => {
+  return dispatch => {
+    dispatch({
+      type: SET_COMPLETE,
+      payload: true
     })
   }
 }

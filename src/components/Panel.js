@@ -59,9 +59,9 @@ export default class Panel extends Component {
     })
   
     if (passing) {
-      this.props.complete(true)
+      this.props.setComplete(true)
       if (this.props.score.scoreboard[0] === 'unfinished') {
-        axios.patch(`http://localhost:3000/users:${this.props.auth.user.username}`);
+        axios.patch(`http://localhost:3000/users:${this.props.auth.user.username}`)
       }
       gameComplete()
       setTimeout(() => {
@@ -84,21 +84,22 @@ export default class Panel extends Component {
       ? <Info>{this.state.results}</Info>
       : <Info>{scores}</Info>
 
-    let submitButton = this.props.isComplete === false 
+    let submitButton = this.props.prompt.isComplete === false 
       ? <Button onClick={() => {
-      this.props.submit({solution: this.props.prompt.solution, 
-        funcName: this.props.prompt.funcName, 
-        tests: this.props.prompt.tests
-      })
-      setTimeout(() => {
-        that.handleTestResponse()
-      }, 1000) 
-      this.clickTag('results')
-    }}>Submit</Button> : <Button onClick={() => {
-      this.props.changeRoom('waiting')
-      this.clickTag('instructions')
-      this.props.clearPrompt()
-    }}>Play again</Button>
+          this.props.submit({solution: this.props.prompt.solution, 
+            funcName: this.props.prompt.funcName, 
+            tests: this.props.prompt.tests
+          })
+          setTimeout(() => {
+            that.handleTestResponse()
+          }, 1000) 
+          this.clickTag('results')
+        }}>Submit</Button> 
+      : <Button onClick={() => {
+          this.props.changeRoom('waiting')
+          this.clickTag('instructions')
+          this.props.clearPrompt()
+        }}>Play again</Button>
 
     let joinButton = this.props.prompt.room === 'lobby' 
       ? <Button onClick={() => this.props.changeRoom('waiting') }>Join</Button> 

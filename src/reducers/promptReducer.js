@@ -1,4 +1,4 @@
-import { GET_PROMPT, INPUT_CHANGE, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM } from '../actions/types'
+import { GET_PROMPT, INPUT_CHANGE, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE } from '../actions/types'
 
 const initialState = {
   title: 'Get ready',
@@ -44,6 +44,12 @@ const prompt = (state = initialState, action) => {
       return {
         ...state,
         tests: action.payload
+      }
+
+    case SET_COMPLETE: 
+      return {
+        ...state,
+        isComplete: action.payload
       }
 
     case CHANGE_ROOM:
