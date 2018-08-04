@@ -99,6 +99,7 @@ export default class Panel extends Component {
           this.props.changeRoom('waiting')
           this.clickTag('instructions')
           this.props.clearPrompt()
+          this.setState({ results: '' })
         }}>Play again</Button>
 
     let joinButton = this.props.prompt.room === 'lobby' 

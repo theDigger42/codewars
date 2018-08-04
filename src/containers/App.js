@@ -38,6 +38,7 @@ export default class App extends Component {
         clearInterval(timer);
         if (this.props.prompt.room === 'waiting') {
           this.props.changeRoom('game')
+          this.onGameStart()
         }
         getDateTimerSocket();
       }
