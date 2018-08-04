@@ -79,7 +79,7 @@ let findLeaderboard = (callback) => {
       callback(names);
     }
   })
-    .sort({ 'wins': -1 });
+    .sort({ 'rating': -1 });
 }
 
 //Gets all toy problems, unsorted

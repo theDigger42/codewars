@@ -49,11 +49,11 @@ export default class App extends Component {
 
   joinGame() {
     subscribeToGameSocket(this.onGameStart, this.props.onScoreboardChange);
-    joinWaitingRoom({ username: this.props.auth.user.username })
+    joinWaitingRoom(this.props.auth.user)
   }
 
   leaveGame() {
-    exitWaitingRoom({ username: this.props.auth.user.username })
+    exitWaitingRoom(this.props.auth.user)
   }
 
   onGameStart() {

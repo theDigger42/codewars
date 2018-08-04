@@ -67,7 +67,7 @@ export default class Panel extends Component {
   render() {
 
     let scores = this.props.score.scoreboard && this.props.score.scoreboard.map((score, i) => {
-      return <p key={i}>{this.suffix(i + 1)} : {score}</p>
+      return <p key={i}>{this.suffix(i + 1)} : {score.username}</p>
     })
 
     let panelBody = this.state.tags[0] === 'instructions' 

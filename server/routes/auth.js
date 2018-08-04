@@ -14,7 +14,10 @@ router.post('/', (req, res) => {
       if (bcrypt.compareSync(password, user.get('password'))) {
         const token = jwt.sign({
           id: user.get('id'),
-          username: user.get('username')
+          username: user.get('username'),
+          rating: user.get('rating'),
+          wins: user.get('wins'),
+          rank: user.get('rank')
         }, config.jwtSecret)
         res.json({ token })
         console.log('Successful login');
