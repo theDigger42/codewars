@@ -21,17 +21,15 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      timerTillNextGame: 120,
-      gameTimer: 120,
+      timerTillNextGame: 0,
       isComplete: false
     }
     this.updateTimer = this.updateTimer.bind(this)
-    this.updateGameTimer = this.updateGameTimer.bind(this)
     this.onGameStart = this.onGameStart.bind(this)
   }
 
   updateTimer(date) {
-    let secondsTillNextGame = 120 - (new Date(date).getSeconds());
+    let secondsTillNextGame = 60 - (new Date(date).getSeconds());
     this.setState({ timerTillNextGame: secondsTillNextGame });
     let timer = setInterval(() => {
       secondsTillNextGame--;
@@ -40,23 +38,8 @@ export default class App extends Component {
         clearInterval(timer);
         if (this.props.prompt.room === 'waiting') {
           this.props.changeRoom('game')
-          this.updateGameTimer();
         }
         getDateTimerSocket();
-      }
-    }, 1000)
-  }
-
-  updateGameTimer() {
-    let secondsTillEndGame = this.state.gameTimer;
-    let gameTimer = setInterval(() => {
-      this.setState({ gameTimer: secondsTillEndGame });
-      secondsTillEndGame--;
-      if (secondsTillEndGame < 0) {
-        clearInterval(gameTimer);
-        setTimeout(() => {
-          this.setState({ gameTimer: 120 })
-        }, 2000)
       }
     }, 1000)
   }
