@@ -13,8 +13,35 @@ export default class Panel extends Component {
     }
 
     this.clickTag = this.clickTag.bind(this)
-    this.handleTestResponse = this.handleTestResponse.bind(this)
     this.suffix = this.suffix.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit() {
+
+    this.props.submit({
+      solution: this.props.prompt.solution, 
+      funcName: this.props.prompt.funcName, 
+      tests: this.props.prompt.tests
+    })
+
+    setTimeout(() => {
+      let passing = true
+      let results = this.props.prompt.tests.map((res) => {
+        return res.status === 'pass' ? <PassResult>Pass</PassResult> : <FailResult>Fail</FailResult>
+      })
+      this.props.prompt.tests.forEach((res) => {
+        if (res.status === 'fail') passing = false;
+      });
+      this.setState({ results: results})
+      if (passing) {
+        gameComplete()
+        this.props.setComplete()
+        setTimeout(() => this.clickTag('scores'), 500)
+        this.props.leave()
+      }
+    }, 1000)
+
   }
 
   clickTag(tag) {
@@ -37,42 +64,7 @@ export default class Panel extends Component {
     return i + "th";
   }
 
-  handleTestResponse() {
-    let tests = this.props.prompt.tests;
-    let passing = true;
-  
-    let testResults = tests.map((test, i) => {
-      if (test.status === 'pass') {
-        return (
-          <PassResult key={i}>Input: {test.input}. Expected: {test.expected}. Actual: {test.actual}.</PassResult>
-        )
-      } else {
-        passing = false
-        return (
-          <FailResult key={i}>Input: {test.input} Expected: {test.expected}. Actual: {test.actual}.</FailResult>
-        )
-      }
-    })
-  
-    this.setState({
-      results: testResults
-    })
-  
-    if (passing) {
-      this.props.setComplete(true)
-      if (this.props.score.scoreboard[0] === 'unfinished') {
-        axios.patch(`/users:${this.props.auth.user.username}`)
-      }
-      gameComplete()
-      setTimeout(() => {
-        this.clickTag('scores')
-      }, 1000)
-    }
-  }
-
   render() {
-
-    let that = this
 
     let scores = this.props.score.scoreboard && this.props.score.scoreboard.map((score, i) => {
       return <p key={i}>{this.suffix(i + 1)} : {score}</p>
@@ -86,13 +78,7 @@ export default class Panel extends Component {
 
     let submitButton = this.props.prompt.isComplete === false 
       ? <Button onClick={() => {
-          this.props.submit({solution: this.props.prompt.solution, 
-            funcName: this.props.prompt.funcName, 
-            tests: this.props.prompt.tests
-          })
-          setTimeout(() => {
-            that.handleTestResponse()
-          }, 1000) 
+          this.handleSubmit()
           this.clickTag('results')
         }}>Submit</Button> 
       : <Button onClick={() => {
@@ -103,7 +89,10 @@ export default class Panel extends Component {
         }}>Play again</Button>
 
     let joinButton = this.props.prompt.room === 'lobby' 
-      ? <Button onClick={() => this.props.changeRoom('waiting') }>Join</Button> 
+      ? <Button onClick={() => {
+          this.props.changeRoom('waiting')
+          this.props.join()
+       }}>Join</Button> 
       : this.props.prompt.room === 'waiting' 
       ? <Button>Waiting...</Button> 
       : submitButton

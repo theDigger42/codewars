@@ -26,7 +26,7 @@ app.use('/api/signup', signup)
 app.use('/', challengeRoutes)
 app.use('/', databaseRoutes)
 
-app.set('port', (process.env.PORT || 80));
+app.set('port', (process.env.PORT || 3000));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
@@ -107,12 +107,18 @@ ioGame.on('connection', (socket) => {
     });
   })
 
+  socket.on('exitWaitingRoom', ({username}) => {
+    delete waitingRoom[username]
+    delete gameRoom[username]
+    console.log('exiting waiting room ', username);
+  })
+
   const randomChallenge = (problem) => {
     ioGame.emit('challenge', problem)
   }
 
   /// everything we only want to send to this person or listen to form this person here
-  const removeFromWaitingRoom = () => delete waitingRoom[_username];
+  const removeFromWaitingRoom = (user) => delete waitingRoom[user];
 
   socket.on('exitWaitingRoom', removeFromWaitingRoom);
   socket.on('disconnect', removeFromWaitingRoom);
@@ -144,7 +150,7 @@ const startGame = () => {
   gameRoom = Object.assign({}, waitingRoom)
   scoreboard = [];
   waitingRoom = {};
-  // setTimeout(handleGameEnd, secondsTillNextGame() - 30) // send results one last time
+  //setTimeout(handleGameEnd, secondsTillNextGame() - 30) // send results one last time
   scoreboardChange();
   setTimeout(startGame, secondsTillNextGame());
 }

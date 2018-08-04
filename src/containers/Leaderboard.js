@@ -6,9 +6,9 @@ import Footer from '../components/Footer'
 export default class Leaderboard extends Component {
 
     render() {
-        let userList = this.props.score.users && this.props.score.users.map((user, i) => {
+        let userList = this.props.score.leaderboard && this.props.score.leaderboard.map((user, i) => {
             return (
-                <User key={i}>{i+1}: {user.username} - {user.score}</User>
+                <User key={i}>{i+1}: {user.username} - Rating: ({user.rating}) - Wins: ({user.wins}) </User>
             )
         })
         return (

@@ -16,11 +16,19 @@ const UserSchema = new mongoose.Schema({
   password: String,
   isAdmin: {
     type: Boolean,
-    default: true
+    default: false
   },
-  score: {
+  wins: {
     type: Number,
     default: 0
+  },
+  rating: {
+    type: Number,
+    default: 1500
+  },
+  rank: {
+    type: String,
+    default: 'Noob'
   }
 });
 
@@ -53,13 +61,16 @@ const User = mongoose.model('User', UserSchema);
 const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema);
 const Scoreboard = mongoose.model('Scoreboard', ScoreboardSchema);
 
+
 //Gets the top users based on score from User schema
 let findLeaderboard = (callback) => {
   User.find((err, users) => {
     let names = users && users.map(user => {
       return {
         username: user.username,
-        score: user.score
+        rating: user.rating,
+        wins: user.wins,
+        rank: user.rank
       }
     })
     if (err) {
@@ -68,7 +79,7 @@ let findLeaderboard = (callback) => {
       callback(names);
     }
   })
-    .sort({ 'score': -1 });
+    .sort({ 'wins': -1 });
 }
 
 //Gets all toy problems, unsorted

@@ -52,7 +52,7 @@ router.get('/challenge:name', (req, res) => {
 router.patch('/users:name', (req, res) => {
   var name = req.params.name.slice(1);
   console.log(name);
-  User.update({ "username": name }, { $inc: { "score": 1 } }, function (err, result) {
+  User.update({ "username": name }, { $inc: { "wins": 1 } }, function (err, result) {
     if (err) console.log(err);
     console.log('patch: ', result);
   });

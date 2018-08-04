@@ -26,6 +26,8 @@ export default class App extends Component {
     }
     this.updateTimer = this.updateTimer.bind(this)
     this.onGameStart = this.onGameStart.bind(this)
+    this.joinGame = this.joinGame.bind(this)
+    this.leaveGame = this.leaveGame.bind(this)
   }
 
   updateTimer(date) {
@@ -45,6 +47,15 @@ export default class App extends Component {
     }, 1000)
   }
 
+  joinGame() {
+    subscribeToGameSocket(this.onGameStart, this.props.onScoreboardChange);
+    joinWaitingRoom({ username: this.props.auth.user.username })
+  }
+
+  leaveGame() {
+    exitWaitingRoom({ username: this.props.auth.user.username })
+  }
+
   onGameStart() {
     gameInit()
   }
@@ -53,8 +64,6 @@ export default class App extends Component {
     this.props.getLeaderboard()
     getDateTimerSocket();
     subscribeToTimerSocket(this.updateTimer);
-    subscribeToGameSocket(this.onGameStart, this.props.onScoreboardChange);
-    joinWaitingRoom({ username: this.props.auth.user.username })
   }
 
   componentWillUnmount() {
@@ -81,6 +90,8 @@ export default class App extends Component {
           path='/challenge'
           component={Challenge}
           timer={this.state.timerTillNextGame}
+          join={this.joinGame}
+          leave={this.leaveGame}
           {...this.props}
         />
         <PrivateRoute

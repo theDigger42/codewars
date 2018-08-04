@@ -1,7 +1,7 @@
 import { GET_LEADERBOARD, CHANGE_SCOREBOARD } from '../actions/types'
 
 const initialState = {
-  users: [],
+  leaderboard: [],
   scoreboard: []
 }
 
@@ -10,7 +10,7 @@ const score = (state = initialState, action) => {
     case GET_LEADERBOARD:
       return {
         ...state,
-        users: action.payload
+        leaderboard: action.payload
       }
 
     case CHANGE_SCOREBOARD:

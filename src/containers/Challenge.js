@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import Editor from '../components/Editor'
 import Footer from '../components/Footer'
 import Panel from '../components/Panel'
+
 export default class Challenge extends Component {
   render() {
     return (
@@ -12,7 +13,7 @@ export default class Challenge extends Component {
         <Prompt>{this.props.prompt.title}</Prompt>
         <Timer>Next game in: {this.props.timer}</Timer>
         <Editor input={this.props.prompt.solution} change={this.props.addText} />
-        <Panel {...this.props} />
+        <Panel {...this.props} join={this.props.join} leave={this.props.leave}/>
         <Footer />
       </Layout>
     )
