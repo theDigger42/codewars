@@ -22,7 +22,7 @@ export default class App extends Component {
     super(props)
     this.state = {
       timerTillNextGame: '',
-      gameTimer: 300,
+      gameTimer: 120,
       isComplete: false
     }
     this.updateTimer = this.updateTimer.bind(this)
@@ -31,7 +31,7 @@ export default class App extends Component {
   }
 
   updateTimer(date) {
-    let secondsTillNextGame = 300 - (new Date(date).getSeconds());
+    let secondsTillNextGame = 120 - (new Date(date).getSeconds());
     this.setState({ timerTillNextGame: secondsTillNextGame });
     let timer = setInterval(() => {
       secondsTillNextGame--;
@@ -55,7 +55,7 @@ export default class App extends Component {
       if (secondsTillEndGame <= 0) {
         clearInterval(gameTimer);
         setTimeout(() => {
-          this.setState({ gameTimer: 300 })
+          this.setState({ gameTimer: 120 })
         }, 2000)
       }
     }, 1000)
