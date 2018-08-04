@@ -61,7 +61,7 @@ export default class Panel extends Component {
     if (passing) {
       this.props.setComplete(true)
       if (this.props.score.scoreboard[0] === 'unfinished') {
-        axios.patch(`/users:${this.props.auth.user.username}`)
+        axios.patch(`http://localhost:3000/users:${this.props.auth.user.username}`)
       }
       gameComplete()
       setTimeout(() => {

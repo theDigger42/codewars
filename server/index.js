@@ -9,7 +9,7 @@ const auth = require('./routes/auth')
 const signup = require('./routes/signup')
 const challengeRoutes = require('./routes/challenge')
 const databaseRoutes = require('./routes/database')
-
+const ToyProblem = require('../database/index').ToyProblem
 
 const app = express();
 const server = http.Server(app);
@@ -26,7 +26,7 @@ app.use('/api/signup', signup)
 app.use('/', challengeRoutes)
 app.use('/', databaseRoutes)
 
-app.set('port', (process.env.PORT || 80));
+app.set('port', (process.env.PORT || 3000));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
@@ -97,6 +97,20 @@ ioGame.on('connection', (socket) => {
     };
     console.log('user added to waiting room', waitingRoom);
   })
+
+  socket.on('gameInit', () => {
+    ToyProblem.count().exec(function (err, count) {
+      var random = Math.floor(Math.random() * count);
+      ToyProblem.findOne().skip(random).exec(function (err, result) {
+        randomChallenge(result)
+      });
+    });
+  })
+
+  const randomChallenge = (problem) => {
+    ioGame.emit('challenge', problem)
+  }
+
   /// everything we only want to send to this person or listen to form this person here
   const removeFromWaitingRoom = () => delete waitingRoom[_username];
 
@@ -125,8 +139,7 @@ const scoreboardChange = (user) => {
 }
 
 const startGame = () => {
-  // move waiting room to gameroom 
-  // reset
+  ioGame.emit('gameStart')
   console.log('starting a new game startgame timer thing');
   gameRoom = Object.assign({}, waitingRoom)
   scoreboard = [];

@@ -13,7 +13,8 @@ import {
   getDateTimerSocket,
   subscribeToGameSocket,
   joinWaitingRoom,
-  exitWaitingRoom
+  exitWaitingRoom,
+  gameInit
 } from '../socket/api'
 export default class App extends Component {
 
@@ -38,7 +39,6 @@ export default class App extends Component {
       if (secondsTillNextGame <= -1) {
         clearInterval(timer);
         if (this.props.prompt.room === 'waiting') {
-          this.props.getPrompt()
           this.props.changeRoom('game')
           this.updateGameTimer();
         }
@@ -55,14 +55,14 @@ export default class App extends Component {
       if (secondsTillEndGame <= 0) {
         clearInterval(gameTimer);
         setTimeout(() => {
-          this.setState({ gameTimer: 30 })
+          this.setState({ gameTimer: 60 })
         }, 2000)
       }
     }, 1000)
   }
 
   onGameStart() {
-    console.log('game started');
+    gameInit()
   }
 
   componentWillMount() {

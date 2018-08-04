@@ -100,7 +100,7 @@ const Layout = styled.div`
   height: 10vh;
   width: 100vw;
 `
-const SignUp = styled.div`
+const SignUp = styled.h4`
   grid-column: 7;
   font-size: 20px;
   color: white;
@@ -110,7 +110,7 @@ const SignUp = styled.div`
     color: maroon;
   }}
 `
-const LogIn = styled.div`
+const LogIn = styled.h4`
   grid-column: 8;
   font-size: 20px;
   color: white;
@@ -135,28 +135,28 @@ const NavLink = styled(Link)`
     color: maroon;
   `};
 `
-const Leaderboard = styled.div`
+const Leaderboard = styled.h4`
   grid-column: 3;
   font-size: 20px;
   margin-left: 5em;
 `
-const Help = styled.div`
+const Help = styled.h4`
   grid-column: 5;
   font-size: 20px;
 `
-const Chat = styled.div`
+const Chat = styled.h4`
   grid-column: 6;
   font-size: 20px;
 `
-const Challenge = styled.div`
+const Challenge = styled.h4`
   grid-column: 7;
   font-size: 20px;
 `
-const Profile = styled.div`
+const Profile = styled.h4`
   grid-column: 8;
   font-size: 20px;
 `
-const Logout = styled.div`
+const Logout = styled.h4`
   grid-column: 9;
   font-size: 20px;
 `

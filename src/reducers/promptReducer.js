@@ -13,7 +13,7 @@ const initialState = {
 
 const prompt = (state = initialState, action) => {
   switch (action.type) {
-
+    
     case GET_PROMPT:
       return {
         ...state,
