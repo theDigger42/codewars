@@ -51,7 +51,7 @@ export default class Navbar extends Component {
           <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat' ? 1 : 0} onClick={() =>
             this.clickTag('chat')}>Chat</NavLink></Chat>
           <Challenge><NavLink to='/challenge' active={this.state.tags[0] === 'challenge' ? 1 : 0} onClick={() =>
-            this.clickTag('challenge')}>Code</NavLink></Challenge>
+            this.clickTag('challenge')}>Game</NavLink></Challenge>
           <Profile><NavLink to='/profile' active={this.state.tags[0] === 'profile' ? 1 : 0} onClick={() =>
             this.clickTag('profile')}>Profile</NavLink></Profile>
           <Logout><NavLink onClick={() => this.props.logout()} to='/'>Logout</NavLink></Logout>

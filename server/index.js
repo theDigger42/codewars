@@ -149,6 +149,6 @@ const startGame = () => {
   setTimeout(startGame, secondsTillNextGame());
 }
 
-const secondsTillNextGame = () => 1000 * (60 - (new Date().getSeconds()));
+const secondsTillNextGame = () => 1000 * (120 - (new Date().getSeconds()));
 
 setTimeout(startGame, secondsTillNextGame);
