@@ -26,7 +26,7 @@ app.use('/api/signup', signup)
 app.use('/', challengeRoutes)
 app.use('/', databaseRoutes)
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 80));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
@@ -149,6 +149,6 @@ const startGame = () => {
   setTimeout(startGame, secondsTillNextGame());
 }
 
-const secondsTillNextGame = () => 1000 * (60 - (new Date().getSeconds()));
+const secondsTillNextGame = () => 1000 * (300 - (new Date().getSeconds()));
 
 setTimeout(startGame, secondsTillNextGame);
