@@ -19,7 +19,6 @@ router.get('/randomChallenge', function (req, res) {
 // Get leaderboard of users in databse
 router.get('/leaderboard', function (req, res) {
   db.findLeaderboard((users) => {
-    console.log(users);
     res.json(users);
   });
 });
@@ -27,7 +26,6 @@ router.get('/leaderboard', function (req, res) {
 //Get leaderboard by DAY
 router.get('/leaderboardByDay', function (req, res) {
   db.findScoreboardByDay((users) => {
-    console.log(users);
     res.json(users);
   });
 });
@@ -51,10 +49,8 @@ router.get('/challenge:name', (req, res) => {
 //Update a user's score within the database
 router.patch('/users:name', (req, res) => {
   var name = req.params.name.slice(1);
-  console.log(name);
   User.update({ "username": name }, { $inc: { "wins": 1 } }, function (err, result) {
     if (err) console.log(err);
-    console.log('patch: ', result);
   });
   res.end('updated');
 });

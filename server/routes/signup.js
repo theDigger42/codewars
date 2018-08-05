@@ -21,8 +21,6 @@ router.post('/', (req, res) => {
       newUser.password = hash;
       newUser.save(function (err) {
         if (err) console.log('error in newUser.save ' + err);
-        console.log(newUser);
-        console.log("successful signup...");
       });
     }
   })

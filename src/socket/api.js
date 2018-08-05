@@ -2,8 +2,7 @@ import ioclient from 'socket.io-client'
 import store from '../store/index'
 import { getPrompt } from '../actions/prompt'
 
-const socket = ioclient.connect('http://localhost:3000', { port: 3000 });
-console.log(socket);
+const socket = ioclient.connect();
 // subscribe to a Socket
 // pass in callback that gets run when recieving messages
 export const subscribeToSocket = (name, cb) => {
@@ -17,12 +16,11 @@ export const subscribeToSocket = (name, cb) => {
 };
 
 export const sendMessage = (message) => {
-  console.log('sending message', message)
   socket.emit('message', message);
 };
 
 //timer 
-const timerSocket = ioclient('http://localhost:3000/timer', { port: 3000 })
+const timerSocket = ioclient('/timer', { port: 3000 })
 
 export const subscribeToTimerSocket = (cb) => {
   timerSocket.on('date', (date) => {
@@ -34,14 +32,13 @@ export const getDateTimerSocket = () => {
   timerSocket.emit('getDate');
 }
 
-const gameSocket = ioclient('http://localhost:3000/game', { port: 3000 });
+const gameSocket = ioclient('/game', { port: 3000 });
 
 export const subscribeToGameSocket = (onGameStart, onScoreboardChange) => {
 
-  gameSocket.on('connect', () => console.log('successfully subscribed'));
+  gameSocket.on('connect', () => console.log('successfully subscribed to game socket'));
 
   gameSocket.on('scoreboardChange', (data) => {
-    console.log('scoreboard changed', data);
     onScoreboardChange(data);
   });
 
@@ -53,12 +50,10 @@ export const subscribeToGameSocket = (onGameStart, onScoreboardChange) => {
 };
 
 export const gameInit = () => {
-  console.log('emiting gameInit');
   gameSocket.emit('gameInit')
 }
 
 export const gameComplete = () => {
-  console.log('emiting game complete')
   gameSocket.emit('gameComplete');
 };
 

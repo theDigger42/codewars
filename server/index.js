@@ -30,7 +30,7 @@ app.use('/api/signup', signup)
 app.use('/', challengeRoutes)
 app.use('/', databaseRoutes)
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 80));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
@@ -50,15 +50,11 @@ const rankFinishers = (scoreboard) => {
       let expectedScoreB = elo.getExpected(playerB, playerA)
       playerA = elo.updateRating(expectedScoreA, 1, playerA)
       playerB = elo.updateRating(expectedScoreB, 0, playerB)
-      console.log(playerA);
-      console.log(playerB);
       User.updateOne({ "username": scoreboard[i].username }, { $set: { "rating": playerA } }, function (err, result) {
         if (err) console.log(err);
-        console.log('patch: ', result);
       });
       User.updateOne({ "username": scoreboard[i+1].username }, { $set: { "rating": playerB } }, function (err, result) {
         if (err) console.log(err);
-        console.log('patch: ', result);
       });
     }
   }
@@ -66,10 +62,7 @@ const rankFinishers = (scoreboard) => {
 
 // socket.io
 io.on('connection', (client) => {
-  console.log('socket connected');
-
   client.on('message', (data) => {
-    console.log('message', data);
     for (connection of connections) {
       connection.emit('message', data)
     }
@@ -83,7 +76,6 @@ io.on('connection', (client) => {
 
   client.on('disconnect', () => {
     connections.splice(connections.indexOf(client), 1);
-    console.log('client disconnected');
   })
 
   client.emit('message', 'connected!')
@@ -93,7 +85,6 @@ io.on('connection', (client) => {
 const ioTimer = io.of('/timer');
 
 ioTimer.on('connection', (interval) => {
-  console.log('ioTimer connected');
   interval.on('getDate', () => {
     interval.emit('date', new Date())
   })
@@ -107,22 +98,16 @@ module.exports = app;
 
 const ioGame = io.of('/game');
 
-// onclient side we need to do this whenever they enter waiting room
 ioGame.on('connection', (socket) => {
-  console.log('game socket connected');
-
   let _user = null;
-
   socket.on('joinWaitingRoom', (user) => {
     _user = user;
-    console.log('joinWaitingRoom', user);
     waitingRoom[user] = {
       socket,
       finished: false,
       finishTime: null,
       finishPlace: null
     };
-    console.log('user added to waiting room', waitingRoom);
   })
 
   socket.on('gameInit', () => {
@@ -132,12 +117,6 @@ ioGame.on('connection', (socket) => {
         randomChallenge(result)
       });
     });
-  })
-
-  socket.on('exitWaitingRoom', (user) => {
-    delete waitingRoom[user]
-    delete gameRoom[user]
-    console.log('exiting waiting room ', user.username);
   })
 
   const randomChallenge = (problem) => {
@@ -165,13 +144,11 @@ const scoreboardChange = (user) => {
   for (let i = 0; i < unfinishedUsers; i++) {
     clientScoreboard.push('unfinished');
   }
-  console.log('emiting scoreboardChange', clientScoreboard);
   ioGame.emit('scoreboardChange', clientScoreboard);
 }
 
 const startGame = () => {
   ioGame.emit('gameStart')
-  console.log(scoreboard);
   rankFinishers(scoreboard)
   gameRoom = Object.assign({}, waitingRoom)
   scoreboard = [];
