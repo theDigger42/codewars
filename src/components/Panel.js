@@ -65,15 +65,21 @@ export default class Panel extends Component {
 
   render() {
 
-    let scores = this.props.score.scoreboard && this.props.score.scoreboard.map((score, i) => {
-      return <p key={i}>{this.suffix(i + 1)} : {score.username}</p>
+    let scoreboard = this.props.score.scoreboard.map((user, i) => {
+      if (user.finished === true) {
+        return <p>{this.suffix(i+1)}: {user.username}</p>
+      } else {
+        return <p>{user.username}</p>
+      }
     })
+
+    console.log(scoreboard);
 
     let panelBody = this.state.tags[0] === 'instructions' 
       ? <Info>{this.props.prompt.body}</Info>
       : this.state.tags[0] === 'results' 
       ? <Info>{this.state.results}</Info>
-      : <Info>{scores}</Info>
+      : <Info>{scoreboard}</Info>
 
     let submitButton = this.props.prompt.isComplete === false 
       ? <Button onClick={() => {
@@ -81,6 +87,7 @@ export default class Panel extends Component {
           this.clickTag('results')
         }}>Submit</Button> 
       : <Button onClick={() => {
+          this.props.join()
           this.props.changeRoom('waiting')
           this.clickTag('instructions')
           this.props.clearPrompt()
@@ -135,7 +142,7 @@ const ResultsPanel = styled.div`
   margin-left: 1em;
   margin-bottom: 2em;
   width: 30vw;
-  min-width: 330px;
+  min-width: 350px;
 `
 const TabContainer = styled.div`
   grid-row: 1;
@@ -143,11 +150,13 @@ const TabContainer = styled.div`
   grid-template-columns: auto auto auto;
   grid-column-gap: 10px;
   background: dimgrey;
+  align-items: center;
+  min-height: 50px;
 `
 const Tab = styled.div`
   background: maroon;
   color: white;
-  font-size: 30px;
+  font-size: 22px;
   text-align: center;
   cursor: pointer;
   ${({ active }) => active && `

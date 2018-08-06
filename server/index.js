@@ -1,5 +1,6 @@
 
 const express = require('express');
+const compression = require('compression')
 const http = require('http');
 const socket = require('socket.io');
 const path = require('path');
@@ -14,6 +15,7 @@ const User = require('../database/index').User
 const EloRank = require('../helpers/ranking')
 
 const app = express();
+app.use(compression())
 const server = http.Server(app);
 const io = socket(server);
 
@@ -38,10 +40,13 @@ app.get('*', (req, res) => {
 
 let connections = [];
 let waitingRoom = {};
-let gameRoom = {};
+let waitingUsers = []
+let gameRoom = [];
 let scoreboard = [];
 
 const rankFinishers = (scoreboard) => {
+  let unfinishedUsers = getUnfinished(gameRoom)
+  //console.log(unfinishedUsers);
   if (scoreboard.length >= 2) {
     for (let i = 0; i < scoreboard.length - 1; i++) {
       let playerA = scoreboard[i].rating
@@ -58,6 +63,24 @@ const rankFinishers = (scoreboard) => {
       });
     }
   }
+  if (scoreboard.length >= 1 && unfinishedUsers.length >= 1) {
+    for (let i = 0; i < unfinishedUsers.length; i++) {
+      let playerA = scoreboard[scoreboard.length-1].rating
+      let playerB = unfinishedUsers[i].rating
+      let expectedScoreA = elo.getExpected(playerA, playerB)
+      let expectedScoreB = elo.getExpected(playerB, playerA)
+      playerA = elo.updateRating(expectedScoreA, 1, playerA)
+      playerB = elo.updateRating(expectedScoreB, 0, playerB)
+      //console.log(playerA);
+      //console.log(playerB);
+      User.updateOne({ "username": scoreboard[scoreboard.length-1].username }, { $set: { "rating": playerA } }, function (err, result) {
+        if (err) console.log(err);
+      });
+      User.updateOne({ "username": unfinishedUsers[i].username }, { $set: { "rating": playerB } }, function (err, result) {
+        if (err) console.log(err);
+      });
+    }
+  }
 }
 
 // socket.io
@@ -69,7 +92,7 @@ io.on('connection', (client) => {
   })
 
   client.on('subscribeToMessage', (data) => {
-    console.log('new subscriber', data);
+    //console.log('new subscriber', data);
   })
 
   connections.push(client);
@@ -102,11 +125,9 @@ ioGame.on('connection', (socket) => {
   let _user = null;
   socket.on('joinWaitingRoom', (user) => {
     _user = user;
+    waitingUsers.push(user)
     waitingRoom[user] = {
-      socket,
-      finished: false,
-      finishTime: null,
-      finishPlace: null
+      socket
     };
   })
 
@@ -123,37 +144,62 @@ ioGame.on('connection', (socket) => {
     ioGame.emit('challenge', problem)
   }
 
-  /// everything we only want to send to this person or listen to form this person here
   const removeFromWaitingRoom = (user) => delete waitingRoom[user];
 
   socket.on('exitWaitingRoom', removeFromWaitingRoom);
   socket.on('disconnect', removeFromWaitingRoom);
 
   socket.on('gameComplete', () => {
-    // if it is good call scoreboardchanged with the result
     scoreboardChange(_user);
   })
 })
 
+const toggleFinished = (user) => {
+  user.finished = true
+  let index;
+  for (let i = 0; i < gameRoom.length; i++) {
+    if (gameRoom[i].username === user.username) {
+      index = i
+    }
+  }
+  gameRoom.splice(index, 1)
+}
+
 const scoreboardChange = (user) => {
   if (user !== undefined) {
     scoreboard.push(user)
+    toggleFinished(user)
   }
-  const unfinishedUsers = Object.keys(gameRoom).length - scoreboard.length;
-  const clientScoreboard = [...scoreboard];
-  for (let i = 0; i < unfinishedUsers; i++) {
-    clientScoreboard.push('unfinished');
-  }
+  const unfinishedUsers = getUnfinished(gameRoom);
+  const clientScoreboard = [...scoreboard, ...unfinishedUsers];
   ioGame.emit('scoreboardChange', clientScoreboard);
+}
+
+const getUnfinished = (users) => {
+  let unfinished = []
+  users.forEach((user) => {
+    if (user.finished === false) {
+      unfinished.push(user)
+    }
+  })
+  return unfinished;
+}
+
+const initializeGameRoom = (users) => {
+  let userArray = [];
+  users.forEach((user) => {
+    userArray.push({username: user.username, rating: user.rating, finished: false})
+  })
+  return userArray
 }
 
 const startGame = () => {
   ioGame.emit('gameStart')
   rankFinishers(scoreboard)
-  gameRoom = Object.assign({}, waitingRoom)
+  gameRoom = initializeGameRoom(waitingUsers);
   scoreboard = [];
+  waitingUsers = [];
   waitingRoom = {};
-  //setTimeout(handleGameEnd, secondsTillNextGame() - 30) // send results one last time
   scoreboardChange();
   setTimeout(startGame, secondsTillNextGame());
 }

@@ -20,7 +20,7 @@ export const sendMessage = (message) => {
 };
 
 //timer 
-const timerSocket = ioclient('/timer', { port: 3000 })
+const timerSocket = ioclient('/timer')
 
 export const subscribeToTimerSocket = (cb) => {
   timerSocket.on('date', (date) => {
@@ -32,7 +32,7 @@ export const getDateTimerSocket = () => {
   timerSocket.emit('getDate');
 }
 
-const gameSocket = ioclient('/game', { port: 3000 });
+const gameSocket = ioclient('/game');
 
 export const subscribeToGameSocket = (onGameStart, onScoreboardChange) => {
 
