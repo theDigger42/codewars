@@ -44,43 +44,61 @@ let waitingUsers = []
 let gameRoom = [];
 let scoreboard = [];
 
-const rankFinishers = (scoreboard) => {
+let comparePlayers = (playerA, playerB) => {
+  console.log(playerA);
+  console.log(playerB);
+  let expectedScoreA = elo.getExpected(playerA.rating, playerB.rating)
+  let expectedScoreB = elo.getExpected(playerB.rating, playerA.rating)
+  console.log(expectedScoreA);
+  console.log(expectedScoreB);
+  ratingA = elo.updateRating(expectedScoreA, 1, playerA.rating)
+  ratingB = elo.updateRating(expectedScoreB, 0, playerB.rating)
+  console.log(ratingA);
+  console.log(ratingB);
+  patchUser(playerA.username, ratingA)
+  patchUser(playerB.username, ratingB)
+}
+
+let compareUnfinished = (playerA, playerB) => {
+  console.log(playerA);
+  console.log(playerB);
+  let expectedScoreA = elo.getExpected(playerA.rating, playerB.rating)
+  let expectedScoreB = elo.getExpected(playerB.rating, playerA.rating)
+  console.log(expectedScoreA);
+  console.log(expectedScoreB);
+  ratingA = elo.updateRating(expectedScoreA, 1, playerA.rating)
+  ratingB = elo.updateRating(expectedScoreB, 0, playerB.rating)
+  console.log(ratingA);
+  console.log(ratingB);
+  patchUser(playerB.username, ratingB)
+}
+
+let patchUser = (username, rating) => {
+  User.updateOne({"username": username}, {$set: {"rating": rating}}, (err, res) => {
+    if (err) console.log(err)
+    console.log(res);
+  })
+}
+
+const rankFinishers = () => {
   let unfinishedUsers = getUnfinished(gameRoom)
-  //console.log(unfinishedUsers);
+  console.log('unfinished       ' + unfinishedUsers);
+  console.log('finished         ' + scoreboard);
   if (scoreboard.length >= 2) {
     for (let i = 0; i < scoreboard.length - 1; i++) {
-      let playerA = scoreboard[i].rating
-      let playerB = scoreboard[i+1].rating
-      let expectedScoreA = elo.getExpected(playerA, playerB)
-      let expectedScoreB = elo.getExpected(playerB, playerA)
-      playerA = elo.updateRating(expectedScoreA, 1, playerA)
-      playerB = elo.updateRating(expectedScoreB, 0, playerB)
-      User.updateOne({ "username": scoreboard[i].username }, { $set: { "rating": playerA } }, function (err, result) {
-        if (err) console.log(err);
-      });
-      User.updateOne({ "username": scoreboard[i+1].username }, { $set: { "rating": playerB } }, function (err, result) {
-        if (err) console.log(err);
-      });
+      comparePlayers(scoreboard[i], scoreboard[i+1])
     }
   }
-  if (scoreboard.length >= 1 && unfinishedUsers.length >= 1) {
+  if (scoreboard.length >= 1 && unfinishedUsers.length > 1) {
     for (let i = 0; i < unfinishedUsers.length; i++) {
-      let playerA = scoreboard[scoreboard.length-1].rating
-      let playerB = unfinishedUsers[i].rating
-      let expectedScoreA = elo.getExpected(playerA, playerB)
-      let expectedScoreB = elo.getExpected(playerB, playerA)
-      playerA = elo.updateRating(expectedScoreA, 1, playerA)
-      playerB = elo.updateRating(expectedScoreB, 0, playerB)
-      //console.log(playerA);
-      //console.log(playerB);
-      User.updateOne({ "username": scoreboard[scoreboard.length-1].username }, { $set: { "rating": playerA } }, function (err, result) {
-        if (err) console.log(err);
-      });
-      User.updateOne({ "username": unfinishedUsers[i].username }, { $set: { "rating": playerB } }, function (err, result) {
-        if (err) console.log(err);
-      });
+      compareUnfinished(scoreboard[scoreboard.length-1], unfinishedUsers[i])
     }
   }
+  if (scoreboard.length === 1 && unfinishedUsers.length === 1) {
+    for (let i = 0; i < unfinishedUsers.length; i++) {
+      comparePlayers(scoreboard[scoreboard.length-1], unfinishedUsers[i])
+    }
+  } 
 }
 
 // socket.io
@@ -194,12 +212,14 @@ const initializeGameRoom = (users) => {
 }
 
 const startGame = () => {
+  rankFinishers()
+  setTimeout(() => {
+    gameRoom = initializeGameRoom(waitingUsers);
+    scoreboard = [];
+    waitingUsers = [];
+    waitingRoom = {};
+  }, 800)
   ioGame.emit('gameStart')
-  rankFinishers(scoreboard)
-  gameRoom = initializeGameRoom(waitingUsers);
-  scoreboard = [];
-  waitingUsers = [];
-  waitingRoom = {};
   scoreboardChange();
   setTimeout(startGame, secondsTillNextGame());
 }
