@@ -63,6 +63,7 @@ export default class App extends Component {
 
   componentWillUnmount() {
     exitWaitingRoom()
+    unsubscribe()
   }
 
   render() {
