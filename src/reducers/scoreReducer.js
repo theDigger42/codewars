@@ -1,4 +1,4 @@
-import { GET_LEADERBOARD, CHANGE_SCOREBOARD } from '../actions/types'
+import { GET_LEADERBOARD, CHANGE_SCOREBOARD, CLEAR_SCOREBOARD } from '../actions/types'
 
 const initialState = {
   leaderboard: [],
@@ -17,6 +17,12 @@ const score = (state = initialState, action) => {
       return {
         ...state,
         scoreboard: action.payload
+      }
+
+    case CLEAR_SCOREBOARD:
+      return {
+        ...state,
+        scoreboard: []
       }
 
     default:

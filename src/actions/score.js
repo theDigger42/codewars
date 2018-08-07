@@ -1,9 +1,9 @@
-import { GET_LEADERBOARD, CHANGE_SCOREBOARD } from './types'
+import { GET_LEADERBOARD, CHANGE_SCOREBOARD, CLEAR_SCOREBOARD } from './types'
 import axios from '../../node_modules/axios';
 
 export const getLeaderboard = () => {
   return dispatch => {
-    axios.get('/leaderboard')
+    axios.get('http://localhost:3000/leaderboard')
       .then(res => {
         dispatch({
           type: GET_LEADERBOARD,
@@ -18,6 +18,14 @@ export const onScoreboardChange = (scoreboard) => {
     dispatch({
       type: CHANGE_SCOREBOARD,
       payload: scoreboard
+    })
+  }
+}
+
+export const clearScoreboard = () => {
+  return dispatch => {
+    dispatch({
+      type: CLEAR_SCOREBOARD
     })
   }
 }

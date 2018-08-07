@@ -8,7 +8,7 @@ import { signup, login, logout, setCurrentUser } from './auth'
 
 import { submit, getPrompt, clearPrompt, changeRoom, setComplete } from './prompt'
 
-import { getLeaderboard, onScoreboardChange } from './score'
+import { getLeaderboard, onScoreboardChange, clearScoreboard } from './score'
 
 const mapDispatchToProps = (dispatch) => (
   bindActionCreators({
@@ -27,7 +27,8 @@ const mapDispatchToProps = (dispatch) => (
     clearPrompt,
     onScoreboardChange,
     changeRoom,
-    setComplete
+    setComplete,
+    clearScoreboard
   }, dispatch)
 )
 
