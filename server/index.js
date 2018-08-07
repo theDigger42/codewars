@@ -11,7 +11,8 @@ const signup = require('./routes/signup')
 const challengeRoutes = require('./routes/challenge')
 const databaseRoutes = require('./routes/database')
 const ToyProblem = require('../database/index').ToyProblem
-const User = require('../database/index').User
+const patchUser = require('../database/index').patchUser
+const getUser = require('../database/index').getUser
 const EloRank = require('../helpers/ranking')
 
 const app = express();
@@ -71,13 +72,6 @@ let compareUnfinished = (playerA, playerB) => {
   console.log(ratingA);
   console.log(ratingB);
   patchUser(playerB.username, ratingB)
-}
-
-let patchUser = (username, rating) => {
-  User.updateOne({"username": username}, {$set: {"rating": rating}}, (err, res) => {
-    if (err) console.log(err)
-    console.log(res);
-  })
 }
 
 const rankFinishers = () => {
@@ -140,11 +134,12 @@ module.exports = app;
 const ioGame = io.of('/game');
 
 ioGame.on('connection', (socket) => {
-  let _user = null;
-  socket.on('joinWaitingRoom', (user) => {
-    _user = user;
-    waitingUsers.push(user)
-    waitingRoom[user] = {
+  let _user = null
+  socket.on('joinWaitingRoom', async (user) => {
+    _user = await getUser(user.username)
+    console.log(_user);
+    waitingUsers.push(_user)
+    waitingRoom[_user] = {
       socket
     };
   })
@@ -155,7 +150,13 @@ ioGame.on('connection', (socket) => {
   socket.on('disconnect', removeFromWaitingRoom);
 
   socket.on('gameComplete', () => {
-    scoreboardChange(_user);
+    console.log(_user);
+    let completedUser = {
+      username: _user.username,
+      finished: true,
+      rating: _user.rating
+    }
+    scoreboardChange(completedUser);
   })
 })
 

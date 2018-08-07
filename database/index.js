@@ -134,6 +134,34 @@ let findScoreboardByDay = (callback) => {
   });
 }
 
+let patchUser = (username, rating) => {
+  if (rating >= 1600) {
+    User.updateOne({"username": username}, {$set: {"rating": rating, "rank": "Pro"}}, (err, res) => {
+      if (err) console.log(err)
+      console.log(res);
+    })
+  } else if (rating <= 1400) {
+    User.updateOne({"username": username}, {$set: {"rating": rating, "rank": "Terrible"}}, (err, res) => {
+      if (err) console.log(err)
+      console.log(res);
+    })
+  } else {
+    User.updateOne({"username": username}, {$set: {"rating": rating}}, (err, res) => {
+      if (err) console.log(err)
+      console.log(res);
+    })
+  }
+}
+
+let getUser = (username) => {
+  return new Promise((resolve) => {
+    User.findOne({"username": username})
+    .then(user => {
+      resolve(user)
+    })
+  })
+}
+
 // Database export
 // Database export  
 module.exports.db = db;
@@ -149,3 +177,5 @@ module.exports.ToyProblem = ToyProblem;
 module.exports.findLeaderboard = findLeaderboard;
 module.exports.findToyProblems = findToyProblems;
 module.exports.findScoreboardByDay = findScoreboardByDay;
+module.exports.patchUser = patchUser
+module.exports.getUser = getUser
