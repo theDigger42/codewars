@@ -149,19 +149,6 @@ ioGame.on('connection', (socket) => {
     };
   })
 
-  socket.on('gameInit', () => {
-    ToyProblem.count().exec(function (err, count) {
-      var random = Math.floor(Math.random() * count);
-      ToyProblem.findOne().skip(random).exec(function (err, result) {
-        randomChallenge(result)
-      });
-    });
-  })
-
-  const randomChallenge = (problem) => {
-    ioGame.emit('challenge', problem)
-  }
-
   const removeFromWaitingRoom = (user) => delete waitingRoom[user];
 
   socket.on('exitWaitingRoom', removeFromWaitingRoom);
@@ -220,7 +207,12 @@ const startGame = () => {
     waitingRoom = {};
     scoreboardChange();
   }, 1000)
-  ioGame.emit('gameStart')
+  ToyProblem.count().exec(function (err, count) {
+    var random = Math.floor(Math.random() * count);
+    ToyProblem.findOne().skip(random).exec(function (err, result) {
+      ioGame.emit('challenge', result)
+    });
+  });
   setTimeout(startGame, secondsTillNextGame());
 }
 

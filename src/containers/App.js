@@ -12,9 +12,9 @@ import {
   subscribeToTimerSocket,
   getDateTimerSocket,
   subscribeToGameSocket,
+  unsubscribe,
   joinWaitingRoom,
-  exitWaitingRoom,
-  gameInit
+  exitWaitingRoom
 } from '../socket/api'
 export default class App extends Component {
 
@@ -25,7 +25,6 @@ export default class App extends Component {
       isComplete: false
     }
     this.updateTimer = this.updateTimer.bind(this)
-    this.onGameStart = this.onGameStart.bind(this)
     this.joinGame = this.joinGame.bind(this)
     this.leaveGame = this.leaveGame.bind(this)
   }
@@ -40,7 +39,6 @@ export default class App extends Component {
         clearInterval(timer);
         if (this.props.prompt.room === 'waiting') {
           this.props.changeRoom('game')
-          this.onGameStart()
         }
         getDateTimerSocket();
       }
@@ -48,16 +46,13 @@ export default class App extends Component {
   }
 
   joinGame() {
-    subscribeToGameSocket(this.onGameStart, this.props.onScoreboardChange);
+    subscribeToGameSocket(this.props.onScoreboardChange);
     joinWaitingRoom(this.props.auth.user)
   }
 
   leaveGame() {
     exitWaitingRoom(this.props.auth.user)
-  }
-
-  onGameStart() {
-    gameInit()
+    unsubscribe()
   }
 
   componentWillMount() {

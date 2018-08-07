@@ -35,7 +35,6 @@ export default class Panel extends Component {
       this.setState({ results: results})
       if (passing) {
         gameComplete()
-        unsubscribe()
         this.props.setComplete()
         setTimeout(() => this.clickTag('scores'), 500)
         this.props.leave()

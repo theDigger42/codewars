@@ -34,7 +34,7 @@ export const getDateTimerSocket = () => {
 
 const gameSocket = ioclient('/game');
 
-export const subscribeToGameSocket = (onGameStart, onScoreboardChange) => {
+export const subscribeToGameSocket = (onScoreboardChange) => {
 
   gameSocket.on('connect', () => console.log('successfully subscribed to game socket'));
 
@@ -45,17 +45,11 @@ export const subscribeToGameSocket = (onGameStart, onScoreboardChange) => {
   gameSocket.on('challenge', (problem) => {
     store.dispatch(getPrompt(problem))
   })
-
-  gameSocket.on('gameStart', onGameStart);
 };
 
 export const unsubscribe = () => {
   gameSocket.removeAllListeners('challenge')
   gameSocket.removeAllListeners('gameStart')
-}
-
-export const gameInit = () => {
-  gameSocket.emit('gameInit')
 }
 
 export const gameComplete = () => {
