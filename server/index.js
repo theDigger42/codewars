@@ -62,21 +62,37 @@ let compareUnfinished = (playerA, playerB) => {
   patchUser(playerB.username, ratingB)
 }
 
-const rankFinishers = () => {
+const retrieveUsers = (array) => {
+  return new Promise(async (resolve) => {
+    let ret = []
+    for (let i = 0; i < array.length; i++) {
+      let data = await getUser(array[i].username)
+      ret.push(data)
+    }
+    resolve(ret)
+  })
+}
+
+const rankFinishers = async () => {
   let unfinishedUsers = getUnfinished(gameRoom)
-  if (scoreboard.length >= 2) {
-    for (let i = 0; i < scoreboard.length - 1; i++) {
-      comparePlayers(scoreboard[i], scoreboard[i+1])
+  let finished
+  let unfinished
+  finished = await retrieveUsers(scoreboard)
+  unfinished = await retrieveUsers(unfinishedUsers)
+
+  if (finished.length >= 2) {
+    for (let i = 0; i < finished.length - 1; i++) {
+      comparePlayers(finished[i], finished[i+1])
     }
   }
-  if (scoreboard.length >= 1 && unfinishedUsers.length > 1) {
-    for (let i = 0; i < unfinishedUsers.length; i++) {
-      compareUnfinished(scoreboard[scoreboard.length-1], unfinishedUsers[i])
+  if (finished.length >= 1 && unfinished.length > 1) {
+    for (let i = 0; i < unfinished.length; i++) {
+      compareUnfinished(finished[finished.length-1], unfinished[i])
     }
   }
-  if (scoreboard.length === 1 && unfinishedUsers.length === 1) {
-    for (let i = 0; i < unfinishedUsers.length; i++) {
-      comparePlayers(scoreboard[scoreboard.length-1], unfinishedUsers[i])
+  if (finished.length === 1 && unfinished.length === 1) {
+    for (let i = 0; i < unfinished.length; i++) {
+      comparePlayers(finished[finished.length-1], unfinished[i])
     }
   } 
 }
@@ -135,31 +151,14 @@ ioGame.on('connection', (socket) => {
   socket.on('disconnect', removeFromWaitingRoom);
 
   socket.on('gameComplete', () => {
-    console.log(_user);
-    let completedUser = {
-      username: _user.username,
-      finished: true,
-      rating: _user.rating
-    }
-    scoreboardChange(completedUser);
+    _user.finished = true
+    scoreboardChange(_user);
   })
 })
 
-const toggleFinished = (user) => {
-  user.finished = true
-  let index;
-  for (let i = 0; i < gameRoom.length; i++) {
-    if (gameRoom[i].username === user.username) {
-      index = i
-    }
-  }
-  gameRoom.splice(index, 1)
-}
-
 const scoreboardChange = (user) => {
-  if (user !== undefined) {
+  if (user && user.finished) {
     scoreboard.push(user)
-    toggleFinished(user)
   }
   const unfinishedUsers = getUnfinished(gameRoom);
   const clientScoreboard = [...scoreboard, ...unfinishedUsers];
@@ -176,30 +175,22 @@ const getUnfinished = (users) => {
   return unfinished;
 }
 
-const initializeGameRoom = (users) => {
-  let userArray = [];
-  users.forEach((user) => {
-    userArray.push({username: user.username, rating: user.rating, finished: false})
-  })
-  return userArray
-}
-
 const startGame = () => {
   rankFinishers()
   setTimeout(() => {
-    gameRoom = initializeGameRoom(waitingUsers);
+    gameRoom = waitingUsers;
     scoreboard = [];
     waitingUsers = [];
     waitingRoom = {};
+    ToyProblem.count().exec(function (err, count) {
+      var random = Math.floor(Math.random() * count);
+      ToyProblem.findOne().skip(random).exec(function (err, result) {
+        ioGame.emit('challenge', result)
+      });
+    });
+    setTimeout(startGame, secondsTillNextGame());
     scoreboardChange();
   }, 1000)
-  ToyProblem.count().exec(function (err, count) {
-    var random = Math.floor(Math.random() * count);
-    ToyProblem.findOne().skip(random).exec(function (err, result) {
-      ioGame.emit('challenge', result)
-    });
-  });
-  setTimeout(startGame, secondsTillNextGame());
 }
 
 const secondsTillNextGame = () => 1000 * (60 - (new Date().getSeconds()));

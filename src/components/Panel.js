@@ -66,6 +66,7 @@ export default class Panel extends Component {
   render() {
 
     let scoreboard = this.props.score.scoreboard.map((user, i) => {
+      console.log(user);
       if (user.finished === true) {
         return <p>{this.suffix(i+1)}: {user.username}</p>
       } else {

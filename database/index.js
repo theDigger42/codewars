@@ -141,8 +141,8 @@ let patchUser = (username, rating) => {
     rankPlayer(username, rating, "Terrible")
   } else {
     User.updateOne({"username": username}, {$set: {"rating": rating}}, (err, res) => {
-      // if (err) console.log(err)
-      // console.log(res);
+      if (err) console.log(err)
+      console.log(res);
     })
   }
 }
@@ -150,7 +150,7 @@ let patchUser = (username, rating) => {
 let rankPlayer = (username, rating, rank) => {
   User.updateOne({"username": username}, {$set: {"rating": rating, "rank": rank}}, (err, res) => {
     if (err) console.log(err)
-    // console.log(res)
+    console.log(res)
   })
 }
 
@@ -158,7 +158,13 @@ let getUser = (username) => {
   return new Promise((resolve) => {
     User.findOne({"username": username})
     .then(user => {
-      resolve(user)
+      let userData = {
+        username: user.get('username'),
+        rating: user.get('rating'),
+        rank: user.get('rank'),
+        finished: false
+      }
+      resolve(userData)
     })
   })
 }
