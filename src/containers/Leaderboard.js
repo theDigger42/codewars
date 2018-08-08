@@ -5,6 +5,10 @@ import Footer from '../components/Footer'
 
 export default class Leaderboard extends Component {
 
+  componentDidMount() {
+    this.props.getLeaderboard()
+  }
+
   render() {
     let userList = this.props.score.leaderboard.map((user, i) => {
       return (

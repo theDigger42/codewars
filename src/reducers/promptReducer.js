@@ -4,9 +4,10 @@ const initialState = {
   title: 'Get ready',
   body: 'Click join and wait for the challenge to begin',
   solution: '',
-  funcName: '',
   tests: [],
-  results: [],
+  testDescriptions: [],
+  testResults: [],
+  message: '',
   isComplete: false,
   room: 'lobby'
 }
@@ -19,10 +20,9 @@ const prompt = (state = initialState, action) => {
         ...state,
         title: action.payload.title,
         body: action.payload.body,
-        solution: 'function ' + action.payload.funcName + '(' + action.payload.params + ') {\n\n}',
-        funcName: action.payload.funcName,
+        solution: action.payload.solution,
         tests: action.payload.tests,
-        results: '',
+        testDescriptions: action.payload.testDescriptions,
         isComplete: false,
         room: ''
       }
@@ -33,9 +33,10 @@ const prompt = (state = initialState, action) => {
         title: 'Get ready',
         body: 'Wait for the next game to begin',
         solution: '',
-        funcName: '',
         tests: [],
-        results: '',
+        testDescriptions: [],
+        testResults: [],
+        message: '',
         isComplete: false,
         room: 'waiting'
       }
@@ -43,7 +44,8 @@ const prompt = (state = initialState, action) => {
     case SUBMIT_SOLUTION:
       return {
         ...state,
-        tests: action.payload
+        testResults: action.payload.testResults,
+        message: action.payload.message
       }
 
     case SET_COMPLETE: 

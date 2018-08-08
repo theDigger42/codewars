@@ -27,9 +27,9 @@ export default class Navbar extends Component {
         <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
           this.clickTag('scores')
         }>Ratings</NavLink></Leaderboard>
-        <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
+        {/* <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
           this.clickTag('help')
-        }>Help</NavLink></Help>
+        }>Help</NavLink></Help> */}
         <SignUp
           onClick={() => this.props.openModal('signup')}
         >
@@ -45,15 +45,15 @@ export default class Navbar extends Component {
           <Title to='/'><img id="logo" src={logo} alt="logo.png" /></Title>
           <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
             this.clickTag('scores')}>Ratings</NavLink></Leaderboard>
-          <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
+          {/* <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
             this.clickTag('help')
-          }>Help</NavLink></Help>
+          }>Help</NavLink></Help> */}
           <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat' ? 1 : 0} onClick={() =>
             this.clickTag('chat')}>Chat</NavLink></Chat>
           <Challenge><NavLink to='/challenge' active={this.state.tags[0] === 'challenge' ? 1 : 0} onClick={() =>
             this.clickTag('challenge')}>Game</NavLink></Challenge>
-          <Profile><NavLink to='/profile' active={this.state.tags[0] === 'profile' ? 1 : 0} onClick={() =>
-            this.clickTag('profile')}>Profile</NavLink></Profile>
+          {/* <Profile><NavLink to='/profile' active={this.state.tags[0] === 'profile' ? 1 : 0} onClick={() =>
+            this.clickTag('profile')}>Profile</NavLink></Profile> */}
           <Logout><NavLink onClick={() => this.props.logout()} to='/'>Logout</NavLink></Logout>
         </Layout>
       )

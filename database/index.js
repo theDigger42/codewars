@@ -37,12 +37,8 @@ const ToyProblemSchema = new mongoose.Schema({
   body: String,
   funcName: String,
   params: String,
-  tests: [
-    {
-      input: String,
-      expected: String
-    }
-  ]
+  tests: Array,
+  testDescriptions: Array
 });
 
 const ScoreboardSchema = new mongoose.Schema({
@@ -57,9 +53,9 @@ const ScoreboardSchema = new mongoose.Schema({
   }
 });
 
-const User = mongoose.model('User', UserSchema);
-const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema);
-const Scoreboard = mongoose.model('Scoreboard', ScoreboardSchema);
+const User = mongoose.model('User', UserSchema, 'users');
+const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema, 'toyProblems');
+const Scoreboard = mongoose.model('Scoreboard', ScoreboardSchema, 'scoreboard');
 
 
 //Gets the top users based on score from User schema

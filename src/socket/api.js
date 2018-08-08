@@ -2,7 +2,7 @@ import ioclient from 'socket.io-client'
 import store from '../store/index'
 import { getPrompt } from '../actions/prompt'
 
-const socket = ioclient.connect();
+const socket = ioclient.connect()
 // subscribe to a Socket
 // pass in callback that gets run when recieving messages
 export const subscribeToSocket = (name, cb) => {

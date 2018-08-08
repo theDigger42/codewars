@@ -4,9 +4,9 @@ import Homepage from './Homepage'
 import Challenge from './Challenge'
 import PrivateRoute from '../components/PrivateRoute'
 import Leaderboard from "./Leaderboard";
-import Help from './Help'
+//import Help from './Help'
 import Chat from './Chat'
-import Profile from './Profile'
+//import Profile from './Profile'
 
 import {
   subscribeToTimerSocket,
@@ -46,19 +46,15 @@ export default class App extends Component {
   }
 
   joinGame() {
-    subscribeToGameSocket(this.props.onScoreboardChange);
     joinWaitingRoom(this.props.auth.user)
+    subscribeToGameSocket(this.props.onScoreboardChange)
+    subscribeToTimerSocket(this.updateTimer)
+    getDateTimerSocket()
   }
 
   leaveGame() {
     exitWaitingRoom(this.props.auth.user)
     unsubscribe()
-  }
-
-  componentWillMount() {
-    this.props.getLeaderboard()
-    getDateTimerSocket();
-    subscribeToTimerSocket(this.updateTimer);
   }
 
   componentWillUnmount() {
@@ -78,10 +74,10 @@ export default class App extends Component {
           path='/scores'
           render={() => <Leaderboard {...this.props} />}
         />
-        <Route
+        {/* <Route
           path='/help'
           render={() => <Help {...this.props} />}
-        />
+        /> */}
         <PrivateRoute
           path='/challenge'
           component={Challenge}
@@ -95,11 +91,11 @@ export default class App extends Component {
           component={Chat}
           {...this.props}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           path='/profile'
           component={Profile}
           {...this.props}
-        />
+        /> */}
       </Switch>
     )
   }

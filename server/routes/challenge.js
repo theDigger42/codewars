@@ -1,32 +1,37 @@
 const express = require('express')
-const Promise = require('bluebird')
 const execute = require('../../helpers/runner').execute;
 
 let router = express.Router()
 
 router.post('/challenge', function (req, res) {
-  let funcName = req.body.funcName;
   let solution = req.body.solution;
   let tests = req.body.tests;
-  let status;
+  let testDescriptions = req.body.testDescriptions
+  let testResults
+  let response
+  let message = 'Success!'
 
-  //Because execute returns a promise, we need to map each test
-  //to the result of execute in order to properly send an array of test results
-  Promise.map(tests, function (test) {
-    return execute(`${solution} ${funcName}(${test.input})`)
-      .then((data) => {
-        if (data !== test.expected) {
-          status = 'fail';
-        } else {
-          status = 'pass';
+  execute(solution, tests)
+    .then((data) => {
+      if (data[0] === "'") {
+        message = 'Error'
+        testResults = data
+      } else {
+        console.log('DATA RESULTS', data)
+        const resultArray = JSON.parse(data)
+        testResults = resultArray
+        for (let i = 0; i < resultArray.length; i++) {
+          if (!resultArray[i]) {
+            message = 'FAILURE'
+            break
+          }
         }
-        return { input: test.input, actual: data, expected: test.expected, status: status };
-      });
-  }).then((data) => {
-    res.status(200);
-    res.data = data;
-    res.end(JSON.stringify(data));
-  });
-});
+      }
+      console.log(testResults, message)
+      response = JSON.stringify({ testResults, message })
+      res.end(response)
+    }).catch(err => console.log('Error in challenge submission', err))
+
+})
 
 module.exports = router

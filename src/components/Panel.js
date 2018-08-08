@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { gameComplete, unsubscribe } from '../socket/api'
+import { gameComplete } from '../socket/api'
 
 export default class Panel extends Component {
   constructor(props) {
@@ -26,12 +26,12 @@ export default class Panel extends Component {
 
     setTimeout(() => {
       let passing = true
-      let results = this.props.prompt.tests.map((res) => {
-        return res.status === 'pass' ? <PassResult>Pass</PassResult> : <FailResult>Fail</FailResult>
+      let results = this.props.prompt.testResults.map((res) => {
+        return res ? <PassResult>Pass</PassResult> : <FailResult>Fail</FailResult>
       })
-      this.props.prompt.tests.forEach((res) => {
-        if (res.status === 'fail') passing = false;
-      });
+      if (this.props.prompt.message !== 'Success!') {
+        passing = false
+      }
       this.setState({ results: results})
       if (passing) {
         gameComplete()
@@ -166,9 +166,11 @@ const Tab = styled.div`
   `};
 `
 const Content = styled.div`
-  font-size: 28px;
+  font-size: 20px;
   text-align: center;
   margin: 1em;
+  height: 400px;
+  overflow: auto;
 `
 const Info = styled.div`
   font-size: 24px;

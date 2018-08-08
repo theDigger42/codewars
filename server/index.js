@@ -36,14 +36,14 @@ app.use('/', databaseRoutes)
 app.set('port', (process.env.PORT || 80));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'));
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 })
 
-let connections = [];
-let waitingRoom = {};
+let connections = []
+let waitingRoom = {}
 let waitingUsers = []
-let gameRoom = [];
-let scoreboard = [];
+let gameRoom = []
+let scoreboard = []
 
 let comparePlayers = (playerA, playerB) => {
   let expectedScoreA = elo.getExpected(playerA.rating, playerB.rating)
