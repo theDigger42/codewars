@@ -135,22 +135,23 @@ let findScoreboardByDay = (callback) => {
 }
 
 let patchUser = (username, rating) => {
-  if (rating >= 1600) {
-    User.updateOne({"username": username}, {$set: {"rating": rating, "rank": "Pro"}}, (err, res) => {
-      if (err) console.log(err)
-      console.log(res);
-    })
-  } else if (rating <= 1400) {
-    User.updateOne({"username": username}, {$set: {"rating": rating, "rank": "Terrible"}}, (err, res) => {
-      if (err) console.log(err)
-      console.log(res);
-    })
+  if (rating > 1500 && rating <= 1600) {
+    rankPlayer(username, rating, "Pro")
+  } else if (rating < 1500 && rating >= 1400) {
+    rankPlayer(username, rating, "Terrible")
   } else {
     User.updateOne({"username": username}, {$set: {"rating": rating}}, (err, res) => {
-      if (err) console.log(err)
-      console.log(res);
+      // if (err) console.log(err)
+      // console.log(res);
     })
   }
+}
+
+let rankPlayer = (username, rating, rank) => {
+  User.updateOne({"username": username}, {$set: {"rating": rating, "rank": rank}}, (err, res) => {
+    if (err) console.log(err)
+    // console.log(res)
+  })
 }
 
 let getUser = (username) => {

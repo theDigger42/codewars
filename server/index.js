@@ -46,38 +46,24 @@ let gameRoom = [];
 let scoreboard = [];
 
 let comparePlayers = (playerA, playerB) => {
-  console.log(playerA);
-  console.log(playerB);
   let expectedScoreA = elo.getExpected(playerA.rating, playerB.rating)
   let expectedScoreB = elo.getExpected(playerB.rating, playerA.rating)
-  console.log(expectedScoreA);
-  console.log(expectedScoreB);
   ratingA = elo.updateRating(expectedScoreA, 1, playerA.rating)
   ratingB = elo.updateRating(expectedScoreB, 0, playerB.rating)
-  console.log(ratingA);
-  console.log(ratingB);
   patchUser(playerA.username, ratingA)
   patchUser(playerB.username, ratingB)
 }
 
 let compareUnfinished = (playerA, playerB) => {
-  console.log(playerA);
-  console.log(playerB);
   let expectedScoreA = elo.getExpected(playerA.rating, playerB.rating)
   let expectedScoreB = elo.getExpected(playerB.rating, playerA.rating)
-  console.log(expectedScoreA);
-  console.log(expectedScoreB);
   ratingA = elo.updateRating(expectedScoreA, 1, playerA.rating)
   ratingB = elo.updateRating(expectedScoreB, 0, playerB.rating)
-  console.log(ratingA);
-  console.log(ratingB);
   patchUser(playerB.username, ratingB)
 }
 
 const rankFinishers = () => {
   let unfinishedUsers = getUnfinished(gameRoom)
-  console.log('unfinished       ' + unfinishedUsers);
-  console.log('finished         ' + scoreboard);
   if (scoreboard.length >= 2) {
     for (let i = 0; i < scoreboard.length - 1; i++) {
       comparePlayers(scoreboard[i], scoreboard[i+1])
@@ -137,7 +123,6 @@ ioGame.on('connection', (socket) => {
   let _user = null
   socket.on('joinWaitingRoom', async (user) => {
     _user = await getUser(user.username)
-    console.log(_user);
     waitingUsers.push(_user)
     waitingRoom[_user] = {
       socket

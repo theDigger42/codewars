@@ -73,8 +73,6 @@ export default class Panel extends Component {
       }
     })
 
-    console.log(scoreboard);
-
     let panelBody = this.state.tags[0] === 'instructions' 
       ? <Info>{this.props.prompt.body}</Info>
       : this.state.tags[0] === 'results' 
