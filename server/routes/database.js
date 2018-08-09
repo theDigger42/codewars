@@ -40,8 +40,9 @@ router.get('/problems', function (req, res) {
 //Get a specific toy problem from the database, using the funcName as a query.
 //NOTE: This isn't currently being used in the application.
 router.get('/challenge:name', (req, res) => {
-  var func = req.params.name.slice(1);
-  ToyProblem.findOne({ "funcName": func }).exec(function (err, result) {
+  var title = req.params.name.slice(1);
+  ToyProblem.findOne({ "title": title }).exec(function (err, result) {
+    if (err) console.log(err)
     res.end(JSON.stringify(result));
   });
 });

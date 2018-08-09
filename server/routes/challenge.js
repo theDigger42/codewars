@@ -4,10 +4,11 @@ const execute = require('../../helpers/runner').execute;
 let router = express.Router()
 
 router.post('/challenge', function (req, res) {
-  let solution = req.body.solution;
-  let tests = req.body.tests;
-  let testDescriptions = req.body.testDescriptions
-  let testResults
+  let solution = req.body.solution
+  let tests = req.body.tests
+  let testDescriptions = JSON.parse(req.body.testDescriptions[0])
+  let testResults = []
+  let results
   let response
   let message = 'Success!'
 
@@ -15,20 +16,20 @@ router.post('/challenge', function (req, res) {
     .then((data) => {
       if (data[0] === "'") {
         message = 'Error'
-        testResults = data
+        results = data
       } else {
-        console.log('DATA RESULTS', data)
         const resultArray = JSON.parse(data)
-        testResults = resultArray
+        results = resultArray
         for (let i = 0; i < resultArray.length; i++) {
           if (!resultArray[i]) {
             message = 'FAILURE'
-            break
+            testResults.push({ description: testDescriptions[i], passing: false })
+          } else {
+            testResults.push({ description: testDescriptions[i], passing: true })
           }
         }
       }
-      console.log(testResults, message)
-      response = JSON.stringify({ testResults, message })
+      response = JSON.stringify({ results, testResults, message })
       res.end(response)
     }).catch(err => console.log('Error in challenge submission', err))
 

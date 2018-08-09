@@ -5,7 +5,6 @@ export const submit = (solution) => {
   return dispatch => {
     axios.post('/challenge', solution)
       .then(res => {
-        console.log(res);
         dispatch({
           type: SUBMIT_SOLUTION,
           payload: res.data

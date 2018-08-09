@@ -34,3 +34,17 @@ function joinObjects(obj1, obj2) {
   });
   return obj1;
 }
+
+function sumArray(arr) {
+  let sum = 0
+  arr.forEach(el => {
+    sum += el
+  })
+  return sum
+}
+
+function isEven(n) {
+  return n % 2 === 0
+}
+
+console.log(typeof sumArray([1,2,3]))

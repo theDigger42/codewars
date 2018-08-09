@@ -7,6 +7,7 @@ const initialState = {
   tests: [],
   testDescriptions: [],
   testResults: [],
+  results: [],
   message: '',
   isComplete: false,
   room: 'lobby'
@@ -33,7 +34,7 @@ const prompt = (state = initialState, action) => {
         title: 'Get ready',
         body: 'Wait for the next game to begin',
         solution: '',
-        tests: [],
+        results: [],
         testDescriptions: [],
         testResults: [],
         message: '',
@@ -44,6 +45,7 @@ const prompt = (state = initialState, action) => {
     case SUBMIT_SOLUTION:
       return {
         ...state,
+        results: action.payload.results,
         testResults: action.payload.testResults,
         message: action.payload.message
       }

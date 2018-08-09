@@ -21,18 +21,19 @@ export default class Panel extends Component {
     this.props.submit({
       solution: this.props.prompt.solution, 
       funcName: this.props.prompt.funcName, 
-      tests: this.props.prompt.tests
+      tests: this.props.prompt.tests,
+      testDescriptions: this.props.prompt.testDescriptions
     })
 
     setTimeout(() => {
       let passing = true
-      let results = this.props.prompt.testResults.map((res) => {
-        return res ? <PassResult>Pass</PassResult> : <FailResult>Fail</FailResult>
+      let descriptiveResults = this.props.prompt.testResults.map((test) => {
+        return test.passing ? <PassResult>{test.description}</PassResult> : <FailResult>{test.description}</FailResult>
       })
       if (this.props.prompt.message !== 'Success!') {
         passing = false
       }
-      this.setState({ results: results})
+      this.setState({ results: descriptiveResults})
       if (passing) {
         gameComplete()
         this.props.setComplete()
@@ -66,7 +67,6 @@ export default class Panel extends Component {
   render() {
 
     let scoreboard = this.props.score.scoreboard.map((user, i) => {
-      console.log(user);
       if (user.finished === true) {
         return <p>{this.suffix(i+1)}: {user.username}</p>
       } else {
