@@ -3,7 +3,7 @@ import axios from '../../node_modules/axios';
 
 export const submit = (solution) => {
   return dispatch => {
-    axios.post('/challenge', solution)
+    axios.post('http://localhost:3000/challenge', solution)
       .then(res => {
         dispatch({
           type: SUBMIT_SOLUTION,

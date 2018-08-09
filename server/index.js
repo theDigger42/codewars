@@ -33,7 +33,7 @@ app.use('/api/signup', signup)
 app.use('/', challengeRoutes)
 app.use('/', databaseRoutes)
 
-app.set('port', (process.env.PORT || 80));
+app.set('port', (process.env.PORT || 3000));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
@@ -116,7 +116,6 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('userOffline', user)
   })
 
-  socket.emit('message', 'connected!')
 });
 
 // begin timer
