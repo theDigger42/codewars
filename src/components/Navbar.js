@@ -48,12 +48,12 @@ export default class Navbar extends Component {
           {/* <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
             this.clickTag('help')
           }>Help</NavLink></Help> */}
-          <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat' ? 1 : 0} onClick={() =>
-            this.clickTag('chat')}>Chat</NavLink></Chat>
+          {/* <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat' ? 1 : 0} onClick={() =>
+            this.clickTag('chat')}>Chat</NavLink></Chat> */}
           <Challenge><NavLink to='/challenge' active={this.state.tags[0] === 'challenge' ? 1 : 0} onClick={() =>
             this.clickTag('challenge')}>Game</NavLink></Challenge>
-          {/* <Profile><NavLink to='/profile' active={this.state.tags[0] === 'profile' ? 1 : 0} onClick={() =>
-            this.clickTag('profile')}>Profile</NavLink></Profile> */}
+          <Profile><NavLink to='/profile' active={this.state.tags[0] === 'profile' ? 1 : 0} onClick={() =>
+            this.clickTag('profile')}>Lobby</NavLink></Profile>
           <Logout><NavLink onClick={() => this.props.logout()} to='/'>Logout</NavLink></Logout>
         </Layout>
       )

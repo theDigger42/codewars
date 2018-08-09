@@ -1,19 +1,25 @@
 import ioclient from 'socket.io-client'
 import store from '../store/index'
 import { getPrompt } from '../actions/prompt'
+import { setOffline } from '../actions/online'
 
 const socket = ioclient.connect()
 // subscribe to a Socket
 // pass in callback that gets run when recieving messages
-export const subscribeToSocket = (name, cb) => {
-  // subscribe to messages
-  socket.on('message', (message) => cb(message));
-  // now tell server we want to subscribe
-  socket.on('connect', (data) => {
-    socket.emit('subscribeToMessage', name);
+export const subscribeToSocket = (user, cb) => {
+  socket.on('connect', () => {
+    socket.emit('userConnected', user);
   })
-
+  socket.on('userOnline', (user) => {
+    cb(user)
+  })
+  socket.on('userOffline', (user) => {
+    store.dispatch(setOffline(user))
+  })
 };
+
+export const disconnect = (user) => socket.emit('disconnect', user)
+
 
 export const sendMessage = (message) => {
   socket.emit('message', message);

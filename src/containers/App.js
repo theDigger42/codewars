@@ -5,16 +5,18 @@ import Challenge from './Challenge'
 import PrivateRoute from '../components/PrivateRoute'
 import Leaderboard from "./Leaderboard";
 //import Help from './Help'
-import Chat from './Chat'
-//import Profile from './Profile'
+//import Chat from './Chat'
+import Profile from './Profile'
 
 import {
+  subscribeToSocket,
   subscribeToTimerSocket,
   getDateTimerSocket,
   subscribeToGameSocket,
   unsubscribe,
   joinWaitingRoom,
-  exitWaitingRoom
+  exitWaitingRoom,
+  disconnect
 } from '../socket/api'
 export default class App extends Component {
 
@@ -57,9 +59,14 @@ export default class App extends Component {
     unsubscribe()
   }
 
+  componentWillMount() {
+    subscribeToSocket(this.props.auth.user, this.props.setOnline)
+  }
+
   componentWillUnmount() {
     exitWaitingRoom()
     unsubscribe()
+    disconnect(this.props.auth.user)
   }
 
   render() {
@@ -86,16 +93,16 @@ export default class App extends Component {
           leave={this.leaveGame}
           {...this.props}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           path='/chat'
           component={Chat}
           {...this.props}
-        />
-        {/* <PrivateRoute
+        /> */}
+        <PrivateRoute
           path='/profile'
           component={Profile}
           {...this.props}
-        /> */}
+        />
       </Switch>
     )
   }

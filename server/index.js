@@ -98,24 +98,25 @@ const rankFinishers = async () => {
 }
 
 // socket.io
-io.on('connection', (client) => {
-  client.on('message', (data) => {
+io.on('connection', (socket) => {
+  socket.on('message', (data) => {
     for (connection of connections) {
       connection.emit('message', data)
     }
   })
 
-  client.on('subscribeToMessage', (data) => {
-    //console.log('new subscriber', data);
+  socket.on('userConnected', (user) => {
+    socket.broadcast.emit('userOnline', user)
   })
 
-  connections.push(client);
+  connections.push(socket);
 
-  client.on('disconnect', () => {
-    connections.splice(connections.indexOf(client), 1);
+  socket.on('disconnect', (user) => {
+    connections.splice(connections.indexOf(socket), 1);
+    socket.broadcast.emit('userOffline', user)
   })
 
-  client.emit('message', 'connected!')
+  socket.emit('message', 'connected!')
 });
 
 // begin timer

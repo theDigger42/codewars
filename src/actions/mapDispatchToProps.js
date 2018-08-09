@@ -10,6 +10,8 @@ import { submit, getPrompt, clearPrompt, changeRoom, setComplete } from './promp
 
 import { getLeaderboard, onScoreboardChange, clearScoreboard } from './score'
 
+import { setOnline } from './online'
+
 const mapDispatchToProps = (dispatch) => (
   bindActionCreators({
     openModal,
@@ -28,7 +30,8 @@ const mapDispatchToProps = (dispatch) => (
     onScoreboardChange,
     changeRoom,
     setComplete,
-    clearScoreboard
+    clearScoreboard,
+    setOnline
   }, dispatch)
 )
 
