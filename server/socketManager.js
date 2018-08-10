@@ -44,7 +44,7 @@ module.exports = (socket) => {
   })
 
   socket.on('LOGOUT', () => {
-    connectedUsers = removeUser(connectedUsers, socket.user.username)
+    connectedUsers = removeUser(connectedUsers, socket.user)
     io.emit('USER_DISCONNECTED', connectedUsers)
     console.log('Disconnect', connectedUsers)
   }) 
