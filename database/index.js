@@ -131,10 +131,54 @@ let findScoreboardByDay = (callback) => {
 }
 
 let patchUser = (username, rating) => {
-  if (rating > 1500 && rating <= 1600) {
-    rankPlayer(username, rating, "Pro")
-  } else if (rating < 1500 && rating >= 1400) {
+  if (rating < 400) {
     rankPlayer(username, rating, "Terrible")
+    return
+  } else if (rating < 500 && rating >= 400) {
+    rankPlayer(username, rating, "Awful")
+    return
+  } else if (rating < 600 && rating >= 500) {
+    rankPlayer(username, rating, "Bad")
+    return
+  } else if (rating < 700 && rating >= 600) {
+    rankPlayer(username, rating, "Noob")
+    return
+  } else if (rating < 800 && rating >= 700) {
+    rankPlayer(username, rating, "Beginner")
+    return
+  } else if (rating < 900 && rating >= 800) {
+    rankPlayer(username, rating, "Script Kiddie")
+    return
+  } else if (rating < 1000 && rating >= 900) {
+    rankPlayer(username, rating, "Junior")
+    return
+  } else if (rating < 1100 && rating >= 1000) {
+    rankPlayer(username, rating, "Coder")
+    return
+  } else if (rating < 1200 && rating >= 1100) {
+    rankPlayer(username, rating, "Brogrammer")
+    return
+  } else if (rating < 1300 && rating >= 1200) {
+    rankPlayer(username, rating, "Dev")
+    return
+  } else if (rating < 1400 && rating >= 1300) {
+    rankPlayer(username, rating, "Engineer")
+    return
+  } else if (rating < 1500 && rating >= 1400) {
+    rankPlayer(username, rating, "Senior")
+    return
+  } else if (rating < 1600 && rating >= 1500) {
+    rankPlayer(username, rating, "Architect")
+    return
+  } else if (rating < 1700 && rating >= 1600) {
+    rankPlayer(username, rating, "Brilliant")
+    return
+  } else if (rating < 1800 && rating >= 1700) {
+    rankPlayer(username, rating, "Genius")
+    return
+  } else if (rating >= 1800) {
+    rankPlayer(username, rating, "Hacker")
+    return
   } else {
     User.updateOne({"username": username}, {$set: {"rating": rating}}, (err, res) => {
       if (err) console.log(err)
