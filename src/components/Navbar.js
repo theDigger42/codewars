@@ -56,8 +56,7 @@ export default class Navbar extends Component {
           <Profile><NavLink to='/profile' active={this.state.tags[0] === 'profile' ? 1 : 0} onClick={() =>
             this.clickTag('profile')}>Lobby</NavLink></Profile>
           <Logout><NavLink onClick={() => {
-            disconnect(this.props.auth.user)
-            this.props.logout()
+            this.props.logout(this.props.auth.user)
           }} to='/'>Logout</NavLink></Logout>
         </Layout>
       )

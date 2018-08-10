@@ -18,7 +18,7 @@ const EloRank = require('../helpers/ranking')
 const app = express();
 app.use(compression())
 const server = http.Server(app);
-const io = socket(server);
+var io = module.exports.io = socket(server);
 
 const elo = new EloRank()
 
@@ -33,13 +33,12 @@ app.use('/api/signup', signup)
 app.use('/', challengeRoutes)
 app.use('/', databaseRoutes)
 
-app.set('port', (process.env.PORT || 80));
+app.set('port', (process.env.PORT || 3000));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 })
 
-let connections = []
 let waitingRoom = {}
 let waitingUsers = []
 let gameRoom = []
@@ -97,49 +96,8 @@ const rankFinishers = async () => {
   } 
 }
 
-let users = []
-
-// socket.io
-io.on('connection', (socket) => {
-
-  let _user = null
-  connections.push(socket);
-
-  socket.on('message', (data) => {
-    for (connection of connections) {
-      connection.emit('message', data)
-    }
-  })
-
-  socket.on('getConnected', () => {
-    socket.emit('connectedUsers', users)
-  })
-
-  socket.on('userConnected', (user) => {
-    _user = user
-    console.log('userConnected', _user);
-    socket.broadcast.emit('userOnline', user)
-    users.push(_user)
-  })
-
-  socket.on('disconnect', () => {
-    connections.splice(connections.indexOf(socket), 1);
-    socket.broadcast.emit('userOffline', _user)
-    console.log('disconnect', _user);
-    users.splice(users.indexOf(_user), 1)
-  })
-
-  socket.on('disconnectUser', (user) => {
-    console.log(user);
-    socket.broadcast.emit('userOffline', user)
-    users.splice(users.indexOf(_user), 1)
-    _user = null
-  })
-
-  socket.emit('connectedUsers', users)
-  console.log('connectedUsers', users);
-
-});
+const socketManager = require('./socketManager')
+io.on('connection', socketManager)
 
 // begin timer
 const ioTimer = io.of('/timer');

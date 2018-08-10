@@ -9,7 +9,7 @@ import Leaderboard from "./Leaderboard";
 import Profile from './Profile'
 
 import {
-  subscribeToSocket,
+  subscribeToOnlineSocket,
   subscribeToTimerSocket,
   getDateTimerSocket,
   subscribeToGameSocket,
@@ -17,6 +17,7 @@ import {
   joinWaitingRoom,
   exitWaitingRoom
 } from '../socket/api'
+
 export default class App extends Component {
 
   constructor(props) {
@@ -28,10 +29,6 @@ export default class App extends Component {
     this.updateTimer = this.updateTimer.bind(this)
     this.joinGame = this.joinGame.bind(this)
     this.leaveGame = this.leaveGame.bind(this)
-  }
-
-  componentDidMount() {
-    subscribeToSocket(this.props.auth.user, this.props.setOnline)
   }
 
   updateTimer(date) {
@@ -48,6 +45,10 @@ export default class App extends Component {
         getDateTimerSocket();
       }
     }, 1000)
+  }
+
+  componentDidMount() {
+    subscribeToOnlineSocket(this.props.setOnline)
   }
 
   joinGame() {

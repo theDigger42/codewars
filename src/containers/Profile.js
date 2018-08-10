@@ -5,8 +5,9 @@ import Footer from '../components/Footer'
 
 export default class Profile extends Component {
   render() {
-    let userList = this.props.online.users.map((user) => {
-      return <User>{user && user.username}</User>
+    let userList = this.props.online.users && Object.keys(this.props.online.users).map((username) => {
+      if (username != this.props.auth.user.username)
+      return <User>{username}</User>
     })
     return (
       <Layout>

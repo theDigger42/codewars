@@ -1,4 +1,4 @@
-import { SET_ONLINE_USER, SET_OFFLINE_USER, INIT_ONLINE_USERS } from '../actions/types'
+import { SET_ONLINE_USERS, SET_OFFLINE_USER, INIT_ONLINE_USERS } from '../actions/types'
 
 const inititalState = {
   users: []
@@ -6,24 +6,11 @@ const inititalState = {
 
 const online = (state = inititalState, action) => {
   switch (action.type) {
-    case SET_ONLINE_USER: 
-      let users = state.users
-      users.push(action.payload)
+    case SET_ONLINE_USERS: 
+      console.log(action.payload);
       return {
         ...state,
-        users: users
-      }
-
-    case SET_OFFLINE_USER:
-      users = state.users
-      let index = 0
-      users.forEach((user, i) => {
-        if (user && user.username === action.payload.username) index = i
-      })
-      users.splice(index, 1)
-      return {
-        ...state,
-        users: users
+        users: action.payload
       }
 
     case INIT_ONLINE_USERS:

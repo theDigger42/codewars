@@ -12,6 +12,11 @@ if (localStorage.jwtToken) {
   store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)))
 }
 
+const loggerMiddleware = store => next => action => {
+  console.log('dispatching: ', action)
+  next(action)
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Root />
