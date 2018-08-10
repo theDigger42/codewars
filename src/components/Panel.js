@@ -19,7 +19,7 @@ export default class Panel extends Component {
   }
 
   updateWins(username) {
-    axios.patch(`http://localhost:3000/users:${username}`)
+    axios.patch(`/users:${username}`)
   }
 
   handleSubmit() {
