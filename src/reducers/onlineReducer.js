@@ -1,4 +1,4 @@
-import { SET_ONLINE_USER, SET_OFFLINE_USER } from '../actions/types'
+import { SET_ONLINE_USER, SET_OFFLINE_USER, INIT_ONLINE_USERS } from '../actions/types'
 
 const inititalState = {
   users: []
@@ -24,6 +24,12 @@ const online = (state = inititalState, action) => {
       return {
         ...state,
         users: users
+      }
+
+    case INIT_ONLINE_USERS:
+      return {
+        ...state,
+        users: action.payload
       }
 
     default:

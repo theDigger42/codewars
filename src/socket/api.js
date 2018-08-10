@@ -1,9 +1,9 @@
 import ioclient from 'socket.io-client'
 import store from '../store/index'
 import { getPrompt } from '../actions/prompt'
-import { setOffline } from '../actions/online'
+import { setOffline, initOnlineUsers } from '../actions/online'
 
-const socket = ioclient.connect('http://localhost:3000', { port: 3000 })
+const socket = ioclient.connect()
 // subscribe to a Socket
 // pass in callback that gets run when recieving messages
 export const subscribeToSocket = (user, cb) => {
@@ -16,9 +16,18 @@ export const subscribeToSocket = (user, cb) => {
   socket.on('userOffline', (user) => {
     store.dispatch(setOffline(user))
   })
+  socket.on('connectedUsers', (users) => {
+    store.dispatch(initOnlineUsers(users))
+  })
 };
 
-export const disconnect = (user) => socket.emit('disconnect', user)
+export const disconnect = (user) => {
+  socket.emit('disconnectUser', user)
+}
+
+export const connect = (user) => {
+  socket.emit('userConnected', user)
+}
 
 
 export const sendMessage = (message) => {
@@ -26,7 +35,7 @@ export const sendMessage = (message) => {
 };
 
 //timer 
-const timerSocket = ioclient('http://localhost:3000/timer')
+const timerSocket = ioclient('/timer')
 
 export const subscribeToTimerSocket = (cb) => {
   timerSocket.on('date', (date) => {
@@ -38,7 +47,7 @@ export const getDateTimerSocket = () => {
   timerSocket.emit('getDate');
 }
 
-const gameSocket = ioclient('http://localhost:3000/game');
+const gameSocket = ioclient('/game');
 
 export const subscribeToGameSocket = (onScoreboardChange) => {
 

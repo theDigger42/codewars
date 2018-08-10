@@ -4,6 +4,7 @@ import Signup from './Signup'
 import Login from './Login'
 import { Link } from 'react-router-dom'
 import logo from '../images/logo.png'
+import { disconnect } from '../socket/api';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -54,7 +55,10 @@ export default class Navbar extends Component {
             this.clickTag('challenge')}>Game</NavLink></Challenge>
           <Profile><NavLink to='/profile' active={this.state.tags[0] === 'profile' ? 1 : 0} onClick={() =>
             this.clickTag('profile')}>Lobby</NavLink></Profile>
-          <Logout><NavLink onClick={() => this.props.logout()} to='/'>Logout</NavLink></Logout>
+          <Logout><NavLink onClick={() => {
+            disconnect(this.props.auth.user)
+            this.props.logout()
+          }} to='/'>Logout</NavLink></Logout>
         </Layout>
       )
 
@@ -139,14 +143,14 @@ const Leaderboard = styled.h4`
   grid-column: 4;
   font-size: 18px;
 `
-const Help = styled.h4`
-  grid-column: 5;
-  font-size: 18px;
-`
-const Chat = styled.h4`
-  grid-column: 6;
-  font-size: 18px;
-`
+// const Help = styled.h4`
+//   grid-column: 5;
+//   font-size: 18px;
+// `
+// const Chat = styled.h4`
+//   grid-column: 6;
+//   font-size: 18px;
+// `
 const Challenge = styled.h4`
   grid-column: 7;
   font-size: 18px;

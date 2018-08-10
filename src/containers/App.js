@@ -31,6 +31,10 @@ export default class App extends Component {
     this.leaveGame = this.leaveGame.bind(this)
   }
 
+  componentDidMount() {
+    subscribeToSocket(this.props.auth.user, this.props.setOnline)
+  }
+
   updateTimer(date) {
     let secondsTillNextGame = 60 - (new Date(date).getSeconds());
     this.setState({ timerTillNextGame: secondsTillNextGame });
@@ -57,10 +61,6 @@ export default class App extends Component {
   leaveGame() {
     exitWaitingRoom(this.props.auth.user)
     unsubscribe()
-  }
-
-  componentWillMount() {
-    subscribeToSocket(this.props.auth.user, this.props.setOnline)
   }
 
   componentWillUnmount() {

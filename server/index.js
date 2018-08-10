@@ -33,7 +33,7 @@ app.use('/api/signup', signup)
 app.use('/', challengeRoutes)
 app.use('/', databaseRoutes)
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 80));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
@@ -97,8 +97,13 @@ const rankFinishers = async () => {
   } 
 }
 
+let users = []
+
 // socket.io
 io.on('connection', (socket) => {
+
+  connections.push(socket);
+
   socket.on('message', (data) => {
     for (connection of connections) {
       connection.emit('message', data)
@@ -107,14 +112,20 @@ io.on('connection', (socket) => {
 
   socket.on('userConnected', (user) => {
     socket.broadcast.emit('userOnline', user)
+    users.push(user)
   })
-
-  connections.push(socket);
 
   socket.on('disconnect', (user) => {
     connections.splice(connections.indexOf(socket), 1);
     socket.broadcast.emit('userOffline', user)
+    users.splice(users.indexOf(user), 1)
   })
+
+  socket.on('disconnectUser', (user) => {
+    socket.broadcast.emit('userOffline', user)
+  })
+
+  socket.emit('connectedUsers', users)
 
 });
 

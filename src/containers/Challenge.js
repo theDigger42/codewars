@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import Panel from '../components/Panel'
 
 export default class Challenge extends Component {
+
   render() {
     return (
       <Layout>

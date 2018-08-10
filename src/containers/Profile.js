@@ -103,9 +103,11 @@ const Online = styled.h1`
 const UserList = styled.div`
   grid-row: 2;
   display: grid;
-  grid-template-rows: 50px;
-  grid-row-gap: 20px;
-  margin-top: 2em;
+  grid-template-rows: repeat(auto-fit, 50px);
+  grid-row-gap: 2px;
+  margin-top: 4em;
+  height: 60vh;
+  overflow: auto;
 `
 const User = styled.h2`
   font-size: 24px;
