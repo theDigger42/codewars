@@ -111,6 +111,10 @@ io.on('connection', (socket) => {
     }
   })
 
+  socket.on('getConnected', () => {
+    socket.emit('connectedUsers', users)
+  })
+
   socket.on('userConnected', (user) => {
     _user = user
     console.log('userConnected', _user);

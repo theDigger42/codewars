@@ -15,8 +15,7 @@ import {
   subscribeToGameSocket,
   unsubscribe,
   joinWaitingRoom,
-  exitWaitingRoom,
-  disconnect
+  exitWaitingRoom
 } from '../socket/api'
 export default class App extends Component {
 

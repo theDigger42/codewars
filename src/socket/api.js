@@ -9,6 +9,7 @@ const socket = ioclient.connect()
 export const subscribeToSocket = (user, cb) => {
   socket.on('connect', () => {
     socket.emit('userConnected', user);
+    socket.emit('getConnected')
     console.log('connect', user);
   })
   socket.on('userOnline', (user) => {
