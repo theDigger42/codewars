@@ -1,13 +1,15 @@
 import ioclient from 'socket.io-client'
 import store from '../store/index'
 import { getPrompt } from '../actions/prompt'
-import { setOffline, initOnlineUsers } from '../actions/online'
 
-export const socket = ioclient.connect()
+export const socket = ioclient.connect('http://localhost:3000')
 
 export const subscribeToOnlineSocket = (callback) => {
   socket.on('connect', () => {
-    console.log('connected');
+    socket.emit('GET_CONNECTED_USERS')
+  })
+  socket.on('CONNECTED_USERS', (users) => {
+    callback(users)
   })
   socket.on('USER_CONNECTED', (users) => {
     callback(users)
@@ -18,7 +20,7 @@ export const subscribeToOnlineSocket = (callback) => {
 }
 
 //timer 
-const timerSocket = ioclient('/timer')
+const timerSocket = ioclient('http://localhost:3000/timer')
 
 export const subscribeToTimerSocket = (cb) => {
   timerSocket.on('date', (date) => {
@@ -30,7 +32,7 @@ export const getDateTimerSocket = () => {
   timerSocket.emit('getDate');
 }
 
-const gameSocket = ioclient('/game');
+const gameSocket = ioclient('http://localhost:3000/game');
 
 export const subscribeToGameSocket = (onScoreboardChange) => {
 

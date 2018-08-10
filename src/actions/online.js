@@ -12,7 +12,7 @@ export const setOnline = (users) => {
 
 export const getOnlineUser = (username) => {
   return dispatch => {
-    axios.get(`/users:${username}`)
+    axios.get(`http://localhost:3000/users:${username}`)
       .then(res => {
         dispatch({
           type: GET_ONLINE_USER,

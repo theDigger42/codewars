@@ -1,5 +1,7 @@
 const io = require('./index').io
 
+let connectedUsers = {}
+
 const addUser = (userList, user) => {
   if (user === null || user.username === null) {
     let newList = Object.assign({}, userList)
@@ -22,9 +24,12 @@ const removeUser = (userList, user) => {
   return newList
 }
 
-let connectedUsers = {}
+module.exports.io = (socket) => {
 
-module.exports = (socket) => {
+  socket.on('GET_CONNECTED_USERS', () => {
+    io.emit('CONNECTED_USERS', connectedUsers)
+  })
+
   socket.on('USER_CONNECTED', (user) => {
     //user.socketId = socket.id
     connectedUsers = addUser(connectedUsers, user) 

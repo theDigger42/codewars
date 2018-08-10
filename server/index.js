@@ -11,17 +11,10 @@ const signup = require('./routes/signup')
 const users = require('./routes/users')
 const challengeRoutes = require('./routes/challenge')
 const databaseRoutes = require('./routes/database')
-const ToyProblem = require('../database/index').ToyProblem
-const patchUser = require('../database/index').patchUser
-const getUser = require('../database/index').getUser
-const EloRank = require('../helpers/ranking')
 
 const app = express();
 app.use(compression())
 const server = http.Server(app);
-var io = module.exports.io = socket(server);
-
-const elo = new EloRank()
 
 // Setup middleware
 app.use(bodyParser.json());
@@ -35,147 +28,26 @@ app.use('/', users)
 app.use('/', challengeRoutes)
 app.use('/', databaseRoutes)
 
-app.set('port', (process.env.PORT || 80));
+app.set('port', (process.env.PORT || 3000));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 })
 
-let waitingRoom = {}
-let waitingUsers = []
-let gameRoom = []
-let scoreboard = []
+const io = module.exports.io = socket(server);
+const ioGame = module.exports.ioGame = io.of('/game');
+const ioTimer = module.exports.ioTimer = io.of('/timer')
 
-let comparePlayers = (playerA, playerB) => {
-  let expectedScoreA = elo.getExpected(playerA.rating, playerB.rating)
-  let expectedScoreB = elo.getExpected(playerB.rating, playerA.rating)
-  ratingA = elo.updateRating(expectedScoreA, 1, playerA.rating)
-  ratingB = elo.updateRating(expectedScoreB, 0, playerB.rating)
-  patchUser(playerA.username, ratingA)
-  patchUser(playerB.username, ratingB)
-}
+const socketManager = require('./socketManager').io
+const gameSocketManager = require('./gameSocketManager').ioGame
+const timerSocketManager = require('./timerSocketManager').ioTimer
 
-let compareUnfinished = (playerA, playerB) => {
-  let expectedScoreA = elo.getExpected(playerA.rating, playerB.rating)
-  let expectedScoreB = elo.getExpected(playerB.rating, playerA.rating)
-  ratingA = elo.updateRating(expectedScoreA, 1, playerA.rating)
-  ratingB = elo.updateRating(expectedScoreB, 0, playerB.rating)
-  patchUser(playerB.username, ratingB)
-}
-
-const retrieveUsers = (array) => {
-  return new Promise(async (resolve) => {
-    let ret = []
-    for (let i = 0; i < array.length; i++) {
-      let data = await getUser(array[i].username)
-      ret.push(data)
-    }
-    resolve(ret)
-  })
-}
-
-const rankFinishers = async () => {
-  let unfinishedUsers = getUnfinished(gameRoom)
-  let finished
-  let unfinished
-  finished = await retrieveUsers(scoreboard)
-  unfinished = await retrieveUsers(unfinishedUsers)
-
-  if (finished.length >= 2) {
-    for (let i = 0; i < finished.length - 1; i++) {
-      comparePlayers(finished[i], finished[i+1])
-    }
-  }
-  if (finished.length >= 1 && unfinished.length > 1) {
-    for (let i = 0; i < unfinished.length; i++) {
-      compareUnfinished(finished[finished.length-1], unfinished[i])
-    }
-  }
-  if (finished.length === 1 && unfinished.length === 1) {
-    for (let i = 0; i < unfinished.length; i++) {
-      comparePlayers(finished[finished.length-1], unfinished[i])
-    }
-  } 
-}
-
-const socketManager = require('./socketManager')
 io.on('connection', socketManager)
-
-// begin timer
-const ioTimer = io.of('/timer');
-
-ioTimer.on('connection', (interval) => {
-  interval.on('getDate', () => {
-    interval.emit('date', new Date())
-  })
-})
+ioTimer.on('connection', timerSocketManager)
+ioGame.on('connection', gameSocketManager)
 
 server.listen(app.get('port'), function () {
   console.log('Server started on port:' + app.get('port'));
 });
 
 module.exports = app;
-
-const ioGame = io.of('/game');
-
-ioGame.on('connection', (socket) => {
-  let _user = null
-  socket.on('joinWaitingRoom', async (user) => {
-    _user = await getUser(user.username)
-    waitingUsers.push(_user)
-    waitingRoom[_user] = {
-      socket
-    };
-  })
-
-  const removeFromWaitingRoom = (user) => delete waitingRoom[user];
-
-  socket.on('exitWaitingRoom', removeFromWaitingRoom);
-  socket.on('disconnect', removeFromWaitingRoom);
-
-  socket.on('gameComplete', () => {
-    _user.finished = true
-    scoreboardChange(_user);
-  })
-})
-
-const scoreboardChange = (user) => {
-  if (user && user.finished) {
-    scoreboard.push(user)
-  }
-  const unfinishedUsers = getUnfinished(gameRoom);
-  const clientScoreboard = [...scoreboard, ...unfinishedUsers];
-  ioGame.emit('scoreboardChange', clientScoreboard);
-}
-
-const getUnfinished = (users) => {
-  let unfinished = []
-  users.forEach((user) => {
-    if (user.finished === false) {
-      unfinished.push(user)
-    }
-  })
-  return unfinished;
-}
-
-const startGame = () => {
-  rankFinishers()
-  setTimeout(() => {
-    gameRoom = waitingUsers;
-    scoreboard = [];
-    waitingUsers = [];
-    waitingRoom = {};
-    ToyProblem.count().exec(function (err, count) {
-      var random = Math.floor(Math.random() * count);
-      ToyProblem.findOne().skip(random).exec(function (err, result) {
-        ioGame.emit('challenge', result)
-      });
-    });
-    setTimeout(startGame, secondsTillNextGame());
-    scoreboardChange();
-  }, 1000)
-}
-
-const secondsTillNextGame = () => 1000 * (60 - (new Date().getSeconds()));
-
-setTimeout(startGame, secondsTillNextGame);

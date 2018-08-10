@@ -17,25 +17,13 @@ const promiseMiddleware = store => next => action => {
   }
 }
 
-const socketMiddleware = store => next => action => {
-  if (action.socket) {
-    action.socket.on('connect', () => {
-      console.log('hello');
-    })
-    next(action)
-  } else {
-    next(action)
-  }
-}
-
 const store = createStore(
   rootReducer,
   composeWithDevTools(
     applyMiddleware(
       thunk, 
       loggerMiddleware,
-      promiseMiddleware,
-      socketMiddleware
+      promiseMiddleware
     )
   )
 );
