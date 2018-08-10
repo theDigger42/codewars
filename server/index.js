@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 const auth = require('./routes/auth')
 const signup = require('./routes/signup')
+const users = require('./routes/users')
 const challengeRoutes = require('./routes/challenge')
 const databaseRoutes = require('./routes/database')
 const ToyProblem = require('../database/index').ToyProblem
@@ -30,10 +31,11 @@ app.use(cors())
 
 app.use('/api/auth', auth)
 app.use('/api/signup', signup)
+app.use('/', users)
 app.use('/', challengeRoutes)
 app.use('/', databaseRoutes)
 
-app.set('port', (process.env.PORT || 80));
+app.set('port', (process.env.PORT || 3000));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));

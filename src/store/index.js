@@ -11,7 +11,6 @@ const loggerMiddleware = store => next => action => {
 const promiseMiddleware = store => next => action => {
   if (action.promise) {
     action.promise
-    .then(rawResponse => rawResponse.json())
     .then(response => store.dispatch({type: action.type, payload: response}))
   } else {
     next(action)

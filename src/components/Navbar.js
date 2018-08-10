@@ -139,7 +139,7 @@ const NavLink = styled(Link)`
   `};
 `
 const Leaderboard = styled.h4`
-  grid-column: 4;
+  grid-column: 5;
   font-size: 18px;
 `
 // const Help = styled.h4`

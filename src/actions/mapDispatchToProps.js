@@ -10,7 +10,7 @@ import { submit, getPrompt, clearPrompt, changeRoom, setComplete } from './promp
 
 import { getLeaderboard, onScoreboardChange, clearScoreboard } from './score'
 
-import { setOnline, setOffline, initOnlineUsers } from './online'
+import { setOnline, getOnlineUser } from './online'
 
 const mapDispatchToProps = (dispatch) => (
   bindActionCreators({
@@ -32,8 +32,7 @@ const mapDispatchToProps = (dispatch) => (
     setComplete,
     clearScoreboard,
     setOnline,
-    setOffline,
-    initOnlineUsers
+    getOnlineUser
   }, dispatch)
 )
 

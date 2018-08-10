@@ -202,6 +202,7 @@ let getUser = (username) => {
         username: user.get('username'),
         rating: user.get('rating'),
         rank: user.get('rank'),
+        wins: user.get('wins'),
         finished: false
       }
       resolve(userData)

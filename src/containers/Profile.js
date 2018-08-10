@@ -4,22 +4,54 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 export default class Profile extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      tags: ['profile']
+    }
+    this.clickTag = this.clickTag.bind(this)
+  }
+
+  clickTag(tag) {
+    var tags = [tag];
+    this.setState({ tags: tags })
+  }
+
+  componentDidMount() {
+    this.props.getOnlineUser(this.props.auth.user.username)
+  }
+
   render() {
+
+    let navButton = this.state.tags[0] === 'profile' ? null 
+    : <MyProfile onClick={() => {
+      this.props.getOnlineUser(this.props.auth.user.username)
+      this.clickTag('profile')
+    }}> My Profile </MyProfile>
+
     let userList = this.props.online.users && Object.keys(this.props.online.users).map((username) => {
       if (username != this.props.auth.user.username)
-      return <User>{username}</User>
+      return <User onClick={() => { 
+        this.props.getOnlineUser(username) 
+        this.clickTag('user')
+      }}>{username}</User>
     })
+
+
+
     return (
       <Layout>
         <Navbar {...this.props} active={'profile'} />
         <Body>
           <UserProfile>
-            <Username>{this.props.auth.user.username}</Username>
+            <Username>{this.props.online.user.username}</Username>
             <Stats>
-              <Rank>Rank:</Rank><Value>{this.props.auth.user.rank}</Value>
-              <Rating>Rating:</Rating><Value>{this.props.auth.user.rating}</Value>
-              <Wins>Wins:</Wins><Value>{this.props.auth.user.wins}</Value>
+              <Rank>Rank:</Rank><Value>{this.props.online.user.rank}</Value>
+              <Rating>Rating:</Rating><Value>{this.props.online.user.rating}</Value>
+              <Wins>Wins:</Wins><Value>{this.props.online.user.wins}</Value>
             </Stats>
+            {navButton}
           </UserProfile>
           <OnlineUsers>
             <Online>Online Users</Online>
@@ -54,7 +86,7 @@ const UserProfile = styled.div`
   height: 80vh;
   background: grey;
   display: grid;
-  grid-template-rows: 50px auto;
+  grid-template-rows: 50px 450px 50px;
   grid-row-gap: 20px;
   grid-template-columns: 1fr 1fr;
 `
@@ -64,7 +96,7 @@ const Username = styled.h1`
   font-size: 40px;
 `
 const Stats = styled.div`
-  grid-column: 1;
+  grid-column: 1 / 3;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 50px 50px;
@@ -88,6 +120,23 @@ const Wins = styled.h2`
 const Value = styled.h2`
   grid-column: 2;
   justify-self: center;
+`
+const MyProfile = styled.button`
+  grid-row: 3;
+  grid-column: 1 / 3;
+  justify-self: center;
+  width: 150px;
+  height: 50px;
+  background: darkred;
+  color: gainsboro;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover{{
+    font-weight: bold;
+    background: maroon;
+    color: ghostwhite;
+    cursor: pointer;
+  }}
 `
 const OnlineUsers = styled.div`
   grid-column: 2;

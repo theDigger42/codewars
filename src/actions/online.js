@@ -1,4 +1,5 @@
-import { SET_ONLINE_USERS, SET_OFFLINE_USER, INIT_ONLINE_USERS } from './types'
+import { SET_ONLINE_USERS, GET_ONLINE_USER } from './types'
+import axios from 'axios'
 
 export const setOnline = (users) => {
   return dispatch => {
@@ -9,16 +10,14 @@ export const setOnline = (users) => {
   }
 }
 
-export const setOffline = (user) => {
-  return {
-    type: SET_OFFLINE_USER,
-    payload: user
-  }
-}
-
-export const initOnlineUsers = (users) => {
-  return {
-    type: INIT_ONLINE_USERS,
-    payload: users
+export const getOnlineUser = (username) => {
+  return dispatch => {
+    axios.get(`http://localhost:3000/users:${username}`)
+      .then(res => {
+        dispatch({
+          type: GET_ONLINE_USER,
+          payload: res.data
+        })
+      })
   }
 }
