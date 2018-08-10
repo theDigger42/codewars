@@ -102,6 +102,7 @@ let users = []
 // socket.io
 io.on('connection', (socket) => {
 
+  let _user = null
   connections.push(socket);
 
   socket.on('message', (data) => {
@@ -111,21 +112,28 @@ io.on('connection', (socket) => {
   })
 
   socket.on('userConnected', (user) => {
+    _user = user
+    console.log('userConnected', _user);
     socket.broadcast.emit('userOnline', user)
-    users.push(user)
+    users.push(_user)
   })
 
-  socket.on('disconnect', (user) => {
+  socket.on('disconnect', () => {
     connections.splice(connections.indexOf(socket), 1);
-    socket.broadcast.emit('userOffline', user)
-    users.splice(users.indexOf(user), 1)
+    socket.broadcast.emit('userOffline', _user)
+    console.log('disconnect', _user);
+    users.splice(users.indexOf(_user), 1)
   })
 
   socket.on('disconnectUser', (user) => {
+    console.log(user);
     socket.broadcast.emit('userOffline', user)
+    users.splice(users.indexOf(_user), 1)
+    _user = null
   })
 
   socket.emit('connectedUsers', users)
+  console.log('connectedUsers', users);
 
 });
 

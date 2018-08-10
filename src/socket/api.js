@@ -9,14 +9,18 @@ const socket = ioclient.connect()
 export const subscribeToSocket = (user, cb) => {
   socket.on('connect', () => {
     socket.emit('userConnected', user);
+    console.log('connect', user);
   })
   socket.on('userOnline', (user) => {
     cb(user)
+    console.log('userOnline', user);
   })
   socket.on('userOffline', (user) => {
+    console.log('userOffline', user);
     store.dispatch(setOffline(user))
   })
   socket.on('connectedUsers', (users) => {
+    console.log('connectedUsers', users);
     store.dispatch(initOnlineUsers(users))
   })
 };
