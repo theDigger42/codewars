@@ -66,7 +66,6 @@ export default class App extends Component {
   componentWillUnmount() {
     exitWaitingRoom()
     unsubscribe()
-    disconnect(this.props.auth.user)
   }
 
   render() {
