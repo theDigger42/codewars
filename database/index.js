@@ -24,11 +24,11 @@ const UserSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    default: 1500
+    default: 800
   },
   rank: {
     type: String,
-    default: 'Noob'
+    default: 'New'
   }
 });
 
@@ -87,30 +87,6 @@ let findToyProblems = (callback) => {
       callback(toyProblems);
     }
   });
-}
-
-// Database export  
-//Logs each solved challenge for leaderboard
-let logPoints = (callback) => {
-  Scoreboard.find((err, user) => {
-    if (err) {
-      console.log(err);
-    } else {
-      callback(user);
-    }
-  });
-}
-
-//Gets top users based on score from ScoreboardSchema // still testing
-let findScoreboard = (callback) => {
-  Scoreboard.find((err, users) => {
-    if (err) {
-      console.log(err);
-    } else {
-      callback(users);
-    }
-  })
-    .sort({ 'score': -1 });
 }
 
 //Find scoreboard by day // THIS WORKS
