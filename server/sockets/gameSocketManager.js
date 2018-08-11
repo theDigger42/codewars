@@ -25,6 +25,9 @@ const startGame = () => {
         ioGame.emit('challenge', result)
       });
     });
+    // ToyProblem.findOne({ "title": "Reverse String" }).exec(function (err, result) {
+    //   ioGame.emit('challenge', result)
+    // });
     setTimeout(startGame, secondsTillNextGame());
     scoreboardChange();
   }, 1000)

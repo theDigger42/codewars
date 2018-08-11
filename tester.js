@@ -47,4 +47,28 @@ function isEven(n) {
   return n % 2 === 0
 }
 
+function factorial(n) {
+  if (n === 0 || n === 1 || n === 2) {
+    return n
+  }
+  let sum = 1
+  while(n > 0) {
+    sum *= n
+    n--
+  }
+  return sum
+}
+
+function reverse(str) {
+  let rev = ''
+  for (let i = str.length - 1; i >= 0; i--) {
+    rev += str[i]
+  }
+  return rev
+}
+
+console.log(reverse('hello'));
+
+console.log(factorial(5));
+
 console.log(typeof sumArray([1,2,3]))
