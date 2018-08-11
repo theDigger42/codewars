@@ -14,7 +14,7 @@ fs.readFile('./database/challenges.json', 'utf8', (err, data) => {
   problems.insert(JSON.parse(data), (err, docs) => {
     if (err) console.log(err)
     console.log(docs);
-    problems.count((err, count) => {
+    problems.countDocuments((err, count) => {
       if (err) console.log(err)
       console.log(`${count} challenges inserted into toyProblem collection.`)
     });

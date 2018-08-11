@@ -8,7 +8,7 @@ let router = express.Router()
 
 //Get a random toy problem from the database
 router.get('/randomChallenge', function (req, res) {
-  ToyProblem.count().exec(function (err, count) {
+  ToyProblem.countDocuments().exec(function (err, count) {
     var random = Math.floor(Math.random() * count);
     ToyProblem.findOne().skip(random).exec(function (err, result) {
       res.end(JSON.stringify(result));

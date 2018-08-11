@@ -38,8 +38,6 @@ export default class Profile extends Component {
       }}>{username}</User>
     })
 
-
-
     return (
       <Layout>
         <Navbar {...this.props} active={'profile'} />
@@ -131,12 +129,12 @@ const MyProfile = styled.button`
   color: gainsboro;
   font-size: 20px;
   cursor: pointer;
-  &:hover{{
+  &:hover{
     font-weight: bold;
     background: maroon;
     color: ghostwhite;
     cursor: pointer;
-  }}
+  }
 `
 const OnlineUsers = styled.div`
   grid-column: 2;

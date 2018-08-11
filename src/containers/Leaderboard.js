@@ -71,7 +71,7 @@ const LeftDiv = styled.div`
   grid-column: 2;
   display: grid;
   grid-template-rows: 50px auto;
-  grid-row-gap: 15px;
+  grid-row-gap: 30px;
   justify-self: right;
 `
 const MiddleDiv = styled.div`
@@ -79,15 +79,16 @@ const MiddleDiv = styled.div`
   grid-column: 3;
   display: grid;
   grid-template-rows: 50px auto;
-  grid-row-gap: 15px;
+  grid-row-gap: 30px;
   justify-self: center;
+
 `
 const RightDiv = styled.div`
   grid-row: 1;
   grid-column: 4;
   display: grid;
   grid-template-rows: 50px auto;
-  grid-row-gap: 15px;
+  grid-row-gap: 30px;
   justify-self: left;
 `
 const Title = styled.h1`

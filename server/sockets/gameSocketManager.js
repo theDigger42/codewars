@@ -19,7 +19,7 @@ const startGame = () => {
     scoreboard = [];
     waitingUsers = [];
     waitingRoom = {};
-    ToyProblem.count().exec(function (err, count) {
+    ToyProblem.countDocuments().exec(function (err, count) {
       var random = Math.floor(Math.random() * count);
       ToyProblem.findOne().skip(random).exec(function (err, result) {
         ioGame.emit('challenge', result)
@@ -106,7 +106,8 @@ const rankFinishers = async () => {
   finished = await retrieveUsers(scoreboard)
   unfinished = await retrieveUsers(unfinishedUsers)
 
-  updateWins(scoreboard[0].username)
+  if (scoreboard[0])
+    updateWins(scoreboard[0].username)
 
   if (finished.length >= 2) {
     for (let i = 0; i < finished.length - 1; i++) {

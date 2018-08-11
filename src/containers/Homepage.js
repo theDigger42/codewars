@@ -1,10 +1,17 @@
 import styled from "styled-components"
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 export default class Homepage extends Component {
+
   render() {
+
+    if (this.props.auth.isAuthenticated) {
+      return <Redirect to='/challenge' />
+    }
+
     return (
       <Layout>
         <Navbar {...this.props} active={'home'} />
