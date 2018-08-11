@@ -106,7 +106,7 @@ const rankFinishers = async () => {
   finished = await retrieveUsers(scoreboard)
   unfinished = await retrieveUsers(unfinishedUsers)
 
-  if (scoreboard[0])
+  if (scoreboard.length >= 2)
     updateWins(scoreboard[0].username)
 
   if (finished.length >= 2) {
