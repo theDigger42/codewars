@@ -2,6 +2,8 @@ import React from 'react'
 import AceEditor from 'react-ace';
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
+import 'brace/theme/chaos';
+import 'brace/theme/merbivore';
 import styled from 'styled-components'
 
 const Editor = (props) => {
@@ -9,7 +11,7 @@ const Editor = (props) => {
     <Wrapper>
       <AceEditor
         mode="javascript"
-        theme="monokai"
+        theme="merbivore"
         onChange={e => props.change('solution', e)}
         value={props.input}
         name="UNIQUE_ID_OF_DIV"
@@ -32,9 +34,9 @@ const Editor = (props) => {
 export default Editor
 
 const Wrapper = styled.div`
-  grid-column: 1 / 8;
-  min-width: 400px;
+  grid-column: 1 / 9;
+  min-width: 420px;
   margin-left: 2em;
   margin-bottom: 2em;
-  height: 66vh;
+  height: 68vh;
 `

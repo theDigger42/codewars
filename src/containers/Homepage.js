@@ -10,11 +10,11 @@ export default class Homepage extends Component {
         <Navbar {...this.props} active={'home'} />
         <Body>
           <Heading>
-            Practice coding.
+            Code.
             <br />
             Compete.
             <br />
-            Improve your speed.
+            Improve Speed.
             <br />
             All in one place.
           </Heading>
@@ -36,7 +36,7 @@ const Layout = styled.div`
 const Body = styled.div`
   grid-row: 2;
   grid-column: 1 / 13;
-  min-height: 80vh;
+  min-height: 82vh;
   background: grey;
   display: grid;
   grid-template-rows: auto;
@@ -46,7 +46,8 @@ const Heading = styled.div`
   grid-row: 1;
   justify-self: center;
   align-self: center;
-  font-size: 58px;
+  font-size: 70px;
+  font-weight: bold;
 `
 
 

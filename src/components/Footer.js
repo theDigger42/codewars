@@ -15,8 +15,8 @@ const Layout = styled.div`
   grid-column: 1 / 13;
   display: grid;
   grid-template-columns: 5% auto 5%;
-  background: black;
-  height: 10vh;
+  background: #1a1a1a;
+  height: 75px;
   width: 100vw;
 `
 

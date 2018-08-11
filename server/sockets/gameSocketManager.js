@@ -1,8 +1,8 @@
-const ioGame = require('./index').ioGame
-const ToyProblem = require('../database/index').ToyProblem
-const patchUser = require('../database/index').patchUser
-const getUser = require('../database/index').getUser
-const EloRank = require('../helpers/ranking')
+const ioGame = require('../index').ioGame
+const ToyProblem = require('../../database/index').ToyProblem
+const patchUser = require('../../database/index').patchUser
+const getUser = require('../../database/index').getUser
+const EloRank = require('../../helpers/ranking')
 
 const elo = new EloRank()
 

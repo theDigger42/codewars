@@ -45,10 +45,10 @@ export const Button = styled.button`
   font-size: 1.2em;
   font-weight: bold;
   padding: 0.5em;
-  border: 2px solid maroon;
+  border: 2px solid #993d00;
   border-radius: 8px;
   &:hover {
-    background: dimgrey;
+    background: #ffa366;
     color: white;
     cursor: pointer;
   }

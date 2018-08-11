@@ -45,7 +45,7 @@ export default class Navbar extends Component {
         <Layout>
           <Title to='/'><img id="logo" src={logo} alt="logo.png" /></Title>
           <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
-            this.clickTag('scores')}>Ratings</NavLink></Leaderboard>
+            this.clickTag('scores')}>Highscores</NavLink></Leaderboard>
           {/* <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
             this.clickTag('help')
           }>Help</NavLink></Help> */}
@@ -98,9 +98,9 @@ const Layout = styled.div`
   grid-column: 1 / 13;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  background: black;
+  background: #1a1a1a;
   align-items: center;
-  height: 10vh;
+  height: 75px;
   width: 100vw;
 `
 const SignUp = styled.h4`

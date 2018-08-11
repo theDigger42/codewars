@@ -74,7 +74,7 @@ const Layout = styled.div`
 const Body = styled.div`
   grid-row: 2;
   grid-column: 1 / 13;
-  min-height: 80vh;
+  min-height: 82vh;
   background: grey;
   display: grid;
   grid-template-rows: 1fr;
@@ -83,8 +83,8 @@ const Body = styled.div`
 `
 const UserProfile = styled.div`
   grid-column: 1; 
-  height: 80vh;
-  background: grey;
+  height: 82vh;
+  background: dimgrey;
   display: grid;
   grid-template-rows: 50px 450px 50px;
   grid-row-gap: 20px;
@@ -99,27 +99,27 @@ const Stats = styled.div`
   grid-column: 1 / 3;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 50px 50px;
+  grid-template-rows: 50px 50px 50px;
   margin-top: 2em;
 `
 const Rank = styled.h2`
   grid-column: 1;
-  justify-self: left;
-  margin-left: 1em;
+  justify-self: right;
+  margin-right: 1em;
 `
 const Rating = styled.h2`
   grid-column: 1;
-  justify-self: left;
-  margin-left: 1em;
+  justify-self: right;
+  margin-right: 1em;
 `
 const Wins = styled.h2`
   grid-column: 1;
-  jyustify-self: left;
-  margin-left: 1em;
+  justify-self: right;
+  margin-right: 1em;
 `
 const Value = styled.h2`
   grid-column: 2;
-  justify-self: center;
+  justify-self: left;
 `
 const MyProfile = styled.button`
   grid-row: 3;
@@ -140,8 +140,8 @@ const MyProfile = styled.button`
 `
 const OnlineUsers = styled.div`
   grid-column: 2;
-  height: 80vh;
-  background: dimgrey;
+  height: 82vh;
+  background: #333333;
   display: grid;
   grid-template-rows: 50px auto;
 `
@@ -149,6 +149,7 @@ const Online = styled.h1`
   grid-row: 1;
   justify-self: center;
   font-size: 40px;
+  color: #f2f2f2;
 `
 const UserList = styled.div`
   grid-row: 2;
@@ -158,6 +159,8 @@ const UserList = styled.div`
   margin-top: 4em;
   height: 60vh;
   overflow: auto;
+  justify-self: left;
+  margin-left: 4em;
 `
 const User = styled.h2`
   font-size: 24px;

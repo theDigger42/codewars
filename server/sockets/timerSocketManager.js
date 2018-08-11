@@ -1,4 +1,4 @@
-const ioTimer = require('./index').ioTimer
+const ioTimer = require('../index').ioTimer
 
 module.exports.ioTimer = (socket) => {
   socket.on('getDate', () => {

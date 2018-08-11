@@ -10,23 +10,38 @@ export default class Leaderboard extends Component {
   }
 
   render() {
-    let userList = this.props.score.leaderboard.map((user, i) => {
+    let usernames = this.props.score.leaderboard.map((user, i) => {
       return (
-        <User key={i}> {user.username} </User>
+        <UserName key={i}> {user.username} </UserName>
       )
     })
-    let ratingList = this.props.score.leaderboard.map((user, i) => {
+    let ratings = this.props.score.leaderboard.map((user, i) => {
       return (
-        <Rating key={i}> {user.rating} </Rating>
+        <UserRating key={i}> {user.rating} </UserRating>
+      )
+    })
+    let wins = this.props.score.leaderboard.map((user, i) => {
+      return (
+        <UserWins key={i}> {user.wins} </UserWins>
       )
     })
     return (
       <Layout>
         <Navbar {...this.props} active={'scores'} />
-        <Title>Top Hackers</Title>
+        <Title>Leaderboard</Title>
         <Body>
-          <LeftDiv>{userList}</LeftDiv>
-          <RightDiv>{ratingList}</RightDiv>
+          <LeftDiv>
+            <User>User</User>
+            {usernames}
+          </LeftDiv>
+          <MiddleDiv>
+            <Rating>Rating</Rating>
+            {ratings}
+          </MiddleDiv>
+          <RightDiv>
+            <Win>Wins</Win>
+            {wins}
+          </RightDiv>
         </Body>
         <Footer />
       </Layout>
@@ -45,24 +60,34 @@ const Body = styled.div`
   grid-column: 1 / 13;
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 20% 1fr 50px 1fr 20%;
+  grid-template-columns: 5% 1fr 1fr 1fr 5%;
+  grid-column-gap: 10px;
   background: grey;
   min-height: 80vh;
+  margin-bottom: 3em;
 `
 const LeftDiv = styled.div`
   grid-row: 1;
   grid-column: 2;
   display: grid;
-  grid-template-rows: auto;
-  grid-row-gap: 10px;
+  grid-template-rows: 50px auto;
+  grid-row-gap: 15px;
   justify-self: right;
+`
+const MiddleDiv = styled.div`
+  grid-row: 1;
+  grid-column: 3;
+  display: grid;
+  grid-template-rows: 50px auto;
+  grid-row-gap: 15px;
+  justify-self: center;
 `
 const RightDiv = styled.div`
   grid-row: 1;
   grid-column: 4;
   display: grid;
-  grid-template-rows: auto;
-  grid-row-gap: 10px;
+  grid-template-rows: 50px auto;
+  grid-row-gap: 15px;
   justify-self: left;
 `
 const Title = styled.h1`
@@ -74,8 +99,33 @@ const Title = styled.h1`
 const User = styled.span`
   font-size: 30px;
   justify-self: right;
+  font-weight: bold;
+  color: maroon;
 `
 const Rating = styled.span`
   font-size: 30px;
+  justify-self: center;
+  font-weight: bold;
+  color: maroon;
+`
+const Win = styled.span`
+  font-size: 30px;
+  justify-self: left;
+  font-weight: bold;
+  color: maroon;
+`
+const UserName = styled.span`
+  font-weight: bold;
+  font-size: 24px;
+  justify-self: right;
+`
+const UserRating = styled.span`
+  font-weight: bold;
+  font-size: 24px;
+  justify-self: center;
+`
+const UserWins = styled.span`
+  font-weight: bold;
+  font-size: 24px;
   justify-self: left;
 `

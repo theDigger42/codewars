@@ -142,16 +142,16 @@ export default class Panel extends Component {
 }
 
 const ResultsPanel = styled.div`
-  grid-column: 8 / 13;
-  background: gainsboro;
+  grid-column: 10 / 13;
+  background: #cccccc;
   justify-self: center;
   display: grid;
   grid-template-rows: 40px 1fr 50px;
-  margin-right: 2em;
+  margin-right: 1em;
   margin-left: 1em;
   margin-bottom: 2em;
   width: 30vw;
-  min-width: 350px;
+  min-width: 362px;
 `
 const TabContainer = styled.div`
   grid-row: 1;
@@ -163,23 +163,28 @@ const TabContainer = styled.div`
   min-height: 50px;
 `
 const Tab = styled.div`
-  background: maroon;
+  background: #e65c00;
   color: white;
   font-size: 22px;
   text-align: center;
   cursor: pointer;
+  height: 35px;
+  line-height: 35px;
+  padding: 2px;
   ${({ active }) => active && `
     color: black;
-    background: gainsboro;
+    background: #cccccc;
     font-weight: bold;
   `};
 `
 const Content = styled.div`
-  font-size: 20px;
+  font-size: 10px;
   text-align: center;
   margin: 1em;
   height: 400px;
   overflow: auto;
+  font-weight: bold;
+  padding: 1em;
 `
 const Info = styled.div`
   font-size: 24px;
@@ -188,9 +193,9 @@ const Button = styled.button`
   grid-row: 3;
   font-size: 30px;
   color: ghostwhite;
-  background: maroon;
+  background: #e65c00;
   &:hover{{
-    background: #420000;
+    background: #993d00;
   }}
 `
 const PassResult = styled.p`
