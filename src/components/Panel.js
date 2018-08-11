@@ -15,11 +15,6 @@ export default class Panel extends Component {
     this.clickTag = this.clickTag.bind(this)
     this.suffix = this.suffix.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.updateWins = this.updateWins.bind(this)
-  }
-
-  updateWins(username) {
-    axios.patch(`http://localhost:3000/users:${username}`)
   }
 
   handleSubmit() {
@@ -43,9 +38,6 @@ export default class Panel extends Component {
       if (passing) {
         gameComplete()
         this.props.setComplete()
-        if (!this.props.score.scoreboard[0]) {
-          this.updateWins(this.props.auth.user.username)
-        }
         setTimeout(() => this.clickTag('scores'), 500)
         this.props.leave()
       }

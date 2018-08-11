@@ -2,6 +2,7 @@ const ioGame = require('../index').ioGame
 const ToyProblem = require('../../database/index').ToyProblem
 const patchUser = require('../../database/index').patchUser
 const getUser = require('../../database/index').getUser
+const updateWins = require('../../database/index').updateWins
 const EloRank = require('../../helpers/ranking')
 
 const elo = new EloRank()
@@ -101,8 +102,11 @@ const rankFinishers = async () => {
   let unfinishedUsers = getUnfinished(gameRoom)
   let finished
   let unfinished
+
   finished = await retrieveUsers(scoreboard)
   unfinished = await retrieveUsers(unfinishedUsers)
+
+  updateWins(scoreboard[0].username)
 
   if (finished.length >= 2) {
     for (let i = 0; i < finished.length - 1; i++) {

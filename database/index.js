@@ -187,6 +187,13 @@ let patchUser = (username, rating) => {
   }
 }
 
+let updateWins = (username) => {
+  User.updateOne({"username": username}, {$inc: {"wins": 1}}, (err, res) => {
+    if (err) console.log(err)
+    console.log(res)
+  })
+}
+
 let rankPlayer = (username, rating, rank) => {
   User.updateOne({"username": username}, {$set: {"rating": rating, "rank": rank}}, (err, res) => {
     if (err) console.log(err)
@@ -227,3 +234,4 @@ module.exports.findToyProblems = findToyProblems;
 module.exports.findScoreboardByDay = findScoreboardByDay;
 module.exports.patchUser = patchUser
 module.exports.getUser = getUser
+module.exports.updateWins = updateWins

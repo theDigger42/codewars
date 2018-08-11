@@ -23,7 +23,7 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      timerTillNextGame: 0,
+      timerTillNextGame: null,
       isComplete: false
     }
     this.updateTimer = this.updateTimer.bind(this)

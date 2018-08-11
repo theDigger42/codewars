@@ -164,7 +164,7 @@ const UserList = styled.div`
 `
 const User = styled.h2`
   font-size: 24px;
-  color: maroon;
+  color: darkorange;
   justify-self: center;
   cursor: pointer;
 `
