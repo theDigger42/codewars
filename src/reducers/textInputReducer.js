@@ -7,7 +7,11 @@ const initialState = {
   username: '',
   password: '',
   solution: '',
-  message: ''
+  submition_title: '',
+  submition_body: '',
+  submition_tests: '',
+  submition_descriptions: '',
+  submition_solution: ''
 }
 
 const textInput = (state = initialState, action) => {

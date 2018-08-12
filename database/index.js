@@ -54,6 +54,15 @@ const ToyProblemSchema = new mongoose.Schema({
   testDescriptions: Array
 });
 
+const UserChallengeSchema = new mongoose.Schema({
+  owner: { type: String },
+  title: { type: String },
+  body: String,
+  tests: String,
+  testDescriptions: String,
+  solution: String
+})
+
 const ScoreboardSchema = new mongoose.Schema({
   username: { type: String },
   score: {
@@ -68,6 +77,7 @@ const ScoreboardSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema, 'users');
 const ToyProblem = mongoose.model('ToyProblem', ToyProblemSchema, 'toyProblems');
+const UserChallenge = mongoose.model('UserChallenge', UserChallengeSchema, 'userChallenges');
 const Scoreboard = mongoose.model('Scoreboard', ScoreboardSchema, 'scoreboard');
 
 
@@ -213,8 +223,7 @@ module.exports.db = db;
 //User collection export
 module.exports.User = User;
 module.exports.Scoreboard = Scoreboard;
-
-// Toy problem export
+module.exports.UserChallenge = UserChallenge
 module.exports.ToyProblem = ToyProblem;
 
 //User functions

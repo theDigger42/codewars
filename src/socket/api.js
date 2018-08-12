@@ -2,7 +2,7 @@ import ioclient from 'socket.io-client'
 import store from '../store/index'
 import { getPrompt } from '../actions/prompt'
 
-export const socket = ioclient.connect('http://localhost:3000')
+export const socket = ioclient.connect()
 
 export const subscribeToOnlineSocket = (callback) => {
   socket.on('connect', () => {
@@ -20,7 +20,7 @@ export const subscribeToOnlineSocket = (callback) => {
 }
 
 //timer 
-const timerSocket = ioclient('http://localhost:3000/timer')
+const timerSocket = ioclient('/timer')
 
 export const subscribeToTimerSocket = (cb) => {
   timerSocket.on('date', (date) => {
@@ -32,7 +32,7 @@ export const getDateTimerSocket = () => {
   timerSocket.emit('getDate');
 }
 
-const gameSocket = ioclient('http://localhost:3000/game');
+const gameSocket = ioclient('/game');
 
 export const subscribeToGameSocket = (onScoreboardChange) => {
 

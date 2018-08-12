@@ -13,7 +13,7 @@ export default class Challenge extends Component {
         <Navbar {...this.props} active={'challenge'} />
         <Prompt>{this.props.prompt.title}</Prompt>
         <Timer>Next game starts in: {this.props.timer}</Timer>
-        <Editor input={this.props.prompt.solution} change={this.props.addText} />
+        <Editor input={this.props.prompt.solution} change={this.props.addSolution} />
         <Panel {...this.props} join={this.props.join} leave={this.props.leave}/>
         <Footer />
       </Layout>

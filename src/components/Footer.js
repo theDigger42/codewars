@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Footer = (props) => {
   return (
     <Layout>
-      <Copy>Kyle Shifflett &#169; 2018</Copy>
+      <Copy>CodeFightClub &#169; 2018</Copy>
     </Layout>
   )
 }
@@ -20,7 +20,7 @@ const Layout = styled.div`
   width: 100vw;
 `
 
-const Copy = styled.span`
+const Copy = styled.h3`
   grid-column: 2;
   color: white;
   justify-self: center;

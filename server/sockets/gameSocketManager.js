@@ -49,7 +49,7 @@ module.exports.ioGame = (socket) => {
   socket.on('disconnect', removeFromWaitingRoom);
 
   socket.on('gameComplete', () => {
-    _user.finished = true
+    if (_user !== null) _user.finished = true
     scoreboardChange(_user);
   })
 }
@@ -109,7 +109,7 @@ const rankFinishers = async () => {
   finished = await retrieveUsers(scoreboard)
   unfinished = await retrieveUsers(unfinishedUsers)
 
-  if (scoreboard.length >= 2)
+  if (scoreboard.length + unfinishedUsers.length >= 2)
     updateWins(scoreboard[0].username)
 
   if (finished.length >= 2) {

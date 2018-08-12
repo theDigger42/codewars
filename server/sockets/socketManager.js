@@ -14,7 +14,7 @@ const addUser = (userList, user) => {
 }
 
 const removeUser = (userList, user) => {
-  if (user === null || user.username === null) {
+  if (user === null) {
     let newList = Object.assign({}, userList)
     delete newList['guest']
     return

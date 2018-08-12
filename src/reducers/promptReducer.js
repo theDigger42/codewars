@@ -1,4 +1,4 @@
-import { GET_PROMPT, INPUT_CHANGE, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE } from '../actions/types'
+import { GET_PROMPT, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE, USER_SUBMITION, SOLUTION_CHANGE, CLEAR_ALL_INPUTS } from '../actions/types'
 
 const initialState = {
   title: 'Get ready to code!',
@@ -10,7 +10,8 @@ const initialState = {
   results: [],
   message: '',
   isComplete: false,
-  room: 'lobby'
+  room: 'lobby',
+  submition_status: ''
 }
 
 const prompt = (state = initialState, action) => {
@@ -50,6 +51,12 @@ const prompt = (state = initialState, action) => {
         message: action.payload.message
       }
 
+    case USER_SUBMITION:
+      return {
+        ...state,
+        submition_status: action.payload
+      }
+
     case SET_COMPLETE: 
       return {
         ...state,
@@ -62,10 +69,16 @@ const prompt = (state = initialState, action) => {
         room: action.payload
       }
 
-    case INPUT_CHANGE: 
+    case SOLUTION_CHANGE: 
       return {
         ...state,
         [action.payload.inputType]: action.payload.input
+      }
+
+    case CLEAR_ALL_INPUTS:
+      return {
+        ...state,
+        submition_status: ''
       }
 
     default:

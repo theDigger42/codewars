@@ -3,6 +3,7 @@ const db = require('../../database/index.js');
 const User = require('../../database/index.js').User;
 const Scoreboard = require('../../database/index.js').Scoreboard;
 const ToyProblem = require('../../database/index.js').ToyProblem;
+const UserChallenge = require('../../database/index').UserChallenge;
 
 let router = express.Router()
 
@@ -58,22 +59,23 @@ router.patch('/users:name', (req, res) => {
 
 //Add a toyProblem to the database
 router.post('/userChallenge', (req, res) => {
-  let challenge = {};
+  let challenge = new UserChallenge()
+
+  challenge.owner = req.body.owner
   challenge.title = req.body.title;
   challenge.body = req.body.body;
-  challenge.solution = req.body.code;
+  challenge.solution = req.body.solution;
   challenge.tests = req.body.tests;
-  challenge.testDescriptions = req.body.testDescriptions;
+  challenge.testDescriptions = req.body.descriptions;
 
-  const problems = db.collection('toyProblems');
-  problems.insert(JSON.parse(challenge), (err, doc) => {
+  challenge.save((err, result) => {
     if (err) {
       console.log(err)
       res.end(err)
     }
-    console.log('Successfully submitted ', doc, ' to database');
-    res.end('Successfully saved challenge to database')
-  });
+    console.log(result)
+    res.end('Successfully submitted challenge. Admins will review soon')
+  })
 });
 
 //Check whether or not a user is logged in
