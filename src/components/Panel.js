@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { gameComplete } from '../socket/api'
-import axios from 'axios'
 
 export default class Panel extends Component {
   constructor(props) {
@@ -143,7 +142,9 @@ const ResultsPanel = styled.div`
   margin-left: 1em;
   margin-bottom: 2em;
   width: 30vw;
-  min-width: 362px;
+  min-width: 370px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 `
 const TabContainer = styled.div`
   grid-row: 1;
@@ -163,6 +164,9 @@ const Tab = styled.div`
   height: 35px;
   line-height: 35px;
   padding: 2px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: 1px solid #e65c00;
   ${({ active }) => active && `
     color: black;
     background: #cccccc;
@@ -186,6 +190,8 @@ const Button = styled.button`
   font-size: 30px;
   color: ghostwhite;
   background: #e65c00;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   &:hover{{
     background: #993d00;
   }}

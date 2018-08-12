@@ -26,30 +26,3 @@ export const CYAN = '66FCF1'
 export const POOL = '#45A29E'
 export const GREEN = '#0E1A1F'
 export const AQUA = '#00FFFF'
-
-export const Input = styled.input`
-  padding: 0.5em;
-  margin: 1.5em;
-  background: ghostwhite;
-  height: 30px;
-  font-size: 16px;
-  border: solid 2px ${MAIN_COLOR};
-  border-radius: 3px;
-`
-
-export const Button = styled.button`
-  background: white;
-  color: smoke;
-  width: 120px;
-  justify-self: center;
-  font-size: 1.2em;
-  font-weight: bold;
-  padding: 0.5em;
-  border: 2px solid #993d00;
-  border-radius: 8px;
-  &:hover {
-    background: #ffa366;
-    color: white;
-    cursor: pointer;
-  }
-`

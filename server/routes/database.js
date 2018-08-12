@@ -57,20 +57,22 @@ router.patch('/users:name', (req, res) => {
 });
 
 //Add a toyProblem to the database
-router.post('/admin/toyProblem', (req, res) => {
-  var problem = {};
-  problem.title = req.body.title;
-  problem.body = req.body.body;
-  problem.funcName = req.body.code;
-  problem.params = req.body.params;
-  problem.tests = JSON.parse(req.body.tests);
-  var dbProblem = new ToyProblem(problem);
-  dbProblem.save((err) => {
+router.post('/userChallenge', (req, res) => {
+  let challenge = {};
+  challenge.title = req.body.title;
+  challenge.body = req.body.body;
+  challenge.solution = req.body.code;
+  challenge.tests = req.body.tests;
+  challenge.testDescriptions = req.body.testDescriptions;
+
+  const problems = db.collection('toyProblems');
+  problems.insert(JSON.parse(challenge), (err, doc) => {
     if (err) {
-      console.log(err);
-      res.end("error saving db");
+      console.log(err)
+      res.end(err)
     }
-    res.end('saved to db');
+    console.log('Successfully submitted ', doc, ' to database');
+    res.end('Successfully saved challenge to database')
   });
 });
 

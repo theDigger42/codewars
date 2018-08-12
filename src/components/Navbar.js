@@ -28,9 +28,6 @@ export default class Navbar extends Component {
         <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
           this.clickTag('scores')
         }>Ratings</NavLink></Leaderboard>
-        {/* <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
-          this.clickTag('help')
-        }>Help</NavLink></Help> */}
         <SignUp
           onClick={() => this.props.openModal('signup')}
         >
@@ -46,9 +43,9 @@ export default class Navbar extends Component {
           <Title to='/'><img id="logo" src={logo} alt="logo.png" /></Title>
           <Leaderboard><NavLink to='/scores' active={this.state.tags[0] === 'scores' ? 1 : 0} onClick={() =>
             this.clickTag('scores')}>Highscores</NavLink></Leaderboard>
-          {/* <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
+          <Help><NavLink to='/help' active={this.state.tags[0] === 'help' ? 1 : 0} onClick={() =>
             this.clickTag('help')
-          }>Help</NavLink></Help> */}
+          }>Help</NavLink></Help>
           {/* <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat' ? 1 : 0} onClick={() =>
             this.clickTag('chat')}>Chat</NavLink></Chat> */}
           <Challenge><NavLink to='/challenge' active={this.state.tags[0] === 'challenge' ? 1 : 0} onClick={() =>
@@ -97,31 +94,33 @@ const Layout = styled.div`
   grid-row: 1;
   grid-column: 1 / 13;
   display: grid;
+  grid-column-gap: 20px;
   grid-template-columns: repeat(9, 1fr);
   background: #1a1a1a;
   align-items: center;
+  justify-items: right;
   height: 75px;
   width: 100vw;
 `
-const SignUp = styled.h4`
+const SignUp = styled.h2`
   grid-column: 8;
-  font-size: 20px;
+  font-size: 14px;
   color: white;
   cursor: pointer;
   justify-self: center;
-  &:hover{{
+  &:hover{
     color: maroon;
-  }}
+  }
 `
-const LogIn = styled.h4`
+const LogIn = styled.h2`
   grid-column: 9;
-  font-size: 20px;
+  font-size: 14px;
   color: white;
   cursor: pointer;
   justify-self: center;
-  &:hover{{
+  &:hover{
     color: maroon;
-  }}
+  }
 `
 const Title = styled(Link)`
   cursor: pointer;
@@ -131,34 +130,35 @@ const Title = styled(Link)`
 const NavLink = styled(Link)`
   cursor: pointer;
   color: white;
-  &:hover{{
+  &:hover{
     color: maroon;
-  }}
+  }
   ${({ active }) => active && `
     color: maroon;
   `};
 `
-const Leaderboard = styled.h4`
+const Leaderboard = styled.h2`
   grid-column: 5;
-  font-size: 18px;
+  font-size: 14px;
 `
-// const Help = styled.h4`
-//   grid-column: 5;
-//   font-size: 18px;
-// `
+const Help = styled.h2`
+  grid-column: 6;
+  font-size: 14px;
+`
 // const Chat = styled.h4`
 //   grid-column: 6;
 //   font-size: 18px;
 // `
-const Challenge = styled.h4`
+const Challenge = styled.h2`
   grid-column: 7;
-  font-size: 18px;
+  font-size: 14px;
 `
-const Profile = styled.h4`
+const Profile = styled.h2`
   grid-column: 8;
-  font-size: 18px;
+  font-size: 14px;
 `
-const Logout = styled.h4`
+const Logout = styled.h2`
   grid-column: 9;
-  font-size: 18px;
+  font-size: 14px;
+  margin-right: 1em;
 `

@@ -4,7 +4,7 @@ import Homepage from './Homepage'
 import Challenge from './Challenge'
 import PrivateRoute from '../components/PrivateRoute'
 import Leaderboard from "./Leaderboard";
-//import Help from './Help'
+import Help from './Help'
 //import Chat from './Chat'
 import Profile from './Profile'
 
@@ -81,10 +81,11 @@ export default class App extends Component {
           path='/scores'
           render={() => <Leaderboard {...this.props} />}
         />
-        {/* <Route
+        <PrivateRoute
           path='/help'
-          render={() => <Help {...this.props} />}
-        /> */}
+          component={Help}
+          {...this.props}
+        />
         <PrivateRoute
           path='/challenge'
           component={Challenge}

@@ -7,12 +7,9 @@ const modal = ({ showModal, handleClose }) => (component) => (
     onClick={handleClose}
   >
     <Content>
-      <Inner
-        className="modal-content"
-        onClick={e => e.stopPropagation()}
-      >
+      <div onClick={(e) => e.stopPropagation()}>
         {component}
-      </Inner>
+      </div>
     </Content>
   </Container>
 );
@@ -37,25 +34,5 @@ const Content = styled.div`
   padding: 1.5rem 1.5rem;
   width: 30rem;
   border-radius: 0.5rem;
-  border: .3rem solid darkorange;
-`
-const Inner = styled.div`
-  display: grid;
-  grid-template-columns: auto;
-  grid-row-gap: 0.5em;
-  margin: 1em;
-  padding: 0.5em;
-  
-  .modal-title {
-    justify-self: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: smoke;
-  }
-
-  .error {
-    color: red;
-    font-size: 150%;
-    justify-self: center;
-  }
+  border: .3rem solid #993d00;
 `

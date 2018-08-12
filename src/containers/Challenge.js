@@ -12,7 +12,7 @@ export default class Challenge extends Component {
       <Layout>
         <Navbar {...this.props} active={'challenge'} />
         <Prompt>{this.props.prompt.title}</Prompt>
-        <Timer>Next game in: {this.props.timer}</Timer>
+        <Timer>Next game starts in: {this.props.timer}</Timer>
         <Editor input={this.props.prompt.solution} change={this.props.addText} />
         <Panel {...this.props} join={this.props.join} leave={this.props.leave}/>
         <Footer />
@@ -35,9 +35,11 @@ const Prompt = styled.h1`
   align-self: center;
   font-weight: bold;
 `
-const Timer = styled.h1`
+const Timer = styled.h2`
   grid-column: 8 / 13;
   text-align: center;
   align-self: center;
   font-weight: bold;
+  justify-self: center;
+  margin-left: 1em;
 `

@@ -1,7 +1,7 @@
 import { GET_PROMPT, INPUT_CHANGE, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE } from '../actions/types'
 
 const initialState = {
-  title: 'Get ready',
+  title: 'Get ready to code!',
   body: 'Click join and wait for the challenge to begin',
   solution: '',
   tests: [],
@@ -31,7 +31,7 @@ const prompt = (state = initialState, action) => {
     case CLEAR_PROMPT: 
       return {
         ...state,
-        title: 'Get ready',
+        title: 'Get ready to code!',
         body: 'Wait for the next game to begin',
         solution: '',
         results: [],
