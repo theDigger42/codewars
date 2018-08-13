@@ -19,22 +19,9 @@ export const subscribeToOnlineSocket = (callback) => {
   })
 }
 
-//timer 
-const timerSocket = ioclient('/timer')
-
-export const subscribeToTimerSocket = (cb) => {
-  timerSocket.on('date', (date) => {
-    cb(date)
-  })
-}
-
-export const getDateTimerSocket = () => {
-  timerSocket.emit('getDate');
-}
-
 const gameSocket = ioclient('/game');
 
-export const subscribeToGameSocket = (onScoreboardChange) => {
+export const subscribeToGameSocket = (onScoreboardChange, onTimerChange) => {
 
   gameSocket.on('connect', () => console.log('successfully subscribed to game socket'));
 
@@ -44,6 +31,10 @@ export const subscribeToGameSocket = (onScoreboardChange) => {
 
   gameSocket.on('challenge', (problem) => {
     store.dispatch(getPrompt(problem))
+  })
+
+  gameSocket.on('timer', (count) => {
+    onTimerChange(count)
   })
 };
 
@@ -57,5 +48,4 @@ export const gameComplete = () => {
 };
 
 export const joinWaitingRoom = (userInfo) => gameSocket.emit('joinWaitingRoom', userInfo);
-
 export const exitWaitingRoom = (userInfo) => gameSocket.emit('exitWaitingRoom', userInfo)

@@ -8,11 +8,12 @@ import Panel from '../components/Panel'
 export default class Challenge extends Component {
 
   render() {
+    let timer = this.props.timer ? <Timer>Next game starts in: {this.props.timer} </Timer> : <Timer></Timer>
     return (
       <Layout>
         <Navbar {...this.props} active={'challenge'} />
         <Prompt>{this.props.prompt.title}</Prompt>
-        <Timer>Next game starts in: {this.props.timer}</Timer>
+        {timer}
         <Editor input={this.props.prompt.solution} change={this.props.addSolution} />
         <Panel {...this.props} join={this.props.join} leave={this.props.leave}/>
         <Footer />

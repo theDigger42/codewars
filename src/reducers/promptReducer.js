@@ -1,4 +1,4 @@
-import { GET_PROMPT, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE, USER_SUBMITION, SOLUTION_CHANGE, CLEAR_ALL_INPUTS } from '../actions/types'
+import { GET_PROMPT, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE, USER_SUBMITION, SOLUTION_CHANGE, CLEAR_ALL_INPUTS, TIMER_CHANGE } from '../actions/types'
 
 const initialState = {
   title: 'Get ready to code!',
@@ -8,6 +8,7 @@ const initialState = {
   testDescriptions: [],
   testResults: [],
   results: [],
+  timer: null,
   message: '',
   isComplete: false,
   room: 'lobby',
@@ -16,6 +17,12 @@ const initialState = {
 
 const prompt = (state = initialState, action) => {
   switch (action.type) {
+
+    case TIMER_CHANGE:
+      return {
+        ...state,
+        timer: action.payload
+      }
     
     case GET_PROMPT:
       return {

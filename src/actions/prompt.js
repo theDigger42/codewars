@@ -1,4 +1,4 @@
-import { SUBMIT_SOLUTION, GET_PROMPT, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE, USER_SUBMITION, SOLUTION_CHANGE} from './types'
+import { SUBMIT_SOLUTION, GET_PROMPT, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE, USER_SUBMITION, SOLUTION_CHANGE, TIMER_CHANGE} from './types'
 import axios from '../../node_modules/axios';
 
 export const addSolution = function (inputType, input, e) {
@@ -67,6 +67,15 @@ export const setComplete = () => {
     dispatch({
       type: SET_COMPLETE,
       payload: true
+    })
+  }
+}
+
+export const onTimerChange = (count) => {
+  return dispatch => {
+    dispatch({
+      type: TIMER_CHANGE,
+      payload: count
     })
   }
 }

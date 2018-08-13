@@ -105,7 +105,6 @@ const Status = styled.p`
 const Rule = styled.p`
   grid-column: 2;
   font-size: 18px;
-  color: #ff7716;
   font-weight: bold;
   min-width: 400px;
   justify-self: left;

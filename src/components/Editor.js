@@ -39,4 +39,5 @@ const Wrapper = styled.div`
   margin-left: 2em;
   margin-bottom: 2em;
   height: 68vh;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.9);
 `

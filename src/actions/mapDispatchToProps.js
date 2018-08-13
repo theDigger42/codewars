@@ -6,7 +6,7 @@ import { openModal, closeModal } from './modal'
 
 import { signup, login, logout, setCurrentUser } from './auth'
 
-import { submit, getPrompt, clearPrompt, changeRoom, setComplete, userSubmition, addSolution } from './prompt'
+import { submit, getPrompt, clearPrompt, changeRoom, setComplete, userSubmition, addSolution, onTimerChange } from './prompt'
 
 import { getLeaderboard, onScoreboardChange, clearScoreboard } from './score'
 
@@ -34,7 +34,8 @@ const mapDispatchToProps = (dispatch) => (
     setOnline,
     getOnlineUser,
     userSubmition,
-    addSolution
+    addSolution,
+    onTimerChange
   }, dispatch)
 )
 

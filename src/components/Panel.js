@@ -145,7 +145,12 @@ const ResultsPanel = styled.div`
   min-width: 370px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.7);
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.9);
 `
+
+
+
 const TabContainer = styled.div`
   grid-row: 1;
   display: grid;
@@ -154,6 +159,7 @@ const TabContainer = styled.div`
   background: dimgrey;
   align-items: center;
   min-height: 50px;
+  box-shadow: 20px -30px 20px dimgray;
 `
 const Tab = styled.div`
   background: #e65c00;
@@ -172,12 +178,13 @@ const Tab = styled.div`
     background: #cccccc;
     font-weight: bold;
   `};
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
 `
 const Content = styled.div`
   font-size: 10px;
   text-align: center;
   margin: 1em;
-  height: 400px;
+  height: 410px;
   overflow: auto;
   font-weight: bold;
   padding: 1em;

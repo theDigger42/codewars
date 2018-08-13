@@ -31,26 +31,20 @@ module.exports.io = (socket) => {
   })
 
   socket.on('USER_CONNECTED', (user) => {
-    //user.socketId = socket.id
     connectedUsers = addUser(connectedUsers, user) 
     socket.user = user
-
     io.emit('USER_CONNECTED', connectedUsers)
-    console.log(connectedUsers)
   })
 
   socket.on('disconnect', () => {
     if ('user' in socket) {
       connectedUsers = removeUser(connectedUsers, socket.user)
-
       io.emit('USER_DISCONNECTED', connectedUsers)
-      console.log('disconnect', connectedUsers)
     }
   })
 
   socket.on('LOGOUT', () => {
     connectedUsers = removeUser(connectedUsers, socket.user)
     io.emit('USER_DISCONNECTED', connectedUsers)
-    console.log('Disconnect', connectedUsers)
   }) 
 }

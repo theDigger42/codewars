@@ -73,7 +73,6 @@ router.post('/userChallenge', (req, res) => {
       console.log(err)
       res.end(err)
     }
-    console.log(result)
     res.end('Successfully submitted challenge. Admins will review soon')
   })
 });

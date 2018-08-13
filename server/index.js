@@ -36,14 +36,11 @@ app.get('*', (req, res) => {
 
 const io = module.exports.io = socket(server);
 const ioGame = module.exports.ioGame = io.of('/game');
-const ioTimer = module.exports.ioTimer = io.of('/timer')
 
 const socketManager = require('./sockets/socketManager').io
 const gameSocketManager = require('./sockets/gameSocketManager').ioGame
-const timerSocketManager = require('./sockets/timerSocketManager').ioTimer
 
 io.on('connection', socketManager)
-ioTimer.on('connection', timerSocketManager)
 ioGame.on('connection', gameSocketManager)
 
 server.listen(app.get('port'), function () {

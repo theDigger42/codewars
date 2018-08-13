@@ -25,12 +25,8 @@ const startGame = () => {
         ioGame.emit('challenge', result)
       });
     });
-    // ToyProblem.findOne({ "title": "Reverse String" }).exec(function (err, result) {
-    //   ioGame.emit('challenge', result)
-    // });
-    setTimeout(startGame, secondsTillNextGame());
     scoreboardChange();
-  }, 1000)
+  }, 500)
 }
 
 module.exports.ioGame = (socket) => {
@@ -129,6 +125,15 @@ const rankFinishers = async () => {
   } 
 }
 
-const secondsTillNextGame = () => 1000 * (60 - (new Date().getSeconds()));
+let timer = 180
 
-setTimeout(startGame, secondsTillNextGame);
+setInterval(() => {
+  if (timer === -1) {
+    timer = 180
+    startGame()
+  }
+  ioGame.emit('timer', timer)
+  timer--
+}, 1000)
+
+setTimeout(startGame, 1000);

@@ -22,7 +22,6 @@ const store = createStore(
   composeWithDevTools(
     applyMiddleware(
       thunk, 
-      loggerMiddleware,
       promiseMiddleware
     )
   )

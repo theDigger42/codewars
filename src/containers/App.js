@@ -10,8 +10,6 @@ import Profile from './Profile'
 
 import {
   subscribeToOnlineSocket,
-  subscribeToTimerSocket,
-  getDateTimerSocket,
   subscribeToGameSocket,
   unsubscribe,
   joinWaitingRoom,
@@ -26,25 +24,8 @@ export default class App extends Component {
       timerTillNextGame: null,
       isComplete: false
     }
-    this.updateTimer = this.updateTimer.bind(this)
     this.joinGame = this.joinGame.bind(this)
     this.leaveGame = this.leaveGame.bind(this)
-  }
-
-  updateTimer(date) {
-    let secondsTillNextGame = 60 - (new Date(date).getSeconds());
-    this.setState({ timerTillNextGame: secondsTillNextGame });
-    let timer = setInterval(() => {
-      secondsTillNextGame--;
-      this.setState({ timerTillNextGame: secondsTillNextGame });
-      if (secondsTillNextGame <= -1) {
-        clearInterval(timer);
-        if (this.props.prompt.room === 'waiting') {
-          this.props.changeRoom('game')
-        }
-        getDateTimerSocket();
-      }
-    }, 1000)
   }
 
   componentDidMount() {
@@ -53,9 +34,7 @@ export default class App extends Component {
 
   joinGame() {
     joinWaitingRoom(this.props.auth.user)
-    subscribeToGameSocket(this.props.onScoreboardChange)
-    subscribeToTimerSocket(this.updateTimer)
-    getDateTimerSocket()
+    subscribeToGameSocket(this.props.onScoreboardChange, this.props.onTimerChange)
   }
 
   leaveGame() {
@@ -89,7 +68,7 @@ export default class App extends Component {
         <PrivateRoute
           path='/challenge'
           component={Challenge}
-          timer={this.state.timerTillNextGame}
+          timer={this.props.prompt.timer}
           join={this.joinGame}
           leave={this.leaveGame}
           {...this.props}
