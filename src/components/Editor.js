@@ -35,7 +35,7 @@ export default Editor
 
 const Wrapper = styled.div`
   grid-column: 1 / 9;
-  min-width: 420px;
+  min-width: 45vw;
   margin-left: 2em;
   margin-bottom: 2em;
   height: 68vh;

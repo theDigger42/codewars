@@ -30,17 +30,28 @@ const Layout = styled.div`
   height: 100vh;
   width: 100vw;
 `
-const Prompt = styled.h1`
-  grid-column: 1 / 8;
+const Prompt = styled.div`
+  grid-column: 2 / 7;
   text-align: center;
   align-self: center;
   font-weight: bold;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  margin-left: 1em;
+  border-radius: 5px;
+  color: gainsboro;
+  background: #595959;
+  background: linear-gradient(grey, #595959);
+  border: 2px solid black;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+  padding: 0.4em;
+  font-size: 24px;
+  width: 100%;
 `
 const Timer = styled.h2`
-  grid-column: 8 / 13;
+  grid-column: 9 / 13;
   text-align: center;
   align-self: center;
   font-weight: bold;
   justify-self: center;
-  margin-left: 1em;
 `

@@ -67,8 +67,28 @@ function reverse(str) {
   return rev
 }
 
-console.log(reverse('hello'));
+function nQueens(n) {
+  var all = Math.pow(2,n) - 1;
+  var solutionCount = 0;
 
-console.log(factorial(5));
+  var findSolutions = function(cols,ld,rd){
 
-console.log(typeof sumArray([1,2,3]))
+    var pos = ~(cols | ld | rd) & all;
+
+    while(pos>0){
+      var bit = -pos & pos;
+      pos = pos ^ bit;
+
+      findSolutions((cols | bit), (ld | bit) << 1, (rd | bit) >> 1);
+
+    }
+    if (cols === all) {
+      solutionCount++;
+    }
+  };
+  findSolutions(0, 0, 0);
+  console.log(solutionCount);
+  return solutionCount;
+};
+
+console.log(nQueens(5))

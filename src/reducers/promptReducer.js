@@ -1,7 +1,7 @@
 import { GET_PROMPT, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE, USER_SUBMITION, SOLUTION_CHANGE, CLEAR_ALL_INPUTS, TIMER_CHANGE } from '../actions/types'
 
 const initialState = {
-  title: 'Get ready to code!',
+  title: 'You up for a challenge?',
   body: 'Click join and wait for the challenge to begin',
   solution: '',
   tests: [],
