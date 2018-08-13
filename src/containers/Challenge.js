@@ -47,6 +47,28 @@ const Prompt = styled.div`
   padding: 0.4em;
   font-size: 24px;
   width: 100%;
+  height: 4vh;
+  @media (max-width: 860px) {
+    font-size: 23px;
+  }
+  @media (max-width: 750px) {
+    font-size: 21px;
+    height: 3vh;
+    margin-top: 1em;
+  }
+  @media (max-width: 650px) {
+    font-size: 19px;
+    margin-top: 1.5em;
+  }
+  @media (max-width: 600px) {
+    font-size: 14px;
+    height: 2vh;
+    margin-top: 2.5em;
+  }
+  @media (max-width: 460px) {
+    font-size: 11px;
+    margin-top: 3.5em;
+  }
 `
 const Timer = styled.h2`
   grid-column: 9 / 13;

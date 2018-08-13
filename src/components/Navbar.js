@@ -99,7 +99,7 @@ const Layout = styled.div`
   background: #1a1a1a;
   align-items: center;
   justify-items: right;
-  height: 75px;
+  height: 10vh;
   width: 100vw;
 `
 const SignUp = styled.h2`

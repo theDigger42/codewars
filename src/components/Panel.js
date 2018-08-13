@@ -142,6 +142,7 @@ const ResultsPanel = styled.div`
   margin-left: 1em;
   margin-bottom: 2em;
   width: 30vw;
+  height: 65vh;
   min-width: 40vw;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -203,6 +204,15 @@ const Content = styled.div`
 `
 const Info = styled.div`
   font-size: 24px;
+  @media (max-width: 860px) {
+    font-size: 23px;
+  }
+  @media (max-width: 750px) {
+    font-size: 21px;
+  }
+  @media (max-width: 650px) {
+    font-size: 19px;
+  }
 `
 const Button = styled.button`
   grid-row: 3;
@@ -211,11 +221,15 @@ const Button = styled.button`
   background: #e65c00;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   &:hover{{
     background: #993d00;
   }}
   width: 40vw;
+  @media (max-width: 750px) {
+    font-size: 24px;
+  }
 `
 const PassResult = styled.p`
   color: green;
