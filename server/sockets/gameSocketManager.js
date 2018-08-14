@@ -125,11 +125,11 @@ const rankFinishers = async () => {
   } 
 }
 
-let timer = 60
+let timer = 90
 
 setInterval(() => {
   if (timer === -1) {
-    timer = 60
+    timer = 90
     startGame()
   }
   ioGame.emit('timer', timer)

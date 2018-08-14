@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from "styled-components"
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import background from '../images/Grey-website-background.png'
 
 export default class Profile extends Component {
 
@@ -66,6 +67,7 @@ const Layout = styled.div`
   display: grid;
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
+  background: url(${background}) dimgrey;
   height: 100vh;
   width: 100vw;
 `
@@ -73,17 +75,15 @@ const Body = styled.div`
   grid-row: 2;
   grid-column: 1 / 13;
   min-height: 82vh;
-  background: grey;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
-  background: grey;
 `
 const UserProfile = styled.div`
   grid-column: 1; 
   height: 82vh;
-  background: dimgrey;
   display: grid;
+  background: dimgray;
   grid-template-rows: 50px 450px 50px;
   grid-row-gap: 20px;
   grid-template-columns: 1fr 1fr;
@@ -139,7 +139,6 @@ const MyProfile = styled.button`
 const OnlineUsers = styled.div`
   grid-column: 2;
   height: 82vh;
-  background: #333333;
   display: grid;
   grid-template-rows: 50px auto;
 `

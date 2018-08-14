@@ -135,16 +135,14 @@ export default class Panel extends Component {
 
 const ResultsPanel = styled.div`
   grid-column: 10 / 13;
-  background: #cccccc;
   justify-self: center;
   display: grid;
   grid-template-rows: 40px 0.8fr 40px;
   margin-right: 1em;
   margin-left: 1em;
-  margin-top: 0.5em;
+  margin-top: 1em;
   width: 40vw;
-  height: 61vh;
-  box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
+  height: 50vh;
 `
 
 const TabContainer = styled.div`
@@ -152,11 +150,8 @@ const TabContainer = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   grid-column-gap: 10px;
-  margin-bottom: 1em;
-  background: dimgrey;
   align-items: center;
   height: 6vh;
-  box-shadow: 10px -10px 10px dimgray;
   width: 40vw;
 `
 const Tab = styled.div`
@@ -191,11 +186,12 @@ const Tab = styled.div`
 const Content = styled.div`
   font-size: 10px;
   text-align: center;
-  margin: 1em;
-  height: 52vh;
   overflow: auto;
   font-weight: bold;
   padding: 1em;
+  background: #cccccc;
+  height: 52vh;
+  box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
 `
 const Info = styled.div`
   font-size: 24px;

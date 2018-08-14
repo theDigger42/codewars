@@ -4,7 +4,6 @@ import Signup from './Signup'
 import Login from './Login'
 import { Link } from 'react-router-dom'
 import logo from '../images/logo.png'
-import { disconnect } from '../socket/api';
 
 export default class Navbar extends Component {
   constructor(props) {

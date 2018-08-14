@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import styled from 'styled-components'
 import EditorInput from '../components/EditorInput'
+import background from '../images/Grey-website-background.png'
 
 const handleChange = (cb, inputType, input) => {
   cb(inputType, input)
@@ -61,8 +62,10 @@ const Layout = styled.div`
   display: grid;
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
+  background: url(${background}) dimgrey;
   width: 100vw;
   justify-items: center;
+  color: gainsboro;
 `
 const Body = styled.div`
   grid-column: 1 / 13;
@@ -73,7 +76,6 @@ const Body = styled.div`
   min-height: 82vh;
   width: 100vw;
   justify-items: center;
-  background: grey;
   align-items: center;
   text-align: center;
 `
@@ -84,7 +86,7 @@ const Heading = styled.h1`
 `
 const Info = styled.h3`
   grid-row: 2;
-  color: maroon;
+  color: orangered;
   text-align: center;
   font-size: 18px;
   grid-column: 1 / 3;
@@ -92,6 +94,7 @@ const Info = styled.h3`
 const Guidelines = styled.h3`
   grid-row: 3;
   text-align: center;
+  color: red;
   grid-column: 1 / 3;
 `
 const Status = styled.p`

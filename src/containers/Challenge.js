@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import Editor from '../components/Editor'
 import Footer from '../components/Footer'
 import Panel from '../components/Panel'
-
+import background from '../images/Grey-website-background.png'
 export default class Challenge extends Component {
 
   render() {
@@ -26,7 +26,7 @@ const Layout = styled.div`
   display: grid;
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
-  background: url('../images/Grey-website-background.png') dimgrey;
+  background: url(${background}) dimgrey;
   height: 100vh;
   width: 100vw;
   overflow: none;
@@ -56,6 +56,7 @@ const Timer = styled.h2`
   align-self: center;
   font-weight: bold;
   justify-self: center;
+  color: gainsboro;
   @media (max-width: 900px) {
     font-size: 16px;
   }

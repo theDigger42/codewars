@@ -1,7 +1,7 @@
 class EloRank {
 
   constructor(k) {
-    this.k = k || 32;
+    this.k = k || 64;
   }
 
   setKFactor(k) {

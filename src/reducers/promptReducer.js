@@ -2,7 +2,7 @@ import { GET_PROMPT, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE, U
 
 const initialState = {
   title: 'You up for a challenge?',
-  body: 'Click join and wait for the challenge to begin',
+  body: 'Click join and wait for the next game to start',
   solution: '',
   tests: [],
   testDescriptions: [],
