@@ -138,11 +138,11 @@ const ResultsPanel = styled.div`
   background: #cccccc;
   justify-self: center;
   display: grid;
-  grid-template-rows: 40px 1fr 50px;
+  grid-template-rows: 40px 0.8fr 40px;
   margin-right: 1em;
   margin-left: 1em;
-  margin-bottom: 2em;
-  width: 30vw;
+  margin-top: 0.5em;
+  width: 25vw;
   height: 60vh;
   width: 40vw;
   box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);

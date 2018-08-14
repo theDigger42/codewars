@@ -34,8 +34,8 @@ const EditorInput = (props) => {
 export default EditorInput
 
 const Wrapper = styled.div`
-  grid-column: 1;
+  grid-column: 1 / 3;
   width: 80%;
-  height: 40vh;
+  height: 60vh;
   margin-left: 1em;
 `

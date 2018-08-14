@@ -35,16 +35,16 @@ export default class Help extends Component {
           <Info>User submitions will be checked by admins. For each submition approved, you will be granted +50 rating.</Info>
           <Guidelines>Successful user submitions must adhere to the following guidelines: </Guidelines>
           <Status>{this.props.prompt.submition_status}</Status>
-          <Input placeholder={"Title"} onChange={e => handleChange(this.props.addText, "submition_title", e.target.value)} value={this.props.input.submition_title}/>
           <Rule>Title must be short and descriptive (4 - 16 characters)</Rule>
+          <Input placeholder={"Title"} onChange={e => handleChange(this.props.addText, "submition_title", e.target.value)} value={this.props.input.submition_title}/>
+          <Rule>Body should clearly describe the guidelines of your challenge</Rule>          
           <Input placeholder={"Body"} onChange={e => handleChange(this.props.addText, "submition_body", e.target.value)}/>
-          <Rule>Body should clearly describe the guidelines of your challenge</Rule>
-          <Input placeholder={"Tests"} onChange={e => handleChange(this.props.addText, "submition_tests", e.target.value)}/>
           <Rule>At least 5 tests must be submitted as an array of boolean values. Example: [typeof helloWorld === 'function', helloWorld() === 'Hello World']</Rule>
+          <Input placeholder={"Tests"} onChange={e => handleChange(this.props.addText, "submition_tests", e.target.value)}/>
+          <Rule>Every test must have a short description (less than 30 character). Submit as an array of strings.</Rule>  
           <Input placeholder={"Test Descriptions"} onChange={e => handleChange(this.props.addText, "submition_descriptions", e.target.value)}/>
-          <Rule>Every test must have a short description (less than 30 character). Submit as an array of strings.</Rule>
-          <EditorInput input={this.props.input.submition_solution} change={this.props.addText} />
           <Rule>Insert a completed example of the challenge. Make sure the solution is short enought to be solved in less than 60 seconds.</Rule>
+          <EditorInput input={this.props.input.submition_solution} change={this.props.addText} />
           <Button onClick={() => {
             this.props.clearAll()
             this.handleSubmit()
@@ -67,7 +67,7 @@ const Layout = styled.div`
 const Body = styled.div`
   grid-column: 1 / 13;
   display: grid;
-  grid-template-rows: 50px 50px 50px 30px repeat(4, 50px);
+  grid-template-rows: 50px 50px 50px 30px repeat(auto-fit, 50px);
   grid-row-gap: 40px;
   grid-template-columns: 1.4fr 1fr;
   min-height: 82vh;
@@ -75,6 +75,7 @@ const Body = styled.div`
   justify-items: center;
   background: grey;
   align-items: center;
+  text-align: center;
 `
 const Heading = styled.h1`
   grid-row: 1;
@@ -103,20 +104,17 @@ const Status = styled.p`
   text-align: center;
 `
 const Rule = styled.p`
-  grid-column: 2;
+  grid-column: 1 / 3;
   font-size: 18px;
   font-weight: bold;
-  min-width: 400px;
-  justify-self: left;
-  margin-right: 20px;
+  margin-right: 4em;
+  margin-left: 4em;
 `
 const Input = styled.input`
-  justify-self: center;
-  width: 80%;
-  margin-left: 1em;
+  width: 75%;
   height: 40px;
   font-size: 18px;
-  grid-column: 1;
+  grid-column: 1 / 3;
 `
 const Button = styled.button`
   grid-column: 1 / 3;
