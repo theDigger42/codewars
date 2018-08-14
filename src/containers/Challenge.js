@@ -26,7 +26,7 @@ const Layout = styled.div`
   display: grid;
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
-  background: dimgrey;
+  background: url('../images/Grey-website-background.png') dimgrey;
   height: 100vh;
   width: 100vw;
   overflow: none;
@@ -40,7 +40,6 @@ const Prompt = styled.div`
   margin-bottom: 0.5em;
   font-size: 18px;
   margin-top: 1em;
-  margin-left: 1em;
   border-radius: 5px;
   color: gainsboro;
   background: linear-gradient(grey, #595959);
