@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ScoreCard from './ScoreCard'
 import styled from 'styled-components'
 import { gameComplete } from '../socket/api'
 
@@ -68,9 +69,9 @@ export default class Panel extends Component {
 
     let scoreboard = this.props.score.scoreboard.map((user, i) => {
       if (user.finished === true) {
-        return <p>{this.suffix(i+1)}: {user.username}</p>
+        return <ScoreCard suffix={this.suffix(i+1)} username={user.username} rank={user.rank}/>
       } else {
-        return <p>{user.username}</p>
+        return <ScoreCard username={user.username} rank={user.rank}/>
       }
     })
 
@@ -142,10 +143,8 @@ const ResultsPanel = styled.div`
   margin-left: 1em;
   margin-bottom: 2em;
   width: 30vw;
-  height: 65vh;
-  min-width: 40vw;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  height: 60vh;
+  width: 40vw;
   box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
 `
 
@@ -154,15 +153,12 @@ const TabContainer = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   grid-column-gap: 10px;
+  margin-bottom: 1em;
   background: dimgrey;
   align-items: center;
-  min-height: 50px;
+  height: 6vh;
   box-shadow: 10px -10px 10px dimgray;
   width: 40vw;
-  @media (max-width: 510px) {
-    font-size: 9px;
-    height: 20px;
-  }
 `
 const Tab = styled.div`
   background: #e65c00;
@@ -170,8 +166,8 @@ const Tab = styled.div`
   font-size: 22px;
   text-align: center;
   cursor: pointer;
-  height: 35px;
-  line-height: 35px;
+  height: 4vh;
+  line-height: 4vh;
   padding: 2px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -227,6 +223,7 @@ const Button = styled.button`
     background: #993d00;
   }}
   width: 40vw;
+  height: 6vh;
   @media (max-width: 750px) {
     font-size: 24px;
   }
