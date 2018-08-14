@@ -142,9 +142,8 @@ const ResultsPanel = styled.div`
   margin-right: 1em;
   margin-left: 1em;
   margin-top: 0.5em;
-  width: 25vw;
-  height: 60vh;
   width: 40vw;
+  height: 61vh;
   box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
 `
 
@@ -193,7 +192,7 @@ const Content = styled.div`
   font-size: 10px;
   text-align: center;
   margin: 1em;
-  height: 410px;
+  height: 52vh;
   overflow: auto;
   font-weight: bold;
   padding: 1em;

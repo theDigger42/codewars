@@ -38,34 +38,18 @@ const Prompt = styled.div`
   justify-self: center;
   font-weight: bold;
   margin-bottom: 0.5em;
-  margin-top: 0.5em;
+  font-size: 18px;
+  margin-top: 1em;
   margin-left: 1em;
   border-radius: 5px;
   color: gainsboro;
   background: linear-gradient(grey, #595959);
   border: 2px solid black;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-  padding: 0.4em;
-  font-size: 24px;
+  padding: 0.5em;
   width: 35vw;
-  height: 4vh;
-  line-height:4vh;
-  @media (max-width: 950px) {
-    margin-top: 1em;
-    font-size: 18px;
-  }
-  @media (max-width: 800px) {
-    margin-top: 1em;
-    font-size: 14px;
-  }
-  @media (max-width: 560px) {
-    margin-top: 2em;
-    font-size: 10px;
-  }
-  @media (max-width: 560px) {
-    margin-top: 2em;
-    font-size: 8px;
-  }
+  height: 3vh;
+  line-height: 2vh;
 `
 const Timer = styled.h2`
   grid-column: 9 / 13;
@@ -73,10 +57,10 @@ const Timer = styled.h2`
   align-self: center;
   font-weight: bold;
   justify-self: center;
-  @media (max-width: 880px) {
-    font-size: 20px;
+  @media (max-width: 900px) {
+    font-size: 16px;
   }
-  @media (max-width: 640px) {
-    font-size: 14px;
+  @media (max-width: 600px) {
+    font-size: 12px;
   }
 `
