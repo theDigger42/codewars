@@ -9,7 +9,7 @@ const addUser = (userList, user) => {
     return
   }
   let newList = Object.assign({}, userList)
-  newList[user.username] = user.username
+  newList[user.username] = user
   return newList
 }
 
@@ -27,6 +27,7 @@ const removeUser = (userList, user) => {
 module.exports.io = (socket) => {
 
   socket.on('GET_CONNECTED_USERS', () => {
+    console.log(connectedUsers);
     io.emit('CONNECTED_USERS', connectedUsers)
   })
 

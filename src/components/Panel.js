@@ -140,9 +140,9 @@ const ResultsPanel = styled.div`
   grid-template-rows: 40px 0.8fr 40px;
   margin-right: 1em;
   margin-left: 1em;
-  margin-top: 1em;
+  margin-top: 0.5em;
   width: 40vw;
-  height: 50vh;
+  height: 49vh;
 `
 
 const TabContainer = styled.div`
@@ -155,7 +155,7 @@ const TabContainer = styled.div`
   width: 40vw;
 `
 const Tab = styled.div`
-  background: #e65c00;
+  background: dimgrey;
   color: white;
   font-size: 22px;
   text-align: center;
@@ -165,7 +165,6 @@ const Tab = styled.div`
   padding: 2px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  border: 1px solid #e65c00;
   ${({ active }) => active && `
     color: black;
     background: #cccccc;
@@ -189,6 +188,7 @@ const Content = styled.div`
   overflow: auto;
   font-weight: bold;
   padding: 1em;
+  margin-top: 1em;
   background: #cccccc;
   height: 52vh;
   box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
@@ -209,13 +209,14 @@ const Button = styled.button`
   grid-row: 3;
   font-size: 30px;
   color: ghostwhite;
-  background: #e65c00;
+  background: dimgrey;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  margin-top: 0.3em;
   box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   &:hover{{
-    background: #993d00;
+    background: #1F1F1F;
   }}
   width: 40vw;
   height: 6vh;

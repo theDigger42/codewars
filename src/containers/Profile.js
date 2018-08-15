@@ -31,12 +31,17 @@ export default class Profile extends Component {
       this.clickTag('profile')
     }}> My Profile </MyProfile>
 
-    let userList = this.props.online.users && Object.keys(this.props.online.users).map((username) => {
-      if (username != this.props.auth.user.username)
-      return <User onClick={() => { 
-        this.props.getOnlineUser(username) 
+    let mapping = Object.keys(this.props.online.users).map((key) => {
+      return [key, this.props.online.users[key]]
+    })
+
+    let userList = mapping.map((arr) => {
+      console.log(arr);
+      if (arr[0] != this.props.auth.user.username)
+      return <User rank={arr[1].rank} onClick={() => { 
+        this.props.getOnlineUser(arr[0]) 
         this.clickTag('user')
-      }}>{username}</User>
+      }}>{arr[0]}</User>
     })
 
     return (
@@ -50,6 +55,34 @@ export default class Profile extends Component {
               <Rating>Rating:</Rating><Value>{this.props.online.user.rating}</Value>
               <Wins>Wins:</Wins><Value>{this.props.online.user.wins}</Value>
             </Stats>
+            <Legend>
+              <EntryDiv>
+                <p>Hacker</p>
+                <p>Legend</p>
+                <p>Genius</p>
+                <p>Architect</p>
+                <p>Senior</p>
+                <p>Dev</p>
+                <p>Brogrammer</p>
+                <p>Script Kiddie</p>
+                <p>Noob</p>
+                <p>Bad</p>
+                <p>New</p>
+              </EntryDiv>
+              <ColorDiv>
+                <div style={{"background": "black", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "dimgrey", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "#a500ff", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "maroon", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "red", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "orangered", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "orange", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "yellow", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "green", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "blue", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "white", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>             
+              </ColorDiv>
+            </Legend>
             {navButton}
           </UserProfile>
           <OnlineUsers>
@@ -81,24 +114,47 @@ const Body = styled.div`
 `
 const UserProfile = styled.div`
   grid-column: 1; 
-  height: 82vh;
+  height: 83vh;
   display: grid;
   background: dimgray;
-  grid-template-rows: 50px 450px 50px;
-  grid-row-gap: 20px;
+  grid-template-rows: 30px 1fr 1.2fr 50px;
   grid-template-columns: 1fr 1fr;
 `
 const Username = styled.h1`
   justify-self: center;
   grid-column: 1 / 3;
-  font-size: 40px;
+  font-size: 30px;
+  font-weight: bold;
 `
 const Stats = styled.div`
   grid-column: 1 / 3;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 50px 50px 50px;
-  margin-top: 2em;
+  margin-top: 1em;
+`
+const Legend = styled.div`
+  grid-row: 3;
+  grid-column: 1 / 3;
+  display: grid;
+  grid-template-columns: 1fr .5fr;
+  background: #1F1F1F;
+`
+const EntryDiv = styled.div`
+  grid-column: 1;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 1fr);
+  justify-items: center;
+  color: gainsboro;
+  font-weight: bold;
+  font-size: 12px;
+`
+const ColorDiv = styled.div`
+  grid-column: 2;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 1fr);
+  justify-items: left;
+  margin-top: 5px;
 `
 const Rank = styled.h2`
   grid-column: 1;
@@ -120,11 +176,11 @@ const Value = styled.h2`
   justify-self: left;
 `
 const MyProfile = styled.button`
-  grid-row: 3;
+  grid-row: 4;
   grid-column: 1 / 3;
   justify-self: center;
   width: 150px;
-  height: 50px;
+  height: 42px;
   background: darkred;
   color: gainsboro;
   font-size: 20px;
@@ -156,12 +212,35 @@ const UserList = styled.div`
   margin-top: 4em;
   height: 60vh;
   overflow: auto;
-  justify-self: left;
-  margin-left: 4em;
+  justify-self: center;
 `
 const User = styled.h2`
   font-size: 24px;
-  color: darkorange;
   justify-self: center;
   cursor: pointer;
+  color: ${props => { 
+    if (props.rank === 'Bad') {
+      return 'blue'
+    } else if (props.rank === 'Noob') {
+      return 'green'
+    } else if (props.rank === 'Script Kiddie') {
+      return 'yellow'
+    } else if (props.rank === 'Brogrammer') {
+      return 'orange'
+    } else if (props.rank === 'Dev') {
+      return 'orangered'
+    } else if (props.rank === 'Senior') {
+      return 'red'
+    } else if (props.rank === 'Architect') {
+      return 'maroon'
+    } else if (props.rank === 'Genius') {
+      return '#a500ff'
+    } else if (props.rank === 'Legend') {
+      return 'dimgrey'
+    } else if (props.rank === 'Hacker') {
+      return 'black'
+    } else if (props.rank === 'New') {
+      return 'white'
+    }
+  }};
 `
