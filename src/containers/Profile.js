@@ -31,11 +31,11 @@ export default class Profile extends Component {
       this.clickTag('profile')
     }}> My Profile </MyProfile>
 
-    let mapping = Object.keys(this.props.online.users).map((key) => {
+    let mapping = this.props.online.users && Object.keys(this.props.online.users).map((key) => {
       return [key, this.props.online.users[key]]
     })
 
-    let userList = mapping.map((arr) => {
+    let userList = mapping && mapping.map((arr) => {
       console.log(arr);
       if (arr[0] != this.props.auth.user.username)
       return <User rank={arr[1].rank} onClick={() => { 
