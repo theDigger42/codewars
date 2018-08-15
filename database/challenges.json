@@ -54,5 +54,12 @@
     "tests": "[typeof convertToRoman === 'function', typeof convertToRoman(1) === 'string', convertToRoman(2) === 'II', convertToRoman(49) === 'XLIX', convertToRoman(50) === 'L', convertToRoman(1094) === 'MXCIV']", 
     "testDescriptions": "[\"convertToRoman should be a function\", \"convertToRoman should return a string\", \"convertToRoman(2) should return 'II'\", \"convertToRoman(49) should return 'XLIX'\", \"convertToRoman(50) should return 'L'\", \"convertToRoman(1094) should return 'MXCIV'\"]",
     "title": "Roman Numeral"
+  },
+  {
+    "body": "Write a function that takes a string with open and closing parentheses as input, and returns whether or not the parentheses are balanced.",
+    "solution": "function balancedParens(str) {\n\n}",
+    "tests": "[typeof balancedParens === 'function', typeof balancedParens('()') === 'boolean', balancedParens('(())') === true, balancedParens('(') === false, balancedParens('()()') === true, balancedParens('(()())') === true, balancedParens('(()(()') === false, balancedParens('()()(') === false]", 
+    "testDescriptions": "[\"balancedParens should be a function\",\"balancedParens should return a string\",\"balancedParens('(())') should be true\",\"balancedParens('(') should be false\",\"balancedParens('()()') should be true\",\"balancedParens('(()())') === true\",\"balancedParens('(()(()') should be false\",\"balancedParens('()()(') should be false\"]",
+    "title": "Balanced Parens"
   }
 ]

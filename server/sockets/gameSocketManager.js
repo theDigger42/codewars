@@ -25,12 +25,12 @@ const startGame = () => {
         ioGame.emit('challenge', result)
       });
     });
-    // ToyProblem.findOne({'title': 'Roman Numeral'}).exec((err, res) => {
+    // ToyProblem.findOne({'title': 'Balanced Parens'}).exec((err, res) => {
     //   if (err) console.log(err)
     //   ioGame.emit('challenge', res)
     // })
-    // scoreboardChange();
-  }, 500)
+    scoreboardChange();
+  }, 400)
 }
 
 module.exports.ioGame = (socket) => {
@@ -129,11 +129,11 @@ const rankFinishers = async () => {
   } 
 }
 
-let timer = 30
+let timer = 120
 
 setInterval(() => {
   if (timer === -1) {
-    timer = 30
+    timer = 120
     startGame()
   }
   ioGame.emit('timer', timer)

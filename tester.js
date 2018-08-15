@@ -87,7 +87,6 @@ function nQueens(n) {
     }
   };
   findSolutions(0, 0, 0);
-  console.log(solutionCount);
   return solutionCount;
 };
 
@@ -107,7 +106,3 @@ function convertToRoman(n) {
   }
   return numeral
 }
-
-console.log(convertToRoman(49))
-
-console.log(nQueens(5))
