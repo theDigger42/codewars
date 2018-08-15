@@ -33,7 +33,7 @@ export default class Help extends Component {
         <Navbar {...this.props} active={'help'} />
         <Body>
           <Heading>Submit your own challenge</Heading>
-          <Info>User submitions will be checked by admins. For each submition approved, you will be granted +50 rating.</Info>
+          <Info>User submitions will be checked by admins. For each submition approved, you will be granted +100 rating.</Info>
           <Guidelines>Successful user submitions must adhere to the following guidelines: </Guidelines>
           <Status>{this.props.prompt.submition_status}</Status>
           <Rule>Title must be short and descriptive (4 - 16 characters)</Rule>

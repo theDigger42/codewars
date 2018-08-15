@@ -19,12 +19,16 @@ const startGame = () => {
     scoreboard = [];
     waitingUsers = [];
     waitingRoom = {};
-    ToyProblem.countDocuments().exec(function (err, count) {
-      var random = Math.floor(Math.random() * count);
-      ToyProblem.findOne().skip(random).exec(function (err, result) {
-        ioGame.emit('challenge', result)
-      });
-    });
+    // ToyProblem.countDocuments().exec(function (err, count) {
+    //   var random = Math.floor(Math.random() * count);
+    //   ToyProblem.findOne().skip(random).exec(function (err, result) {
+    //     ioGame.emit('challenge', result)
+    //   });
+    // });
+    ToyProblem.findOne({'title': 'Roman Numeral'}).exec((err, res) => {
+      if (err) console.log(err)
+      ioGame.emit('challenge', res)
+    })
     scoreboardChange();
   }, 500)
 }
@@ -125,11 +129,11 @@ const rankFinishers = async () => {
   } 
 }
 
-let timer = 90
+let timer = 30
 
 setInterval(() => {
   if (timer === -1) {
-    timer = 90
+    timer = 30
     startGame()
   }
   ioGame.emit('timer', timer)

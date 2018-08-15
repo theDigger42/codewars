@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Signup from './Signup'
 import Login from './Login'
 import { Link } from 'react-router-dom'
-import logo from '../images/logo.png'
+import logo from '../images/miniLogo.png'
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -98,7 +98,7 @@ const Layout = styled.div`
   background: #1a1a1a;
   align-items: center;
   justify-items: right;
-  height: 9vh;
+  height: 10vh;
   width: 100vw;
 `
 const SignUp = styled.h2`
@@ -125,6 +125,7 @@ const Title = styled(Link)`
   cursor: pointer;
   grid-column: 1 / 3;
   justify-self: left;
+  height: 10vh;
 `
 const NavLink = styled(Link)`
   cursor: pointer;

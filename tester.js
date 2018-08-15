@@ -91,4 +91,23 @@ function nQueens(n) {
   return solutionCount;
 };
 
+let numerals = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
+let values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+
+function convertToRoman(n) {
+  let numeral = ''
+  let i = 0
+  while (n > 0) {
+    if (n - values[i] >= 0) {
+      numeral += numerals[i]
+      n -= values[i]
+    } else {
+      i++
+    }
+  }
+  return numeral
+}
+
+console.log(convertToRoman(49))
+
 console.log(nQueens(5))

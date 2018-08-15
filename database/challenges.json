@@ -47,5 +47,12 @@
     "tests": "[typeof reverse === 'function', typeof reverse('hello') === 'string', reverse('Hannah') === 'hannaH', reverse('the') === 'eht', reverse('okay') === 'yako', reverse('dubstep') === 'petsbud', reverse('cool') === 'looc', reverse('AnGel') === 'leGnA', reverse('MarrY') === 'YrraM', reverse('.mdaf8h2v') === 'v2h8fadm.']",
     "testDescriptions": "[\"reverse should be a function\", \"reverse should return a string\", \"reverse('Hannah') should be 'hannaH'\", \"reverse('the') should be 'eht'\", \"reverse('okay') should be 'yako'\", \"reverse('dubstep') should be 'petsbud'\", \"reverse('cool') should be 'looc'\", \"reverse('AnGel') should be 'leGnA'\", \"reverse('MarrY') should be 'YrraM'\", \"reverse('.mdaf8h2v') should be 'v2h8fadm.'\"]",
     "title": "Reverse String"
+  },
+  {
+    "body": "Given an integer, write a function to return its roman numeral representation",
+    "solution": "let numerals = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']\nlet values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]\n\nfunction convertToRoman(n) {\n\n}",
+    "tests": "[typeof convertToRoman === 'function', typeof convertToRoman(1) === 'string', convertToRoman(2) === 'II', convertToRoman(49) === 'XLIX', convertToRoman(50) === 'L', convertToRoman(1094) === 'MXCIV']", 
+    "testDescriptions": "[\"convertToRoman should be a function\", \"convertToRoman should return a string\", \"convertToRoman(2) should return 'II'\", \"convertToRoman(49) should return 'XLIX'\", \"convertToRoman(50) should return 'L'\", \"convertToRoman(1094) should return 'MXCIV'\"]",
+    "title": "Roman Numeral"
   }
 ]
