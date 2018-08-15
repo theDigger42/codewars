@@ -19,17 +19,17 @@ const startGame = () => {
     scoreboard = [];
     waitingUsers = [];
     waitingRoom = {};
-    // ToyProblem.countDocuments().exec(function (err, count) {
-    //   var random = Math.floor(Math.random() * count);
-    //   ToyProblem.findOne().skip(random).exec(function (err, result) {
-    //     ioGame.emit('challenge', result)
-    //   });
-    // });
-    ToyProblem.findOne({'title': 'Roman Numeral'}).exec((err, res) => {
-      if (err) console.log(err)
-      ioGame.emit('challenge', res)
-    })
-    scoreboardChange();
+    ToyProblem.countDocuments().exec(function (err, count) {
+      var random = Math.floor(Math.random() * count);
+      ToyProblem.findOne().skip(random).exec(function (err, result) {
+        ioGame.emit('challenge', result)
+      });
+    });
+    // ToyProblem.findOne({'title': 'Roman Numeral'}).exec((err, res) => {
+    //   if (err) console.log(err)
+    //   ioGame.emit('challenge', res)
+    // })
+    // scoreboardChange();
   }, 500)
 }
 
