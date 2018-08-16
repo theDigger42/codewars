@@ -98,9 +98,11 @@ const RightDiv = styled.div`
   justify-self: left;
 `
 const Title = styled.h1`
+  margin-top: 90px;
   grid-column: 1 / 13;
   justify-self: center;
   min-height: 50px;
+  color: gainsboro;
 `
 const User = styled.span`
   font-size: 30px;

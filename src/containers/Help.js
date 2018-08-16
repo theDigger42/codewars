@@ -33,8 +33,6 @@ export default class Help extends Component {
         <Navbar {...this.props} active={'help'} />
         <Body>
           <Heading>Submit your own challenge</Heading>
-          <Info>User submitions will be checked by admins. For each submition approved, you will be granted +100 rating.</Info>
-          <Guidelines>Successful user submitions must adhere to the following guidelines: </Guidelines>
           <Status>{this.props.prompt.submition_status}</Status>
           <Rule>Title must be short and descriptive (4 - 16 characters)</Rule>
           <Input placeholder={"Title"} onChange={e => handleChange(this.props.addText, "submition_title", e.target.value)} value={this.props.input.submition_title}/>
@@ -68,9 +66,10 @@ const Layout = styled.div`
   color: gainsboro;
 `
 const Body = styled.div`
+  margin-top: 100px;
   grid-column: 1 / 13;
   display: grid;
-  grid-template-rows: 50px 50px 50px 30px repeat(auto-fit, 50px);
+  grid-template-rows: repeat(auto-fit, 50px);
   grid-row-gap: 40px;
   grid-template-columns: 1.4fr 1fr;
   min-height: 82vh;
@@ -80,21 +79,6 @@ const Body = styled.div`
   text-align: center;
 `
 const Heading = styled.h1`
-  grid-row: 1;
-  grid-column: 1 / 3;
-  margin-top: 2em;
-`
-const Info = styled.h3`
-  grid-row: 2;
-  color: red;
-  text-align: center;
-  font-size: 18px;
-  grid-column: 1 / 3;
-`
-const Guidelines = styled.h3`
-  grid-row: 3;
-  text-align: center;
-  color: red;
   grid-column: 1 / 3;
 `
 const Status = styled.p`
@@ -126,8 +110,7 @@ const Button = styled.button`
   width: 30vw;
   height: 60px;
   font-size: 20px;
-  margin-top: 1em;
-  margin-bottom: 3em;
+  margin-bottom: 100px;
   &:hover{
       font-weight: bold;
       background: maroon;

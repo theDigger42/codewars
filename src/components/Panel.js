@@ -155,9 +155,7 @@ const ResultsPanel = styled.div`
   grid-template-rows: 40px 0.8fr 40px;
   margin-right: 1em;
   margin-left: 1em;
-  margin-top: 0.5em;
   width: 40vw;
-  height: 49vh;
 `
 
 const TabContainer = styled.div`
@@ -166,7 +164,6 @@ const TabContainer = styled.div`
   grid-template-columns: auto auto auto;
   grid-column-gap: 10px;
   align-items: center;
-  height: 6vh;
   width: 40vw;
 `
 const Tab = styled.div`
@@ -203,9 +200,8 @@ const Content = styled.div`
   overflow: auto;
   font-weight: bold;
   padding: 1em;
-  margin-top: 1em;
+  margin-top: 5px;
   background: #cccccc;
-  height: 52vh;
   box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
 `
 const Info = styled.div`
@@ -227,14 +223,14 @@ const Button = styled.button`
   background: dimgrey;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  margin-top: 0.3em;
+  margin-top: 5px;
   box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   &:hover{{
     background: #1F1F1F;
   }}
   width: 40vw;
-  height: 6vh;
+  height: 60px;
   @media (max-width: 750px) {
     font-size: 24px;
   }

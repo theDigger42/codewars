@@ -37,7 +37,6 @@ const Wrapper = styled.div`
   grid-column: 1 / 9;
   min-width: 45vw;
   margin-left: 2em;
-  margin-top: 0.9em;
   margin-bottom: 2em;
   height: 67vh;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.9);

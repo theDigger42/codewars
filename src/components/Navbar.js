@@ -91,7 +91,8 @@ export default class Navbar extends Component {
   }
 }
 
-const Layout = styled.div`
+const Layout = styled.header`
+  position: fixed;
   grid-row: 1;
   grid-column: 1 / 13;
   display: grid;
@@ -100,7 +101,6 @@ const Layout = styled.div`
   background: #1a1a1a;
   align-items: center;
   justify-items: right;
-  height: 75px;
   width: 100vw;
 `
 const SignUp = styled.h2`
@@ -127,7 +127,6 @@ const Title = styled(Link)`
   cursor: pointer;
   grid-column: 1 / 3;
   justify-self: left;
-  height: 10vh;
 `
 const NavLink = styled(Link)`
   cursor: pointer;

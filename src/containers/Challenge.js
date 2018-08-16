@@ -37,9 +37,8 @@ const Prompt = styled.div`
   align-self: center;
   justify-self: center;
   font-weight: bold;
-  margin-bottom: 0.5em;
   font-size: 18px;
-  margin-top: 1em;
+  margin-top: 70px;
   border-radius: 5px;
   color: gainsboro;
   background: linear-gradient(grey, #595959);
@@ -55,6 +54,7 @@ const Timer = styled.h2`
   align-self: center;
   font-weight: bold;
   justify-self: center;
+  margin-top: 90px;
   color: gainsboro;
   @media (max-width: 900px) {
     font-size: 16px;
