@@ -14,6 +14,13 @@ const Layout = styled.div`
   @media (max-width: 700px) {
     font-size: 16px;
   }
+  color: ${props => {
+    if (props.rank === 'Hacker') {
+      return 'white'
+    } else {
+      return 'black'
+    }
+  }};
   background: ${props => { 
     if (props.rank === 'Bad') {
       return 'blue'

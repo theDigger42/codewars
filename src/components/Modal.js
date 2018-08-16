@@ -34,5 +34,5 @@ const Content = styled.div`
   padding: 1.5rem 1.5rem;
   width: 30rem;
   border-radius: 0.5rem;
-  border: .3rem solid #993d00;
+  border: .3rem solid dimgrey;
 `

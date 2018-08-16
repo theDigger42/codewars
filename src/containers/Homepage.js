@@ -21,9 +21,9 @@ export default class Homepage extends Component {
             <br />
             Compete.
             <br />
-            Improve Speed.
+            Type fast.
             <br />
-            All in one place.
+            {"<Code_War/>"}
           </Heading>
         </Body>
         <Footer />

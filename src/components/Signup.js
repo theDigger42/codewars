@@ -84,17 +84,17 @@ const Input = styled.input`
 
 const Button = styled.button`
   grid-row: 4;
-  background: white;
+  background: gainsboro;
   color: smoke;
   width: 120px;
   position: relative;
   font-size: 1.2em;
   font-weight: bold;
   padding: 0.5em;
-  border: 2px solid #993d00;
+  border: 2px solid dimgrey;
   border-radius: 8px;
   &:hover {
-    background: orangered;
+    background: black;
     color: white;
     cursor: pointer;
   }

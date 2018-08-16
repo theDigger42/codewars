@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Footer = (props) => {
   return (
     <Layout>
-      <Copy>CodeFightClub &#169; 2018</Copy>
+      <Copy>{"<Code_War/>"} &#169; 2018</Copy>
     </Layout>
   )
 }

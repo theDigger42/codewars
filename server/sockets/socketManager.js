@@ -20,14 +20,13 @@ const removeUser = (userList, user) => {
     return
   }
   let newList = Object.assign({}, userList)
-  delete newList[user.username]
+  if (user) delete newList[user.username]
   return newList
 }
 
 module.exports.io = (socket) => {
 
   socket.on('GET_CONNECTED_USERS', () => {
-    console.log(connectedUsers);
     io.emit('CONNECTED_USERS', connectedUsers)
   })
 

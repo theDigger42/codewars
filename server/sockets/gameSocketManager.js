@@ -30,7 +30,7 @@ const startGame = () => {
     //   ioGame.emit('challenge', res)
     // })
     scoreboardChange();
-  }, 400)
+  }, 1000)
 }
 
 module.exports.ioGame = (socket) => {
