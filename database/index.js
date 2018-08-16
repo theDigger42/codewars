@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    default: 800
+    default: 1000
   },
   rank: {
     type: String,
