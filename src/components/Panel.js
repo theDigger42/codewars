@@ -67,6 +67,21 @@ export default class Panel extends Component {
 
   render() {
 
+    if (this.props.prompt.timer === 0) {
+      this.props.score.scoreboard.forEach(user => {
+        if (user.username === this.props.auth.user.username) {
+          if (user.finished === false) {
+            this.props.leave()
+            this.clickTag('instructions')
+            this.props.clearPrompt()
+            this.setState({ results: '' })
+            this.props.clearScoreboard()
+            this.props.changeRoom('lobby')
+          }
+        }
+      })
+    }
+
     let scoreboard = this.props.score.scoreboard.map((user, i) => {
       if (user.finished === true) {
         return <ScoreCard suffix={this.suffix(i+1)} username={user.username} rank={user.rank}/>
@@ -123,7 +138,7 @@ export default class Panel extends Component {
             onClick={() => {
               this.clickTag('scores')
             }}>
-            Scores
+            Players
           </Tab>
         </TabContainer>
         <Content>{panelBody}</Content>

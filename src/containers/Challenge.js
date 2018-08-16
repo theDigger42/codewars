@@ -8,7 +8,7 @@ import background from '../images/Grey-website-background.png'
 export default class Challenge extends Component {
 
   render() {
-    let timer = this.props.timer ? <Timer>Next game starts in: {this.props.timer} </Timer> : <Timer></Timer>
+    let timer = this.props.timer ? <Timer>Next game starts in: {this.props.timer} </Timer> : <Timer>Click Join</Timer>
     return (
       <Layout>
         <Navbar {...this.props} active={'challenge'} />
@@ -48,7 +48,6 @@ const Prompt = styled.div`
   padding: 0.5em;
   width: 35vw;
   height: 3vh;
-  line-height: 2vh;
 `
 const Timer = styled.h2`
   grid-column: 9 / 13;

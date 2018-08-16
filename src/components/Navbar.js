@@ -98,7 +98,7 @@ const Layout = styled.div`
   background: #1a1a1a;
   align-items: center;
   justify-items: right;
-  height: 10vh;
+  height: 75px;
   width: 100vw;
 `
 const SignUp = styled.h2`

@@ -1,8 +1,8 @@
 import { GET_PROMPT, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE, USER_SUBMITION, SOLUTION_CHANGE, CLEAR_ALL_INPUTS, TIMER_CHANGE } from '../actions/types'
 
 const initialState = {
-  title: 'You up for a challenge?',
-  body: 'Click join and wait for the next game to start',
+  title: 'Up for a game?',
+  body: 'Click join and wait for the game to start',
   solution: '',
   tests: [],
   testDescriptions: [],

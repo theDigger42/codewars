@@ -86,7 +86,7 @@ const Heading = styled.h1`
 `
 const Info = styled.h3`
   grid-row: 2;
-  color: orangered;
+  color: red;
   text-align: center;
   font-size: 18px;
   grid-column: 1 / 3;
@@ -118,6 +118,8 @@ const Input = styled.input`
   height: 40px;
   font-size: 18px;
   grid-column: 1 / 3;
+  background: gainsboro;
+  color: #1f1f1f;
 `
 const Button = styled.button`
   grid-column: 1 / 3;

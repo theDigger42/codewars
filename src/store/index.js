@@ -3,10 +3,10 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers/rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const loggerMiddleware = store => next => action => {
-  console.log('dispatching: ', action)
-  next(action)
-}
+// const loggerMiddleware = store => next => action => {
+//   console.log('dispatching: ', action)
+//   next(action)
+// }
 
 const promiseMiddleware = store => next => action => {
   if (action.promise) {

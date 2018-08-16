@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Footer = (props) => {
   return (
     <Layout>
-      <Copy>{"<Code_War/>"} &#169; 2018</Copy>
+      <Copy>{"<Code-War/>"} &#169; 2018</Copy>
     </Layout>
   )
 }
@@ -16,7 +16,7 @@ const Layout = styled.div`
   display: grid;
   grid-template-columns: 5% auto 5%;
   background: #1a1a1a;
-  height: 9vh;
+  height: 75px;
   width: 100vw;
 `
 

@@ -36,12 +36,12 @@ export default class Profile extends Component {
     })
 
     let userList = mapping && mapping.map((arr) => {
-      console.log(arr);
-      if (arr[0] != this.props.auth.user.username)
+      if (arr[0] !== this.props.auth.user.username)
       return <User rank={arr[1].rank} onClick={() => { 
         this.props.getOnlineUser(arr[0]) 
         this.clickTag('user')
       }}>{arr[0]}</User>
+      return null
     })
 
     return (
