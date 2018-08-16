@@ -17,13 +17,10 @@ export default class Homepage extends Component {
         <Navbar {...this.props} active={'home'} />
         <Body>
           <Heading>
-            Code.
-            <br />
-            Compete.
-            <br />
-            Type fast.
-            <br />
-            {"<Code_War/>"}
+            <h1>Code.</h1>
+            <h1>Compete.</h1>
+            <h1>Type fast.</h1>
+            <h1>{"<Code-War/>"}</h1>
           </Heading>
         </Body>
         <Footer />
@@ -53,8 +50,8 @@ const Heading = styled.div`
   grid-row: 1;
   justify-self: center;
   align-self: center;
-  font-size: 70px;
   font-weight: bold;
+  font-size: 30px;
 `
 
 

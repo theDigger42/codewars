@@ -13,7 +13,7 @@ export default class Leaderboard extends Component {
   render() {
     let usernames = this.props.score.leaderboard.map((user, i) => {
       return (
-        <UserName key={i}> {user.username} </UserName>
+        <UserName rank={user.rank} key={i}> {user.username} </UserName>
       )
     })
     let ratings = this.props.score.leaderboard.map((user, i) => {
@@ -118,7 +118,31 @@ const UserName = styled.span`
   font-weight: bold;
   font-size: 24px;
   justify-self: right;
-  color: gainsboro;
+  color: ${props => { 
+    if (props.rank === 'Bad') {
+      return 'blue'
+    } else if (props.rank === 'Noob') {
+      return 'green'
+    } else if (props.rank === 'Script Kiddie') {
+      return 'yellow'
+    } else if (props.rank === 'Brogrammer') {
+      return 'orange'
+    } else if (props.rank === 'Dev') {
+      return 'orangered'
+    } else if (props.rank === 'Senior') {
+      return 'red'
+    } else if (props.rank === 'Architect') {
+      return 'maroon'
+    } else if (props.rank === 'Genius') {
+      return '#a500ff'
+    } else if (props.rank === 'Legend') {
+      return 'dimgrey'
+    } else if (props.rank === 'Hacker') {
+      return 'black'
+    } else if (props.rank === 'New') {
+      return 'white'
+    }
+  }};
 `
 const UserRating = styled.span`
   font-weight: bold;
