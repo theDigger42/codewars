@@ -22,11 +22,11 @@ router.post('/', (req, res) => {
         res.json({ token })
         console.log('Successful login');
       } else {
-        res.status(401).json({ errors: { form: 'Invalid Credentials' } })
+        res.status(401).json({ error: 'Invalid password' })
       }
     } else {
       console.log(err);
-      res.status(401).json({ errors: { form: 'Invalid Credentials' } })
+      res.status(401).json({ error: 'Username or password combination is invalid' })
     }
   })
 })

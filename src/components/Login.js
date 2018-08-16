@@ -16,6 +16,7 @@ const Login = ({
   closeModal,
   username,
   password,
+  error,
   showModal,
   addText,
   clear
@@ -34,6 +35,7 @@ const Login = ({
   })(
     <Layout>
       <Title>LOGIN</Title>
+      <Verify>{error}</Verify>
       <Input
         value={username}
         onChange={e => handleChange(addText, "username", e.target.value)}
@@ -64,11 +66,17 @@ export default Login
 
 const Layout = styled.div`
   display: grid;
-  grid-template-rows: 75px auto auto auto;
+  grid-template-rows: 75px 50px auto auto auto;
 `
 const Title = styled.h1`
   font-weight: bold;
   justify-self: center;
+`
+const Verify = styled.p`
+  color: red;
+  justify-self: center;
+  font-weight: bold;
+  font-size: 18px;
 `
 const Input = styled.input`
   padding: 0.5em;
@@ -83,7 +91,7 @@ const Input = styled.input`
 `
 
 const Button = styled.button`
-  grid-row: 4;
+  grid-row: 5;
   background: gainsboro;
   color: smoke;
   width: 120px;

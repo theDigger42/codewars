@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
     if (err) {
       console.error(err);
     } else if (user) {
-      console.log('Username already taken')
+      res.json({error: 'Username already taken'})
     } else {
       const saltRounds = 5;
       let salt = bcrypt.genSaltSync(saltRounds)
@@ -20,7 +20,12 @@ router.post('/', (req, res) => {
       newUser.username = username;
       newUser.password = hash;
       newUser.save(function (err) {
-        if (err) console.log('error in newUser.save ' + err);
+        if (err) {
+          console.log('error in newUser.save ' + err);
+          res.json({error: 'Error saving user in database'})
+        } else {
+          res.json({success: 'Successful signup!'})
+        }
       });
     }
   })

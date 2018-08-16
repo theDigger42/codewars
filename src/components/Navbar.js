@@ -67,6 +67,7 @@ export default class Navbar extends Component {
           closeModal={this.props.closeModal}
           signin={this.props.signin}
           login={this.props.login}
+          error={this.props.auth.loginError}
           showModal={this.props.modalReducer.login}
           message={this.props.modalReducer.message}
           addText={this.props.addText}
@@ -79,6 +80,7 @@ export default class Navbar extends Component {
           openModal={this.props.openModal}
           closeModal={this.props.closeModal}
           signup={this.props.signup}
+          error={this.props.auth.signupError}
           showModal={this.props.modalReducer.signup}
           message={this.props.modalReducer.message}
           addText={this.props.addText}

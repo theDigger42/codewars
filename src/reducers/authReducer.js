@@ -7,7 +7,9 @@ import isEmpty from 'lodash/isEmpty'
 
 const intialState = {
   user: {},
-  isAuthenticated: false
+  isAuthenticated: false,
+  loginError: '',
+  signupError: ''
 }
 
 const auth = (state = intialState, action) => {
@@ -17,6 +19,18 @@ const auth = (state = intialState, action) => {
       return {
         isAuthenticated: !isEmpty(action.user),
         user: action.user
+      }
+
+    case 'LOGIN_ERROR':
+      return {
+        ...state,
+        loginError: action.payload
+      }
+
+    case 'SIGN_UP_ERROR':
+      return {
+        ...state,
+        signupError: action.payload
       }
 
     case `${LOGOUT}`:
