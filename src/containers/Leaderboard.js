@@ -17,9 +17,15 @@ export default class Leaderboard extends Component {
       )
     })
     let ratings = this.props.score.leaderboard.map((user, i) => {
-      return (
-        <UserRating key={i}> {user.rating} </UserRating>
-      )
+      if (user.rating < 0) {
+        return (
+          <UserRating key={i}> {user.rating} </UserRating>
+        )
+      } else {
+        return (
+          <UserRating key={i}> +{user.rating} </UserRating>
+        )
+      }
     })
     let wins = this.props.score.leaderboard.map((user, i) => {
       return (

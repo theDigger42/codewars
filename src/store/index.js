@@ -13,15 +13,13 @@ import jwt from 'jsonwebtoken'
 // }
 
 const promiseMiddleware = store => next => action => {
-  console.log('in middleware');
   if (action.promise) {
     action.promise
     .then(response => {
-      console.log(response);
       if (response.data.error) {
         store.dispatch({type: `${action.type}_ERROR`, payload: response.data.error})
       }
-    }).then(() => axios.post(`http://localhost:3000/api/auth`, action.credentials))
+    }).then(() => axios.post(`/api/auth`, action.credentials))
       .then(res => {
         const token = res.data.token
         localStorage.setItem('jwtToken', token)
