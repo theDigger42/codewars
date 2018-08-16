@@ -65,9 +65,9 @@ const UserChallengeSchema = new mongoose.Schema({
 
 const ScoreboardSchema = new mongoose.Schema({
   username: { type: String },
-  score: {
+  rating: {
     type: Number,
-    default: 1
+    default: 0
   },
   entry: {
     type: Date,
@@ -118,8 +118,8 @@ let findScoreboardByDay = (callback) => {
   today.setHours(0, 0, 0, 0);
   Scoreboard.aggregate([
     { $match: { entry: { $gt: new Date(today) } } },
-    { $group: { _id: '$username', count: { $sum: 1 } } },
-    { $sort: { count: -1 } }
+    { $group: { _id: '$username', rating: {$sum: '$rating'} } },
+    { $sort: { rating: -1 } }
   ], function (err, results) {
     if (err) {
       console.log('err in scoreboard aggregate');
@@ -174,6 +174,23 @@ let updateWins = (username) => {
   })
 }
 
+let updateRating = (user1, user2) => {
+  var score1 = new Scoreboard({"username": user1.username, "rating": user1.rating})
+  var score2 = new Scoreboard({"username": user2.username, "rating": user2.rating})
+  score1.save((err, res) => {
+    if (err) {
+      console.log(err);
+    } 
+    console.log(res)
+  });
+  score2.save((err, res) => {
+    if (err) {
+      console.log(err);
+    } 
+    console.log(res)
+  });
+}
+
 let rankPlayer = (username, rating, rank) => {
   User.updateOne({"username": username}, {$set: {"rating": rating, "rank": rank}}, (err, res) => {
     if (err) console.log(err)
@@ -213,3 +230,4 @@ module.exports.findScoreboardByDay = findScoreboardByDay;
 module.exports.patchUser = patchUser
 module.exports.getUser = getUser
 module.exports.updateWins = updateWins
+module.exports.updateRating = updateRating

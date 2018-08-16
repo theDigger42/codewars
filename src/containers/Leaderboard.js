@@ -13,7 +13,7 @@ export default class Leaderboard extends Component {
   render() {
     let usernames = this.props.score.leaderboard.map((user, i) => {
       return (
-        <UserName rank={user.rank} key={i}> {user.username} </UserName>
+        <UserName rank={user.rank} key={i}> {user._id} </UserName>
       )
     })
     let ratings = this.props.score.leaderboard.map((user, i) => {
@@ -29,19 +29,19 @@ export default class Leaderboard extends Component {
     return (
       <Layout>
         <Navbar {...this.props} active={'scores'} />
-        <Title>Leaderboard</Title>
+        <Title>Daily Leaderboard</Title>
         <Body>
           <LeftDiv>
             <User>User</User>
             {usernames}
           </LeftDiv>
           <MiddleDiv>
-            <Rating>Rating</Rating>
-            {ratings}
+            {/* <Rating>Rating</Rating>
+            {ratings} */}
           </MiddleDiv>
           <RightDiv>
-            <Win>Wins</Win>
-            {wins}
+            <Win>Rating</Win>
+            {ratings}
           </RightDiv>
         </Body>
         <Footer />
@@ -140,6 +140,8 @@ const UserName = styled.span`
     } else if (props.rank === 'Hacker') {
       return 'black'
     } else if (props.rank === 'New') {
+      return 'white'
+    } else {
       return 'white'
     }
   }};
