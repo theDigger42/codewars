@@ -9,7 +9,8 @@ const initialState = {
   signup: false,
   login: false,
   ask: false,
-  message: ''
+  message: '',
+  show: false
 }
 
 const modalReducer = (state = initialState, action) => {
@@ -18,7 +19,8 @@ const modalReducer = (state = initialState, action) => {
       return {
         ...state,
         [action.payload.modal]: true,
-        message: action.payload.message
+        message: action.payload.message,
+        show: true
       }
 
     case CLOSE_MODAL:

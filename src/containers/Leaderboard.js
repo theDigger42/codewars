@@ -69,7 +69,7 @@ const Body = styled.div`
   grid-template-rows: 1fr;
   grid-template-columns: 5% 1fr 1fr 1fr 5%;
   grid-column-gap: 10px;
-  min-height: 80vh;
+  height: 70vh;
   margin-bottom: 3em;
 `
 const LeftDiv = styled.div`
@@ -79,6 +79,7 @@ const LeftDiv = styled.div`
   grid-template-rows: 50px auto;
   grid-row-gap: 30px;
   justify-self: right;
+  margin-bottom: 50px;
 `
 const MiddleDiv = styled.div`
   grid-row: 1;
@@ -87,7 +88,6 @@ const MiddleDiv = styled.div`
   grid-template-rows: 50px auto;
   grid-row-gap: 30px;
   justify-self: center;
-
 `
 const RightDiv = styled.div`
   grid-row: 1;
@@ -96,9 +96,10 @@ const RightDiv = styled.div`
   grid-template-rows: 50px auto;
   grid-row-gap: 30px;
   justify-self: left;
+  margin-bottom: 50px;
 `
 const Title = styled.h1`
-  margin-top: 90px;
+  margin-top: 100px;
   grid-column: 1 / 13;
   justify-self: center;
   min-height: 50px;

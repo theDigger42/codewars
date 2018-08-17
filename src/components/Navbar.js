@@ -93,6 +93,7 @@ export default class Navbar extends Component {
 
 const Layout = styled.header`
   position: fixed;
+  top: 0;
   grid-row: 1;
   grid-column: 1 / 13;
   display: grid;

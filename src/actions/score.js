@@ -3,7 +3,7 @@ import axios from '../../node_modules/axios';
 
 export const getLeaderboard = () => {
   return dispatch => {
-    axios.get('http://localhost:3000/leaderboardByDay')
+    axios.get('/leaderboardByDay')
       .then(res => {
         dispatch({
           type: GET_LEADERBOARD,

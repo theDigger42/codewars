@@ -14,7 +14,7 @@ export const setCurrentUser = (user) => {
 
 export const login = (data) => {
   return dispatch => {
-    return axios.post(`http://localhost:3000/api/auth`, data).then(res => {
+    return axios.post(`/api/auth`, data).then(res => {
       const token = res.data.token
       localStorage.setItem('jwtToken', token)
       setAuthorizationToken(token)
@@ -39,6 +39,6 @@ export const logout = (user) => {
 
 export const signup = (credentials) => ({
   type: SIGN_UP,
-  promise: axios.post(`http://localhost:3000/api/signup`, credentials),
+  promise: axios.post(`/api/signup`, credentials),
   credentials: credentials
 })

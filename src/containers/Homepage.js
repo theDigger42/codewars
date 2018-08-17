@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Landing from '../components/Landing'
 
 export default class Homepage extends Component {
 
@@ -15,14 +16,7 @@ export default class Homepage extends Component {
     return (
       <Layout>
         <Navbar {...this.props} active={'home'} />
-        <Body>
-          <Heading>
-            <h1>Code.</h1>
-            <h1>Compete.</h1>
-            <h1>Type fast.</h1>
-            <h1>{"<Code-War/>"}</h1>
-          </Heading>
-        </Body>
+        <Landing block={this.props.modalReducer.show}/>
         <Footer />
       </Layout>
     )
@@ -31,27 +25,8 @@ export default class Homepage extends Component {
 
 const Layout = styled.div`
   display: grid;
-  grid-template-rows: repeat(auto-fit, 1fr);
-  grid-template-columns: repeat(auto-fit, 1fr);
+  grid-template-rows: 75px 1fr 50px;
   height: 100vh;
   width: 100vw;
 `
-
-const Body = styled.div`
-  grid-row: 2;
-  grid-column: 1 / 13;
-  min-height: 82vh;
-  background: grey;
-  display: grid;
-  grid-template-rows: auto;
-`
-
-const Heading = styled.div`
-  grid-row: 1;
-  justify-self: center;
-  align-self: center;
-  font-weight: bold;
-  font-size: 30px;
-`
-
 
