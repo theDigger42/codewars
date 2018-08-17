@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Signup from './Signup'
 import Login from './Login'
 import { Link } from 'react-router-dom'
-import logo from '../images/Logo2.png'
+import logo from '../images/logo.png'
 
 export default class Navbar extends Component {
   constructor(props) {

@@ -70,7 +70,7 @@ const Body = styled.div`
   grid-template-columns: 5% 1fr 1fr 1fr 5%;
   grid-column-gap: 10px;
   height: 70vh;
-  margin-bottom: 3em;
+  margin-bottom: 75px;
 `
 const LeftDiv = styled.div`
   grid-row: 1;
