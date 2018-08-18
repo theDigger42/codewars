@@ -156,6 +156,7 @@ const ResultsPanel = styled.div`
   margin-right: 1em;
   margin-left: 1em;
   width: 40vw;
+  height: 80vh;
 `
 
 const TabContainer = styled.div`
@@ -182,7 +183,7 @@ const Tab = styled.div`
     background: #cccccc;
     font-weight: bold;
   `};
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.6);
   @media (max-width: 1000px) {
     font-size: 22px;
   }
@@ -200,9 +201,9 @@ const Content = styled.div`
   overflow: auto;
   font-weight: bold;
   padding: 1em;
-  margin-top: 5px;
+  margin-top: 8px;
   background: #cccccc;
-  box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
+  box-shadow: 4px 5px 6px rgba(0, 0, 0, 0.7);
 `
 const Info = styled.div`
   font-size: 24px;
@@ -223,8 +224,8 @@ const Button = styled.button`
   background: dimgrey;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  margin-top: 5px;
-  box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.7);
+  margin-top: 10px;
+  box-shadow: 4px 5px 8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   &:hover{{
     background: #1F1F1F;

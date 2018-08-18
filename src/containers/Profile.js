@@ -92,11 +92,13 @@ const Layout = styled.div`
   grid-template-columns: repeat(auto-fit, 1fr);
   background: url(${background}) dimgrey;
   width: 100vw;
+  height: 100%;
 `
 const Body = styled.div`
   margin-top: 75px;
   grid-row: 2;
   grid-column: 1 / 13;
+  height: 85vh;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
@@ -105,13 +107,16 @@ const UserProfile = styled.div`
   grid-column: 1; 
   display: grid;
   background: dimgray;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 0.3fr 2fr;
   grid-template-columns: 1fr 1fr;
+  height: 100%;
 `
 const Username = styled.h1`
+  height: 50%;
   justify-self: center;
+  grid-row: 1;
   grid-column: 1 / 3;
-  font-size: 30px;
+  font-size: 26px;
   font-weight: bold;
   color: ${props => { 
     if (props.rank === 'Bad') {
@@ -141,9 +146,11 @@ const Username = styled.h1`
 `
 const Stats = styled.div`
   grid-column: 1 / 3;
+  grid-row: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 50px 50px 50px;
+  grid-template-rows: 40px 40px 40px;
+  height: 100%;
 `
 const Legend = styled.div`
   grid-row: 3;
@@ -186,11 +193,12 @@ const Wins = styled.h2`
 const Value = styled.h2`
   grid-column: 2;
   justify-self: left;
+  width: 100%;
 `
 const OnlineUsers = styled.div`
   grid-column: 2;
   display: grid;
-  grid-template-rows: 50px auto;
+  grid-template-rows: 70px auto;
   height: 100%;
 `
 const Online = styled.h1`
@@ -198,17 +206,16 @@ const Online = styled.h1`
   justify-self: center;
   font-size: 40px;
   color: #f2f2f2;
+  width: 100%;
+  text-align: center;
 `
 const UserList = styled.div`
   grid-row: 2;
   display: grid;
   grid-template-rows: repeat(auto-fit, 50px);
-  grid-row-gap: 2px;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  height: 100%;
   overflow: auto;
   justify-self: center;
+  height: 100%;
 `
 const User = styled.h2`
   font-size: 24px;

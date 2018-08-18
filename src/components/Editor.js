@@ -38,6 +38,6 @@ const Wrapper = styled.div`
   min-width: 45vw;
   margin-left: 2em;
   margin-bottom: 2em;
-  height: 67vh;
+  height: 70vh;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.9);
 `

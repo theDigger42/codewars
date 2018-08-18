@@ -56,6 +56,7 @@ const Layout = styled.div`
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
   width: 100vw;
+  height: 100vh;
   background: url(${background}) dimgrey;
 `
 const Body = styled.div`
@@ -64,7 +65,9 @@ const Body = styled.div`
   grid-template-rows: 1fr;
   grid-template-columns: 5% 1fr 1fr 1fr 5%;
   grid-column-gap: 10px;
+  height: 63vh;
   margin-bottom: 75px;
+  overflow: auto;
 `
 const LeftDiv = styled.div`
   grid-row: 1;
@@ -98,6 +101,8 @@ const Title = styled.h1`
   justify-self: center;
   min-height: 50px;
   color: gainsboro;
+  width: 100%;
+  text-align: center;
 `
 const User = styled.span`
   font-size: 30px;

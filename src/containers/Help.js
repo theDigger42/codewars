@@ -72,7 +72,7 @@ const Body = styled.div`
   grid-template-rows: repeat(auto-fit, 50px);
   grid-row-gap: 40px;
   grid-template-columns: 1.4fr 1fr;
-  min-height: 82vh;
+  min-height: 83vh;
   width: 100vw;
   justify-items: center;
   align-items: center;
@@ -80,6 +80,8 @@ const Body = styled.div`
 `
 const Heading = styled.h1`
   grid-column: 1 / 3;
+  width: 100%;
+  text-align: center;
 `
 const Status = styled.p`
   grid-row: 8;

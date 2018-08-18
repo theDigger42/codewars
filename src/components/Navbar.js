@@ -99,10 +99,11 @@ const Layout = styled.header`
   display: grid;
   grid-column-gap: 20px;
   grid-template-columns: repeat(9, 1fr);
-  background: #1a1a1a;
+  background: black;
   align-items: center;
   justify-items: right;
   width: 100vw;
+  height: 75px;
 `
 const SignUp = styled.h2`
   grid-column: 8;

@@ -7,7 +7,7 @@ const Layout = styled.div`
   justify-items: center;
   align-items: center;
   margin-bottom: 0.5em;
-  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.9);
   border: 1px solid black;
   height: 50px;
   font-size: 18px;

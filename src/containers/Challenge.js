@@ -57,6 +57,7 @@ const Timer = styled.h2`
   margin-top: 90px;
   color: gainsboro;
   font-size: 28px;
+  width: 100%;
   @media (max-width: 900px) {
     font-size: 24px;
   }

@@ -19,6 +19,7 @@ const Layout = styled.footer`
   grid-template-columns: 5% auto 5%;
   background: black;
   width: 100vw;
+  height: 50px;
 `
 
 const Copy = styled.h3`
@@ -26,5 +27,7 @@ const Copy = styled.h3`
   color: white;
   justify-self: center;
   align-self: center;
+  width: 100%;
+  text-align: center;
 `
 
