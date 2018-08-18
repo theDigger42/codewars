@@ -169,7 +169,7 @@ const TabContainer = styled.div`
 const Tab = styled.div`
   background: dimgrey;
   color: white;
-  font-size: 22px;
+  font-size: 28px;
   text-align: center;
   cursor: pointer;
   height: 4vh;
@@ -184,14 +184,14 @@ const Tab = styled.div`
   `};
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
   @media (max-width: 1000px) {
-    font-size: 16px;
+    font-size: 22px;
   }
   @media (max-width: 705px) {
-    font-size: 10px;
+    font-size: 16px;
     height: 30px;
   }
   @media (max-width: 510px) {
-    font-size: 8px;
+    font-size: 11px;
   }
 `
 const Content = styled.div`

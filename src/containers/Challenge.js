@@ -37,7 +37,7 @@ const Prompt = styled.div`
   align-self: center;
   justify-self: center;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 24px;
   margin-top: 70px;
   border-radius: 5px;
   color: gainsboro;
@@ -56,10 +56,11 @@ const Timer = styled.h2`
   justify-self: center;
   margin-top: 90px;
   color: gainsboro;
+  font-size: 28px;
   @media (max-width: 900px) {
-    font-size: 16px;
+    font-size: 24px;
   }
   @media (max-width: 600px) {
-    font-size: 12px;
+    font-size: 18px;
   }
 `

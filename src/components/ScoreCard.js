@@ -23,7 +23,7 @@ const Layout = styled.div`
   }};
   background: ${props => { 
     if (props.rank === 'Bad') {
-      return 'blue'
+      return 'cyan'
     } else if (props.rank === 'Noob') {
       return 'green'
     } else if (props.rank === 'Script Kiddie') {
@@ -39,7 +39,7 @@ const Layout = styled.div`
     } else if (props.rank === 'Genius') {
       return '#a500ff'
     } else if (props.rank === 'Legend') {
-      return 'dimgrey'
+      return 'indigo'
     } else if (props.rank === 'Hacker') {
       return 'black'
     }

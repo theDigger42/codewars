@@ -106,7 +106,7 @@ const Layout = styled.header`
 `
 const SignUp = styled.h2`
   grid-column: 8;
-  font-size: 14px;
+  font-size: 16px;
   color: white;
   cursor: pointer;
   justify-self: center;
@@ -116,7 +116,7 @@ const SignUp = styled.h2`
 `
 const LogIn = styled.h2`
   grid-column: 9;
-  font-size: 14px;
+  font-size: 16px;
   color: white;
   cursor: pointer;
   justify-self: center;
@@ -128,6 +128,7 @@ const Title = styled(Link)`
   cursor: pointer;
   grid-column: 1 / 3;
   justify-self: left;
+  margin-left: 1em;
 `
 const NavLink = styled(Link)`
   cursor: pointer;
@@ -141,11 +142,11 @@ const NavLink = styled(Link)`
 `
 const Leaderboard = styled.h2`
   grid-column: 5;
-  font-size: 14px;
+  font-size: 16px;
 `
 const Help = styled.h2`
   grid-column: 6;
-  font-size: 14px;
+  font-size: 16px;
 `
 // const Chat = styled.h4`
 //   grid-column: 6;
@@ -153,14 +154,14 @@ const Help = styled.h2`
 // `
 const Challenge = styled.h2`
   grid-column: 7;
-  font-size: 14px;
+  font-size: 16px;
 `
 const Profile = styled.h2`
   grid-column: 8;
-  font-size: 14px;
+  font-size: 16px;
 `
 const Logout = styled.h2`
   grid-column: 9;
-  font-size: 14px;
+  font-size: 16px;
   margin-right: 1em;
 `

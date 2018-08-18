@@ -25,31 +25,22 @@ export default class Profile extends Component {
 
   render() {
 
-    let navButton = this.state.tags[0] === 'profile' ? null 
-    : <MyProfile onClick={() => {
-      this.props.getOnlineUser(this.props.auth.user.username)
-      this.clickTag('profile')
-    }}> My Profile </MyProfile>
-
     let mapping = this.props.online.users && Object.keys(this.props.online.users).map((key) => {
       return [key, this.props.online.users[key]]
     })
 
-    let userList = mapping && mapping.map((arr) => {
-      if (arr[0] !== this.props.auth.user.username)
-      return <User rank={arr[1].rank} onClick={() => { 
+    let userList = mapping && mapping.map((arr) => <User rank={arr[1].rank} onClick={() => { 
         this.props.getOnlineUser(arr[0]) 
         this.clickTag('user')
       }}>{arr[0]}</User>
-      return null
-    })
+    )
 
     return (
       <Layout>
         <Navbar {...this.props} active={'profile'} />
         <Body>
           <UserProfile>
-            <Username>{this.props.online.user.username}</Username>
+            <Username rank={this.props.online.user.rank} >{this.props.online.user.username}</Username>
             <Stats>
               <Rank>Rank:</Rank><Value>{this.props.online.user.rank}</Value>
               <Rating>Rating:</Rating><Value>{this.props.online.user.rating}</Value>
@@ -71,7 +62,7 @@ export default class Profile extends Component {
               </EntryDiv>
               <ColorDiv>
                 <div style={{"background": "black", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
-                <div style={{"background": "dimgrey", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "indigo", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
                 <div style={{"background": "#a500ff", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
                 <div style={{"background": "maroon", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
                 <div style={{"background": "red", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
@@ -79,11 +70,10 @@ export default class Profile extends Component {
                 <div style={{"background": "orange", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
                 <div style={{"background": "yellow", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
                 <div style={{"background": "green", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
-                <div style={{"background": "blue", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
+                <div style={{"background": "cyan", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>
                 <div style={{"background": "white", "borderRadius": "50%", "width":"25px", "height": "25px"}}></div>             
               </ColorDiv>
             </Legend>
-            {navButton}
           </UserProfile>
           <OnlineUsers>
             <Online>Online Users</Online>
@@ -101,23 +91,21 @@ const Layout = styled.div`
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
   background: url(${background}) dimgrey;
-  height: 100vh;
   width: 100vw;
 `
 const Body = styled.div`
+  margin-top: 75px;
   grid-row: 2;
   grid-column: 1 / 13;
-  min-height: 82vh;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
 `
 const UserProfile = styled.div`
   grid-column: 1; 
-  height: 83vh;
   display: grid;
   background: dimgray;
-  grid-template-rows: 30px 1fr 1.2fr 50px;
+  grid-template-rows: 1fr 2fr;
   grid-template-columns: 1fr 1fr;
 `
 const Username = styled.h1`
@@ -125,13 +113,37 @@ const Username = styled.h1`
   grid-column: 1 / 3;
   font-size: 30px;
   font-weight: bold;
+  color: ${props => { 
+    if (props.rank === 'Bad') {
+      return 'cyan'
+    } else if (props.rank === 'Noob') {
+      return 'green'
+    } else if (props.rank === 'Script Kiddie') {
+      return 'yellow'
+    } else if (props.rank === 'Brogrammer') {
+      return 'orange'
+    } else if (props.rank === 'Dev') {
+      return 'orangered'
+    } else if (props.rank === 'Senior') {
+      return 'red'
+    } else if (props.rank === 'Architect') {
+      return 'maroon'
+    } else if (props.rank === 'Genius') {
+      return '#a500ff'
+    } else if (props.rank === 'Legend') {
+      return 'indigo'
+    } else if (props.rank === 'Hacker') {
+      return 'black'
+    } else if (props.rank === 'New') {
+      return 'white'
+    }
+  }};
 `
 const Stats = styled.div`
   grid-column: 1 / 3;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 50px 50px 50px;
-  margin-top: 1em;
 `
 const Legend = styled.div`
   grid-row: 3;
@@ -175,28 +187,11 @@ const Value = styled.h2`
   grid-column: 2;
   justify-self: left;
 `
-const MyProfile = styled.button`
-  grid-row: 4;
-  grid-column: 1 / 3;
-  justify-self: center;
-  width: 150px;
-  height: 42px;
-  background: darkred;
-  color: gainsboro;
-  font-size: 20px;
-  cursor: pointer;
-  &:hover{
-    font-weight: bold;
-    background: maroon;
-    color: ghostwhite;
-    cursor: pointer;
-  }
-`
 const OnlineUsers = styled.div`
   grid-column: 2;
-  height: 82vh;
   display: grid;
   grid-template-rows: 50px auto;
+  height: 100%;
 `
 const Online = styled.h1`
   grid-row: 1;
@@ -209,8 +204,9 @@ const UserList = styled.div`
   display: grid;
   grid-template-rows: repeat(auto-fit, 50px);
   grid-row-gap: 2px;
-  margin-top: 4em;
-  height: 60vh;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  height: 100%;
   overflow: auto;
   justify-self: center;
 `
@@ -220,7 +216,7 @@ const User = styled.h2`
   cursor: pointer;
   color: ${props => { 
     if (props.rank === 'Bad') {
-      return 'blue'
+      return 'cyan'
     } else if (props.rank === 'Noob') {
       return 'green'
     } else if (props.rank === 'Script Kiddie') {
@@ -236,7 +232,7 @@ const User = styled.h2`
     } else if (props.rank === 'Genius') {
       return '#a500ff'
     } else if (props.rank === 'Legend') {
-      return 'dimgrey'
+      return 'indigo'
     } else if (props.rank === 'Hacker') {
       return 'black'
     } else if (props.rank === 'New') {

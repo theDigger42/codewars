@@ -27,11 +27,6 @@ export default class Leaderboard extends Component {
         )
       }
     })
-    let wins = this.props.score.leaderboard.map((user, i) => {
-      return (
-        <UserWins key={i}> {user.wins} </UserWins>
-      )
-    })
     return (
       <Layout>
         <Navbar {...this.props} active={'scores'} />
@@ -69,7 +64,6 @@ const Body = styled.div`
   grid-template-rows: 1fr;
   grid-template-columns: 5% 1fr 1fr 1fr 5%;
   grid-column-gap: 10px;
-  height: 70vh;
   margin-bottom: 75px;
 `
 const LeftDiv = styled.div`
