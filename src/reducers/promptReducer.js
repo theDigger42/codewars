@@ -1,29 +1,38 @@
-import { GET_PROMPT, SUBMIT_SOLUTION, CLEAR_PROMPT, CHANGE_ROOM, SET_COMPLETE, USER_SUBMITION, SOLUTION_CHANGE, CLEAR_ALL_INPUTS, TIMER_CHANGE } from '../actions/types'
+import {
+  GET_PROMPT,
+  SUBMIT_SOLUTION,
+  CLEAR_PROMPT,
+  CHANGE_ROOM,
+  SET_COMPLETE,
+  USER_SUBMITION,
+  SOLUTION_CHANGE,
+  CLEAR_ALL_INPUTS,
+  TIMER_CHANGE
+} from "../actions/types";
 
 const initialState = {
-  title: 'Get ready...',
-  body: 'Click join and wait for the game to start',
-  solution: '',
+  title: "Get ready...",
+  body: "Click join and wait for the game to start",
+  solution: "",
   tests: [],
   testDescriptions: [],
   testResults: [],
   results: [],
   timer: null,
-  message: '',
+  message: "",
   isComplete: false,
-  room: 'lobby',
-  submition_status: ''
-}
+  room: "lobby",
+  submition_status: ""
+};
 
 const prompt = (state = initialState, action) => {
   switch (action.type) {
-
     case TIMER_CHANGE:
       return {
         ...state,
         timer: action.payload
-      }
-    
+      };
+
     case GET_PROMPT:
       return {
         ...state,
@@ -33,22 +42,22 @@ const prompt = (state = initialState, action) => {
         tests: action.payload.tests,
         testDescriptions: action.payload.testDescriptions,
         isComplete: false,
-        room: ''
-      }
+        room: ""
+      };
 
-    case CLEAR_PROMPT: 
+    case CLEAR_PROMPT:
       return {
         ...state,
-        title: 'Get ready...',
-        body: 'Wait for the next game to begin',
-        solution: '',
+        title: "Get ready...",
+        body: "Wait for the next game to begin",
+        solution: "",
         results: [],
         testDescriptions: [],
         testResults: [],
-        message: '',
+        message: "",
         isComplete: false,
-        room: 'waiting'
-      }
+        room: "waiting"
+      };
 
     case SUBMIT_SOLUTION:
       return {
@@ -56,42 +65,41 @@ const prompt = (state = initialState, action) => {
         results: action.payload.results,
         testResults: action.payload.testResults,
         message: action.payload.message
-      }
+      };
 
     case USER_SUBMITION:
       return {
         ...state,
         submition_status: action.payload
-      }
+      };
 
-    case SET_COMPLETE: 
+    case SET_COMPLETE:
       return {
         ...state,
         isComplete: action.payload
-      }
+      };
 
     case CHANGE_ROOM:
       return {
         ...state,
         room: action.payload
-      }
+      };
 
-    case SOLUTION_CHANGE: 
+    case SOLUTION_CHANGE:
       return {
         ...state,
         [action.payload.inputType]: action.payload.input
-      }
+      };
 
     case CLEAR_ALL_INPUTS:
       return {
         ...state,
-        submition_status: ''
-      }
+        submition_status: ""
+      };
 
     default:
-      return state
-
+      return state;
   }
-}
+};
 
-export default prompt
+export default prompt;

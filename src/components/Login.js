@@ -1,15 +1,15 @@
 import React from "react";
 import modal from "./Modal";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const handleClick = (e, cb, credentials) => {
-  e.preventDefault()
-  cb(credentials)
-}
+  e.preventDefault();
+  cb(credentials);
+};
 
 const handleChange = (cb, inputType, input) => {
-  cb(inputType, input)
-}
+  cb(inputType, input);
+};
 
 const Login = ({
   login,
@@ -21,13 +21,12 @@ const Login = ({
   addText,
   clear
 }) => {
-
   const enterInput = e => {
-    if (e.key === 'Enter' ) {
-      handleClick(e, login, { username, password })
-      clear()
+    if (e.key === "Enter") {
+      handleClick(e, login, { username, password });
+      clear();
     }
-  }
+  };
 
   return modal({
     showModal,
@@ -52,32 +51,34 @@ const Login = ({
         required
         onKeyPress={enterInput}
       />
-      <Button onClick={e => {
-        login({ username, password })
-        clear()
-      }}>
+      <Button
+        onClick={e => {
+          login({ username, password });
+          clear();
+        }}
+      >
         Submit
       </Button>
     </Layout>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
 
 const Layout = styled.div`
   display: grid;
   grid-template-rows: 75px 50px auto auto auto;
-`
+`;
 const Title = styled.h1`
   font-weight: bold;
   justify-self: center;
-`
+`;
 const Verify = styled.p`
   color: red;
   justify-self: center;
   font-weight: bold;
   font-size: 18px;
-`
+`;
 const Input = styled.input`
   padding: 0.5em;
   margin: 1.5em;
@@ -88,7 +89,7 @@ const Input = styled.input`
   border: solid 2px black;
   border-radius: 3px;
   justify-self: center;
-`
+`;
 
 const Button = styled.button`
   grid-row: 5;
@@ -107,4 +108,4 @@ const Button = styled.button`
     cursor: pointer;
   }
   justify-self: center;
-`
+`;

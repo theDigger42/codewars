@@ -1,9 +1,13 @@
-import { GET_LEADERBOARD, CHANGE_SCOREBOARD, CLEAR_SCOREBOARD } from '../actions/types'
+import {
+  GET_LEADERBOARD,
+  CHANGE_SCOREBOARD,
+  CLEAR_SCOREBOARD
+} from "../actions/types";
 
 const initialState = {
   leaderboard: [],
   scoreboard: []
-}
+};
 
 const score = (state = initialState, action) => {
   switch (action.type) {
@@ -11,24 +15,23 @@ const score = (state = initialState, action) => {
       return {
         ...state,
         leaderboard: action.payload
-      }
+      };
 
     case CHANGE_SCOREBOARD:
       return {
         ...state,
         scoreboard: action.payload
-      }
+      };
 
     case CLEAR_SCOREBOARD:
       return {
         ...state,
         scoreboard: []
-      }
+      };
 
     default:
-      return state
-
+      return state;
   }
-}
+};
 
-export default score
+export default score;

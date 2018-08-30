@@ -1,24 +1,34 @@
-import styled from "styled-components"
-import React, { Component } from 'react'
-import Navbar from '../components/Navbar'
-import Editor from '../components/Editor'
-import Footer from '../components/Footer'
-import Panel from '../components/Panel'
-import background from '../images/Grey-website-background.png'
+import styled from "styled-components";
+import React, { Component } from "react";
+import Navbar from "../components/Navbar";
+import Editor from "../components/Editor";
+import Footer from "../components/Footer";
+import Panel from "../components/Panel";
+import background from "../images/Grey-website-background.png";
 export default class Challenge extends Component {
-
   render() {
-    let timer = this.props.timer ? <Timer>Next game starts in: {this.props.timer} </Timer> : <Timer>Click Join</Timer>
+    let timer = this.props.timer ? (
+      <Timer>Next game starts in: {this.props.timer} </Timer>
+    ) : (
+      <Timer>Click Join</Timer>
+    );
     return (
       <Layout>
-        <Navbar {...this.props} active={'challenge'} />
+        <Navbar {...this.props} active={"challenge"} />
         <Prompt>{this.props.prompt.title}</Prompt>
         {timer}
-        <Editor input={this.props.prompt.solution} change={this.props.addSolution} />
-        <Panel {...this.props} join={this.props.join} leave={this.props.leave}/>
+        <Editor
+          input={this.props.prompt.solution}
+          change={this.props.addSolution}
+        />
+        <Panel
+          {...this.props}
+          join={this.props.join}
+          leave={this.props.leave}
+        />
         <Footer />
       </Layout>
-    )
+    );
   }
 }
 
@@ -30,7 +40,7 @@ const Layout = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: none;
-`
+`;
 const Prompt = styled.div`
   grid-column: 2 / 8;
   text-align: center;
@@ -47,7 +57,7 @@ const Prompt = styled.div`
   padding: 0.5em;
   width: 35vw;
   height: 3vh;
-`
+`;
 const Timer = styled.h2`
   grid-column: 9 / 13;
   text-align: center;
@@ -64,4 +74,4 @@ const Timer = styled.h2`
   @media (max-width: 600px) {
     font-size: 18px;
   }
-`
+`;

@@ -1,19 +1,23 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { connect } from 'react-redux';
-import mapDispatchToProps from './actions/mapDispatchToProps'
-import mapStateToProps from './store/mapStateToProps'
-import App from './containers/App'
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { connect } from "react-redux";
+import mapDispatchToProps from "./actions/mapDispatchToProps";
+import mapStateToProps from "./store/mapStateToProps";
+import App from "./containers/App";
 
-const Root = (props) => {
+const Root = props => {
   return (
     <Router>
-      <Route {...props}
+      <Route
+        {...props}
         path="/"
-        render={(routeProps) => <App {...props} {...routeProps} />}
+        render={routeProps => <App {...props} {...routeProps} />}
       />
     </Router>
-  )
-}
+  );
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Root);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Root);

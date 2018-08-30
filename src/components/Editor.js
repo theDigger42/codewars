@@ -1,18 +1,18 @@
-import React from 'react'
-import AceEditor from 'react-ace';
-import 'brace/mode/javascript';
-import 'brace/theme/monokai';
-import 'brace/theme/chaos';
-import 'brace/theme/merbivore';
-import styled from 'styled-components'
+import React from "react";
+import AceEditor from "react-ace";
+import "brace/mode/javascript";
+import "brace/theme/monokai";
+import "brace/theme/chaos";
+import "brace/theme/merbivore";
+import styled from "styled-components";
 
-const Editor = (props) => {
+const Editor = props => {
   return (
     <Wrapper>
       <AceEditor
         mode="javascript"
         theme="merbivore"
-        onChange={e => props.change('solution', e)}
+        onChange={e => props.change("solution", e)}
         value={props.input}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
@@ -28,10 +28,10 @@ const Editor = (props) => {
         }}
       />
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Editor
+export default Editor;
 
 const Wrapper = styled.div`
   grid-column: 1 / 9;
@@ -40,4 +40,4 @@ const Wrapper = styled.div`
   margin-bottom: 2em;
   height: 70vh;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.9);
-`
+`;

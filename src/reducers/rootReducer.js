@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux';
-import modalReducer from './modalReducer'
-import input from './textInputReducer'
-import auth from './authReducer'
-import prompt from './promptReducer'
-import score from './scoreReducer'
-import online from './onlineReducer'
+import { combineReducers } from "redux";
+import modalReducer from "./modalReducer";
+import input from "./textInputReducer";
+import auth from "./authReducer";
+import prompt from "./promptReducer";
+import score from "./scoreReducer";
+import online from "./onlineReducer";
 
 export default combineReducers({
   modalReducer,

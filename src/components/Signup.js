@@ -1,15 +1,15 @@
-import React from "react"
-import modal from './Modal'
-import styled from 'styled-components'
+import React from "react";
+import modal from "./Modal";
+import styled from "styled-components";
 
 const handleClick = (e, cb, credentials) => {
-  e.preventDefault()
-  cb(credentials)
-}
+  e.preventDefault();
+  cb(credentials);
+};
 
 const handleChange = (cb, inputType, input) => {
-  cb(inputType, input)
-}
+  cb(inputType, input);
+};
 
 const Signup = ({
   signup,
@@ -21,15 +21,12 @@ const Signup = ({
   addText,
   clear
 }) => {
-
-  const enterInput =
-    (e) =>
-      e.key === 'Enter'
-      && handleClick(e, signup, { username, password })
+  const enterInput = e =>
+    e.key === "Enter" && handleClick(e, signup, { username, password });
 
   return modal({
     showModal,
-    handleClose: () => closeModal('signup')
+    handleClose: () => closeModal("signup")
   })(
     <Layout>
       <Title>SIGNUP</Title>
@@ -52,32 +49,32 @@ const Signup = ({
       />
       <Button
         onClick={e => {
-          handleClick(e, signup, { username, password })
-          clear()
+          handleClick(e, signup, { username, password });
+          clear();
         }}
       >
         Submit
       </Button>
     </Layout>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
 
 const Layout = styled.div`
   display: grid;
   grid-template-rows: 75px 50px auto auto auto;
-`
+`;
 const Title = styled.h1`
   font-weight: bold;
   justify-self: center;
-`
+`;
 const Verify = styled.p`
   color: red;
   justify-self: center;
   font-weight: bold;
   font-size: 18px;
-`
+`;
 const Input = styled.input`
   padding: 0.5em;
   margin: 1.5em;
@@ -88,7 +85,7 @@ const Input = styled.input`
   border: solid 2px black;
   border-radius: 3px;
   justify-self: center;
-`
+`;
 
 const Button = styled.button`
   grid-row: 5;
@@ -107,4 +104,4 @@ const Button = styled.button`
     cursor: pointer;
   }
   justify-self: center;
-`
+`;

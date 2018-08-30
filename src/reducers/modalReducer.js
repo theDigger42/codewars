@@ -1,17 +1,12 @@
-import {
-  OPEN_MODAL,
-  CLOSE_MODAL,
-  SIGN_UP,
-  LOGIN
-} from '../actions/types'
+import { OPEN_MODAL, CLOSE_MODAL, SIGN_UP, LOGIN } from "../actions/types";
 
 const initialState = {
   signup: false,
   login: false,
   ask: false,
-  message: '',
+  message: "",
   show: false
-}
+};
 
 const modalReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -21,20 +16,20 @@ const modalReducer = (state = initialState, action) => {
         [action.payload.modal]: true,
         message: action.payload.message,
         show: true
-      }
+      };
 
     case CLOSE_MODAL:
-      return initialState
+      return initialState;
 
     case SIGN_UP:
-      return initialState
+      return initialState;
 
     case LOGIN:
-      return initialState
+      return initialState;
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default modalReducer
+export default modalReducer;

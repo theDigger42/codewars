@@ -1,53 +1,55 @@
-import React, { Component } from 'react'
-import ScoreCard from './ScoreCard'
-import styled from 'styled-components'
-import { gameComplete } from '../socket/api'
+import React, { Component } from "react";
+import ScoreCard from "./ScoreCard";
+import styled from "styled-components";
+import { gameComplete } from "../socket/api";
 
 export default class Panel extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      tags: ['instructions'],
-      results: '',
+      tags: ["instructions"],
+      results: "",
       isComplete: false
-    }
+    };
 
-    this.clickTag = this.clickTag.bind(this)
-    this.suffix = this.suffix.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.clickTag = this.clickTag.bind(this);
+    this.suffix = this.suffix.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
-
     this.props.submit({
-      solution: this.props.prompt.solution, 
-      funcName: this.props.prompt.funcName, 
+      solution: this.props.prompt.solution,
+      funcName: this.props.prompt.funcName,
       tests: this.props.prompt.tests,
       testDescriptions: this.props.prompt.testDescriptions
-    })
+    });
 
     setTimeout(() => {
-      let passing = true
-      let descriptiveResults = this.props.prompt.testResults.map((test) => {
-        return test.passing ? <PassResult>{test.description}</PassResult> : <FailResult>{test.description}</FailResult>
-      })
-      if (this.props.prompt.message !== 'Success!') {
-        passing = false
+      let passing = true;
+      let descriptiveResults = this.props.prompt.testResults.map(test => {
+        return test.passing ? (
+          <PassResult>{test.description}</PassResult>
+        ) : (
+          <FailResult>{test.description}</FailResult>
+        );
+      });
+      if (this.props.prompt.message !== "Success!") {
+        passing = false;
       }
-      this.setState({ results: descriptiveResults})
+      this.setState({ results: descriptiveResults });
       if (passing) {
-        gameComplete()
-        this.props.setComplete()
-        setTimeout(() => this.clickTag('scores'), 500)
-        this.props.leave()
+        gameComplete();
+        this.props.setComplete();
+        setTimeout(() => this.clickTag("scores"), 500);
+        this.props.leave();
       }
-    }, 1000)
-
+    }, 1000);
   }
 
   clickTag(tag) {
     var tags = [tag];
-    this.setState({ tags: tags })
+    this.setState({ tags: tags });
   }
 
   suffix(i) {
@@ -66,85 +68,117 @@ export default class Panel extends Component {
   }
 
   render() {
-
     if (this.props.prompt.timer === 0) {
       this.props.score.scoreboard.forEach(user => {
         if (user.username === this.props.auth.user.username) {
           if (user.finished === false) {
-            this.props.leave()
-            this.clickTag('instructions')
-            this.props.clearPrompt()
-            this.setState({ results: '' })
-            this.props.clearScoreboard()
-            this.props.changeRoom('lobby')
+            this.props.leave();
+            this.clickTag("instructions");
+            this.props.clearPrompt();
+            this.setState({ results: "" });
+            this.props.clearScoreboard();
+            this.props.changeRoom("lobby");
           }
         }
-      })
+      });
     }
 
     let scoreboard = this.props.score.scoreboard.map((user, i) => {
       if (user.finished === true) {
-        return <ScoreCard suffix={this.suffix(i+1)} username={user.username} rank={user.rank}/>
+        return (
+          <ScoreCard
+            suffix={this.suffix(i + 1)}
+            username={user.username}
+            rank={user.rank}
+          />
+        );
       } else {
-        return <ScoreCard username={user.username} rank={user.rank}/>
+        return <ScoreCard username={user.username} rank={user.rank} />;
       }
-    })
+    });
 
-    let panelBody = this.state.tags[0] === 'instructions' 
-      ? <Info>{this.props.prompt.body}</Info>
-      : this.state.tags[0] === 'results' 
-      ? <Info>{this.state.results}</Info>
-      : <Info>{scoreboard}</Info>
+    let panelBody =
+      this.state.tags[0] === "instructions" ? (
+        <Info>{this.props.prompt.body}</Info>
+      ) : this.state.tags[0] === "results" ? (
+        <Info>{this.state.results}</Info>
+      ) : (
+        <Info>{scoreboard}</Info>
+      );
 
-    let submitButton = this.props.prompt.isComplete === false 
-      ? <Button onClick={() => {
-          this.handleSubmit()
-          this.clickTag('results')
-        }}>Submit</Button> 
-      : <Button onClick={() => {
-          this.props.join()
-          this.props.changeRoom('waiting')
-          this.clickTag('instructions')
-          this.props.clearPrompt()
-          this.setState({ results: '' })
-          this.props.clearScoreboard()
-        }}>Play again</Button>
+    let submitButton =
+      this.props.prompt.isComplete === false ? (
+        <Button
+          onClick={() => {
+            this.handleSubmit();
+            this.clickTag("results");
+          }}
+        >
+          Submit
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            this.props.join();
+            this.props.changeRoom("waiting");
+            this.clickTag("instructions");
+            this.props.clearPrompt();
+            this.setState({ results: "" });
+            this.props.clearScoreboard();
+          }}
+        >
+          Play again
+        </Button>
+      );
 
-    let joinButton = this.props.prompt.room === 'lobby' 
-      ? <Button onClick={() => {
-          this.props.changeRoom('waiting')
-          this.props.join()
-       }}>Join</Button> 
-      : this.props.prompt.room === 'waiting' 
-      ? <Button>Waiting...</Button> 
-      : submitButton
+    let joinButton =
+      this.props.prompt.room === "lobby" ? (
+        <Button
+          onClick={() => {
+            this.props.changeRoom("waiting");
+            this.props.join();
+          }}
+        >
+          Join
+        </Button>
+      ) : this.props.prompt.room === "waiting" ? (
+        <Button>Waiting...</Button>
+      ) : (
+        submitButton
+      );
 
     return (
       <ResultsPanel>
         <TabContainer>
-          <Tab active={this.state.tags[0] === 'instructions'}
+          <Tab
+            active={this.state.tags[0] === "instructions"}
             onClick={() => {
-              this.clickTag('instructions')
-            }}>
+              this.clickTag("instructions");
+            }}
+          >
             Instructions
           </Tab>
-          <Tab active={this.state.tags[0] === 'results'}
+          <Tab
+            active={this.state.tags[0] === "results"}
             onClick={() => {
-              this.clickTag('results')
-            }}>
+              this.clickTag("results");
+            }}
+          >
             Results
           </Tab>
-          <Tab active={this.state.tags[0] === 'scores'}
+          <Tab
+            active={this.state.tags[0] === "scores"}
             onClick={() => {
-              this.clickTag('scores')
-            }}>
+              this.clickTag("scores");
+            }}
+          >
             Players
           </Tab>
         </TabContainer>
         <Content>{panelBody}</Content>
         {joinButton}
       </ResultsPanel>
-    )
+    );
   }
 }
 
@@ -157,7 +191,7 @@ const ResultsPanel = styled.div`
   margin-left: 1em;
   width: 40vw;
   height: 80vh;
-`
+`;
 
 const TabContainer = styled.div`
   grid-row: 1;
@@ -166,7 +200,7 @@ const TabContainer = styled.div`
   grid-column-gap: 10px;
   align-items: center;
   width: 40vw;
-`
+`;
 const Tab = styled.div`
   background: dimgrey;
   color: white;
@@ -178,7 +212,9 @@ const Tab = styled.div`
   padding: 2px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  ${({ active }) => active && `
+  ${({ active }) =>
+    active &&
+    `
     color: black;
     background: #cccccc;
     font-weight: bold;
@@ -194,7 +230,7 @@ const Tab = styled.div`
   @media (max-width: 510px) {
     font-size: 11px;
   }
-`
+`;
 const Content = styled.div`
   font-size: 10px;
   text-align: center;
@@ -204,7 +240,7 @@ const Content = styled.div`
   margin-top: 8px;
   background: #cccccc;
   box-shadow: 4px 5px 6px rgba(0, 0, 0, 0.7);
-`
+`;
 const Info = styled.div`
   font-size: 24px;
   @media (max-width: 860px) {
@@ -216,7 +252,7 @@ const Info = styled.div`
   @media (max-width: 650px) {
     font-size: 19px;
   }
-`
+`;
 const Button = styled.button`
   grid-row: 3;
   font-size: 30px;
@@ -227,18 +263,20 @@ const Button = styled.button`
   margin-top: 10px;
   box-shadow: 4px 5px 8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-  &:hover{{
-    background: #1F1F1F;
-  }}
+  &:hover {
+     {
+      background: #1f1f1f;
+    }
+  }
   width: 40vw;
   height: 60px;
   @media (max-width: 750px) {
     font-size: 24px;
   }
-`
+`;
 const PassResult = styled.p`
   color: green;
-`
+`;
 const FailResult = styled.p`
   color: red;
-`
+`;

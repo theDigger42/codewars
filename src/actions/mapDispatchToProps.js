@@ -1,42 +1,53 @@
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from "redux";
 
-import { addText, clearAll, clearText } from './inputText'
+import { addText, clearAll, clearText } from "./inputText";
 
-import { openModal, closeModal } from './modal'
+import { openModal, closeModal } from "./modal";
 
-import { signup, login, logout, setCurrentUser } from './auth'
+import { signup, login, logout, setCurrentUser } from "./auth";
 
-import { submit, getPrompt, clearPrompt, changeRoom, setComplete, userSubmition, addSolution, onTimerChange } from './prompt'
+import {
+  submit,
+  getPrompt,
+  clearPrompt,
+  changeRoom,
+  setComplete,
+  userSubmition,
+  addSolution,
+  onTimerChange
+} from "./prompt";
 
-import { getLeaderboard, onScoreboardChange, clearScoreboard } from './score'
+import { getLeaderboard, onScoreboardChange, clearScoreboard } from "./score";
 
-import { setOnline, getOnlineUser } from './online'
+import { setOnline, getOnlineUser } from "./online";
 
-const mapDispatchToProps = (dispatch) => (
-  bindActionCreators({
-    openModal,
-    closeModal,
-    addText,
-    clearText,
-    clearAll,
-    signup,
-    login,
-    logout,
-    setCurrentUser,
-    submit,
-    getLeaderboard,
-    getPrompt,
-    clearPrompt,
-    onScoreboardChange,
-    changeRoom,
-    setComplete,
-    clearScoreboard,
-    setOnline,
-    getOnlineUser,
-    userSubmition,
-    addSolution,
-    onTimerChange
-  }, dispatch)
-)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      openModal,
+      closeModal,
+      addText,
+      clearText,
+      clearAll,
+      signup,
+      login,
+      logout,
+      setCurrentUser,
+      submit,
+      getLeaderboard,
+      getPrompt,
+      clearPrompt,
+      onScoreboardChange,
+      changeRoom,
+      setComplete,
+      clearScoreboard,
+      setOnline,
+      getOnlineUser,
+      userSubmition,
+      addSolution,
+      onTimerChange
+    },
+    dispatch
+  );
 
-export default mapDispatchToProps
+export default mapDispatchToProps;
