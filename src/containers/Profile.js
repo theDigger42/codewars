@@ -31,8 +31,9 @@ export default class Profile extends Component {
 
     let userList =
       mapping &&
-      mapping.map(arr => (
+      mapping.map((arr, i) => (
         <User
+          key={i}
           rank={arr[1].rank}
           onClick={() => {
             this.props.getOnlineUser(arr[0]);
@@ -73,6 +74,19 @@ export default class Profile extends Component {
                 <p>Bad</p>
                 <p>New</p>
               </EntryDiv>
+              <RatingDiv>
+                <p>1600 + </p>
+                <p>1500 - 1600</p>
+                <p>1400 - 1500</p>
+                <p>1300 - 1400</p>
+                <p>1200 - 1300</p>
+                <p>1100 - 1200</p>
+                <p>1000 - 1100</p>
+                <p>900 - 1000</p>
+                <p>800 - 900</p>
+                <p> 0 - 800 </p>
+                <p>1000</p>
+              </RatingDiv>
               <ColorDiv>
                 <div
                   style={{
@@ -196,7 +210,7 @@ const Body = styled.div`
 const UserProfile = styled.div`
   grid-column: 1;
   display: grid;
-  background: dimgray;
+  background: #cccccc;
   grid-template-rows: 0.3fr 2fr;
   grid-template-columns: 1fr 1fr;
   height: 100%;
@@ -246,7 +260,7 @@ const Legend = styled.div`
   grid-row: 3;
   grid-column: 1 / 3;
   display: grid;
-  grid-template-columns: 1fr 0.5fr;
+  grid-template-columns: 1fr 1fr 1fr;
   background: #1f1f1f;
 `;
 const EntryDiv = styled.div`
@@ -258,11 +272,20 @@ const EntryDiv = styled.div`
   font-weight: bold;
   font-size: 12px;
 `;
-const ColorDiv = styled.div`
+const RatingDiv = styled.div`
   grid-column: 2;
   display: grid;
   grid-template-rows: repeat(auto-fit, 1fr);
-  justify-items: left;
+  justify-items: center;
+  color: gainsboro;
+  font-weight: bold;
+  font-size: 12px;
+`;
+const ColorDiv = styled.div`
+  grid-column: 3;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 1fr);
+  justify-items: center;
   margin-top: 5px;
 `;
 const Rank = styled.h2`

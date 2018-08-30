@@ -7,7 +7,8 @@ import {
   USER_SUBMITION,
   SOLUTION_CHANGE,
   CLEAR_ALL_INPUTS,
-  TIMER_CHANGE
+  TIMER_CHANGE,
+  RESET_TIMER
 } from "../actions/types";
 
 const initialState = {
@@ -33,6 +34,12 @@ const prompt = (state = initialState, action) => {
         timer: action.payload
       };
 
+    case RESET_TIMER:
+      return {
+        ...state,
+        timer: null
+      }
+
     case GET_PROMPT:
       return {
         ...state,
@@ -49,7 +56,7 @@ const prompt = (state = initialState, action) => {
       return {
         ...state,
         title: "Get ready...",
-        body: "Wait for the next game to begin",
+        body: "Keep playing : ) ",
         solution: "",
         results: [],
         testDescriptions: [],

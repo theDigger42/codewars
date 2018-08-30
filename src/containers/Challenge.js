@@ -10,7 +10,7 @@ export default class Challenge extends Component {
     let timer = this.props.timer ? (
       <Timer>Next game starts in: {this.props.timer} </Timer>
     ) : (
-      <Timer>Click Join</Timer>
+      <Timer>...</Timer>
     );
     return (
       <Layout>

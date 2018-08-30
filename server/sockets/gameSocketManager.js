@@ -5,6 +5,7 @@ const getUser = require("../../database/index").getUser;
 const updateWins = require("../../database/index").updateWins;
 const updateRating = require("../../database/index").updateRating;
 const EloRank = require("../../helpers/ranking");
+const Promise = require('bluebird');
 
 const elo = new EloRank();
 
@@ -13,10 +14,17 @@ let waitingUsers = [];
 let gameRoom = [];
 let scoreboard = [];
 
-const startGame = () => {
+const startGame = async () => {
   rankFinishers();
-  setTimeout(() => {
-    gameRoom = waitingUsers;
+  setTimeout(async () => {
+    await Promise.map(waitingUsers, (user) => {
+      return getUser(user.username).then(user => {
+        user.finished = false
+        return user
+      })
+    }).then(users => {
+      gameRoom = users
+    })
     scoreboard = [];
     waitingUsers = [];
     waitingRoom = {};
@@ -33,26 +41,28 @@ const startGame = () => {
     //   ioGame.emit('challenge', res)
     // })
     scoreboardChange();
-  }, 1000);
+  }, 1000)
+};
+
+const updateUserInGameRoom = (username) => {
+  gameRoom.forEach(user => {
+    if (user.username === username) {
+      user.finished = true
+    }
+  });
 };
 
 module.exports.ioGame = socket => {
   let _user = null;
   socket.on("joinWaitingRoom", async user => {
     _user = await getUser(user.username);
-    waitingUsers.push(_user);
-    waitingRoom[_user] = {
-      socket
-    };
+    if (!waitingRoom[_user.username]) waitingUsers.push(_user);
+    waitingRoom[_user.username] = _user
   });
-
-  const removeFromWaitingRoom = user => delete waitingRoom[user];
-
-  socket.on("exitWaitingRoom", removeFromWaitingRoom);
-  socket.on("disconnect", removeFromWaitingRoom);
 
   socket.on("gameComplete", () => {
     if (_user !== null) _user.finished = true;
+    updateUserInGameRoom(_user.username)
     scoreboardChange(_user);
   });
 };
@@ -125,7 +135,7 @@ const rankFinishers = async () => {
   unfinished = await retrieveUsers(unfinishedUsers);
 
   if (scoreboard.length + unfinishedUsers.length >= 2) {
-    updateWins(scoreboard[0].username);
+    if (scoreboard[0]) updateWins(scoreboard[0].username);
   }
 
   if (finished.length >= 2) {
@@ -148,11 +158,11 @@ const rankFinishers = async () => {
   }
 };
 
-let timer = 120;
+let timer = 30;
 
 setInterval(() => {
   if (timer === -1) {
-    timer = 120;
+    timer = 30;
     startGame();
   }
   ioGame.emit("timer", timer);

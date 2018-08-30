@@ -6,7 +6,8 @@ import {
   SET_COMPLETE,
   USER_SUBMITION,
   SOLUTION_CHANGE,
-  TIMER_CHANGE
+  TIMER_CHANGE,
+  RESET_TIMER
 } from "./types";
 import axios from "../../node_modules/axios";
 
@@ -83,6 +84,14 @@ export const onTimerChange = count => {
     dispatch({
       type: TIMER_CHANGE,
       payload: count
+    });
+  };
+};
+
+export const resetTimer = () => {
+  return dispatch => {
+    dispatch({
+      type: RESET_TIMER
     });
   };
 };

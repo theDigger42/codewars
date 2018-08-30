@@ -14,10 +14,16 @@ import {
   setComplete,
   userSubmition,
   addSolution,
-  onTimerChange
+  onTimerChange,
+  resetTimer
 } from "./prompt";
 
-import { getLeaderboard, onScoreboardChange, clearScoreboard } from "./score";
+import {
+  getDailyLeaderboard,
+  getLeaderboard,
+  onScoreboardChange,
+  clearScoreboard
+} from "./score";
 
 import { setOnline, getOnlineUser } from "./online";
 
@@ -34,6 +40,7 @@ const mapDispatchToProps = dispatch =>
       logout,
       setCurrentUser,
       submit,
+      getDailyLeaderboard,
       getLeaderboard,
       getPrompt,
       clearPrompt,
@@ -45,7 +52,8 @@ const mapDispatchToProps = dispatch =>
       getOnlineUser,
       userSubmition,
       addSolution,
-      onTimerChange
+      onTimerChange,
+      resetTimer
     },
     dispatch
   );

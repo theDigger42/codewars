@@ -1,24 +1,15 @@
 const io = require("../index").io;
+const getUser = require("../../database/index").getUser;
 
 let connectedUsers = {};
 
 const addUser = (userList, user) => {
-  if (user === null || user.username === null) {
-    let newList = Object.assign({}, userList);
-    newList["guest"] = "guest";
-    return;
-  }
   let newList = Object.assign({}, userList);
   newList[user.username] = user;
   return newList;
 };
 
 const removeUser = (userList, user) => {
-  if (user === null) {
-    let newList = Object.assign({}, userList);
-    delete newList["guest"];
-    return;
-  }
   let newList = Object.assign({}, userList);
   if (user) delete newList[user.username];
   return newList;
@@ -30,20 +21,24 @@ module.exports.io = socket => {
   });
 
   socket.on("USER_CONNECTED", user => {
-    connectedUsers = addUser(connectedUsers, user);
-    socket.user = user;
-    io.emit("USER_CONNECTED", connectedUsers);
+    if (user) {
+      getUser(user.username).then(async newUser => {
+        connectedUsers = await addUser(connectedUsers, newUser);
+        socket.newUser = newUser;
+        io.emit("USER_CONNECTED", connectedUsers);
+      });
+    }
   });
 
   socket.on("disconnect", () => {
-    if ("user" in socket) {
-      connectedUsers = removeUser(connectedUsers, socket.user);
+    if ("newUser" in socket) {
+      connectedUsers = removeUser(connectedUsers, socket.newUser);
       io.emit("USER_DISCONNECTED", connectedUsers);
     }
   });
 
   socket.on("LOGOUT", () => {
-    connectedUsers = removeUser(connectedUsers, socket.user);
+    connectedUsers = removeUser(connectedUsers, socket.newUser);
     io.emit("USER_DISCONNECTED", connectedUsers);
   });
 };

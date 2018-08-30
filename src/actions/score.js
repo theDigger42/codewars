@@ -1,9 +1,25 @@
-import { GET_LEADERBOARD, CHANGE_SCOREBOARD, CLEAR_SCOREBOARD } from "./types";
+import {
+  GET_DAILY_LEADERBOARD,
+  GET_LEADERBOARD,
+  CHANGE_SCOREBOARD,
+  CLEAR_SCOREBOARD
+} from "./types";
 import axios from "../../node_modules/axios";
+
+export const getDailyLeaderboard = () => {
+  return dispatch => {
+    axios.get("http://localhost:3000/leaderboardByDay").then(res => {
+      dispatch({
+        type: GET_DAILY_LEADERBOARD,
+        payload: res.data
+      });
+    });
+  };
+};
 
 export const getLeaderboard = () => {
   return dispatch => {
-    axios.get("http://localhost:3000/leaderboardByDay").then(res => {
+    axios.get("http://localhost:3000/leaderboard").then(res => {
       dispatch({
         type: GET_LEADERBOARD,
         payload: res.data

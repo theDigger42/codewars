@@ -9,6 +9,7 @@ const Layout = styled.div`
   margin-bottom: 0.5em;
   box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.9);
   border: 1px solid black;
+  border-radius: 5px;
   height: 50px;
   font-size: 18px;
   @media (max-width: 700px) {

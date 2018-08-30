@@ -5,30 +5,78 @@ import Footer from "../components/Footer";
 import background from "../images/Grey-website-background.png";
 
 export default class Leaderboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tags: ["Daily"]
+    };
+
+    this.clickTag = this.clickTag.bind(this);
+  }
+
+  clickTag(tag) {
+    var tags = [tag];
+    this.setState({ tags: tags });
+  }
+
   componentDidMount() {
+    this.props.getDailyLeaderboard();
     this.props.getLeaderboard();
   }
 
   render() {
-    let usernames = this.props.score.leaderboard.map((user, i) => {
-      return (
-        <UserName rank={user.rank} key={i}>
-          {" "}
-          {user._id}{" "}
-        </UserName>
-      );
-    });
-    let ratings = this.props.score.leaderboard.map((user, i) => {
-      if (user.rating < 0) {
-        return <UserRating key={i}> {user.rating} </UserRating>;
-      } else {
-        return <UserRating key={i}> +{user.rating} </UserRating>;
-      }
-    });
+    let usernames =
+      this.state.tags[0] === "Daily"
+        ? this.props.score.daily.map((user, i) => {
+            return (
+              <UserName rank={user._id.rank} key={i}>
+                {" "}
+                {user._id.username}{" "}
+              </UserName>
+            );
+          })
+        : this.props.score.leaderboard.map((user, i) => {
+            return (
+              <UserName rank={user.rank} key={i}>
+                {" "}
+                {user.username}{" "}
+              </UserName>
+            );
+          });
+    let ratings =
+      this.state.tags[0] === "Daily"
+        ? this.props.score.daily.map((user, i) => {
+            if (user.rating < 0) {
+              return <UserRating key={i}> {user.rating} </UserRating>;
+            } else {
+              return <UserRating key={i}> +{user.rating} </UserRating>;
+            }
+          })
+        : this.props.score.leaderboard.map((user, i) => {
+            if (user.rating < 0) {
+              return <UserRating key={i}> {user.rating} </UserRating>;
+            } else {
+              return <UserRating key={i}> {user.rating} </UserRating>;
+            }
+          });
     return (
       <Layout>
         <Navbar {...this.props} active={"scores"} />
-        <Title>Daily Leaderboard</Title>
+        <Selection>
+          <DailyButton
+            onClick={() => this.clickTag("Daily")}
+            active={this.state.tags[0] === "Daily"}
+          >
+            Today
+          </DailyButton>
+          <LeaderboardButton
+            onClick={() => this.clickTag("All Time")}
+            active={this.state.tags[0] === "All Time"}
+          >
+            All Time
+          </LeaderboardButton>
+        </Selection>
+        <Title>{this.state.tags[0] + " Leaderboard"}</Title>
         <Body>
           <LeftDiv>
             <User>User</User>
@@ -39,7 +87,9 @@ export default class Leaderboard extends Component {
             {ratings} */}
           </MiddleDiv>
           <RightDiv>
-            <Win>Rating</Win>
+            <Rating>
+              {this.state.tags[0] === "Daily" ? "Rating Δ" : "Rating"}
+            </Rating>
             {ratings}
           </RightDiv>
         </Body>
@@ -56,6 +106,51 @@ const Layout = styled.div`
   width: 100vw;
   height: 100vh;
   background: url(${background}) dimgrey;
+`;
+const Selection = styled.div`
+  grid-column: 1 / 13;
+  margin-top: 100px;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: 1fr 50px 1fr;
+`;
+const DailyButton = styled.button`
+  grid-column: 1;
+  width: 20vw;
+  font-size: 20px;
+  border-radius: 5px;
+  &:hover {
+    font-weight: bold;
+    background: maroon;
+    color: ghostwhite;
+    cursor: pointer;
+  }
+  ${({ active }) =>
+    active &&
+    `
+    color: ghostwhite;
+    background: maroon;
+    font-weight: bold;
+  `};
+`;
+const LeaderboardButton = styled.button`
+  grid-column: 3;
+  width: 20vw;
+  font-size: 20px;
+  border-radius: 5px;
+  &:hover {
+    font-weight: bold;
+    background: maroon;
+    color: ghostwhite;
+    cursor: pointer;
+  }
+  ${({ active }) =>
+    active &&
+    `
+    color: ghostwhite;
+    background: maroon;
+    font-weight: bold;
+  `};
 `;
 const Body = styled.div`
   grid-column: 1 / 13;
@@ -94,7 +189,6 @@ const RightDiv = styled.div`
   margin-bottom: 50px;
 `;
 const Title = styled.h1`
-  margin-top: 100px;
   grid-column: 1 / 13;
   justify-self: center;
   min-height: 50px;
@@ -106,19 +200,13 @@ const User = styled.span`
   font-size: 30px;
   justify-self: right;
   font-weight: bold;
-  color: red;
+  color: black;
 `;
 const Rating = styled.span`
   font-size: 30px;
-  justify-self: center;
-  font-weight: bold;
-  color: red;
-`;
-const Win = styled.span`
-  font-size: 30px;
   justify-self: left;
   font-weight: bold;
-  color: red;
+  color: black;
 `;
 const UserName = styled.span`
   font-weight: bold;
@@ -156,11 +244,5 @@ const UserRating = styled.span`
   font-weight: bold;
   font-size: 24px;
   justify-self: center;
-  color: gainsboro;
-`;
-const UserWins = styled.span`
-  font-weight: bold;
-  font-size: 24px;
-  justify-self: left;
   color: gainsboro;
 `;

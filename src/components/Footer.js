@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-const Footer = props => {
+const Footer = (props) => {
   return (
     <Layout>
-      <Copy>{"Code-War"} 2018</Copy>
+      <Copy>{"Code-War"}  2018</Copy>
     </Layout>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
 
 const Layout = styled.footer`
   position: fixed;
@@ -20,7 +20,7 @@ const Layout = styled.footer`
   background: black;
   width: 100vw;
   height: 50px;
-`;
+`
 
 const Copy = styled.h3`
   grid-column: 2;
@@ -29,4 +29,5 @@ const Copy = styled.h3`
   align-self: center;
   width: 100%;
   text-align: center;
-`;
+`
+

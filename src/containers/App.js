@@ -42,6 +42,7 @@ export default class App extends Component {
   leaveGame() {
     exitWaitingRoom(this.props.auth.user);
     unsubscribe();
+    this.props.resetTimer()
   }
 
   componentWillUnmount() {
