@@ -10,12 +10,14 @@ const signup = require("./routes/signup");
 const users = require("./routes/users");
 const challengeRoutes = require("./routes/challenge");
 const databaseRoutes = require("./routes/database");
+const helmet = require('helmet')
 
 const app = express();
 app.use(compression());
 const server = http.Server(app);
 
 // Setup middleware
+app.use(helmet())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../build"));
