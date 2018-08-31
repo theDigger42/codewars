@@ -121,7 +121,6 @@ let findScoreboardByDay = (callback) => {
     { $group: { _id: {username: '$username'}, rating: {$sum: '$rating'} } },
     { $sort: { rating: -1 } }
   ], function (err, results) {
-    console.log(results);
     if (err) {
       console.log('err in scoreboard aggregate');
     } else {
@@ -214,6 +213,13 @@ let getUser = (username) => {
   })
 }
 
+let getRank = (username) => {
+  return new Promise((resolve) => {
+    User.findOne({"username": username})
+    .then(user => resolve(user.get('rank')));
+  });
+};
+
 // Database export
 // Database export  
 module.exports.db = db;
@@ -232,3 +238,4 @@ module.exports.patchUser = patchUser
 module.exports.getUser = getUser
 module.exports.updateWins = updateWins
 module.exports.updateRating = updateRating
+module.exports.getRank = getRank;

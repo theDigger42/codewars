@@ -93,7 +93,7 @@ export default class Panel extends Component {
           />
         );
       } else {
-        return <ScoreCard username={user.username} rank={user.rank} />;
+        return <ScoreCard username={user.username} rank={user.rank} getOnlineUser={this.props.getOnlineUser}/>;
       }
     });
 

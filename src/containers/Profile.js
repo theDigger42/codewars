@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import background from "../images/Grey-website-background.png";
+import ScoreCard from '../components/ScoreCard'
 
 export default class Profile extends Component {
   constructor(props) {
@@ -32,16 +33,16 @@ export default class Profile extends Component {
     let userList =
       mapping &&
       mapping.map((arr, i) => (
-        <User
+        <ScoreCard
           key={i}
           rank={arr[1].rank}
-          onClick={() => {
-            this.props.getOnlineUser(arr[0]);
-            this.clickTag("user");
+          username={arr[0]}
+          getOnlineUser={this.props.getOnlineUser}
+          style={{
+            margin: "1em"
           }}
         >
-          {arr[0]}
-        </User>
+        </ScoreCard>
       ));
 
     return (
@@ -196,7 +197,6 @@ const Layout = styled.div`
   grid-template-columns: repeat(auto-fit, 1fr);
   background: url(${background}) dimgrey;
   width: 100vw;
-  height: 100%;
 `;
 const Body = styled.div`
   margin-top: 75px;
@@ -210,7 +210,7 @@ const Body = styled.div`
 const UserProfile = styled.div`
   grid-column: 1;
   display: grid;
-  background: #cccccc;
+  background: #aaaaaa;
   grid-template-rows: 0.3fr 2fr;
   grid-template-columns: 1fr 1fr;
   height: 100%;
@@ -254,7 +254,6 @@ const Stats = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 40px 40px 40px;
-  height: 100%;
 `;
 const Legend = styled.div`
   grid-row: 3;
@@ -312,7 +311,6 @@ const OnlineUsers = styled.div`
   grid-column: 2;
   display: grid;
   grid-template-rows: 70px auto;
-  height: 100%;
 `;
 const Online = styled.h1`
   grid-row: 1;
@@ -325,38 +323,10 @@ const Online = styled.h1`
 const UserList = styled.div`
   grid-row: 2;
   display: grid;
-  grid-template-rows: repeat(auto-fit, 50px);
+  grid-template-rows: repeat(auto-fit, 60px);
   overflow: auto;
   justify-self: center;
+  width: 60%;
   height: 100%;
-`;
-const User = styled.h2`
-  font-size: 24px;
-  justify-self: center;
-  cursor: pointer;
-  color: ${props => {
-    if (props.rank === "Bad") {
-      return "cyan";
-    } else if (props.rank === "Noob") {
-      return "green";
-    } else if (props.rank === "Script Kiddie") {
-      return "yellow";
-    } else if (props.rank === "Brogrammer") {
-      return "orange";
-    } else if (props.rank === "Dev") {
-      return "orangered";
-    } else if (props.rank === "Senior") {
-      return "red";
-    } else if (props.rank === "Architect") {
-      return "maroon";
-    } else if (props.rank === "Genius") {
-      return "#a500ff";
-    } else if (props.rank === "Legend") {
-      return "indigo";
-    } else if (props.rank === "Hacker") {
-      return "black";
-    } else if (props.rank === "New") {
-      return "white";
-    }
-  }};
+  padding: 1em;
 `;

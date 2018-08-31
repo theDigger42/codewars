@@ -29,5 +29,6 @@ const Copy = styled.h3`
   align-self: center;
   width: 100%;
   text-align: center;
+  line-height: 10px;
 `
 

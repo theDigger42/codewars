@@ -29,7 +29,7 @@ export default class Leaderboard extends Component {
       this.state.tags[0] === "Daily"
         ? this.props.score.daily.map((user, i) => {
             return (
-              <UserName rank={user._id.rank} key={i}>
+              <UserName rank={user.rank} key={i}>
                 {" "}
                 {user._id.username}{" "}
               </UserName>
@@ -104,7 +104,6 @@ const Layout = styled.div`
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
   width: 100vw;
-  height: 100vh;
   background: url(${background}) dimgrey;
 `;
 const Selection = styled.div`

@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-const Layout = styled.div`
+
+const Layout = styled(Link)`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1.3fr;
   justify-items: center;
@@ -45,6 +47,9 @@ const Layout = styled.div`
       return "black";
     }
   }};
+  &:hover{
+    cursor: pointer;
+  }
 `;
 const Suffix = styled.span`
   grid-column: 1;
@@ -60,9 +65,14 @@ const Rank = styled.span`
   font-style: italic;
 `;
 
-const ScoreCard = ({ suffix, username, rank }) => {
+const ScoreCard = ({ suffix, username, rank, getOnlineUser }) => {
   return (
-    <Layout rank={rank}>
+    <Layout 
+      rank={rank}
+      to="/profile"
+      onClick={() => {
+        getOnlineUser(username);
+      }}>
       <Suffix>{suffix}</Suffix>
       <Username>{username}</Username>
       <Rank>{rank}</Rank>

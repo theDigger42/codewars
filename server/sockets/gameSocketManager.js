@@ -41,7 +41,7 @@ const startGame = async () => {
     //   ioGame.emit('challenge', res)
     // })
     scoreboardChange();
-  }, 1000)
+  }, 500)
 };
 
 const updateUserInGameRoom = (username) => {

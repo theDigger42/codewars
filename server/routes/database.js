@@ -4,6 +4,8 @@ const User = require("../../database/index.js").User;
 const Scoreboard = require("../../database/index.js").Scoreboard;
 const ToyProblem = require("../../database/index.js").ToyProblem;
 const UserChallenge = require("../../database/index").UserChallenge;
+const getRank = require("../../database/index").getRank;
+const Promise = require('bluebird');
 
 let router = express.Router();
 
@@ -29,7 +31,12 @@ router.get("/leaderboard", function(req, res) {
 //Get leaderboard by DAY
 router.get("/leaderboardByDay", function(req, res) {
   db.findScoreboardByDay(users => {
-    res.json(users);
+    Promise.map(users, async (user) => {
+      user.rank = await getRank(user._id.username)
+      return user;
+    }).then(results => {
+      res.json(results);
+    })
   });
 });
 

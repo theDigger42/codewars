@@ -8,7 +8,7 @@ import axios from "../../node_modules/axios";
 
 export const getDailyLeaderboard = () => {
   return dispatch => {
-    axios.get("http://localhost:3000/leaderboardByDay").then(res => {
+    axios.get("/leaderboardByDay").then(res => {
       dispatch({
         type: GET_DAILY_LEADERBOARD,
         payload: res.data
@@ -19,7 +19,7 @@ export const getDailyLeaderboard = () => {
 
 export const getLeaderboard = () => {
   return dispatch => {
-    axios.get("http://localhost:3000/leaderboard").then(res => {
+    axios.get("/leaderboard").then(res => {
       dispatch({
         type: GET_LEADERBOARD,
         payload: res.data
