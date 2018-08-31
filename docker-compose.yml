@@ -1,0 +1,16 @@
+version: '3'
+services:
+  server:
+    container_name: server
+    image: server
+    build: ./
+    command: node server/index.js database/seed.js 
+    ports: 
+      - 80:80
+    depends_on:
+      - mongo
+  mongo: 
+    container_name: mongo
+    image: mongo
+    ports:
+      - 27017:27017

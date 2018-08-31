@@ -36,7 +36,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "start-app": "node server/index.js"
   },
   "devDependencies": {
     "dotenv": "^6.0.0",

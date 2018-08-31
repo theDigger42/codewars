@@ -1,7 +1,10 @@
 const fs = require("fs");
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://kyle:kyle@ds127982.mlab.com:27982/codefightclub");
+//mongoose.connect("mongodb://kyle:kyle@ds127982.mlab.com:27982/codefightclub");
+mongoose.connect("mongodb://mongo:27017/codewars", { useNewUrlParser: true })
+.then(() => console.log('MongoDB Connected...'))
+.catch(err => console.log(err))
 
 const db = mongoose.connection;
 db.collection("toyProblems").drop();

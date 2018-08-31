@@ -29,7 +29,9 @@ app.use("/", users);
 app.use("/", challengeRoutes);
 app.use("/", databaseRoutes);
 
-app.set("port", process.env.PORT || 80);
+const port = 80;
+
+app.set("port", process.env.PORT || port);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
