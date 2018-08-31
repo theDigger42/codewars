@@ -45,6 +45,8 @@ const Layout = styled(Link)`
       return "indigo";
     } else if (props.rank === "Hacker") {
       return "black";
+    } else if (props.rank === "New") {
+      return "white";
     }
   }};
   &:hover{
