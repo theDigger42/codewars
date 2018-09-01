@@ -1,5 +1,5 @@
 const express = require("express");
-const execute = require("../../helpers/runner").execute;
+const execute = require("../helpers/runner").execute;
 
 let router = express.Router();
 

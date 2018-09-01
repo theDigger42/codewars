@@ -3,19 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
     "axios": "^0.18.0",
-    "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.1",
-    "body-parser": "^1.18.3",
     "brace": "^0.11.1",
-    "cookie-parser": "^1.4.3",
-    "cors": "^2.8.4",
-    "express": "^4.16.3",
-    "helmet": "^3.13.0",
-    "http": "0.0.0",
     "jsonwebtoken": "^8.3.0",
-    "mongoose": "^5.2.5",
-    "mongoose-validator": "^2.1.0",
     "nuka-carousel": "^4.3.6",
     "path": "^0.12.7",
     "react": "^16.4.1",
@@ -26,21 +19,21 @@
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "sandbox": "^0.8.6",
     "socket.io": "^2.1.1",
-    "styled-components": "^3.3.3",
-    "underscore": "^1.9.1"
+    "styled-components": "^3.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm-run-all -p start-js",
+    "build": "npm-run-all build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "server-dev": "nodemon server/index.js",
-    "start-app": "node server/index.js"
+    "build-css": "node-sass --include-path ./src  --include-path ./node_modules src/ -o src/compiled",
+    "watch-css": "npm run build-css && node-sass --include-path ./src --include-path ./node_modules src/ -o src/compiled/ --watch",
+    "start-js": "react-scripts start",
+    "build-js": "react-scripts build"
   },
   "devDependencies": {
-    "dotenv": "^6.0.0",
     "redux-devtools-extension": "^2.13.5"
-  }
+  },
+  "proxy": "http://server:8080"
 }

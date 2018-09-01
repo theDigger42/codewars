@@ -1,5 +1,5 @@
 const io = require("../index").io;
-const getUser = require("../../database/index").getUser;
+const getUser = require("../database/index").getUser;
 
 let connectedUsers = {};
 

@@ -1,10 +1,10 @@
 const express = require("express");
-const db = require("../../database/index.js");
-const User = require("../../database/index.js").User;
-const Scoreboard = require("../../database/index.js").Scoreboard;
-const ToyProblem = require("../../database/index.js").ToyProblem;
-const UserChallenge = require("../../database/index").UserChallenge;
-const getRank = require("../../database/index").getRank;
+const db = require("../database/index.js");
+const User = require("../database/index.js").User;
+const Scoreboard = require("../database/index.js").Scoreboard;
+const ToyProblem = require("../database/index.js").ToyProblem;
+const UserChallenge = require("../database/index").UserChallenge;
+const getRank = require("../database/index").getRank;
 const Promise = require('bluebird');
 
 let router = express.Router();

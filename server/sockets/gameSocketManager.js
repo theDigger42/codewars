@@ -1,10 +1,10 @@
 const ioGame = require("../index").ioGame;
-const ToyProblem = require("../../database/index").ToyProblem;
-const patchUser = require("../../database/index").patchUser;
-const getUser = require("../../database/index").getUser;
-const updateWins = require("../../database/index").updateWins;
-const updateRating = require("../../database/index").updateRating;
-const EloRank = require("../../helpers/ranking");
+const ToyProblem = require("../database/index").ToyProblem;
+const patchUser = require("../database/index").patchUser;
+const getUser = require("../database/index").getUser;
+const updateWins = require("../database/index").updateWins;
+const updateRating = require("../database/index").updateRating;
+const EloRank = require("../helpers/ranking");
 const Promise = require('bluebird');
 
 const elo = new EloRank();

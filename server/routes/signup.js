@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("../../database/index").User;
+const User = require("../database/index").User;
 const bcrypt = require("bcryptjs");
 
 let router = express.Router();

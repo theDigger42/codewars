@@ -1,35 +1,26 @@
-version: '3.5'
+version: '2'
 services:
-  server: 
-    container_name: server
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
-    volumes: 
-      - '.:/usr/src/app'
-      - '/usr/src/app/node_modules'
-    ports: 
-      - 3000:3000
+  server:
+    build:
+      context: ./server/
+    command: /usr/app/node_modules/.bin/nodemon src/index.js
+    volumes:
+      - ./server/:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "8080:8080"
+    # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
     environment:
       - NODE_ENV=development
-    depends_on:
-      - mongo
-  react:
-    container_name: react
+      - CHOKIDAR_USEPOLLING=true
+  client:
     build:
-      context: ./src
-      dockerfile: Dockerfile
+      context: ./client/
+    command: npm start
     volumes:
-      - '.:/usr/src/app'
-      - '/usr/src/app/node_modules'
-    ports:
-      - '3001:3001'
+      - ./client/:/usr/app
+      - /usr/app/node_modules
     depends_on:
       - server
-    environment:
-      - NODE_ENV=development
-  mongo: 
-    container_name: mongo
-    image: mongo
     ports:
-      - 27017:27017
+      - "3000:3000"

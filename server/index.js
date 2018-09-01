@@ -16,12 +16,16 @@ const app = express();
 app.use(compression());
 const server = http.Server(app);
 
+const PORT = process.env.PORT || 8080;
+const HOST = '0.0.0.0';
+const CLIENT_BUILD_PATH = path.join(__dirname, '../../client/build');
+
 // Setup middleware
 app.use(helmet())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/../build"));
 app.use(cors());
+app.use(express.static(CLIENT_BUILD_PATH));
 
 app.use("/api/auth", auth);
 app.use("/api/signup", signup);
@@ -29,12 +33,11 @@ app.use("/", users);
 app.use("/", challengeRoutes);
 app.use("/", databaseRoutes);
 
-const port = 3000;
+app.set("port", process.env.PORT || PORT);
 
-app.set("port", process.env.PORT || port);
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build", "index.html"));
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', function(request, response) {
+  response.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
 });
 
 const io = (module.exports.io = socket(server));
@@ -46,8 +49,7 @@ const gameSocketManager = require("./sockets/gameSocketManager").ioGame;
 io.on("connection", socketManager);
 ioGame.on("connection", gameSocketManager);
 
-server.listen(app.get("port"), function() {
-  console.log("Server started on port:" + app.get("port"));
-});
+server.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
 
 module.exports = app;
