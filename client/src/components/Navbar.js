@@ -148,7 +148,7 @@ const SignUp = styled.h2`
   cursor: pointer;
   justify-self: center;
   &:hover {
-    color: orangered;
+    color: red;
   }
 `;
 const LogIn = styled.h2`
@@ -158,7 +158,7 @@ const LogIn = styled.h2`
   cursor: pointer;
   justify-self: center;
   &:hover {
-    color: orangered;
+    color: red;
   }
 `;
 const Title = styled(Link)`
@@ -171,12 +171,12 @@ const NavLink = styled(Link)`
   cursor: pointer;
   color: white;
   &:hover {
-    color: orangered;
+    color: red;
   }
   ${({ active }) =>
     active &&
     `
-    color: orangered;
+    color: red;
   `};
 `;
 const Leaderboard = styled.h2`

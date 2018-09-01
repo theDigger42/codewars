@@ -2,6 +2,7 @@
   "name": "codewars",
   "version": "0.1.0",
   "private": true,
+  "main": "src/index.js",
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
@@ -32,7 +33,7 @@
     "underscore": "^1.9.1"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
