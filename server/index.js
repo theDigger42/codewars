@@ -29,7 +29,7 @@ app.use("/", users);
 app.use("/", challengeRoutes);
 app.use("/", databaseRoutes);
 
-const port = 80;
+const port = 3000;
 
 app.set("port", process.env.PORT || port);
 

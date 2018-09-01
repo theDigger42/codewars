@@ -1,0 +1,46 @@
+{
+  "name": "codewars",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "brace": "^0.11.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "helmet": "^3.13.0",
+    "http": "0.0.0",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.5",
+    "mongoose-validator": "^2.1.0",
+    "nuka-carousel": "^4.3.6",
+    "path": "^0.12.7",
+    "react": "^16.4.1",
+    "react-ace": "^6.1.4",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "sandbox": "^0.8.6",
+    "socket.io": "^2.1.1",
+    "styled-components": "^3.3.3",
+    "underscore": "^1.9.1"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "server-dev": "nodemon server/index.js",
+    "start-app": "node server/index.js"
+  },
+  "devDependencies": {
+    "dotenv": "^6.0.0",
+    "redux-devtools-extension": "^2.13.5"
+  }
+}
