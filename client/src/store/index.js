@@ -23,7 +23,7 @@ const promiseMiddleware = store => next => action => {
           });
         }
       })
-      .then(() => axios.post(`http://localhost:3000/api/auth`, action.credentials))
+      .then(() => axios.post(`/api/auth`, action.credentials))
       .then(res => {
         const token = res.data.token;
         localStorage.setItem("jwtToken", token);
