@@ -1,20 +1,13 @@
 [
   {
-    "body": "Write a function called helloWorld that Returns the string 'Hello World' using two variables example: helloWorld() // returns 'Hello World'",
-    "solution": "function helloWorld() {\n  const hello = '';\n  const world = '';\n  ______ hello + ' ' + world;\n}",
-    "tests": "[typeof helloWorld === 'function', helloWorld() === 'Hello World']",
-    "testDescriptions": "[\"helloWorld should be a function\", \"return value should be Hello World\"]",
-    "title": "Hello World!"
-  },
-  {
-    "body": "Write a function joinObjects that takes in 2 different objects and adds the properties of the 2nd object to the first and then returns the first object with the new properties attached.",
+    "body": "Write a function joinObjects that takes in 2 objects, then adds the properties of the 2nd object to the first and then returns the new first object.",
     "solution": "function joinObjects(obj1, obj2) {\n\n}",
     "tests": "[typeof joinObjects === 'function', typeof joinObjects({1: 1}, {2: 2}) === 'object' && !Array.isArray(joinObjects({1: 1}, {2: 2})), joinObjects({1: 1}, {2: 2})[1] === 1 && joinObjects({1: 1}, {2: 2})[2] === 2, joinObjects({1: 1}, {1: 5, 2: 2})[1] === 1 && joinObjects({1: 1}, {1: 5, 2: 2})[2] === 2]",
     "testDescriptions": "[\"joinObjects should be a function\", \"return value should be an object\", \"should join separate objects into one\", \"should not overwrite first object\"]",
     "title": "Join Objects"
   },
   {
-    "body": "Write a function fibonacci that takes an integer n and returns the nth number of the fibonacci sequence. DO NOT USE RECURSION. Code must run in O(n) time.",
+    "body": "Write a function fibonacci that takes an integer n and returns the nth number of the fibonacci sequence. YOU CANNOT USE RECURSION.",
     "solution": "function fibonacci(n) {\n\n}",
     "tests": "[typeof fibonacci === 'function', typeof fibonacci(3) === 'number', fibonacci(0) === 0, fibonacci(1) === 1, fibonacci(2) === 1, fibonacci(3) === 2, fibonacci(10) === 55, fibonacci(20) === 6765, fibonacci(40) === 102334155]",
     "testDescriptions": "[\"fibonacci should be a function\", \"fibonacci should return a number\", \"the 0th fibonacci number is 0\", \"the 1st fibonacci number is 1\", \"the 2nd fibonacci number is 1\", \"the 3rd fibonacci number is 2\", \"the 10th fibonacci number is 55\", \"the 20th fibonacci number is 6765\", \"the 40th fibonacci number is 102334155\"]",
@@ -35,7 +28,7 @@
     "title": "isEven"
   },
   {
-    "body": "Write a function factorial that takes a number n and returns the computed factorial of n",
+    "body": "Write a function factorial that takes a number n and returns the computed factorial of n. YOU CANNOT USE RECURSION.",
     "solution": "function factorial(n) {\n\n}",
     "tests": "[typeof factorial === 'function', typeof factorial(0) === 'number', factorial(0) === 0, factorial(1) === 1, factorial(2) === 2, factorial(3) === 6, factorial(4) === 24, factorial(5) === 120, factorial(6) === 720, factorial(7) === 5040]",
     "testDescriptions": "[\"factorial should be a function\", \"factorial should return a number\", \"0! should be 0\", \"1! should be 1\", \"2! should be 2\", \"3! should be 6\", \"4! should be 24\", \"5! should be 120\", \"6! should be 720\", \"7! should be 5040\"]",
@@ -50,7 +43,7 @@
   },
   {
     "body": "Given an integer, write a function to return its roman numeral representation",
-    "solution": "let numerals = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']\nlet values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]\n\nfunction convertToRoman(n) {\n\n}",
+    "solution": "function convertToRoman(n) {\n  let numerals = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']\n  let values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]\n\n}",
     "tests": "[typeof convertToRoman === 'function', typeof convertToRoman(1) === 'string', convertToRoman(2) === 'II', convertToRoman(49) === 'XLIX', convertToRoman(50) === 'L', convertToRoman(1094) === 'MXCIV']", 
     "testDescriptions": "[\"convertToRoman should be a function\", \"convertToRoman should return a string\", \"convertToRoman(2) should return 'II'\", \"convertToRoman(49) should return 'XLIX'\", \"convertToRoman(50) should return 'L'\", \"convertToRoman(1094) should return 'MXCIV'\"]",
     "title": "Roman Numeral"

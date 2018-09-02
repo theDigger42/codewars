@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const validate = require('mongoose-validator')
+const fs = require('fs')
+require('dotenv').config()
 
-mongoose.connect('mongodb://kyle:kyle@ds127982.mlab.com:27982/codefightclub');
+mongoose.connect(process.env.MONGO_URI);
 // mongoose.connect('mongodb://mongo:27017/codewars', { useNewUrlParser: true })
 // .then(() => console.log('MongoDB Connected...'))
 // .catch(err => console.log(err))

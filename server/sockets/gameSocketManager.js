@@ -28,18 +28,18 @@ const startGame = async () => {
     scoreboard = [];
     waitingUsers = [];
     waitingRoom = {};
-    ToyProblem.countDocuments().exec(function(err, count) {
-      var random = Math.floor(Math.random() * count);
-      ToyProblem.findOne()
-        .skip(random)
-        .exec(function(err, result) {
-          ioGame.emit("challenge", result);
-        });
-    });
-    // ToyProblem.findOne({'title': 'Balanced Parens'}).exec((err, res) => {
-    //   if (err) console.log(err)
-    //   ioGame.emit('challenge', res)
-    // })
+    // ToyProblem.countDocuments().exec(function(err, count) {
+    //   var random = Math.floor(Math.random() * count);
+    //   ToyProblem.findOne()
+    //     .skip(random)
+    //     .exec(function(err, result) {
+    //       ioGame.emit("challenge", result);
+    //     });
+    // });
+    ToyProblem.findOne({'title': 'Balanced Parens'}).exec((err, res) => {
+      if (err) console.log(err)
+      ioGame.emit('challenge', res)
+    })
     scoreboardChange();
   }, 500)
 };
@@ -158,11 +158,11 @@ const rankFinishers = async () => {
   }
 };
 
-let timer = 120;
+let timer = 180;
 
 setInterval(() => {
   if (timer === -1) {
-    timer = 120;
+    timer = 180;
     startGame();
   }
   ioGame.emit("timer", timer);

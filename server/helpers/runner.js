@@ -1,15 +1,13 @@
-const Sandbox = require("sandbox");
-const box = new Sandbox();
 const Promise = require("bluebird");
+const {VM} = require('vm2');
 
-box.options.timeout = 3000;
+const vm = new VM({
+  timeout: 3000,
+  sandbox: {}
+});
 
-var execute = function(code, tests) {
-  return new Promise(resolve => {
-    box.run(`${code} ${tests};`, output => {
-      resolve(output.result);
-    });
-  });
+let execute = (code, tests) => {
+  return new Promise(resolve => resolve(vm.run(`${code} ${tests}`)))
 };
 
-module.exports.execute = execute;
+module.exports.execute = execute
