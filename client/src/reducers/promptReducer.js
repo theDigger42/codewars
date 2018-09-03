@@ -8,7 +8,8 @@ import {
   SOLUTION_CHANGE,
   CLEAR_ALL_INPUTS,
   TIMER_CHANGE,
-  RESET_TIMER
+  RESET_TIMER,
+  RESET_RESULTS
 } from "../actions/types";
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   tests: [],
   testDescriptions: [],
   testResults: [],
+  loading: false,
   results: [],
   timer: null,
   message: "",
@@ -39,6 +41,13 @@ const prompt = (state = initialState, action) => {
         ...state,
         timer: null
       }
+    
+    case RESET_RESULTS:
+      return {
+        ...state,
+        testResults: [],
+        loading: true
+      }
 
     case GET_PROMPT:
       return {
@@ -49,7 +58,8 @@ const prompt = (state = initialState, action) => {
         tests: action.payload.tests,
         testDescriptions: action.payload.testDescriptions,
         isComplete: false,
-        room: ""
+        room: "",
+        loading: false
       };
 
     case CLEAR_PROMPT:
@@ -63,7 +73,8 @@ const prompt = (state = initialState, action) => {
         testResults: [],
         message: "",
         isComplete: false,
-        room: "waiting"
+        room: "waiting",
+        loading: false
       };
 
     case SUBMIT_SOLUTION:

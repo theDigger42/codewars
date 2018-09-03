@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import ScoreCard from "./ScoreCard";
 import styled from "styled-components";
+import '../styles/loader.css'
 import { gameComplete } from "../socket/api";
+import TestResults from "./TestResults";
 
 export default class Panel extends Component {
   constructor(props) {
@@ -20,29 +22,19 @@ export default class Panel extends Component {
   handleSubmit() {
     this.props.submit({
       solution: this.props.prompt.solution,
-      funcName: this.props.prompt.funcName,
       tests: this.props.prompt.tests,
       testDescriptions: this.props.prompt.testDescriptions
     });
 
     setTimeout(() => {
-      this.clickTag("results");
       let passing = true;
-      let descriptiveResults = this.props.prompt.testResults.map(test => {
-        return test.passing ? (
-          <PassResult>{test.description}</PassResult>
-        ) : (
-          <FailResult>{test.description}</FailResult>
-        );
-      });
       if (this.props.prompt.message !== "Success!") {
         passing = false;
       }
-      this.setState({ results: descriptiveResults });
       if (passing) {
         gameComplete();
         this.props.setComplete();
-        setTimeout(() => this.clickTag("scores"), 500);
+        setTimeout(() => this.clickTag("scores"), 1000);
         this.props.leave();
       }
     }, 2000);
@@ -69,6 +61,7 @@ export default class Panel extends Component {
   }
 
   render() {
+    
     if (this.props.prompt.timer === 0) {
       this.props.score.scoreboard.forEach(user => {
         if (user.username === this.props.auth.user.username) {
@@ -102,7 +95,7 @@ export default class Panel extends Component {
       this.state.tags[0] === "instructions" ? (
         <Info>{this.props.prompt.body}</Info>
       ) : this.state.tags[0] === "results" ? (
-        <Info>{this.state.results}</Info>
+        <Info>{<TestResults results={this.props.prompt.testResults} loading={this.props.prompt.loading}/>}</Info>
       ) : (
         <Info>{scoreboard}</Info>
       );
@@ -112,6 +105,10 @@ export default class Panel extends Component {
         <Button
           onClick={() => {
             this.handleSubmit();
+            this.clickTag('results')
+            this.setState({
+              results: ''
+            })
           }}
         >
           Submit
@@ -272,10 +269,4 @@ const Button = styled.button`
   @media (max-width: 750px) {
     font-size: 24px;
   }
-`;
-const PassResult = styled.p`
-  color: green;
-`;
-const FailResult = styled.p`
-  color: red;
 `;

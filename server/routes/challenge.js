@@ -36,9 +36,9 @@ router.post("/challenge", function(req, res) {
   })
   .catch(err => {
     testResults.push({
-      description: err,
+      description: err.toString(),
       passing: false
-    });
+    });   
     response = JSON.stringify({ results, testResults, message: 'FAILURE'});
     res.end(response);
   })

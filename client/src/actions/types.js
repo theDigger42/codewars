@@ -27,3 +27,5 @@ export const SOLUTION_CHANGE = "SOLUTION_CHANGE";
 
 export const TIMER_CHANGE = "TIMER_CHANGE";
 export const RESET_TIMER = "RESET_TIMER";
+export const RESET_RESULTS = "RESET_RESULTS";
+

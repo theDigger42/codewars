@@ -1,12 +1,5 @@
 [
   {
-    "body": "Write a function joinObjects that takes in 2 objects, then adds the properties of the 2nd object to the first and then returns the new first object.",
-    "solution": "let joinObjects = (obj1, obj2) => {\n\n}",
-    "tests": "[typeof joinObjects === 'function', typeof joinObjects({1: 1}, {2: 2}) === 'object' && !Array.isArray(joinObjects({1: 1}, {2: 2})), joinObjects({1: 1}, {2: 2})[1] === 1 && joinObjects({1: 1}, {2: 2})[2] === 2, joinObjects({1: 1}, {1: 5, 2: 2})[1] === 1 && joinObjects({1: 1}, {1: 5, 2: 2})[2] === 2]",
-    "testDescriptions": "[\"joinObjects should be a function\", \"return value should be an object\", \"should join separate objects into one\", \"should not overwrite first object\"]",
-    "title": "Join Objects"
-  },
-  {
     "body": "Write a function fibonacci that takes an integer n and returns the nth number of the fibonacci sequence.",
     "solution": "let fibonacci = (n) => {\n\n}",
     "tests": "[typeof fibonacci === 'function', typeof fibonacci(3) === 'number', fibonacci(0) === 0, fibonacci(1) === 1, fibonacci(2) === 1, fibonacci(3) === 2, fibonacci(10) === 55, fibonacci(20) === 6765]",

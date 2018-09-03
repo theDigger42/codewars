@@ -7,7 +7,8 @@ import {
   USER_SUBMITION,
   SOLUTION_CHANGE,
   TIMER_CHANGE,
-  RESET_TIMER
+  RESET_TIMER,
+  RESET_RESULTS
 } from "./types";
 import axios from "../../node_modules/axios";
 
@@ -32,6 +33,9 @@ export const submit = solution => {
         payload: res.data
       });
     });
+    dispatch({
+      type: RESET_RESULTS
+    })
   };
 };
 
