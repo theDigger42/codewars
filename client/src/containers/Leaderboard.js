@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import background from "../images/Grey-website-background.png";
 
 export default class Leaderboard extends Component {
   constructor(props) {
@@ -104,7 +103,7 @@ const Layout = styled.div`
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
   width: 100vw;
-  background: url(${background}) dimgrey;
+  background-color: #1f1f1f;
 `;
 const Selection = styled.div`
   grid-column: 1 / 13;
@@ -157,9 +156,8 @@ const Body = styled.div`
   grid-template-rows: 1fr;
   grid-template-columns: 5% 1fr 1fr 1fr 5%;
   grid-column-gap: 10px;
-  height: 63vh;
+  min-height: 60vh;
   margin-bottom: 75px;
-  overflow: auto;
 `;
 const LeftDiv = styled.div`
   grid-row: 1;
@@ -199,13 +197,13 @@ const User = styled.span`
   font-size: 30px;
   justify-self: right;
   font-weight: bold;
-  color: black;
+  color: gainsboro;
 `;
 const Rating = styled.span`
   font-size: 30px;
   justify-self: left;
   font-weight: bold;
-  color: black;
+  color: gainsboro;
 `;
 const UserName = styled.span`
   font-weight: bold;

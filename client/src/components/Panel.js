@@ -207,8 +207,8 @@ const Tab = styled.div`
   font-size: 28px;
   text-align: center;
   cursor: pointer;
-  height: 4vh;
-  line-height: 4vh;
+  height: 4.5vh;
+  line-height: 4.5vh;
   padding: 2px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -225,7 +225,6 @@ const Tab = styled.div`
   }
   @media (max-width: 705px) {
     font-size: 16px;
-    height: 30px;
   }
   @media (max-width: 510px) {
     font-size: 11px;

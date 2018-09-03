@@ -1,39 +1,11 @@
-function fibonacci(n) {
-  if (n === 0) return 0;
-  var previous_first = 0,
-    previous_second = 1,
-    next = 1;
-  for (var i = 2; i <= n; i++) {
-    next = previous_first + previous_second;
-    previous_first = previous_second;
-    previous_second = next;
-  }
-  return next;
-}
-
-function fibonacci(n) {
+let fibonacci = (n) => {
   if (n < 2){
     return n
   }
   return fibonacci(n - 1) + fibonacci(n - 2)
 }
 
-function helloWorld() {
-  const hello = "Hello";
-  const world = "World";
-  return `${hello} ${world}`;
-}
-
-function compareTriangleAndCircle(base, height, radius) {
-  const triArea = (base * height) / 2;
-  const circleArea = Math.PI * Math.pow(radius, 2);
-  if (triArea > circleArea) {
-    return "Triangle";
-  }
-  return "Circle";
-}
-
-function joinObjects(obj1, obj2) {
+let joinObjects = (obj1, obj2) => {
   Object.keys(obj2).forEach(key => {
     if (obj1[key]) {
       obj1[key] = obj1[key];
@@ -44,7 +16,7 @@ function joinObjects(obj1, obj2) {
   return obj1;
 }
 
-function sumArray(arr) {
+let sumArray = (arr) => {
   let sum = 0;
   arr.forEach(el => {
     sum += el;
@@ -52,23 +24,12 @@ function sumArray(arr) {
   return sum;
 }
 
-function isEven(n) {
-  return n % 2 === 0;
+let factorial = (n) => {
+  if (n === 0) return 1
+  return n * factorial(n-1);
 }
 
-function factorial(n) {
-  if (n === 0 || n === 1 || n === 2) {
-    return n;
-  }
-  let sum = 1;
-  while (n > 0) {
-    sum *= n;
-    n--;
-  }
-  return sum;
-}
-
-function reverse(str) {
+let reverse = (str) => {
   let rev = "";
   for (let i = str.length - 1; i >= 0; i--) {
     rev += str[i];
@@ -76,46 +37,8 @@ function reverse(str) {
   return rev;
 }
 
-function nQueens(n) {
-  var all = Math.pow(2, n) - 1;
-  var solutionCount = 0;
-
-  var findSolutions = function(cols, ld, rd) {
-    var pos = ~(cols | ld | rd) & all;
-
-    while (pos > 0) {
-      var bit = -pos & pos;
-      pos = pos ^ bit;
-
-      findSolutions(cols | bit, (ld | bit) << 1, (rd | bit) >> 1);
-    }
-    if (cols === all) {
-      solutionCount++;
-    }
-  };
-  findSolutions(0, 0, 0);
-  return solutionCount;
-}
-
-let numerals = [
-  "M",
-  "CM",
-  "D",
-  "CD",
-  "C",
-  "XC",
-  "L",
-  "XL",
-  "X",
-  "IX",
-  "V",
-  "IV",
-  "I"
-];
-let values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
-
-function convertToRoman(n) {
-  let numeral = "";
+let convertToRoman = (n) => {
+  let numeral = '';
   let i = 0;
   while (n > 0) {
     if (n - values[i] >= 0) {
@@ -128,14 +51,13 @@ function convertToRoman(n) {
   return numeral;
 }
 
-let balancedParens = function(input) {
+let balancedParens = (input) => {
   let stack = [];
   let pairs = {
       '[': ']',
       '(': ')',
       '{': '}'
   };
-
   for (let i = 0; i < str.length; i++) {
       let chr = str[i];
       if (pairs[chr]) {
@@ -148,3 +70,30 @@ let balancedParens = function(input) {
   }
   return stack.length === 0;
 };
+
+let repeatStr = (n, string) => {
+  let ret = '';
+  for (let i = 0; i < n; i++) {
+    ret += string;
+  }
+  return ret;
+}
+
+let oddCount = (n) => {
+  let count = 0;
+  for (let i = 1; i < n; i++) {
+    if (i % 2 !== 0) count++;
+  }
+  return count;
+}
+
+let longestPalindrome = (s) => {
+  if (!s) return 0;
+  for (let c = s.length; c > 0; c--) {
+    for (let i = 0; i <= s.length - c; i++) {
+      var check = s.substr(i, c);
+      if (check === check.split("").reverse().join("")) return c;
+    }
+  }
+}
+
