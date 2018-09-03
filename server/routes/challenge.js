@@ -13,7 +13,9 @@ router.post("/challenge", function(req, res) {
   let message = "Success!";
 
   execute(solution, tests)
-  .then(resultArray => {
+  .then(testingResults => {
+    let resultArray = JSON.parse(testingResults);
+    console.log('In Challenge route -------- ', resultArray);
     resultArray.forEach((result, i) => {
       if (!result) {
         message = "FAILURE";
@@ -29,6 +31,14 @@ router.post("/challenge", function(req, res) {
       }
     })
     response = JSON.stringify({ results, testResults, message });
+    res.end(response);
+  })
+  .catch(err => {
+    testResults.push({
+      description: err,
+      passing: false
+    });
+    response = JSON.stringify({ results, testResults, message: 'FAILURE'});
     res.end(response);
   })
 });

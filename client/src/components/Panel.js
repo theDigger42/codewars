@@ -26,6 +26,7 @@ export default class Panel extends Component {
     });
 
     setTimeout(() => {
+      this.clickTag("results");
       let passing = true;
       let descriptiveResults = this.props.prompt.testResults.map(test => {
         return test.passing ? (
@@ -44,7 +45,7 @@ export default class Panel extends Component {
         setTimeout(() => this.clickTag("scores"), 500);
         this.props.leave();
       }
-    }, 1000);
+    }, 2000);
   }
 
   clickTag(tag) {
@@ -111,7 +112,6 @@ export default class Panel extends Component {
         <Button
           onClick={() => {
             this.handleSubmit();
-            this.clickTag("results");
           }}
         >
           Submit

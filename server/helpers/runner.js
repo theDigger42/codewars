@@ -1,13 +1,19 @@
 const Promise = require("bluebird");
-const {VM} = require('vm2');
+const exec = require('child_process').exec;
 
-const vm = new VM({
-  timeout: 3000,
-  sandbox: {}
-});
+const dockerCommand = 'docker run --rm codewars/node-runner run -l javascript -c';
 
 let execute = (code, tests) => {
-  return new Promise(resolve => resolve(vm.run(`${code} ${tests}`)))
+  return new Promise((resolve, reject) => {
+    exec(`${dockerCommand} \"${code}; console.log(${tests})\"`, (err, stdout, stderr) => {
+      if (err) reject(err);
+      if (stderr) reject(stderr);
+      resolve(stdout);
+    });
+  });
 };
+
+execute(`let a = 20;`, `[a === 20, a != 15]`)
+.then(res => console.log(res))
 
 module.exports.execute = execute

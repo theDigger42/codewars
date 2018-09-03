@@ -9,6 +9,7 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "brace": "^0.11.1",
+    "child_process": "^1.0.2",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
@@ -30,6 +31,7 @@
     "redux-thunk": "^2.3.0",
     "socket.io": "^2.1.1",
     "styled-components": "^3.3.3",
+    "sys": "0.0.1",
     "underscore": "^1.9.1",
     "vm2": "^3.6.3"
   },

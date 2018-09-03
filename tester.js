@@ -11,6 +11,13 @@ function fibonacci(n) {
   return next;
 }
 
+function fibonacci(n) {
+  if (n < 2){
+    return n
+  }
+  return fibonacci(n - 1) + fibonacci(n - 2)
+}
+
 function helloWorld() {
   const hello = "Hello";
   const world = "World";
@@ -120,3 +127,24 @@ function convertToRoman(n) {
   }
   return numeral;
 }
+
+let balancedParens = function(input) {
+  let stack = [];
+  let pairs = {
+      '[': ']',
+      '(': ')',
+      '{': '}'
+  };
+
+  for (let i = 0; i < str.length; i++) {
+      let chr = str[i];
+      if (pairs[chr]) {
+          stack.push(chr);
+      } else if (chr === ']' || chr === ')' || chr === '}') {
+          if (pairs[stack.pop()] !== chr) {
+              return false;
+          }
+      }
+  }
+  return stack.length === 0;
+};
