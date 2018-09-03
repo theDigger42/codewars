@@ -13,7 +13,4 @@ let execute = (code, tests) => {
   });
 };
 
-execute(`let a = 20;`, `[a === 20, a != 15]`)
-.then(res => console.log(res))
-
 module.exports.execute = execute

@@ -36,7 +36,7 @@ const startGame = async () => {
           ioGame.emit("challenge", result);
         });
     });
-    // ToyProblem.findOne({'title': 'Reverse String'}).exec((err, res) => {
+    // ToyProblem.findOne({'title': 'Longest Palindrome'}).exec((err, res) => {
     //   if (err) console.log(err)
     //   ioGame.emit('challenge', res)
     // })
@@ -158,11 +158,11 @@ const rankFinishers = async () => {
   }
 };
 
-let timer = 20;
+let timer = 120;
 
 setInterval(() => {
   if (timer === -1) {
-    timer = 20;
+    timer = 120;
     startGame();
   }
   ioGame.emit("timer", timer);

@@ -5,6 +5,7 @@ let router = express.Router();
 
 router.post("/challenge", function(req, res) {
   let solution = req.body.solution;
+  solution = solution.replace(/"/g, "'");
   let tests = req.body.tests;
   let testDescriptions = JSON.parse(req.body.testDescriptions[0]);
   let testResults = [];
