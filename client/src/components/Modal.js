@@ -30,4 +30,7 @@ const Content = styled.div`
   width: 30rem;
   border-radius: 0.5rem;
   border: 0.3rem solid dimgrey;
+  @media (max-width: 600px) {
+    width: 20rem;
+  }
 `;

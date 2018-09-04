@@ -139,9 +139,22 @@ const Layout = styled.header`
   align-items: center;
   justify-items: right;
   width: 100vw;
-  height: 75px;
+  height: 8vh;
 `;
 const SignUp = styled.h2`
+  grid-column: 7;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  justify-self: center;
+  &:hover {
+    color: red;
+  }
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
+`;
+const LogIn = styled.h2`
   grid-column: 8;
   font-size: 16px;
   color: white;
@@ -150,15 +163,8 @@ const SignUp = styled.h2`
   &:hover {
     color: red;
   }
-`;
-const LogIn = styled.h2`
-  grid-column: 9;
-  font-size: 16px;
-  color: white;
-  cursor: pointer;
-  justify-self: center;
-  &:hover {
-    color: red;
+  @media (max-width: 600px) {
+    font-size: 12px;
   }
 `;
 const Title = styled(Link)`
@@ -178,6 +184,9 @@ const NavLink = styled(Link)`
     `
     color: red;
   `};
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 const Leaderboard = styled.h2`
   grid-column: 5;

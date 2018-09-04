@@ -102,7 +102,6 @@ export default class Help extends Component {
             Submit{" "}
           </Button>
         </Body>
-        <Footer />
       </Layout>
     );
   }
@@ -112,7 +111,7 @@ const Layout = styled.div`
   display: grid;
   grid-template-rows: repeat(auto-fit, 1fr);
   grid-template-columns: repeat(auto-fit, 1fr);
-  background: url(${background}) dimgrey;
+  background: #1a1a1a;
   width: 100vw;
   justify-items: center;
   color: gainsboro;

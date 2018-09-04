@@ -27,7 +27,7 @@ export const addSolution = function(inputType, input, e) {
 
 export const submit = solution => {
   return dispatch => {
-    axios.post("http://localhost:3000/challenge", solution).then(res => {
+    axios.post("/challenge", solution).then(res => {
       dispatch({
         type: SUBMIT_SOLUTION,
         payload: res.data
@@ -41,7 +41,7 @@ export const submit = solution => {
 
 export const userSubmition = solution => {
   return dispatch => {
-    axios.post("http://localhost:3000/userChallenge", solution).then(res => {
+    axios.post("/userChallenge", solution).then(res => {
       dispatch({
         type: USER_SUBMITION,
         payload: res.data

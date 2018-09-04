@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="A fun way to compete against other programmers and improve your skills.">
+  <meta name="description" content="A fun way to stand out to employers, by earning rating from competing against other coders.">
 
   <!--
       manifest.json provides metadata used when your web app is added to the
@@ -38,6 +38,19 @@
       font-family: 'Do Hyeon', sans-serif;
     }
 
+    html {
+      overflow: scroll;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar {
+      width: 0px;  /* remove scrollbar space */
+      background: transparent;  /* optional: just make scrollbar invisible */
+    }
+    /* optional: show position indicator in red */
+    ::-webkit-scrollbar-thumb {
+      background: #FF0000;
+    }
+
     button {
       font-family: 'Do Hyeon', sans-serif;
       outline: 0;
@@ -53,12 +66,12 @@
     }
 
     #logo {
-      height: 75px;
-      width: 75px;
+      height: 8vh;
+      width: 8vh;
     }
   </style>
 
-  <title>Code War</title>
+  <title>Code Fight Club</title>
 </head>
 
 <body>

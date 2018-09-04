@@ -7,7 +7,7 @@ export default class Leaderboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: ["Daily"]
+      tags: ["All Time"]
     };
 
     this.clickTag = this.clickTag.bind(this);
@@ -92,7 +92,6 @@ export default class Leaderboard extends Component {
             {ratings}
           </RightDiv>
         </Body>
-        <Footer />
       </Layout>
     );
   }
@@ -114,7 +113,7 @@ const Selection = styled.div`
 `;
 const DailyButton = styled.button`
   grid-column: 1;
-  width: 20vw;
+  width: 200px;
   font-size: 20px;
   border-radius: 5px;
   &:hover {
@@ -130,10 +129,14 @@ const DailyButton = styled.button`
     background: maroon;
     font-weight: bold;
   `};
+  @media (max-width: 650px) {
+    font-size: 14px;
+    width: 80px;
+  }
 `;
 const LeaderboardButton = styled.button`
   grid-column: 3;
-  width: 20vw;
+  width: 200px;
   font-size: 20px;
   border-radius: 5px;
   &:hover {
@@ -149,14 +152,18 @@ const LeaderboardButton = styled.button`
     background: maroon;
     font-weight: bold;
   `};
+  @media (max-width: 650px) {
+    font-size: 14px;
+    width: 80px;
+  }
 `;
 const Body = styled.div`
   grid-column: 1 / 13;
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 5% 1fr 1fr 1fr 5%;
+  grid-template-columns: 15% 1fr 1fr 1fr 15%;
   grid-column-gap: 10px;
-  min-height: 60vh;
+  min-height: 62vh;
   margin-bottom: 75px;
 `;
 const LeftDiv = styled.div`
@@ -165,7 +172,7 @@ const LeftDiv = styled.div`
   display: grid;
   grid-template-rows: 50px auto;
   grid-row-gap: 30px;
-  justify-self: right;
+  justify-self: center;
   margin-bottom: 50px;
 `;
 const MiddleDiv = styled.div`
@@ -182,7 +189,7 @@ const RightDiv = styled.div`
   display: grid;
   grid-template-rows: 50px auto;
   grid-row-gap: 30px;
-  justify-self: left;
+  justify-self: center;
   margin-bottom: 50px;
 `;
 const Title = styled.h1`
@@ -192,23 +199,33 @@ const Title = styled.h1`
   color: gainsboro;
   width: 100%;
   text-align: center;
+  font-size: 40px;
+  @media (max-width: 650px) {
+    font-size: 24px;
+  }
 `;
 const User = styled.span`
-  font-size: 30px;
-  justify-self: right;
-  font-weight: bold;
-  color: gainsboro;
-`;
-const Rating = styled.span`
-  font-size: 30px;
+  font-size: 40px;
   justify-self: left;
   font-weight: bold;
   color: gainsboro;
+  @media (max-width: 650px) {
+    font-size: 20px;
+  }
+`;
+const Rating = styled.span`
+  font-size: 40px;
+  justify-self: right;
+  font-weight: bold;
+  color: gainsboro;
+  @media (max-width: 650px) {
+    font-size: 20px;
+  }
 `;
 const UserName = styled.span`
   font-weight: bold;
   font-size: 24px;
-  justify-self: right;
+  justify-self: left;
   color: ${props => {
     if (props.rank === "Bad") {
       return "blue";
@@ -236,10 +253,16 @@ const UserName = styled.span`
       return "white";
     }
   }};
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
 `;
 const UserRating = styled.span`
   font-weight: bold;
   font-size: 24px;
   justify-self: center;
   color: gainsboro;
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
 `;

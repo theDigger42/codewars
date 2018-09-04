@@ -16,7 +16,7 @@ const Editor = props => {
         value={props.input}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
-        fontSize={16}
+        fontSize={14}
         cursorStart={2}
         showPrintMargin={true}
         highlightActiveLine={true}

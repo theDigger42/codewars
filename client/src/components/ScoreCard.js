@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 const Layout = styled(Link)`
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1.3fr;
+  grid-template-columns: auto 1fr 1fr 1fr;
+  grid-column-gap: 5px;
   justify-items: center;
   align-items: center;
   margin-bottom: 0.5em;
@@ -14,8 +15,9 @@ const Layout = styled(Link)`
   border-radius: 5px;
   height: 50px;
   font-size: 18px;
-  @media (max-width: 700px) {
+  @media (max-width: 650px) {
     font-size: 16px;
+    height: 40px;
   }
   color: ${props => {
     if (props.rank === "Hacker") {
@@ -54,20 +56,38 @@ const Layout = styled(Link)`
   }
 `;
 const Suffix = styled.span`
+  margin-left: 1em;
   grid-column: 1;
   font-weight: bold;
+  @media (max-width: 650px) {
+    font-size: 12px;
+  }
 `;
 const Username = styled.span`
   grid-column: 2;
   font-weight: bold;
+  @media (max-width: 650px) {
+    font-size: 12px;
+  }
 `;
-const Rank = styled.span`
+const Rating = styled.span`
   grid-column: 3;
   font-weight: bold;
   font-style: italic;
+  @media (max-width: 650px) {
+    font-size: 12px;
+  }
+`;
+const Rank = styled.span`
+  grid-column: 4;
+  font-weight: bold;
+  font-style: italic;
+  @media (max-width: 650px) {
+    font-size: 12px;
+  }
 `;
 
-const ScoreCard = ({ suffix, username, rank, getOnlineUser }) => {
+const ScoreCard = ({ suffix, username, rank, rating, getOnlineUser }) => {
   return (
     <Layout 
       rank={rank}
@@ -77,6 +97,7 @@ const ScoreCard = ({ suffix, username, rank, getOnlineUser }) => {
       }}>
       <Suffix>{suffix}</Suffix>
       <Username>{username}</Username>
+      <Rating>{rating}</Rating>
       <Rank>{rank}</Rank>
     </Layout>
   );

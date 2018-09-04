@@ -68,6 +68,7 @@ const Layout = styled.div`
 const Title = styled.h1`
   font-weight: bold;
   justify-self: center;
+  color: black;
 `;
 const Verify = styled.p`
   color: red;
@@ -85,23 +86,27 @@ const Input = styled.input`
   border: solid 2px black;
   border-radius: 3px;
   justify-self: center;
+  @media (max-width: 600px) {
+    width: 200px;
+  }
 `;
 
 const Button = styled.button`
+  font-size: 20px;
+  width: 200px;
+  border-radius: 10px;
   grid-row: 5;
-  background: gainsboro;
-  color: smoke;
-  width: 120px;
-  position: relative;
-  font-size: 1.2em;
-  font-weight: bold;
-  padding: 0.5em;
-  border: 2px solid dimgrey;
-  border-radius: 8px;
+  justify-self: center;
+  height: 50px;
   &:hover {
-    background: black;
-    color: white;
+    font-weight: bold;
+    background: maroon;
+    color: ghostwhite;
+    border: 1px solid maroon;
     cursor: pointer;
   }
-  justify-self: center;
+  @media (max-width: 600px) {
+    font-size: 12px;
+    width: 100px;
+  }
 `;

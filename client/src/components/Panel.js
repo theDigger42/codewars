@@ -83,11 +83,12 @@ export default class Panel extends Component {
           <ScoreCard
             suffix={this.suffix(i + 1)}
             username={user.username}
+            rating={user.rating}
             rank={user.rank}
           />
         );
       } else {
-        return <ScoreCard username={user.username} rank={user.rank} getOnlineUser={this.props.getOnlineUser}/>;
+        return <ScoreCard username={user.username} rank={user.rank} rating={user.rating} getOnlineUser={this.props.getOnlineUser}/>;
       }
     });
 
