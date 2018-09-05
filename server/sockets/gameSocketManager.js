@@ -36,12 +36,12 @@ const startGame = async () => {
           ioGame.emit("challenge", result);
         });
     });
-    // ToyProblem.findOne({'title': 'Longest Palindrome'}).exec((err, res) => {
+    // ToyProblem.findOne({'title': 'Odd Count'}).exec((err, res) => {
     //   if (err) console.log(err)
     //   ioGame.emit('challenge', res)
     // })
     scoreboardChange();
-  }, 500)
+  }, 800)
 };
 
 const updateUserInGameRoom = (username) => {
