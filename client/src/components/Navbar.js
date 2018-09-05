@@ -150,7 +150,7 @@ const SignUp = styled.h2`
   &:hover {
     color: red;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 650px) {
     font-size: 12px;
   }
 `;
@@ -163,7 +163,7 @@ const LogIn = styled.h2`
   &:hover {
     color: red;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 650px) {
     font-size: 12px;
   }
 `;
@@ -184,7 +184,7 @@ const NavLink = styled(Link)`
     `
     color: red;
   `};
-  @media (max-width: 600px) {
+  @media (max-width: 650px) {
     font-size: 12px;
   }
 `;
@@ -193,14 +193,6 @@ const Leaderboard = styled.h2`
   justify-self: center;
   font-size: 16px;
 `;
-const Help = styled.h2`
-  grid-column: 6;
-  font-size: 16px;
-`;
-// const Chat = styled.h4`
-//   grid-column: 6;
-//   font-size: 18px;
-// `
 const Challenge = styled.h2`
   grid-column: 7;
   font-size: 16px;

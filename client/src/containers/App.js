@@ -5,8 +5,8 @@ import Challenge from "./Challenge";
 import PrivateRoute from "../components/PrivateRoute";
 import Leaderboard from "./Leaderboard";
 import Help from "./Help";
-//import Chat from './Chat'
 import Lobby from "./Lobby";
+import Profile from './Profile';
 
 import {
   subscribeToOnlineSocket,
@@ -55,6 +55,7 @@ export default class App extends Component {
       <Switch>
         <Route exact path="/" render={() => <Homepage {...this.props} />} />
         <Route path="/scores" render={() => <Leaderboard {...this.props} />} />
+        <Route path="/profile/:name" render={() => <Profile {...this.props} />} />
         <PrivateRoute path="/help" component={Help} {...this.props} />
         <PrivateRoute
           path="/challenge"
@@ -64,11 +65,6 @@ export default class App extends Component {
           leave={this.leaveGame}
           {...this.props}
         />
-        {/* <PrivateRoute
-          path='/chat'
-          component={Chat}
-          {...this.props}
-        /> */}
         <PrivateRoute path="/lobby" component={Lobby} {...this.props} />
       </Switch>
     );

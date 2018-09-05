@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 import styled from "styled-components";
 import EditorInput from "../components/EditorInput";
-import background from "../images/Grey-website-background.png";
+// import background from "../images/Grey-website-background.png";
 
 const handleChange = (cb, inputType, input) => {
   cb(inputType, input);

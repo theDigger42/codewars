@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import background from "../images/Grey-website-background.png";
 import ScoreCard from '../components/ScoreCard'
 
-export default class Profile extends Component {
+export default class Lobby extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -261,12 +261,13 @@ const OnlineUsers = styled.div`
 const Online = styled.h1`
   grid-row: 1;
   justify-self: center;
+  align-self: center;
   font-size: 30px;
   color: #f2f2f2;
   width: 100%;
   text-align: center;
   font-size: 30px;
-  margin-top: 1.3em;
+  margin-top: 2em;
   @media (max-width: 650px) {
     font-size: 20px;
   }

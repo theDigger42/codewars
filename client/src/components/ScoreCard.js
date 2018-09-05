@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 
-const Layout = styled(Link)`
+const Layout = styled.div`
   display: grid;
   grid-template-columns: auto 1fr 1fr 1fr;
   grid-column-gap: 5px;
   justify-items: center;
   align-items: center;
   margin-bottom: 0.5em;
-  box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.9);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
   border: 1px solid black;
   border-radius: 5px;
   height: 50px;
@@ -53,6 +53,7 @@ const Layout = styled(Link)`
   }};
   &:hover{
     cursor: pointer;
+    opacity: 0.85;
   }
 `;
 const Suffix = styled.span`
@@ -82,16 +83,16 @@ const Rank = styled.span`
   grid-column: 4;
   font-weight: bold;
   font-style: italic;
+  margin-right: 1em;
   @media (max-width: 650px) {
     font-size: 12px;
   }
 `;
 
-const ScoreCard = ({ suffix, username, rank, rating, getOnlineUser }) => {
+const ScoreCard = ({ suffix, username, rank, rating }) => {
   return (
     <Layout 
       rank={rank}
-      to={`/profile/${username}`}
     >
       <Suffix>{suffix}</Suffix>
       <Username>{username}</Username>
