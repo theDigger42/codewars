@@ -22,7 +22,7 @@ router.post("/", (req, res) => {
       newUser.save(function(err) {
         if (err) {
           console.log("error in newUser.save " + err);
-          res.json({ error: "Error saving user in database" });
+          res.json({ error: err.toString() });
         } else {
           res.json({ success: "Successful signup!" });
         }
