@@ -9,7 +9,7 @@ export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: ["profile"]
+      tags: ["lobby"]
     };
     this.clickTag = this.clickTag.bind(this);
   }
@@ -17,10 +17,6 @@ export default class Profile extends Component {
   clickTag(tag) {
     var tags = [tag];
     this.setState({ tags: tags });
-  }
-
-  componentDidMount() {
-    this.props.getOnlineUser(this.props.auth.user.username);
   }
 
   render() {
@@ -38,7 +34,6 @@ export default class Profile extends Component {
           rank={arr[1].rank}
           rating={arr[1].rating}
           username={arr[0]}
-          getOnlineUser={this.props.getOnlineUser}
           style={{
             margin: "1em"
           }}
@@ -48,7 +43,7 @@ export default class Profile extends Component {
 
     return (
       <Layout>
-        <Navbar {...this.props} active={"profile"} />
+        <Navbar {...this.props} active={"lobby"} />
         <Body>
           <Legend>
             <Ranks>Ranks / Ratings</Ranks>
@@ -193,7 +188,8 @@ const Body = styled.div`
   grid-column: 1 / 13;
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1fr 1.25fr;
+  height: 100%;
 `;
 const Legend = styled.div`
   grid-column: 1;
@@ -202,8 +198,8 @@ const Legend = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   background: #1f1f1f;
   padding: 1rem;
-  grid-column-gap: 5px;
   margin-bottom: 1em;
+  min-width: 150px;
 `;
 const Ranks = styled.h1`
   grid-row: 1;
@@ -211,9 +207,13 @@ const Ranks = styled.h1`
   color: gainsboro;
   font-size: 30px;
   justify-self: center;
+  align-self: center;
+  padding: 1em 0;
   text-align: center;
+  background: grey;
+  width: 100%;
   @media (max-width: 650px) {
-    font-size: 24px;
+    font-size: 20px;
   }
 `
 const EntryDiv = styled.div`
@@ -226,7 +226,7 @@ const EntryDiv = styled.div`
   font-weight: bold;
   font-size: 16px;
   @media (max-width: 650px) {
-    font-size: 10px;
+    font-size: 8px;
   }
 `;
 const RatingDiv = styled.div`
@@ -239,7 +239,7 @@ const RatingDiv = styled.div`
   font-weight: bold;
   font-size: 16px;
   @media (max-width: 650px) {
-    font-size: 10px;
+    font-size: 8px;
   }
 `;
 const ColorDiv = styled.div`
@@ -268,7 +268,7 @@ const Online = styled.h1`
   font-size: 30px;
   margin-top: 1.3em;
   @media (max-width: 650px) {
-    font-size: 24px;
+    font-size: 20px;
   }
 `;
 const UserList = styled.div`
@@ -277,6 +277,6 @@ const UserList = styled.div`
   grid-template-rows: repeat(auto-fit, 60px);
   overflow: auto;
   justify-self: center;
-  width: 60%;
+  width: 80%;
   padding: 1em;
 `;

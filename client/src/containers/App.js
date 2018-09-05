@@ -6,7 +6,7 @@ import PrivateRoute from "../components/PrivateRoute";
 import Leaderboard from "./Leaderboard";
 import Help from "./Help";
 //import Chat from './Chat'
-import Profile from "./Profile";
+import Lobby from "./Lobby";
 
 import {
   subscribeToOnlineSocket,
@@ -69,7 +69,7 @@ export default class App extends Component {
           component={Chat}
           {...this.props}
         /> */}
-        <PrivateRoute path="/profile" component={Profile} {...this.props} />
+        <PrivateRoute path="/lobby" component={Lobby} {...this.props} />
       </Switch>
     );
   }

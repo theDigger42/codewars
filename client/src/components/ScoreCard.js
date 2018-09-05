@@ -91,10 +91,8 @@ const ScoreCard = ({ suffix, username, rank, rating, getOnlineUser }) => {
   return (
     <Layout 
       rank={rank}
-      to="/profile"
-      onClick={() => {
-        getOnlineUser(username);
-      }}>
+      to={`/profile/${username}`}
+    >
       <Suffix>{suffix}</Suffix>
       <Username>{username}</Username>
       <Rating>{rating}</Rating>

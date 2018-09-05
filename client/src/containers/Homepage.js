@@ -44,10 +44,10 @@ export default class Homepage extends Component {
             <p style={{color: 'yellow', gridRow: '1', gridColumn: '13'}}>b</p>
           </Title>
           <Description>
-            Stand out to employers from your rating by competing against other coders
+            Stand out to employers by gaining rating from competing against other coders
           </Description>
           <Instructions>
-            Sign up below to start competing today
+            Sign up below to start fighting today
           </Instructions>
           <Verify>{this.props.auth.signupError}</Verify>
           <Input
@@ -87,10 +87,10 @@ const Layout = styled.div`
   color: gainsboro;
 `;
 const Body = styled.div`
-  margin-top: 10vh;
+  margin-top: 8vh;
   display: grid;
-  grid-row-gap: 15px;
-  grid-template-rows: 100px 120px 60px 40px 40px 40px 40px;
+  grid-row-gap: 20px;
+  grid-template-rows: 100px 100px 50px 60px 40px 40px 40px;
   justify-items: center;
   text-align: center; 
 `
@@ -104,8 +104,9 @@ const Title = styled.div`
   grid-template-rows: 1fr;
 `
 const Description = styled.h3`
-  margin: 2rem;
-  font-size: 30px;
+  font-size: 28px;
+  margin-right: 2em;
+  margin-left: 2em;
   @media (max-width: 600px) {
     font-size: 18px;
   }
@@ -144,7 +145,12 @@ const Button = styled.button`
 `;
 const Verify = styled.p`
   color: red;
-  justify-self: center;
+  margin-right: 2em;
+  margin-left: 2em;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 18px; 
+  @media (max-width: 600px) {
+    font-size: 12px;
+    width: 300px;
+  }
 `;

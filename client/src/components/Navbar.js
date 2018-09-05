@@ -48,10 +48,10 @@ export default class Navbar extends Component {
             active={this.state.tags[0] === "scores" ? 1 : 0}
             onClick={() => this.clickTag("scores")}
           >
-            Highscores
+            Ratings
           </NavLink>
         </Leaderboard>
-        <Help>
+        {/* <Help>
           <NavLink
             to="/help"
             active={this.state.tags[0] === "help" ? 1 : 0}
@@ -59,7 +59,7 @@ export default class Navbar extends Component {
           >
             Help
           </NavLink>
-        </Help>
+        </Help> */}
         {/* <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat' ? 1 : 0} onClick={() =>
             this.clickTag('chat')}>Chat</NavLink></Chat> */}
         <Challenge>
@@ -73,9 +73,9 @@ export default class Navbar extends Component {
         </Challenge>
         <Profile>
           <NavLink
-            to="/profile"
-            active={this.state.tags[0] === "profile" ? 1 : 0}
-            onClick={() => this.clickTag("profile")}
+            to="/lobby"
+            active={this.state.tags[0] === "lobby" ? 1 : 0}
+            onClick={() => this.clickTag("lobby")}
           >
             Lobby
           </NavLink>
@@ -142,7 +142,7 @@ const Layout = styled.header`
   height: 8vh;
 `;
 const SignUp = styled.h2`
-  grid-column: 7;
+  grid-column: 8;
   font-size: 16px;
   color: white;
   cursor: pointer;
@@ -155,7 +155,7 @@ const SignUp = styled.h2`
   }
 `;
 const LogIn = styled.h2`
-  grid-column: 8;
+  grid-column: 9;
   font-size: 16px;
   color: white;
   cursor: pointer;
@@ -190,6 +190,7 @@ const NavLink = styled(Link)`
 `;
 const Leaderboard = styled.h2`
   grid-column: 5;
+  justify-self: center;
   font-size: 16px;
 `;
 const Help = styled.h2`
