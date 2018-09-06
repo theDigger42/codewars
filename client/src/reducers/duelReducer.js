@@ -28,7 +28,7 @@ const intialState = {
 
 const duel = (state = intialState, action) => {
   switch (action.type) {
-    case `${PLAYER_JOINED_DUEL}`:
+    case PLAYER_JOINED_DUEL:
       return {
         ...state,
         opponent: action.payload

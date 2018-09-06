@@ -72,7 +72,7 @@ export default class Duel extends Component {
     return (
       <Layout>
         <Navbar {...this.props} active={"duel"} />
-        <User rank={user.rank}>{user.username}</User><User rank={opponent.rank}>{opponent.username ? opponent.username : "Opponent"}</User>
+        <User rank={user.rank}>{user.username}</User><User rank={opponent.rank}>{opponent.username}</User>
         <PracticeEditor
           input={this.props.duel.solution}
           change={this.props.addDuelSolution}

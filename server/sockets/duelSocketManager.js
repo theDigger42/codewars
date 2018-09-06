@@ -81,7 +81,6 @@ module.exports.ioDuel = socket => {
   });
 
   socket.on('duelTyping', (letter) => {
-    console.log(letter);
     socket.broadcast.emit('playerTyping', letter)
   })
 
