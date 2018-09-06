@@ -60,6 +60,9 @@ let comparePlayers = (roomArray) => {
 module.exports.ioDuel = socket => {
   let _user = null;
   socket.on("joinDuelRoom", async user => {
+    if (Object.keys(waitingRoom).length === 1) {
+      socket.emit('playerJoined', Object.values(waitingRoom)[0])
+    }
     socket.broadcast.emit('playerJoined', user)
     _user = await getUser(user.username);
     waitingRoom[_user.username] = _user
