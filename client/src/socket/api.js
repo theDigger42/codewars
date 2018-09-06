@@ -1,6 +1,7 @@
 import ioclient from "socket.io-client";
 import store from "../store/index";
 import { getPrompt } from "../actions/prompt";
+import { playerJoinedDuel, getDuelPrompt, playerTyping, opponentResults, clearOpponentConsole } from '../actions/duel'
 
 export const socket = ioclient.connect('/');
 
@@ -53,3 +54,51 @@ export const joinWaitingRoom = userInfo =>
 
 export const exitWaitingRoom = userInfo =>
   gameSocket.emit("exitWaitingRoom", userInfo);
+
+export const joinDuelRoom = userInfo => duelSocket.emit('joinDuelRoom', userInfo)
+
+export const duelComplete = () => duelSocket.emit('duelComplete')
+
+export const duelTyping = (letter) => {
+  console.log('typing');
+  duelSocket.emit('duelTyping', letter)
+}
+
+export const emitResponse = (response) => {
+  console.log(response);
+  duelSocket.emit('userResponse', response)
+}
+
+export const resetConsoleForOpponent = () => {
+  duelSocket.emit('resetOpponentConsole')
+}
+
+const duelSocket = ioclient("/duel");
+
+export const subscribeToDuelSocket = () => {
+  duelSocket.on("connect", () =>
+    console.log("successfully subscribed to duel socket")
+  );
+
+  duelSocket.on("challenge", problem => {
+    store.dispatch(getDuelPrompt(problem));
+  });
+
+  duelSocket.on('playerJoined', (player) => {
+    console.log(player);
+    store.dispatch(playerJoinedDuel(player))
+  })
+
+  duelSocket.on('playerTyping', (letter) => {
+    store.dispatch(playerTyping(letter));
+  })
+
+  duelSocket.on('opponentResults', (response) => {
+    store.dispatch(opponentResults(response));
+  })
+
+  duelSocket.on('clearOpponentConsole', () => {
+    store.dispatch(clearOpponentConsole())
+  })
+
+};

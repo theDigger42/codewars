@@ -6,7 +6,7 @@ import "brace/theme/chaos";
 import "brace/theme/merbivore";
 import styled from "styled-components";
 
-const Editor = props => {
+const GameEditor = props => {
   return (
     <Wrapper>
       <AceEditor
@@ -31,7 +31,7 @@ const Editor = props => {
   );
 };
 
-export default Editor;
+export default GameEditor;
 
 const Wrapper = styled.div`
   grid-column: 1 / 9;

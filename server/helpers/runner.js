@@ -13,4 +13,15 @@ let execute = (code, tests) => {
   });
 };
 
+let runCode = (code) => {
+  return new Promise((resolve, reject) => {
+    exec(`${dockerCommand} \"${code}\"`, (err, stdout, stderr) => {
+      if (err) reject(err);
+      if (stderr) reject(stderr);
+      resolve(stdout);
+    })
+  })
+}
+
 module.exports.execute = execute
+module.exports.runCode = runCode

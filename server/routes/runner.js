@@ -1,7 +1,20 @@
 const express = require("express");
+const runCode = require("../helpers/runner").runCode;
 const execute = require("../helpers/runner").execute;
 
 let router = express.Router();
+
+router.post('/', (req, res) => {
+  console.log(req.body.code);
+  let code = req.body.code ? req.body.code.replace(/"/g, "'") : null;
+  runCode(code)
+  .then(result => {
+    res.end(result)
+  })
+  .catch(err => {
+    res.end(err)
+  })
+})
 
 router.post("/challenge", function(req, res) {
   let solution = req.body.solution;
@@ -43,4 +56,4 @@ router.post("/challenge", function(req, res) {
   })
 });
 
-module.exports = router;
+module.exports = router

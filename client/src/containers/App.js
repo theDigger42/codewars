@@ -7,6 +7,7 @@ import Leaderboard from "./Leaderboard";
 import Help from "./Help";
 import Lobby from "./Lobby";
 import Profile from './Profile';
+import Duel from './Duel';
 
 import {
   subscribeToOnlineSocket,
@@ -60,6 +61,14 @@ export default class App extends Component {
         <PrivateRoute
           path="/challenge"
           component={Challenge}
+          timer={this.props.prompt.timer}
+          join={this.joinGame}
+          leave={this.leaveGame}
+          {...this.props}
+        />
+        <PrivateRoute
+          path="/duel"
+          component={Duel}
           timer={this.props.prompt.timer}
           join={this.joinGame}
           leave={this.leaveGame}

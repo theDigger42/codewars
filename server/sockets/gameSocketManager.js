@@ -158,11 +158,11 @@ const rankFinishers = async () => {
   }
 };
 
-let timer = 120;
+let timer = 20;
 
 setInterval(() => {
   if (timer === -1) {
-    timer = 120;
+    timer = 20;
     startGame();
   }
   ioGame.emit("timer", timer);

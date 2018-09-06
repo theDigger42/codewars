@@ -5,6 +5,7 @@ import auth from "./authReducer";
 import prompt from "./promptReducer";
 import score from "./scoreReducer";
 import online from "./onlineReducer";
+import duel from "./duelReducer"
 
 export default combineReducers({
   modalReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   auth,
   prompt,
   score,
-  online
+  online,
+  duel
 });

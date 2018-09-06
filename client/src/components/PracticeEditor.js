@@ -1,18 +1,31 @@
 import React from "react";
-import AceEditor from "react-ace";
+import {split as SplitEditor} from "react-ace";
 import "brace/mode/javascript";
 import "brace/theme/monokai";
 import "brace/theme/chaos";
 import "brace/theme/merbivore";
 import styled from "styled-components";
+import { duelTyping } from '../socket/api'
 
-const EditorInput = props => {
+const diffOnLoad = editor => {
+  window.addEventListener('resize', () => {
+  editor.resize();
+ });
+};
+
+const PracticeEditor = props => {
   return (
     <Wrapper>
-      <AceEditor
+      <SplitEditor
         mode="javascript"
         theme="merbivore"
-        onChange={e => props.change("submition_solution", e)}
+        onLoad={diffOnLoad}
+        splits={2}
+        orientation="beside"
+        onChange={e => {
+          props.change(e)
+          duelTyping(e)
+        }}
         value={props.input}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
@@ -31,11 +44,12 @@ const EditorInput = props => {
   );
 };
 
-export default EditorInput;
+export default PracticeEditor;
 
 const Wrapper = styled.div`
+  grid-row: 3;
   grid-column: 1 / 3;
-  width: 80%;
-  height: 60vh;
-  margin-left: 1em;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  height: 50vh;
 `;

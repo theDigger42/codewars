@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { Component } from "react";
 import Navbar from "../components/Navbar";
-import Editor from "../components/Editor";
+import GameEditor from "../components/GameEditor";
 import Footer from "../components/Footer";
 import Panel from "../components/Panel";
 import background from "../images/Grey-website-background.png";
@@ -17,7 +17,7 @@ export default class Challenge extends Component {
         <Navbar {...this.props} active={"challenge"} />
         <Prompt>{this.props.prompt.title}</Prompt>
         {timer}
-        <Editor
+        <GameEditor
           input={this.props.prompt.solution}
           change={this.props.addSolution}
         />

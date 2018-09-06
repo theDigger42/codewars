@@ -51,15 +51,15 @@ export default class Navbar extends Component {
             Ratings
           </NavLink>
         </Leaderboard>
-        {/* <Help>
+        <Practice>
           <NavLink
-            to="/help"
-            active={this.state.tags[0] === "help" ? 1 : 0}
-            onClick={() => this.clickTag("help")}
+            to="/duel"
+            active={this.state.tags[0] === "duel" ? 1 : 0}
+            onClick={() => this.clickTag("duel")}
           >
-            Help
+            Duel
           </NavLink>
-        </Help> */}
+        </Practice>
         {/* <Chat><NavLink to='/chat' active={this.state.tags[0] === 'chat' ? 1 : 0} onClick={() =>
             this.clickTag('chat')}>Chat</NavLink></Chat> */}
         <Challenge>
@@ -68,7 +68,7 @@ export default class Navbar extends Component {
             active={this.state.tags[0] === "challenge" ? 1 : 0}
             onClick={() => this.clickTag("challenge")}
           >
-            Game
+            Multiplayer
           </NavLink>
         </Challenge>
         <Profile>
@@ -191,6 +191,10 @@ const NavLink = styled(Link)`
 const Leaderboard = styled.h2`
   grid-column: 5;
   justify-self: center;
+  font-size: 16px;
+`;
+const Practice = styled.h2`
+  grid-column: 6;
   font-size: 16px;
 `;
 const Challenge = styled.h2`

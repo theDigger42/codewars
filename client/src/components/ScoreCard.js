@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
-const Layout = styled.div`
+const Layout = styled(Link)`
   display: grid;
   grid-template-columns: auto 1fr 1fr 1fr;
   grid-column-gap: 5px;
@@ -92,6 +92,7 @@ const Rank = styled.span`
 const ScoreCard = ({ suffix, username, rank, rating }) => {
   return (
     <Layout 
+      to={`/profile/${username}`}
       rank={rank}
     >
       <Suffix>{suffix}</Suffix>
