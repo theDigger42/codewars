@@ -68,12 +68,10 @@ export const joinDuelRoom = userInfo => duelSocket.emit('joinDuelRoom', userInfo
 export const duelComplete = () => duelSocket.emit('duelComplete')
 
 export const duelTyping = (letter) => {
-  console.log('typing');
   duelSocket.emit('duelTyping', letter)
 }
 
 export const emitResponse = (response) => {
-  console.log(response);
   duelSocket.emit('userResponse', response)
 }
 
@@ -82,7 +80,6 @@ export const resetConsoleForOpponent = () => {
 }
 
 export const connectToRoom = (user, room) => {
-  console.log(room);
   duelSocket.emit('joinDuelRoom', {user, room})
 }
 
@@ -94,12 +91,10 @@ const duelSocket = ioclient("/duel");
 
 export const subscribeToDuelSocket = (roomId) => {
   duelSocket.on("connect", () => {
-    console.log("successfully subscribed to duel socket");
     duelSocket.emit('joinRoom', roomId)
   });
 
   duelSocket.on('currentRoom', (roomId) => {
-    console.log(roomId);
     store.dispatch(setDuelRoom(roomId))
   })
 
@@ -108,7 +103,6 @@ export const subscribeToDuelSocket = (roomId) => {
   });
 
   duelSocket.on('duelers', (players) => {
-    console.log("hit duelers");
     store.dispatch(playersJoinedDuel(players))
   })
 

@@ -57,7 +57,6 @@ module.exports.ioDuel = socket => {
     if (!waitingRoom[_user.username]) waitingRoom[_user.username] = user
     if (Object.keys(waitingRoom).length === 2) {
       duelRoom[currentRoom] = Object.keys(waitingRoom).map(i => waitingRoom[i])
-      console.log(duelRoom[currentRoom]);
       startDuel(currentRoom)
       roomId = `room${Math.random()}`
     }

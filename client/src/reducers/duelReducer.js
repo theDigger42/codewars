@@ -38,13 +38,15 @@ const duel = (state = intialState, action) => {
       return {
         ...state,
         solution: [],
-        console: []
+        console: [],
+        title: ''
       }
 
     case SET_DUEL_COMPLETE:
       return {
         ...state,
-        passing: true
+        passing: true,
+        title: ''
       }
 
     case SET_DUEL_ROOM:
@@ -57,11 +59,11 @@ const duel = (state = intialState, action) => {
       return {
         ...state,
         solution: [],
-        opponentConsole: []
+        opponentConsole: [],
+        title: ''
       }
 
     case PLAYER_JOINED_DUEL:
-      console.log(action.payload);
       return {
         ...state,
         players: action.payload
@@ -82,7 +84,6 @@ const duel = (state = intialState, action) => {
       }
     
     case PLAYER_TYPING:
-      console.log(action.payload);
       return {
         ...state,
         solution: action.payload

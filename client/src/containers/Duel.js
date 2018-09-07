@@ -22,18 +22,25 @@ export default class Duel extends Component {
       value: [],
       console: [],
       opponentConsole: '',
-      completionStatus: ''
+      completionStatus: '',
+      loading: false
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.onJoin = this.onJoin.bind(this)
   }
 
   componentDidMount() {
     subscribeToDuelSocket()
   }
 
+  onJoin() {
+    this.setState({
+      loading: true
+    })
+  }
+
   onChange(e) {
-    console.log(e);
     e[0] = this.props.duel.solution
     this.setState({
       value: e
@@ -43,7 +50,6 @@ export default class Duel extends Component {
   onSubmit() {
     this.props.resetConsoleResults()
     resetConsoleForOpponent()
-    console.log(this.props.duel.solution[0]);
     axios.post('/api/runner/challenge', 
     {
       solution: this.props.duel.solution[0],
@@ -61,6 +67,9 @@ export default class Duel extends Component {
         duelComplete()
         this.props.setDuelComplete()
         setTimeout(() => {
+          this.setState({
+            loading: false
+          })
           this.props.clearDuelPrompt()
           this.props.resetConsoleResults()
           resetConsoleForOpponent()
@@ -72,6 +81,10 @@ export default class Duel extends Component {
   
   render() {
     let user = this.props.auth.user
+    let button = this.props.duel.title ? <Button onClick={() => this.onSubmit({code: this.state.value[0]})}>Submit</Button> : <Button onClick={() => {
+      this.onJoin()
+      connectToRoom(user)
+    }}>Join</Button>
     let opponent = this.props.duel.players[1].username !== user.username ? this.props.duel.players[1] : this.props.duel.players[0]
     let results = this.props.duel.console.map(result => {
       return <Result passing={result.passing}>{result.description}</Result>
@@ -91,8 +104,7 @@ export default class Duel extends Component {
           <UserConsole>{this.props.duel.passing ? "You Won!" : this.props.duel.opponentPassing ? "You Lost" : results}</UserConsole>
           <OpponentConsole>{opponentResults}</OpponentConsole>
         </Console>
-        <Button onClick={() => this.onSubmit({code: this.state.value[0]})}>Submit</Button>
-        <Join onClick={() => connectToRoom(this.props.auth.user, this.props.duel.roomId)}>Join</Join>
+        {button}
         <Footer />
       </Layout>
     );
@@ -171,9 +183,17 @@ const OpponentConsole = styled.div`
 `
 const Button = styled.button`
   grid-row: 5;
-  grid-column: 1;
+  grid-column: 1 / 3;
   width: 300px;
   justify-self: center;
+  border-radius: 10px;
+  &:hover {
+    font-weight: bold;
+    background: maroon;
+    color: ghostwhite;
+    border: 1px solid maroon;
+    cursor: pointer;
+  }
 `
 const Join = styled.button`
   grid-row: 5;
