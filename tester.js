@@ -51,7 +51,7 @@ let convertToRoman = (n) => {
   return numeral;
 }
 
-let balancedParens = (input) => {
+let balancedParens = (str) => {
   let stack = [];
   let pairs = {
       '[': ']',

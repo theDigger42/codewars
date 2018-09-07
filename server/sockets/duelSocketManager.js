@@ -10,21 +10,8 @@ const Promise = require('bluebird');
 const elo = new EloRank();
 
 let waitingRoom = {};
-let duelRoom = []
-
-let startDuel = () => {
-  ToyProblem.countDocuments().exec((err, count) => {
-    var random = Math.floor(Math.random() * count);
-    ToyProblem.findOne()
-      .skip(random)
-      .exec((err, result) => {
-        ioDuel.emit("challenge", result);
-      });
-  });
-
-  duelRoom = Object.keys(waitingRoom).map(i => waitingRoom[i])
-  waitingRoom = {};
-}
+let duelRoom = {};
+let roomId = `room${Math.random()}`
 
 let ratingChange = (roomArray) => {
   let playerA, playerB
@@ -59,40 +46,63 @@ let comparePlayers = (roomArray) => {
 
 module.exports.ioDuel = socket => {
   let _user = null;
-  socket.on("joinDuelRoom", async user => {
-    if (Object.keys(waitingRoom).length === 1) {
-      socket.emit('playerJoined', Object.values(waitingRoom)[0])
-    }
-    socket.broadcast.emit('playerJoined', user)
+  let currentRoom = null
+
+  socket.emit('currentRoom', roomId);
+
+  socket.on("joinDuelRoom", async ({user}) => {
+    currentRoom = roomId
+    socket.join(currentRoom)
     _user = await getUser(user.username);
-    waitingRoom[_user.username] = _user
+    if (!waitingRoom[_user.username]) waitingRoom[_user.username] = user
     if (Object.keys(waitingRoom).length === 2) {
-      startDuel()
+      duelRoom[currentRoom] = Object.keys(waitingRoom).map(i => waitingRoom[i])
+      console.log(duelRoom[currentRoom]);
+      startDuel(currentRoom)
+      roomId = `room${Math.random()}`
     }
   });
 
   socket.on("duelComplete", () => {
-    duelRoom.forEach(user => {
+    duelRoom[currentRoom].forEach(user => {
       if (user.username === _user.username) {
         user.won = true;
       } else {
         user.won = false;
       }
     })
-    ratingChange(duelRoom)
-    comparePlayers(duelRoom)
+    ratingChange(duelRoom[currentRoom])
+    comparePlayers(duelRoom[currentRoom])
+    delete duelRoom[currentRoom]
   });
 
   socket.on('duelTyping', (letter) => {
-    socket.broadcast.emit('playerTyping', letter)
+    socket.in(currentRoom).broadcast.emit('playerTyping', letter)
   })
 
   socket.on('userResponse', (response) => {
-    socket.broadcast.emit('opponentResults', response)
+    socket.in(currentRoom).broadcast.emit('opponentResults', response)
   })
 
   socket.on('resetOpponentConsole', () => {
-    socket.broadcast.emit('clearOpponentConsole');
+    socket.in(currentRoom).broadcast.emit('clearOpponentConsole');
+  })
+
+  socket.on('resetOpponentPrompt', () => {
+    socket.in(currentRoom).broadcast.emit('clearOpponentPrompt');
   })
 
 };
+
+let startDuel = (id) => {
+  ioDuel.in(id).emit('duelers', Object.values(waitingRoom));
+  ToyProblem.countDocuments().exec((err, count) => {
+    var random = Math.floor(Math.random() * count);
+    ToyProblem.findOne()
+      .skip(random)
+      .exec((err, result) => {
+        ioDuel.in(id).emit("challenge", result);
+      });
+  });
+  waitingRoom = {};
+}

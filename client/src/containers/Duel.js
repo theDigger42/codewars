@@ -5,14 +5,21 @@ import PracticeEditor from "../components/PracticeEditor";
 import Footer from "../components/Footer";
 import background from "../images/Grey-website-background.png";
 import axios from 'axios'
-import { subscribeToDuelSocket, joinDuelRoom, duelComplete, emitResponse, resetConsoleForOpponent } from '../socket/api'
+import { 
+  subscribeToDuelSocket, 
+  duelComplete, 
+  emitResponse, 
+  resetConsoleForOpponent,
+  connectToRoom,
+  clearPromptForOpponent
+} from '../socket/api'
 
 export default class Duel extends Component {
 
   constructor(props) {
     super(props) 
     this.state = {
-      value: [this.props.duel.solution, '//Duel is a feature im working on\n//It has not been implemented yet :)'],
+      value: [],
       console: [],
       opponentConsole: '',
       completionStatus: ''
@@ -23,7 +30,6 @@ export default class Duel extends Component {
 
   componentDidMount() {
     subscribeToDuelSocket()
-    joinDuelRoom(this.props.auth.user)
   }
 
   onChange(e) {
@@ -53,16 +59,20 @@ export default class Duel extends Component {
       })
       if (passing) {
         duelComplete()
-        this.setState({
-          completionStatus: 'You Won!'
-        })
+        this.props.setDuelComplete()
+        setTimeout(() => {
+          this.props.clearDuelPrompt()
+          this.props.resetConsoleResults()
+          resetConsoleForOpponent()
+          clearPromptForOpponent()
+        }, 2000)
       }
     })
   }
   
   render() {
     let user = this.props.auth.user
-    let opponent = this.props.duel.opponent
+    let opponent = this.props.duel.players[1].username !== user.username ? this.props.duel.players[1] : this.props.duel.players[0]
     let results = this.props.duel.console.map(result => {
       return <Result passing={result.passing}>{result.description}</Result>
     })
@@ -78,10 +88,11 @@ export default class Duel extends Component {
           change={this.props.addDuelSolution}
         />
         <Console>
-          <UserConsole>{this.state.completionStatus ? "You Won!" : this.props.duel.opponentPassing ? "You Lost" : results}</UserConsole>
+          <UserConsole>{this.props.duel.passing ? "You Won!" : this.props.duel.opponentPassing ? "You Lost" : results}</UserConsole>
           <OpponentConsole>{opponentResults}</OpponentConsole>
         </Console>
         <Button onClick={() => this.onSubmit({code: this.state.value[0]})}>Submit</Button>
+        <Join onClick={() => connectToRoom(this.props.auth.user, this.props.duel.roomId)}>Join</Join>
         <Footer />
       </Layout>
     );
@@ -160,7 +171,13 @@ const OpponentConsole = styled.div`
 `
 const Button = styled.button`
   grid-row: 5;
-  grid-column: 1 / 3;
+  grid-column: 1;
+  width: 300px;
+  justify-self: center;
+`
+const Join = styled.button`
+  grid-row: 5;
+  grid-column: 2;
   width: 300px;
   justify-self: center;
 `

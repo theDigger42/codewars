@@ -6,7 +6,15 @@ import { openModal, closeModal } from "./modal";
 
 import { signup, login, logout, setCurrentUser } from "./auth";
 
-import { getDuelPrompt, addDuelSolution, playerTyping, resetConsoleResults, setConsoleResults } from './duel'
+import { 
+  getDuelPrompt, 
+  addDuelSolution, 
+  playerTyping, 
+  resetConsoleResults, 
+  setConsoleResults, 
+  clearDuelPrompt,
+  setDuelComplete
+} from './duel'
 
 import {
   submit,
@@ -60,7 +68,9 @@ const mapDispatchToProps = dispatch =>
       addDuelSolution,
       playerTyping,
       resetConsoleResults,
-      setConsoleResults
+      setConsoleResults,
+      clearDuelPrompt,
+      setDuelComplete
     },
     dispatch
   );

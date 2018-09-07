@@ -23,8 +23,11 @@ const PracticeEditor = props => {
         splits={2}
         orientation="beside"
         onChange={e => {
-          props.change(e)
-          duelTyping(e)
+          if (props.input[1] !== e[1]) return;
+          else {
+            props.change(e)
+            duelTyping(e)
+          }
         }}
         value={props.input}
         name="UNIQUE_ID_OF_DIV"

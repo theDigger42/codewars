@@ -1,5 +1,4 @@
 import {
-  SUBMIT_SOLUTION_DUEL,
   GET_PROMPT_DUEL,
   RESET_RESULTS_DUEL,
   PLAYER_JOINED_DUEL,
@@ -8,30 +7,64 @@ import {
   OPPONENT_RESULTS,
   SET_CONSOLE_RESULTS,
   RESET_CONSOLE_RESULTS,
-  CLEAR_OPPONENT_CONSOLE
+  CLEAR_OPPONENT_CONSOLE,
+  CLEAR_DUEL_PROMPT,
+  SET_DUEL_ROOM,
+  SET_DUEL_COMPLETE,
+  CLEAR_OPPONENT_PROMPT
 } from "../actions/types";
 
 const intialState = {
-  opponent: {},
+  players: [{}, {}],
   opponentConsole: [],
   opponentPassing: false,
+  passing: false,
   title: '',
   body: '',
-  solution: [],
+  solution: ['//Wait for another player to join.', ''],
   console: [],
   tests: [],
   testDescriptions: [],
   testResults: [],
   loading: false,
-  results: []
+  results: [],
+  roomId: ''
 };
 
 const duel = (state = intialState, action) => {
   switch (action.type) {
-    case PLAYER_JOINED_DUEL:
+
+    case CLEAR_OPPONENT_PROMPT:
       return {
         ...state,
-        opponent: action.payload
+        solution: [],
+        console: []
+      }
+
+    case SET_DUEL_COMPLETE:
+      return {
+        ...state,
+        passing: true
+      }
+
+    case SET_DUEL_ROOM:
+      return {
+        ...state,
+        roomId: action.payload
+      }
+
+    case CLEAR_DUEL_PROMPT:
+      return {
+        ...state,
+        solution: [],
+        opponentConsole: []
+      }
+
+    case PLAYER_JOINED_DUEL:
+      console.log(action.payload);
+      return {
+        ...state,
+        players: action.payload
       };
 
     case GET_PROMPT_DUEL:
@@ -42,6 +75,10 @@ const duel = (state = intialState, action) => {
         solution: [action.payload.solution, action.payload.solution],
         tests: action.payload.tests,
         testDescriptions: action.payload.testDescriptions,
+        console: [],
+        opponentConsole: [],
+        passing: false,
+        opponentPassing: false
       }
     
     case PLAYER_TYPING:

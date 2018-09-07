@@ -8,9 +8,27 @@ import {
   OPPONENT_RESULTS,
   SET_CONSOLE_RESULTS,
   RESET_CONSOLE_RESULTS,
-  CLEAR_OPPONENT_CONSOLE
+  CLEAR_OPPONENT_CONSOLE,
+  CLEAR_DUEL_PROMPT,
+  SET_DUEL_ROOM,
+  SET_DUEL_COMPLETE,
+  CLEAR_OPPONENT_PROMPT
 } from "./types";
+
 import axios from "../../node_modules/axios";
+
+export const setDuelComplete = () => {
+  return {
+    type: SET_DUEL_COMPLETE
+  }
+}
+
+export const setDuelRoom = (roomId) => {
+  return {
+    type: SET_DUEL_ROOM,
+    payload: roomId
+  }
+}
 
 export const resetConsoleResults = () => {
   return {
@@ -18,9 +36,21 @@ export const resetConsoleResults = () => {
   }
 }
 
+export const clearDuelPrompt = () => {
+  return {
+    type: CLEAR_DUEL_PROMPT
+  }
+}
+
 export const clearOpponentConsole = () => {
   return {
     type: CLEAR_OPPONENT_CONSOLE
+  }
+}
+
+export const clearOpponentPrompt = () => {
+  return {
+    type: CLEAR_OPPONENT_PROMPT
   }
 }
 
@@ -52,10 +82,10 @@ export const getDuelPrompt = problem => {
   };
 };
 
-export const playerJoinedDuel = (player) => {
+export const playersJoinedDuel = (players) => {
   return {
     type: PLAYER_JOINED_DUEL,
-    payload: player
+    payload: players
   }
 }
 

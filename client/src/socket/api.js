@@ -1,7 +1,15 @@
 import ioclient from "socket.io-client";
 import store from "../store/index";
 import { getPrompt } from "../actions/prompt";
-import { playerJoinedDuel, getDuelPrompt, playerTyping, opponentResults, clearOpponentConsole } from '../actions/duel'
+import { 
+  playersJoinedDuel, 
+  getDuelPrompt, 
+  playerTyping, 
+  opponentResults, 
+  clearOpponentConsole,
+  setDuelRoom,
+  clearOpponentPrompt
+} from '../actions/duel'
 
 export const socket = ioclient.connect('/');
 
@@ -73,20 +81,35 @@ export const resetConsoleForOpponent = () => {
   duelSocket.emit('resetOpponentConsole')
 }
 
+export const connectToRoom = (user, room) => {
+  console.log(room);
+  duelSocket.emit('joinDuelRoom', {user, room})
+}
+
+export const clearPromptForOpponent = () => {
+  duelSocket.emit('resetOpponentPrompt')
+}
+
 const duelSocket = ioclient("/duel");
 
-export const subscribeToDuelSocket = () => {
-  duelSocket.on("connect", () =>
-    console.log("successfully subscribed to duel socket")
-  );
+export const subscribeToDuelSocket = (roomId) => {
+  duelSocket.on("connect", () => {
+    console.log("successfully subscribed to duel socket");
+    duelSocket.emit('joinRoom', roomId)
+  });
+
+  duelSocket.on('currentRoom', (roomId) => {
+    console.log(roomId);
+    store.dispatch(setDuelRoom(roomId))
+  })
 
   duelSocket.on("challenge", problem => {
     store.dispatch(getDuelPrompt(problem));
   });
 
-  duelSocket.on('playerJoined', (player) => {
-    console.log(player);
-    store.dispatch(playerJoinedDuel(player))
+  duelSocket.on('duelers', (players) => {
+    console.log("hit duelers");
+    store.dispatch(playersJoinedDuel(players))
   })
 
   duelSocket.on('playerTyping', (letter) => {
@@ -99,6 +122,10 @@ export const subscribeToDuelSocket = () => {
 
   duelSocket.on('clearOpponentConsole', () => {
     store.dispatch(clearOpponentConsole())
+  })
+
+  duelSocket.on('clearOpponentPrompt', () => {
+    store.dispatch(clearOpponentPrompt())
   })
 
 };
