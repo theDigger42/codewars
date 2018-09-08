@@ -5,7 +5,6 @@ const execute = require("../helpers/runner").execute;
 let router = express.Router();
 
 router.post('/', (req, res) => {
-  console.log(req.body.code);
   let code = req.body.code ? req.body.code.replace(/"/g, "'") : null;
   runCode(code)
   .then(result => {

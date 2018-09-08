@@ -1,5 +1,5 @@
 import React from "react";
-import {split as SplitEditor} from "react-ace";
+import AceEditor from "react-ace";
 import "brace/mode/javascript";
 import "brace/theme/monokai";
 import "brace/theme/chaos";
@@ -16,33 +16,51 @@ const diffOnLoad = editor => {
 const PracticeEditor = props => {
   return (
     <Wrapper>
-      <SplitEditor
-        mode="javascript"
-        theme="merbivore"
-        onLoad={diffOnLoad}
-        splits={2}
-        orientation="beside"
-        onChange={e => {
-          if (props.input[1] !== e[1]) return;
-          else {
-            props.change(e)
+      <PlayerEditor>
+        <AceEditor
+          mode="javascript"
+          theme="merbivore"
+          onLoad={diffOnLoad}
+          name="UNIQUE_ID_OF_DIV"
+          value={props.input}
+          onChange={e => {
+            props.change("solution", e)
             duelTyping(e)
-          }
-        }}
-        value={props.input}
-        name="UNIQUE_ID_OF_DIV"
-        editorProps={{ $blockScrolling: true }}
-        fontSize={16}
-        cursorStart={2}
-        showPrintMargin={true}
-        highlightActiveLine={true}
-        width="100%"
-        height="100%"
-        setOptions={{
-          showLineNumbers: true,
-          tabSize: 2
-        }}
-      />
+          }}
+          editorProps={{ $blockScrolling: true }}
+          fontSize={16}
+          cursorStart={2}
+          showPrintMargin={true}
+          highlightActiveLine={true}
+          width="100%"
+          height="100%"
+          setOptions={{
+            showLineNumbers: true,
+            tabSize: 2
+          }}
+        />
+      </PlayerEditor>
+      <OpponentEditor>
+        <AceEditor
+          mode="javascript"
+          theme="merbivore"
+          onLoad={diffOnLoad}
+          readOnly
+          value={props.opponent}
+          name="UNIQUE_ID_OF_DIV"
+          editorProps={{ $blockScrolling: true }}
+          fontSize={16}
+          cursorStart={2}
+          showPrintMargin={true}
+          highlightActiveLine={true}
+          width="100%"
+          height="100%"
+          setOptions={{
+            showLineNumbers: true,
+            tabSize: 2
+          }}
+        />
+      </OpponentEditor>
     </Wrapper>
   );
 };
@@ -55,4 +73,12 @@ const Wrapper = styled.div`
   margin-right: 1rem;
   margin-left: 1rem;
   height: 50vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
+const PlayerEditor = styled.div`
+  grid-column: 1;
+`
+const OpponentEditor = styled.div`
+  grid-column: 2;
+`

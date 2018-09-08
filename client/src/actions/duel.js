@@ -61,10 +61,16 @@ export const setConsoleResults = (results) => {
   }
 }
 
-export const addDuelSolution = (input) => {
+export const addDuelSolution = (inputType, input, e) => {
+  if (e) {
+    e.preventDefault();
+  }
   return {
     type: DUEL_SOLUTION_CHANGE,
-    payload: input
+    payload: {
+      inputType,
+      input
+    }
   };
 };
 
@@ -89,11 +95,10 @@ export const playersJoinedDuel = (players) => {
   }
 }
 
-export const playerTyping = (array) => {
-  let newArray = [array[1], array[0]]
+export const playerTyping = (input) => {
   return {
     type: PLAYER_TYPING,
-    payload: newArray
+    payload: input
   }
 }
 

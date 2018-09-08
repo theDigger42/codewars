@@ -21,7 +21,8 @@ const intialState = {
   passing: false,
   title: '',
   body: '',
-  solution: ['', ''],
+  solution: '',
+  opponentSolution: '',
   console: [],
   tests: [],
   testDescriptions: [],
@@ -37,7 +38,8 @@ const duel = (state = intialState, action) => {
     case CLEAR_OPPONENT_PROMPT:
       return {
         ...state,
-        solution: [],
+        solution: '',
+        opponentSolution: '',
         console: [],
         title: ''
       }
@@ -58,7 +60,8 @@ const duel = (state = intialState, action) => {
     case CLEAR_DUEL_PROMPT:
       return {
         ...state,
-        solution: [],
+        solution: '',
+        opponentSolution: '',
         opponentConsole: [],
         title: ''
       }
@@ -74,7 +77,8 @@ const duel = (state = intialState, action) => {
         ...state,
         title: action.payload.title,
         body: action.payload.body,
-        solution: [action.payload.solution, action.payload.solution],
+        solution: action.payload.solution,
+        opponentSolution: action.payload.solution,
         tests: action.payload.tests,
         testDescriptions: action.payload.testDescriptions,
         console: [],
@@ -86,7 +90,7 @@ const duel = (state = intialState, action) => {
     case PLAYER_TYPING:
       return {
         ...state,
-        solution: action.payload
+        opponentSolution: action.payload
       }
 
     case OPPONENT_RESULTS:
@@ -105,13 +109,14 @@ const duel = (state = intialState, action) => {
     case DUEL_SOLUTION_CHANGE:
       return {
         ...state,
-        solution: [action.payload[0], state.solution[1]]
+        [action.payload.inputType]: action.payload.input
       };
 
     case RESET_RESULTS_DUEL:
       return {
         ...state,
-        console: []
+        console: [],
+        opponentConsole: []
       }
 
     case SET_CONSOLE_RESULTS:

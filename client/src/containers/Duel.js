@@ -19,7 +19,7 @@ export default class Duel extends Component {
   constructor(props) {
     super(props) 
     this.state = {
-      value: [],
+      value: '',
       console: [],
       opponentConsole: '',
       completionStatus: '',
@@ -41,7 +41,6 @@ export default class Duel extends Component {
   }
 
   onChange(e) {
-    e[0] = this.props.duel.solution
     this.setState({
       value: e
     })
@@ -52,7 +51,7 @@ export default class Duel extends Component {
     resetConsoleForOpponent()
     axios.post('/api/runner/challenge', 
     {
-      solution: this.props.duel.solution[0],
+      solution: this.props.duel.solution,
       tests: this.props.duel.tests,
       testDescriptions: this.props.duel.testDescriptions
     }).then(res => {
@@ -81,7 +80,7 @@ export default class Duel extends Component {
   
   render() {
     let user = this.props.auth.user
-    let button = this.props.duel.title ? <Button onClick={() => this.onSubmit({code: this.state.value[0]})}>Submit</Button> : <Button onClick={() => {
+    let button = this.props.duel.title ? <Button onClick={() => this.onSubmit()}>Submit</Button> : <Button onClick={() => {
       this.onJoin()
       connectToRoom(user)
     }}>Join</Button>
@@ -98,6 +97,7 @@ export default class Duel extends Component {
         <User rank={user.rank}>{user.username}</User><User rank={opponent.rank}>{opponent.username}</User>
         <PracticeEditor
           input={this.props.duel.solution}
+          opponent={this.props.duel.opponentSolution}
           change={this.props.addDuelSolution}
         />
         <Console>
