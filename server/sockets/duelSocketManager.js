@@ -46,7 +46,6 @@ let comparePlayers = (roomArray) => {
 };
 
 module.exports.ioDuel = socket => {
-  let throttle = 10;
   let _user = null;
   let currentRoom = null
 
@@ -78,11 +77,7 @@ module.exports.ioDuel = socket => {
   });
 
   socket.on('duelTyping', (letter) => {
-    if (throttle === 0) {
-      socket.in(currentRoom).broadcast.emit('playerTyping', letter)
-      throttle = 10
-    }
-    throttle--
+    socket.in(currentRoom).broadcast.emit('playerTyping', letter)
   })
 
   socket.on('userResponse', (response) => {
