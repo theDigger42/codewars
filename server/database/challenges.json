@@ -1,63 +1,63 @@
 [
   {
     "body": "Write a function fibonacci that takes an integer n and returns the nth number of the fibonacci sequence.",
-    "solution": "let fibonacci = (n) => {\n\n}",
+    "solution": "//Write a function fibonacci that takes an integer n\n//and returns the nth number of the fibonacci sequence.\n\nlet fibonacci = (n) => {\n\n}",
     "tests": "[typeof fibonacci === 'function', typeof fibonacci(3) === 'number', fibonacci(0) === 0, fibonacci(1) === 1, fibonacci(2) === 1, fibonacci(3) === 2, fibonacci(10) === 55, fibonacci(20) === 6765]",
     "testDescriptions": "[\"fibonacci should be a function\", \"fibonacci should return a number\", \"the 0th fibonacci number is 0\", \"the 1st fibonacci number is 1\", \"the 2nd fibonacci number is 1\", \"the 3rd fibonacci number is 2\", \"the 10th fibonacci number is 55\", \"the 20th fibonacci number is 6765\"]",
     "title": "Fibonacci"
   },
   {
     "body": "Write a function sumArray that takes an array and returns the sum of all elements in the array",
-    "solution": "let sumArray = (arr) => {\n\n}",
+    "solution": "//Write a function sumArray that takes an array and \n//returns the sum of all elements in the array\n\nlet sumArray = (arr) => {\n\n}",
     "tests": "[typeof sumArray === 'function', typeof sumArray([1,2,3]) === 'number', sumArray([1,2,3]) === 6, sumArray([-3,0,3,3]) === 3, sumArray([4,6,-5,12,50]) === 67, sumArray([4,4,4,4]) === 16]",
     "testDescriptions": "[\"sumArray should be a function\", \"sumArray should return a number\", \"sumArray([1,2,3]) should equal 6\", \"sumArray([-3,0,3,3]) should equal 3\", \"sumArray([4,6,-5,12,50]) should equal 67\", \"sumArray([4,4,4,4]) should equal 16\"]",
     "title": "sumArray"
   },
   {
     "body": "Write a function factorial that takes a number n and returns the computed factorial of n.",
-    "solution": "let factorial = (n) => {\n\n}",
+    "solution": "//Write a function factorial that takes a number n \n//and returns the computed factorial of n.\n\nlet factorial = (n) => {\n\n}",
     "tests": "[typeof factorial === 'function', typeof factorial(0) === 'number', factorial(0) === 1, factorial(1) === 1, factorial(2) === 2, factorial(3) === 6, factorial(4) === 24, factorial(5) === 120, factorial(6) === 720, factorial(7) === 5040]",
     "testDescriptions": "[\"factorial should be a function\", \"factorial should return a number\", \"0! should be 1\", \"1! should be 1\", \"2! should be 2\", \"3! should be 6\", \"4! should be 24\", \"5! should be 120\", \"6! should be 720\", \"7! should be 5040\"]",
     "title": "Factorial"
   },
   {
     "body": "Write a function reverse that takes in a string as a parameter and returns the same string reversed.",
-    "solution": "let reverse = (str) => {\n\n}",
+    "solution": "//Write a function reverse that takes in a string \n//as a parameter and returns the same string reversed.\n\nlet reverse = (str) => {\n\n}",
     "tests": "[typeof reverse === 'function', typeof reverse('hello') === 'string', reverse('Hannah') === 'hannaH', reverse('the') === 'eht', reverse('okay') === 'yako', reverse('dubstep') === 'petsbud', reverse('cool') === 'looc', reverse('AnGel') === 'leGnA', reverse('MarrY') === 'YrraM', reverse('.mdaf8h2v') === 'v2h8fadm.']",
     "testDescriptions": "[\"reverse should be a function\", \"reverse should return a string\", \"reverse('Hannah') should be 'hannaH'\", \"reverse('the') should be 'eht'\", \"reverse('okay') should be 'yako'\", \"reverse('dubstep') should be 'petsbud'\", \"reverse('cool') should be 'looc'\", \"reverse('AnGel') should be 'leGnA'\", \"reverse('MarrY') should be 'YrraM'\", \"reverse('.mdaf8h2v') should be 'v2h8fadm.'\"]",
     "title": "Reverse String"
   },
   {
     "body": "Given an integer, write a function to return its roman numeral representation",
-    "solution": "let numerals = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']\nlet values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]\n\nlet convertToRoman = (n) => {\n\n}",
+    "solution": "//Given an integer, write a function to return its \n//roman numeral representation\n\nlet numerals = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']\nlet values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]\n\nlet convertToRoman = (n) => {\n\n}",
     "tests": "[typeof convertToRoman === 'function', typeof convertToRoman(1) === 'string', convertToRoman(2) === 'II', convertToRoman(49) === 'XLIX', convertToRoman(50) === 'L', convertToRoman(1094) === 'MXCIV']", 
     "testDescriptions": "[\"convertToRoman should be a function\", \"convertToRoman should return a string\", \"convertToRoman(2) should return 'II'\", \"convertToRoman(49) should return 'XLIX'\", \"convertToRoman(50) should return 'L'\", \"convertToRoman(1094) should return 'MXCIV'\"]",
     "title": "Roman Numeral"
   },
   {
     "body": "Write a function that takes a string with open and closing parentheses as input, and returns whether or not the parentheses are balanced.",
-    "solution": "let balancedParens = (str) => {\n\n}",
+    "solution": "//Write a function that takes a string with open \n//and closing parentheses as input, and returns a boolean\n//indicating whether or not the parentheses are balanced.\n\nlet balancedParens = (str) => {\n\n}",
     "tests": "[typeof balancedParens === 'function', typeof balancedParens('()') === 'boolean', balancedParens('(())') === true, balancedParens('(') === false, balancedParens('()()') === true, balancedParens('(()())') === true, balancedParens('(()(()') === false, balancedParens('()()(') === false]", 
     "testDescriptions": "[\"balancedParens should be a function\",\"balancedParens should return a string\",\"balancedParens('(())') should be true\",\"balancedParens('(') should be false\",\"balancedParens('()()') should be true\",\"balancedParens('(()())') === true\",\"balancedParens('(()(()') should be false\",\"balancedParens('()()(') should be false\"]",
     "title": "Balanced Parens"
   },
   {
     "body": "Write a function called repeatStr, which repeats the given string n times.",
-    "solution": "let repeatStr = (n, string) => {\n\n}",
+    "solution": "//Write a function called repeatStr, which \n//repeats the given string n times and returns\n//the resulting string.\n\nlet repeatStr = (n, string) => {\n\n}",
     "tests": "[typeof repeatStr === 'function', typeof repeatStr(2, 'hi') === 'string', repeatStr(2, 'hi') === 'hihi', repeatStr(4, 'DRE') === 'DREDREDREDRE', repeatStr(3, 'towel') === 'toweltoweltowel', repeatStr(7, 'sheer') === 'sheersheersheersheersheersheersheer', repeatStr(1, 'justOne') === 'justOne']", 
     "testDescriptions": "[\"repeatStr should be a function\", \"repeatStr should return a string\", \"repeatStr(2, 'hi') should equal 'hihi'\", \"repeatStr(4, 'DRE') should equal 'DREDREDREDRE'\", \"repeatStr(3, 'towel') should equal 'toweltoweltowel'\", \"repeatStr(7, 'sheer') should equal 'sheersheersheersheersheersheersheer'\", \"repeatStr(1, 'justOne') should equal 'justOne'\"]",
     "title": "Repeat String"
   },
   {
     "body": "Given a number n, return the number of positive odd numbers below n.",
-    "solution": "let oddCount = (n) => {\n\n}",
+    "solution": "//Given a number n, return an integer indicating the number of positive \n//odd numbers below n.\n\nlet oddCount = (n) => {\n\n}",
     "tests": "[typeof oddCount === 'function', typeof oddCount(4) === 'number', oddCount(4) === 2, oddCount(5) === 2, oddCount(45) === 22, oddCount(324) === 162, oddCount(2345) === 1172, oddCount(19949) === 9974]", 
     "testDescriptions": "[\"oddCount should be a function\", \"oddCount should return a number\", \"oddcount(4) should equal 2\", \"oddCount(5) should equal 2\", \"oddCount(45) should equal 22\", \"oddCount(324) should equal 162\", \"oddCount(2345) should equal 1172\", \"oddCount(19949) should equal 9974\"]",
     "title": "Odd Count"
   },
   {
     "body": "Find the length of the longest substring in the given string s that is the same in reverse. As an example, if the input was “I like racecars that go fast”, the substring (racecar) length would be 7. If the length of the input string is 0, the return value must be 0.",
-    "solution": "let longestPalindrome = (s) => {\n\n}",
+    "solution": "//Find the length of the longest substring in \n//the given string s that is the same in reverse. \n//As an example, if the input was “I like racecars that go fast”, \n//the substring (racecar) length would be 7. \n//If the length of the input string is 0, the return value must be 0.\n\nlet longestPalindrome = (s) => {\n\n}",
     "tests": "[typeof longestPalindrome === 'function', typeof longestPalindrome('yes') === 'number', longestPalindrome('ab') === 1, longestPalindrome('') === 0, longestPalindrome('zxdr') === 1, longestPalindrome('abba') === 4, longestPalindrome('hannah') === 6, longestPalindrome('racecar') === 7]", 
     "testDescriptions": "[\"longestPalindrome should be a function\", \"longestPalindrome should return a number\", \"longestPalindrome('ab') should equal 1\", \"longestPalindrome('') should equal 0\", \"longestPalindrome('zxdr') should equal 1\", \"longestPalindrome('abba') should equal 4\", \"longestPalindrome('hannah') should equal 6\", \"longestPalindrome('racecar') should equal 7\"]",
     "title": "Longest Palindrome"

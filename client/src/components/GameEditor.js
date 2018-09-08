@@ -35,9 +35,9 @@ export default GameEditor;
 
 const Wrapper = styled.div`
   grid-column: 1 / 9;
-  min-width: 45vw;
+  min-width: 50vw;
   margin-left: 2em;
   margin-bottom: 2em;
-  height: 70vh;
-  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.9);
+  height: 74vh;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.9);
 `;

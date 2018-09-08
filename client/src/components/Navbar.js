@@ -135,7 +135,7 @@ const Layout = styled.header`
   display: grid;
   grid-column-gap: 20px;
   grid-template-columns: repeat(9, 1fr);
-  background: black;
+  background: linear-gradient(to top, #1f1f1f, black);
   align-items: center;
   justify-items: right;
   width: 100vw;
@@ -196,6 +196,7 @@ const Leaderboard = styled.h2`
 const Practice = styled.h2`
   grid-column: 6;
   font-size: 16px;
+  justify-self: center;
 `;
 const Challenge = styled.h2`
   grid-column: 7;

@@ -80,7 +80,10 @@ export default class Duel extends Component {
   
   render() {
     let user = this.props.auth.user
-    let button = this.props.duel.title ? <Button onClick={() => this.onSubmit()}>Submit</Button> : <Button onClick={() => {
+    let button = this.props.duel.title ? 
+      <Button onClick={() => this.onSubmit()}>Submit</Button> : this.state.loading ? 
+      <Button>Waiting for another user...</Button> :
+      <Button onClick={() => {
       this.onJoin()
       connectToRoom(user)
     }}>Join</Button>
@@ -94,7 +97,7 @@ export default class Duel extends Component {
     return (
       <Layout>
         <Navbar {...this.props} active={"duel"} />
-        <User rank={user.rank}>{user.username}</User><User rank={opponent.rank}>{opponent.username}</User>
+        <UserDiv><User rank={user.rank}>{user.username}</User></UserDiv><UserDiv><User rank={opponent.rank}>{opponent.username}</User></UserDiv>
         <PracticeEditor
           input={this.props.duel.solution}
           opponent={this.props.duel.opponentSolution}
@@ -120,9 +123,19 @@ const Layout = styled.div`
   height: 100vh;
   overflow: none;
 `;
-const User = styled.h2`
+const UserDiv = styled.div`
   grid-row: 2;
+  background: grey;
+  border: 4px solid #1f1f1f;
+  border-radius: 5px;
+  margin: 0.2rem;
+  width: 50%;
+  justify-self: center;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
+`
+const User = styled.h2`
   text-align: center;
+  line-height: 0;
   color: ${props => {
     if (props.rank === "Bad") {
       return "cyan";
@@ -157,6 +170,7 @@ const Console = styled.div`
   grid-template-columns: 1fr 1fr;
   margin-left: 1rem;
   margin-right: 1rem;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.9);
 `
 const UserConsole = styled.div`
   border-right: 1px solid dimgrey;
@@ -184,9 +198,10 @@ const OpponentConsole = styled.div`
 const Button = styled.button`
   grid-row: 5;
   grid-column: 1 / 3;
-  width: 300px;
+  width: 40%;
   justify-self: center;
   border-radius: 10px;
+  font-size: 20px;
   &:hover {
     font-weight: bold;
     background: maroon;

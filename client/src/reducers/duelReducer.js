@@ -99,7 +99,7 @@ const duel = (state = intialState, action) => {
         if (result.passing === false) {
           passing = false;
         }
-      })
+      });
       return {
         ...state,
         opponentConsole: action.payload.testResults,

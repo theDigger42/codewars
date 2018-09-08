@@ -28,7 +28,7 @@ const PracticeEditor = props => {
             duelTyping(e)
           }}
           editorProps={{ $blockScrolling: true }}
-          fontSize={16}
+          fontSize={14}
           cursorStart={2}
           showPrintMargin={true}
           highlightActiveLine={true}
@@ -49,7 +49,7 @@ const PracticeEditor = props => {
           value={props.opponent}
           name="UNIQUE_ID_OF_DIV"
           editorProps={{ $blockScrolling: true }}
-          fontSize={16}
+          fontSize={14}
           cursorStart={2}
           showPrintMargin={true}
           highlightActiveLine={true}
@@ -75,6 +75,7 @@ const Wrapper = styled.div`
   height: 50vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.9);
 `;
 const PlayerEditor = styled.div`
   grid-column: 1;

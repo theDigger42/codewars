@@ -188,7 +188,7 @@ const ResultsPanel = styled.div`
   margin-right: 1em;
   margin-left: 1em;
   width: 40vw;
-  height: 80vh;
+  height: 75vh;
 `;
 
 const TabContainer = styled.div`
@@ -198,6 +198,7 @@ const TabContainer = styled.div`
   grid-column-gap: 10px;
   align-items: center;
   width: 40vw;
+  height: 5vh;
 `;
 const Tab = styled.div`
   background: dimgrey;
@@ -205,8 +206,8 @@ const Tab = styled.div`
   font-size: 28px;
   text-align: center;
   cursor: pointer;
-  height: 4.5vh;
-  line-height: 4.5vh;
+  height: 5vh;
+  line-height: 5vh;
   padding: 2px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -230,11 +231,11 @@ const Tab = styled.div`
 `;
 const Content = styled.div`
   font-size: 10px;
+  height: 57vh;
   text-align: center;
   overflow: auto;
   font-weight: bold;
   padding: 1em;
-  margin-top: 8px;
   background: #cccccc;
   box-shadow: 4px 5px 6px rgba(0, 0, 0, 0.7);
 `;
@@ -257,7 +258,6 @@ const Button = styled.button`
   background: dimgrey;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  margin-top: 10px;
   box-shadow: 4px 5px 8px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   &:hover {
@@ -266,7 +266,7 @@ const Button = styled.button`
     }
   }
   width: 40vw;
-  height: 60px;
+  height: 9vh;
   @media (max-width: 750px) {
     font-size: 24px;
   }
