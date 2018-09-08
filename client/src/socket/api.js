@@ -57,11 +57,9 @@ export const gameComplete = () => {
   gameSocket.emit("gameComplete");
 };
 
-export const joinWaitingRoom = userInfo =>
-  gameSocket.emit("joinWaitingRoom", userInfo);
+export const joinWaitingRoom = userInfo => gameSocket.emit("joinWaitingRoom", userInfo);
 
-export const exitWaitingRoom = userInfo =>
-  gameSocket.emit("exitWaitingRoom", userInfo);
+export const exitWaitingRoom = userInfo => gameSocket.emit("exitWaitingRoom", userInfo);
 
 export const joinDuelRoom = userInfo => duelSocket.emit('joinDuelRoom', userInfo)
 

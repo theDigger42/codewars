@@ -21,7 +21,7 @@ const intialState = {
   passing: false,
   title: '',
   body: '',
-  solution: ['//Wait for another player to join.', ''],
+  solution: ['', ''],
   console: [],
   tests: [],
   testDescriptions: [],

@@ -174,7 +174,8 @@ let patchUser = (username, rating) => {
 }
 
 let updateWins = (username) => {
-  User.updateOne({"username": username}, {$inc: {"wins": 1}}, (err, res) => {
+  User.updateOne({"username": username}, {$inc: {"wins": 0.5}}, (err, res) => {
+    console.log(res);
     if (err) console.log(err)
   }).catch(err => console.log(err))
 }

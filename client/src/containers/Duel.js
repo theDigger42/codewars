@@ -195,9 +195,3 @@ const Button = styled.button`
     cursor: pointer;
   }
 `
-const Join = styled.button`
-  grid-row: 5;
-  grid-column: 2;
-  width: 300px;
-  justify-self: center;
-`

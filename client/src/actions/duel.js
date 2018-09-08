@@ -90,9 +90,7 @@ export const playersJoinedDuel = (players) => {
 }
 
 export const playerTyping = (array) => {
-  let newArray = []
-  newArray[1] = array[0]
-  newArray[0] = array[1]
+  let newArray = [array[1], array[0]]
   return {
     type: PLAYER_TYPING,
     payload: newArray

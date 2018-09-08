@@ -42,9 +42,11 @@ let comparePlayers = (roomArray) => {
   ratingB = elo.updateRating(expectedScoreB, 0, playerB.rating);
   patchUser(playerA.username, ratingA);
   patchUser(playerB.username, ratingB);
+  updateWins(playerA.username)
 };
 
 module.exports.ioDuel = socket => {
+  let throttle = 10;
   let _user = null;
   let currentRoom = null
 
@@ -54,7 +56,7 @@ module.exports.ioDuel = socket => {
     currentRoom = roomId
     socket.join(currentRoom)
     _user = await getUser(user.username);
-    if (!waitingRoom[_user.username]) waitingRoom[_user.username] = user
+    if (!waitingRoom[_user.username]) waitingRoom[_user.username] = _user
     if (Object.keys(waitingRoom).length === 2) {
       duelRoom[currentRoom] = Object.keys(waitingRoom).map(i => waitingRoom[i])
       startDuel(currentRoom)
@@ -70,13 +72,17 @@ module.exports.ioDuel = socket => {
         user.won = false;
       }
     })
-    ratingChange(duelRoom[currentRoom])
     comparePlayers(duelRoom[currentRoom])
+    ratingChange(duelRoom[currentRoom])
     delete duelRoom[currentRoom]
   });
 
   socket.on('duelTyping', (letter) => {
-    socket.in(currentRoom).broadcast.emit('playerTyping', letter)
+    if (throttle === 0) {
+      socket.in(currentRoom).broadcast.emit('playerTyping', letter)
+      throttle = 10
+    }
+    throttle--
   })
 
   socket.on('userResponse', (response) => {
