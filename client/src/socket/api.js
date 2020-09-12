@@ -11,7 +11,7 @@ import {
   clearOpponentPrompt
 } from '../actions/duel'
 
-export const socket = ioclient.connect('/');
+export const socket = ioclient.connect('http://localhost:4000/');
 
 export const subscribeToOnlineSocket = callback => {
   socket.on("connect", () => {
@@ -28,7 +28,7 @@ export const subscribeToOnlineSocket = callback => {
   });
 };
 
-const gameSocket = ioclient("/game");
+const gameSocket = ioclient("http://localhost:4000/game");
 
 export const subscribeToGameSocket = (onScoreboardChange, onTimerChange) => {
   gameSocket.on("connect", () =>
@@ -85,7 +85,7 @@ export const clearPromptForOpponent = () => {
   duelSocket.emit('resetOpponentPrompt')
 }
 
-const duelSocket = ioclient("/duel");
+const duelSocket = ioclient("http://localhost:4000/duel");
 
 export const subscribeToDuelSocket = (roomId) => {
   duelSocket.on("connect", () => {

@@ -49,7 +49,7 @@ export default class Duel extends Component {
   onSubmit() {
     this.props.resetConsoleResults()
     resetConsoleForOpponent()
-    axios.post('/api/runner/challenge', 
+    axios.post('http://localhost:4000/api/runner/challenge', 
     {
       solution: this.props.duel.solution,
       tests: this.props.duel.tests,
@@ -186,7 +186,7 @@ const Result = styled.p`
     } else {
       return 'red'
     }
-  }}
+  }};
   text-align: left;
 `
 const OpponentConsole = styled.div`

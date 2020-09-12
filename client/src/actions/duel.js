@@ -104,7 +104,7 @@ export const playerTyping = (input) => {
 
 export const submitDuelSolution = solution => {
   return dispatch => {
-    axios.post("/challenge", solution).then(res => {
+    axios.post("http://localhost:4000/challenge", solution).then(res => {
       dispatch({
         type: SUBMIT_SOLUTION_DUEL,
         payload: res.data
